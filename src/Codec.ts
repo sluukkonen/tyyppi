@@ -1,4 +1,4 @@
-import { Context } from "./Context.js"
+import { ValidationContext } from "./ValidationContext.js"
 import { ParseError } from "./ParseError.js"
 import { Result } from "./Result.js"
 
@@ -6,7 +6,9 @@ export class Codec<I, O = I> {
   readonly Input!: I
   readonly Output!: O
 
-  constructor(readonly validate: (value: unknown, ctx: Context) => Result<O>) {
+  constructor(
+    readonly validate: (value: unknown, ctx: ValidationContext) => Result<O>
+  ) {
     this.parse = this.parse.bind(this)
     this.unsafeParse = this.unsafeParse.bind(this)
   }
@@ -18,7 +20,7 @@ export class Codec<I, O = I> {
   }
 
   parse(value: unknown): Result<O> {
-    return this.validate(value, new Context([]))
+    return this.validate(value, new ValidationContext([]))
   }
 }
 

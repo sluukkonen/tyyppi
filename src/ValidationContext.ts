@@ -1,7 +1,7 @@
 import { Issue, IssueWithoutPath, Path } from "./Issue.js"
 import { Failure, Success } from "./Result.js"
 
-export class Context {
+export class ValidationContext {
   readonly path: Path
   readonly issues: Issue[]
 

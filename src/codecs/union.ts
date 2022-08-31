@@ -1,5 +1,5 @@
 import { Codec } from "../Codec.js"
-import { Context } from "../Context.js"
+import { ValidationContext } from "../ValidationContext.js"
 import { Success } from "../Result.js"
 
 type UnionInputs<T extends readonly unknown[]> = T extends readonly [
@@ -30,7 +30,7 @@ class UnionCodec<C extends readonly Codec<unknown>[] | [], I, O> extends Codec<
 > {
   constructor(readonly members: C) {
     super((value, ctx) => {
-      const innerCtx = new Context(ctx.path)
+      const innerCtx = new ValidationContext(ctx.path)
 
       for (let i = 0; i < members.length; i++) {
         const codec = members[i]
