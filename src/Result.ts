@@ -1,4 +1,4 @@
-import { Issue } from "./issues.js"
+import { Issue } from "./Issue.js"
 
 export interface Failure {
   ok: false

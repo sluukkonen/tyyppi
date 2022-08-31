@@ -1,4 +1,4 @@
-import { Issue, IssueWithoutPath, Path } from "./issues.js"
+import { Issue, IssueWithoutPath, Path } from "./Issue.js"
 import { Failure, Success } from "./Result.js"
 
 export class Context {
