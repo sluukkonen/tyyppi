@@ -1,4 +1,4 @@
-import { Codec } from "./Codec.js"
+import { Codec } from "../Codec.js"
 
 class StringCodec extends Codec<string> {
   readonly tag = "string"

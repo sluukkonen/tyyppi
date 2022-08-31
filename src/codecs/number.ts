@@ -1,4 +1,4 @@
-import { Codec } from "./Codec.js"
+import { Codec } from "../Codec.js"
 
 class NumberCodec extends Codec<number> {
   readonly tag = "number"

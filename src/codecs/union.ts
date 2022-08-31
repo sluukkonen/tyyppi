@@ -1,6 +1,6 @@
-import { Codec } from "./Codec.js"
-import { Context } from "./Context.js"
-import { Success } from "./Result.js"
+import { Codec } from "../Codec.js"
+import { Context } from "../Context.js"
+import { Success } from "../Result.js"
 
 type UnionInputs<T extends readonly unknown[]> = T extends readonly [
   Codec<infer I, unknown>,
@@ -12,6 +12,7 @@ type UnionInputs<T extends readonly unknown[]> = T extends readonly [
   : T extends readonly Codec<infer I, unknown>[]
   ? I
   : never
+
 type UnionOutputs<T extends readonly unknown[]> = T extends readonly [
   Codec<unknown, infer O>,
   ...infer Rest

@@ -1,4 +1,4 @@
-import { Codec, Input, Output } from "./Codec.js"
+import { Codec, Input, Output } from "../Codec.js"
 
 class ArrayCodec<C extends Codec<I, O>, I, O> extends Codec<I[], O[]> {
   readonly tag = "array"
