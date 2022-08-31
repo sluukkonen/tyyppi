@@ -1,10 +1,6 @@
-export type Path = (string | number)[]
+import { Issue, IssueWithoutPath, Path } from "./issues.js"
 
-export interface Issue {
-  code: string
-  message: string
-  path: Path
-}
+export * from "./issues.js"
 
 class ParseError extends Error {
   constructor(message: string, public issues: Issue[]) {
@@ -37,13 +33,12 @@ class Context {
     return { ok: true, value }
   }
 
-  addIssue(code: string, message: string): void {
-    const issue: Issue = { code: "generic", message, path: this.path.slice() }
-    this.issues.push(issue)
+  addIssue(issue: IssueWithoutPath): void {
+    this.issues.push({ ...issue, path: this.path.slice() })
   }
 
-  failure(code: string, message: string): Failure {
-    this.addIssue(code, message)
+  failure(issue: IssueWithoutPath): Failure {
+    this.addIssue(issue)
     return this.failures()
   }
 
@@ -86,8 +81,14 @@ export type Output<C extends Codec<unknown>> = C["Output"]
 class StringCodec extends Codec<string> {
   readonly tag = "string"
   constructor() {
-    super((val, ctx) =>
-      typeof val === "string" ? ctx.success(val) : ctx.failure("", "")
+    super((value, ctx) =>
+      typeof value === "string"
+        ? ctx.success(value)
+        : ctx.failure({
+            code: "invalid_string",
+            message: "Expected value to be a string",
+            value,
+          })
     )
   }
 }
@@ -98,8 +99,14 @@ class NumberCodec extends Codec<number> {
   readonly tag = "number"
 
   constructor() {
-    super((val, ctx) =>
-      typeof val === "number" ? ctx.success(val) : ctx.failure("", "")
+    super((value, ctx) =>
+      typeof value === "number"
+        ? ctx.success(value)
+        : ctx.failure({
+            code: "invalid_number",
+            message: "Expected value to be a number",
+            value,
+          })
     )
   }
 }
@@ -110,20 +117,23 @@ class ArrayCodec<C extends Codec<I, O>, I, O> extends Codec<I[], O[]> {
   readonly tag = "array"
 
   constructor(readonly values: C) {
-    super((val, ctx) => {
-      if (!Array.isArray(val)) return ctx.failure("", "")
+    super((value, ctx) => {
+      if (!Array.isArray(value))
+        return ctx.failure({
+          code: "invalid_array",
+          message: "Expected value to be an array",
+          value,
+        })
 
       let ok = true
       const array: Output<C>[] = []
 
-      for (let i = 0; i < val.length; i++) {
+      for (let i = 0; i < value.length; i++) {
         ctx.push(i)
-        const element = val[i]
+        const element = value[i]
         const result = values.validate(element, ctx)
-        if (!result.ok) {
-          ok = false
-          ctx.addIssue("", "")
-        } else array.push(result.value)
+        if (!result.ok) ok = false
+        else array.push(result.value)
         ctx.pop()
       }
 
@@ -172,7 +182,12 @@ class UnionCodec<C extends readonly Codec<unknown>[] | [], I, O> extends Codec<
         if (result.ok) return ctx.success(result.value) as Success<O>
       }
 
-      return ctx.failure("", "")
+      return ctx.failure({
+        code: "invalid_union",
+        message: "Invalid union",
+        value,
+        issues: innerCtx.issues,
+      })
     })
   }
 }
