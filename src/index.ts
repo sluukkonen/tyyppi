@@ -60,13 +60,11 @@ class Context {
   }
 }
 
-export type Validation<I, O> = (value: I, ctx: Context) => Result<O>
-
 export class Codec<I, O = I> {
   readonly Input!: I
   readonly Output!: O
 
-  constructor(readonly validate: Validation<unknown, O>) {
+  constructor(readonly validate: (value: unknown, ctx: Context) => Result<O>) {
     this.parse = this.parse.bind(this)
     this.unsafeParse = this.unsafeParse.bind(this)
   }
