@@ -20,7 +20,7 @@ export class Codec<I, O = I> {
   }
 
   parse(value: unknown): Result<O> {
-    return this.validate(value, new ValidationContext([]))
+    return this.validate(value, new ValidationContext(""))
   }
 }
 

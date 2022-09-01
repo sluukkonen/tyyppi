@@ -1,8 +1,6 @@
-export type Path = (string | number)[]
-
 interface IssueBase {
   message: string
-  path: Path
+  path: string
   value: unknown
 }
 

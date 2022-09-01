@@ -14,14 +14,14 @@ class ArrayCodec<C extends Codec<I, O>, I, O> extends Codec<I[], O[]> {
 
       let ok = true
       const array: Output<C>[] = []
+      const path = ctx.path
 
       for (let i = 0; i < value.length; i++) {
-        ctx.push(i)
+        ctx.setPath(path ? `${path}[${i}]` : String(i))
         const element = value[i]
         const result = values.validate(element, ctx)
         if (!result.ok) ok = false
         else array.push(result.value)
-        ctx.pop()
       }
 
       return ok ? ctx.success(array) : ctx.failures()

@@ -1,11 +1,11 @@
-import { Issue, IssueWithoutPath, Path } from "./Issue.js"
+import { Issue, IssueWithoutPath } from "./Issue.js"
 import { Failure, Success } from "./Result.js"
 
 export class ValidationContext {
-  readonly path: Path
+  public path: string
   readonly issues: Issue[]
 
-  constructor(path: Path) {
+  constructor(path: string) {
     this.path = path
     this.issues = []
   }
@@ -15,7 +15,7 @@ export class ValidationContext {
   }
 
   addIssue(issue: IssueWithoutPath): void {
-    this.issues.push({ ...issue, path: this.path.slice() })
+    this.issues.push({ ...issue, path: this.path })
   }
 
   failure(issue: IssueWithoutPath): Failure {
@@ -27,11 +27,7 @@ export class ValidationContext {
     return { ok: false, issues: this.issues }
   }
 
-  push(part: string | number) {
-    this.path.push(part)
-  }
-
-  pop() {
-    this.path.pop()
+  setPath(path: string) {
+    this.path = path
   }
 }
