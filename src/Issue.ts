@@ -16,6 +16,10 @@ export interface InvalidNumber extends IssueBase {
   code: "invalid_number"
 }
 
+export interface InvalidObject extends IssueBase {
+  code: "invalid_object"
+}
+
 export interface InvalidString extends IssueBase {
   code: "invalid_string"
 }
@@ -29,11 +33,11 @@ export type Issue =
   | GenericIssue
   | InvalidArray
   | InvalidNumber
+  | InvalidObject
   | InvalidString
   | InvalidUnion
 
-/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-type DistributiveOmit<T, K extends keyof any> = T extends any
+type DistributiveOmit<T, K extends keyof T> = T extends unknown
   ? Omit<T, K>
   : never
 
