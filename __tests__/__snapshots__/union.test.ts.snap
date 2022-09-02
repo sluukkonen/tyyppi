@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`union an empty union should not accept any values 1`] = `
+[
+  {
+    "code": "invalid_union",
+    "issues": [],
+    "message": "Invalid union",
+    "path": "",
+    "value": "",
+  },
+]
+`;
+
+exports[`union should work with a single member 1`] = `
+[
+  {
+    "code": "invalid_union",
+    "issues": [],
+    "message": "Invalid union",
+    "path": "",
+    "value": 0,
+  },
+]
+`;
+
+exports[`union should work with multiple members 1`] = `
+[
+  {
+    "code": "invalid_union",
+    "issues": [
+      {
+        "code": "invalid_string",
+        "message": "Expected value to be a string",
+        "path": "",
+        "value": {},
+      },
+      {
+        "code": "invalid_number",
+        "message": "Expected value to be a number",
+        "path": "",
+        "value": {},
+      },
+    ],
+    "message": "Invalid union",
+    "path": "",
+    "value": {},
+  },
+]
+`;

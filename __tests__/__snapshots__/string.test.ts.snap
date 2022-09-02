@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`string should fail to parse non-strings 1`] = `
+[
+  {
+    "code": "invalid_string",
+    "message": "Expected value to be a string",
+    "path": "",
+    "value": 0,
+  },
+]
+`;

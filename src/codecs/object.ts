@@ -16,7 +16,7 @@ class ObjectCodec<
     const keys = Object.keys(props)
 
     super((value, ctx) => {
-      if (value == null || typeof value !== "object")
+      if (value == null || typeof value !== "object" || Array.isArray(value))
         return ctx.failure({
           code: "invalid_object",
           message: "Expected value to be an object",

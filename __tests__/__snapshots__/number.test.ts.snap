@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`number should fail to parse non-numbers 1`] = `
+[
+  {
+    "code": "invalid_number",
+    "message": "Expected value to be a number",
+    "path": "",
+    "value": "1",
+  },
+]
+`;
