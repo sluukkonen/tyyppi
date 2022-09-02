@@ -12,6 +12,10 @@ export interface InvalidArray extends IssueBase {
   code: "invalid_array"
 }
 
+export interface InvalidBoolean extends IssueBase {
+  code: "invalid_boolean"
+}
+
 export interface InvalidNumber extends IssueBase {
   code: "invalid_number"
 }
@@ -32,6 +36,7 @@ export interface InvalidUnion extends IssueBase {
 export type Issue =
   | GenericIssue
   | InvalidArray
+  | InvalidBoolean
   | InvalidNumber
   | InvalidObject
   | InvalidString

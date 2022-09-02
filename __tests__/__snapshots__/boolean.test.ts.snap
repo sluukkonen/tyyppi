@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`boolean should not parse non-booleans 1`] = `
+[
+  {
+    "code": "invalid_boolean",
+    "message": "Expected value to be a boolean",
+    "path": "",
+    "value": "true",
+  },
+]
+`;
