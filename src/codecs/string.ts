@@ -8,7 +8,7 @@ class StringCodec extends Codec<string> {
       typeof value === "string"
         ? ctx.success(value)
         : ctx.failure({
-            code: "invalid_string",
+            code: "invalid_type",
             message: "Expected value to be a string",
             value,
           })

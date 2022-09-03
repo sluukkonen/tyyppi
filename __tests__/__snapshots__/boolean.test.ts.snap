@@ -3,7 +3,7 @@
 exports[`boolean should not parse non-booleans 1`] = `
 [
   {
-    "code": "invalid_boolean",
+    "code": "invalid_type",
     "message": "Expected value to be a boolean",
     "path": "",
     "value": "true",

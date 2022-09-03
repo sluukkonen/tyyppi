@@ -8,7 +8,7 @@ class BooleanCodec extends Codec<boolean> {
       typeof value === "boolean"
         ? ctx.success(value)
         : ctx.failure({
-            code: "invalid_boolean",
+            code: "invalid_type",
             message: "Expected value to be a boolean",
             value,
           })

@@ -8,7 +8,7 @@ class NumberCodec extends Codec<number> {
       typeof value === "number"
         ? ctx.success(value)
         : ctx.failure({
-            code: "invalid_number",
+            code: "invalid_type",
             message: "Expected value to be a number",
             value,
           })

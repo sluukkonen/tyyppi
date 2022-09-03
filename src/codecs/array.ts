@@ -7,7 +7,7 @@ class ArrayCodec<C extends Codec<I, O>, I, O> extends Codec<I[], O[]> {
     super((value, ctx) => {
       if (!Array.isArray(value))
         return ctx.failure({
-          code: "invalid_array",
+          code: "invalid_type",
           message: "Expected value to be an array",
           value,
         })

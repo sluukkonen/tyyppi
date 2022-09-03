@@ -12,7 +12,7 @@ class RecordCodec<
     super((record, ctx) => {
       if (record == null || typeof record !== "object" || Array.isArray(record))
         return ctx.failure({
-          code: "invalid_object",
+          code: "invalid_type",
           message: "Expected value to be an object",
           value: record,
         })

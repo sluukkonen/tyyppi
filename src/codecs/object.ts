@@ -18,7 +18,7 @@ class ObjectCodec<
     super((value, ctx) => {
       if (value == null || typeof value !== "object" || Array.isArray(value))
         return ctx.failure({
-          code: "invalid_object",
+          code: "invalid_type",
           message: "Expected value to be an object",
           value,
         })

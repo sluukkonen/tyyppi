@@ -30,13 +30,13 @@ exports[`union should work with multiple members 1`] = `
     "code": "invalid_union",
     "issues": [
       {
-        "code": "invalid_string",
+        "code": "invalid_type",
         "message": "Expected value to be a string",
         "path": "",
         "value": {},
       },
       {
-        "code": "invalid_number",
+        "code": "invalid_type",
         "message": "Expected value to be a number",
         "path": "",
         "value": {},

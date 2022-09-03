@@ -8,24 +8,8 @@ export interface GenericIssue extends IssueBase {
   code: "generic_issue"
 }
 
-export interface InvalidArray extends IssueBase {
-  code: "invalid_array"
-}
-
-export interface InvalidBoolean extends IssueBase {
-  code: "invalid_boolean"
-}
-
-export interface InvalidNumber extends IssueBase {
-  code: "invalid_number"
-}
-
-export interface InvalidObject extends IssueBase {
-  code: "invalid_object"
-}
-
-export interface InvalidString extends IssueBase {
-  code: "invalid_string"
+export interface InvalidType extends IssueBase {
+  code: "invalid_type"
 }
 
 export interface InvalidUnion extends IssueBase {
@@ -33,14 +17,7 @@ export interface InvalidUnion extends IssueBase {
   issues: Issue[]
 }
 
-export type Issue =
-  | GenericIssue
-  | InvalidArray
-  | InvalidBoolean
-  | InvalidNumber
-  | InvalidObject
-  | InvalidString
-  | InvalidUnion
+export type Issue = GenericIssue | InvalidType | InvalidUnion
 
 type DistributiveOmit<T, K extends keyof T> = T extends unknown
   ? Omit<T, K>
