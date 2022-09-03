@@ -2,16 +2,15 @@ import { array, number, object } from "../src/index.js"
 import { expectParseFailure, expectParseSuccess } from "./helpers.js"
 
 describe("array", () => {
-  test("should parse a valid array", () => {
+  test("should parse valid arrays", () => {
+    expectParseSuccess(array(number), [])
     expectParseSuccess(array(number), [1])
+    expectParseSuccess(array(number), [1, 2])
+    expectParseSuccess(array(number), [1, 2, 3])
   })
 
   test("should fail to parse non-arrays", () => {
     expectParseFailure(array(number), 0)
-  })
-
-  test("should parse empty arrays", () => {
-    expectParseSuccess(array(number), [])
   })
 
   test("should fail to parse arrays with invalid values", () => {
