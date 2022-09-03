@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`record path should nest with nested records 1`] = `
+[
+  {
+    "code": "invalid_string",
+    "message": "Expected value to be a string",
+    "path": "a.b",
+    "value": 1,
+  },
+]
+`;
+
+exports[`record should not parse arrays 1`] = `
+[
+  {
+    "code": "invalid_object",
+    "message": "Expected value to be an object",
+    "path": "",
+    "value": [],
+  },
+]
+`;
+
+exports[`record should not parse non-objects 1`] = `
+[
+  {
+    "code": "invalid_object",
+    "message": "Expected value to be an object",
+    "path": "",
+    "value": "",
+  },
+]
+`;
+
+exports[`record should not parse null 1`] = `
+[
+  {
+    "code": "invalid_object",
+    "message": "Expected value to be an object",
+    "path": "",
+    "value": null,
+  },
+]
+`;
+
+exports[`record should not parse records with invalid keys 1`] = `
+[
+  {
+    "code": "generic_issue",
+    "message": "Not an a!",
+    "path": "b",
+    "value": "b",
+  },
+]
+`;
+
+exports[`record should not parse records with invalid values 1`] = `
+[
+  {
+    "code": "invalid_string",
+    "message": "Expected value to be a string",
+    "path": "b",
+    "value": 2,
+  },
+]
+`;

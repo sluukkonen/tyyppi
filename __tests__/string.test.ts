@@ -4,6 +4,8 @@ import { expectParseFailure, expectParseSuccess } from "./helpers.js"
 describe("string", () => {
   test("should parse strings", () => {
     expectParseSuccess(string, "")
+    expectParseSuccess(string, "a")
+    expectParseSuccess(string, "123")
   })
 
   test("should fail to parse non-strings", () => {

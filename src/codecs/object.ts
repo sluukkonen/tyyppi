@@ -1,6 +1,6 @@
 import { Codec, Input, Output } from "../Codec.js"
 
-function hasOwnProperty<K extends string>(
+export function hasOwnProperty<K extends string>(
   obj: unknown,
   key: K
 ): obj is Record<K, unknown> {
