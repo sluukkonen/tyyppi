@@ -37,7 +37,7 @@ class ObjectCodec<
         const result = codec.validate(property, ctx)
         if (!result.ok) {
           ok = false
-        } else if (result.value !== undefined) {
+        } else if (ok && result.value !== undefined) {
           object[key as keyof O] = result.value as O[keyof O]
         }
       }

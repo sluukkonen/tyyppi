@@ -21,7 +21,7 @@ class ArrayCodec<C extends Codec<I, O>, I, O> extends Codec<I[], O[]> {
         const element = value[i]
         const result = values.validate(element, ctx)
         if (!result.ok) ok = false
-        else array.push(result.value)
+        else if (ok) array.push(result.value)
       }
 
       return ok ? ctx.success(array) : ctx.failures()
