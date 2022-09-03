@@ -7,11 +7,10 @@ export function hasOwnProperty<K extends string>(
   return Object.prototype.hasOwnProperty.call(obj, key)
 }
 
-class ObjectCodec<
-  T extends Record<string, Codec<unknown>>,
-  I extends Record<string, unknown>,
-  O extends Record<string, unknown>
-> extends Codec<I, O> {
+class ObjectCodec<T extends Record<string, Codec<unknown>>> extends Codec<
+  { [K in keyof T]: Input<T[K]> },
+  { [K in keyof T]: Output<T[K]> }
+> {
   constructor(readonly props: T) {
     const keys = Object.keys(props)
 
@@ -24,7 +23,8 @@ class ObjectCodec<
         })
 
       let ok = true
-      const object = {} as O
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const object = {} as any
       const path = ctx.path
 
       for (let i = 0; i < keys.length; i++) {
@@ -35,11 +35,8 @@ class ObjectCodec<
         const property = hasOwnProperty(value, key) ? value[key] : undefined
 
         const result = codec.validate(property, ctx)
-        if (!result.ok) {
-          ok = false
-        } else if (ok && result.value !== undefined) {
-          object[key as keyof O] = result.value as O[keyof O]
-        }
+        if (!result.ok) ok = false
+        else if (ok && result.value !== undefined) object[key] = result.value
       }
 
       ctx.setPath(path)
@@ -51,8 +48,4 @@ class ObjectCodec<
 
 export const object = <T extends Record<string, Codec<unknown>>>(
   props: T
-): ObjectCodec<
-  T,
-  { [K in keyof T]: Input<T[K]> },
-  { [K in keyof T]: Output<T[K]> }
-> => new ObjectCodec(props)
+): ObjectCodec<T> => new ObjectCodec(props)
