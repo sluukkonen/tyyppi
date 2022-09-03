@@ -1,6 +1,5 @@
 import { Codec } from "../Codec.js"
 import { ValidationContext } from "../ValidationContext.js"
-import { Success } from "../Result.js"
 
 type UnionInputs<T extends readonly unknown[]> = T extends readonly [
   Codec<infer I, unknown>,
@@ -24,9 +23,9 @@ type UnionOutputs<T extends readonly unknown[]> = T extends readonly [
   ? O
   : never
 
-class UnionCodec<C extends readonly Codec<unknown>[] | [], I, O> extends Codec<
-  I,
-  O
+class UnionCodec<C extends readonly Codec<unknown>[] | []> extends Codec<
+  UnionInputs<C>,
+  UnionOutputs<C>
 > {
   constructor(readonly members: C) {
     super((value, ctx) => {
@@ -35,7 +34,8 @@ class UnionCodec<C extends readonly Codec<unknown>[] | [], I, O> extends Codec<
       for (let i = 0; i < members.length; i++) {
         const codec = members[i]
         const result = codec.validate(value, innerCtx)
-        if (result.ok) return ctx.success(result.value) as Success<O>
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        if (result.ok) return ctx.success(result.value) as any
       }
 
       return ctx.failure({
@@ -50,4 +50,4 @@ class UnionCodec<C extends readonly Codec<unknown>[] | [], I, O> extends Codec<
 
 export const union = <C extends readonly Codec<unknown>[] | []>(
   codecs: C
-): UnionCodec<C, UnionInputs<C>, UnionOutputs<C>> => new UnionCodec(codecs)
+): UnionCodec<C> => new UnionCodec(codecs)
