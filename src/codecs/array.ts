@@ -1,6 +1,9 @@
 import { Codec, Input, Output } from "../Codec.js"
 
-class ArrayCodec<C extends Codec<I, O>, I, O> extends Codec<I[], O[]> {
+class ArrayCodec<C extends Codec<unknown>> extends Codec<
+  Input<C>[],
+  Output<C>[]
+> {
   readonly tag = "array"
 
   constructor(readonly values: C) {
@@ -29,6 +32,5 @@ class ArrayCodec<C extends Codec<I, O>, I, O> extends Codec<I[], O[]> {
   }
 }
 
-export const array = <C extends Codec<unknown>>(
-  codec: C
-): ArrayCodec<C, Input<C>, Output<C>> => new ArrayCodec(codec)
+export const array = <C extends Codec<unknown>>(codec: C): ArrayCodec<C> =>
+  new ArrayCodec(codec)
