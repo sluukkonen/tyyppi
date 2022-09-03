@@ -15,6 +15,7 @@
     }
   },
   "scripts": {
+    "prepare": "git config core.hooksPath .githooks",
     "build": "tsc",
     "lint": "eslint .",
     "prettier": "prettier --check .",

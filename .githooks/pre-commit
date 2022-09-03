@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -e
+
+yarn build && yarn lint && yarn test && yarn prettier
