@@ -1,6 +1,6 @@
 import { Codec, Input, Output } from "../Codec.js"
 import { Success } from "../Result.js"
-import { hasOwnProperty } from "./object.js"
+import { hasOwnProperty } from "../utils.js"
 
 class RecordCodec<
   K extends Codec<string>,

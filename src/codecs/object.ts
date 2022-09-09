@@ -1,11 +1,5 @@
 import { Codec, Input, Output } from "../Codec.js"
-
-export function hasOwnProperty<K extends string>(
-  obj: unknown,
-  key: K
-): obj is Record<K, unknown> {
-  return Object.prototype.hasOwnProperty.call(obj, key)
-}
+import { hasOwnProperty } from "../utils.js"
 
 class ObjectCodec<T extends Record<string, Codec<unknown>>> extends Codec<
   { [K in keyof T]: Input<T[K]> },
