@@ -14,7 +14,7 @@
     "fp-ts": "2.12.3",
     "io-ts": "2.2.18",
     "runtypes": "6.6.0",
-    "typescript": "4.8.3",
+    "typescript": "4.8.4",
     "zod": "3.19.1"
   }
 }
