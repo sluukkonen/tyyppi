@@ -18,9 +18,3 @@ export interface InvalidUnion extends IssueBase {
 }
 
 export type Issue = GenericIssue | InvalidType | InvalidUnion
-
-type DistributiveOmit<T, K extends keyof T> = T extends unknown
-  ? Omit<T, K>
-  : never
-
-export type IssueWithoutPath = DistributiveOmit<Issue, "path">

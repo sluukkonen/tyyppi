@@ -10,6 +10,7 @@ class NumberCodec extends SimpleCodec<number> {
         : ctx.failure({
             code: "invalid_type",
             message: "Expected value to be a number",
+            path: ctx.path,
             value,
           })
     )

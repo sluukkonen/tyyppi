@@ -1,4 +1,4 @@
-import { Issue, IssueWithoutPath } from "./Issue.js"
+import { Issue } from "./Issue.js"
 import { Failure, Success } from "./Result.js"
 
 export class ValidationContext {
@@ -14,11 +14,11 @@ export class ValidationContext {
     return { ok: true, value }
   }
 
-  addIssue(issue: IssueWithoutPath): void {
+  addIssue(issue: Issue): void {
     this.issues.push({ ...issue, path: this.path })
   }
 
-  failure(issue: IssueWithoutPath): Failure {
+  failure(issue: Issue): Failure {
     this.addIssue(issue)
     return this.failures()
   }

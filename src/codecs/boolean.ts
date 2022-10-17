@@ -10,6 +10,7 @@ class BooleanCodec extends SimpleCodec<boolean> {
         : ctx.failure({
             code: "invalid_type",
             message: "Expected value to be a boolean",
+            path: ctx.path,
             value,
           })
     )

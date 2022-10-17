@@ -10,6 +10,7 @@ class ArrayCodec<C extends AnyCodec> extends Codec<InputOf<C>[], TypeOf<C>[]> {
           return ctx.failure({
             code: "invalid_type",
             message: "Expected value to be an array",
+            path: ctx.path,
             value,
           })
 

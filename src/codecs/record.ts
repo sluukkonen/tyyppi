@@ -19,6 +19,7 @@ class RecordCodec<K extends Codec<string>, V extends AnyCodec> extends Codec<
           return ctx.failure({
             code: "invalid_type",
             message: "Expected value to be an object",
+            path: ctx.path,
             value: record,
           })
 
