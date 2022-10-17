@@ -7,7 +7,8 @@ export class Codec<I, O = I> {
   readonly Output!: O
 
   constructor(
-    readonly validate: (value: unknown, ctx: ValidationContext) => Result<O>
+    readonly validate: (value: unknown, ctx: ValidationContext) => Result<O>,
+    readonly encode: (value: O) => I
   ) {
     this.parse = this.parse.bind(this)
     this.unsafeParse = this.unsafeParse.bind(this)
@@ -24,5 +25,5 @@ export class Codec<I, O = I> {
   }
 }
 
-export type Input<C extends Codec<unknown>> = C["Input"]
-export type Output<C extends Codec<unknown>> = C["Output"]
+export type Input<C extends Codec<any>> = C["Input"]
+export type Output<C extends Codec<any>> = C["Output"]

@@ -1,6 +1,6 @@
-import { Codec } from "../Codec.js"
+import { SimpleCodec } from "../SimpleCodec.js"
 
-class BooleanCodec extends Codec<boolean> {
+class BooleanCodec extends SimpleCodec<boolean> {
   readonly tag = "boolean"
 
   constructor() {

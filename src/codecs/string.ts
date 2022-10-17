@@ -1,6 +1,6 @@
-import { Codec } from "../Codec.js"
+import { SimpleCodec } from "../SimpleCodec.js"
 
-class StringCodec extends Codec<string> {
+class StringCodec extends SimpleCodec<string> {
   readonly tag = "string"
 
   constructor() {
