@@ -5,7 +5,7 @@ export interface Failure {
   issues: Issue[]
 }
 
-export interface Success<T> {
+export interface Success<out T> {
   ok: true
   value: T
 }

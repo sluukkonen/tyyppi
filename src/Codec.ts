@@ -2,7 +2,7 @@ import { ValidationContext } from "./ValidationContext.js"
 import { ParseError } from "./ParseError.js"
 import { Result } from "./Result.js"
 
-export class Codec<I, T = I> {
+export class Codec<out I, in out T = I> {
   readonly Input!: I
   readonly Type!: T
 
