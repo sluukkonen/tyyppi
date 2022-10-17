@@ -37,6 +37,7 @@ describe("record", () => {
         : ctx.failure({
             code: "generic_issue",
             message: "Not an a!",
+            path: ctx.path,
             value,
           })
     )

@@ -15,7 +15,7 @@ export class ValidationContext {
   }
 
   addIssue(issue: Issue): void {
-    this.issues.push({ ...issue, path: this.path })
+    this.issues.push(issue)
   }
 
   failure(issue: Issue): Failure {
