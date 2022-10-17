@@ -1,7 +1,7 @@
-import { Codec, ParseError } from "../src/index.js"
+import { AnyCodec, ParseError } from "../src/index.js"
 
 export function expectParseSuccess(
-  codec: Codec<unknown>,
+  codec: AnyCodec,
   value: unknown,
   result?: unknown
 ) {
@@ -11,7 +11,7 @@ export function expectParseSuccess(
   expect(codec.unsafeParse(codec.encode(parsed))).toEqual(parsed)
 }
 
-export function expectParseFailure(codec: Codec<unknown>, value: unknown) {
+export function expectParseFailure(codec: AnyCodec, value: unknown) {
   const result = codec.parse(value)
 
   expect(result).toEqual({ ok: false, issues: expect.any(Array) })

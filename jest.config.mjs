@@ -1,5 +1,4 @@
 /** @type {import('jest').Config} */
-
 export default {
   collectCoverage: true,
   coverageDirectory: "coverage",
@@ -12,9 +11,7 @@ export default {
       statements: 100,
     },
   },
+  preset: "ts-jest",
   resolver: "ts-jest-resolver",
   testMatch: ["**/__tests__/**/*.test.ts"],
-  transform: {
-    "^.+\\.(t|j)sx?$": ["@swc/jest"],
-  },
 }
