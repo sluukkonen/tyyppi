@@ -1,14 +1,13 @@
 import { AnyCodec, Codec, InputOf, TypeOf } from "../Codec.js"
-import { Success } from "../Result.js"
 import { hasOwnProperty } from "../utils.js"
 
-class RecordCodec<K extends Codec<string>, V extends AnyCodec> extends Codec<
-  Record<InputOf<K>, InputOf<V>>,
-  Record<TypeOf<K>, TypeOf<V>>
+class RecordCodec<V extends AnyCodec> extends Codec<
+  Record<string, InputOf<V>>,
+  Record<string, TypeOf<V>>
 > {
   readonly tag = "record"
 
-  constructor(readonly keys: K, readonly values: V) {
+  constructor(readonly values: V) {
     super(
       (record, ctx) => {
         if (
@@ -23,7 +22,7 @@ class RecordCodec<K extends Codec<string>, V extends AnyCodec> extends Codec<
             value: record,
           })
 
-        const result = {} as Record<TypeOf<K>, TypeOf<V>>
+        const object = {} as Record<string, TypeOf<V>>
         let ok = true
         const path = ctx.path
 
@@ -31,28 +30,24 @@ class RecordCodec<K extends Codec<string>, V extends AnyCodec> extends Codec<
           if (hasOwnProperty(record, k)) {
             ctx.setPath(path ? `${path}.${k}` : k)
 
-            const keyResult = keys.validate(k, ctx)
-            if (!keyResult.ok) ok = false
-
-            const valueResult = values.validate(record[k], ctx)
-            if (!valueResult.ok) ok = false
-            else if (ok && valueResult.value !== undefined) {
-              result[(keyResult as Success<TypeOf<K>>).value] =
-                valueResult.value
+            const result = values.validate(record[k], ctx)
+            if (!result.ok) ok = false
+            else if (ok && result.value !== undefined) {
+              object[k] = result.value
             }
           }
         }
 
         ctx.setPath(path)
 
-        return ok ? ctx.success(result) : ctx.failures()
+        return ok ? ctx.success(object) : ctx.failures()
       },
       (record) => {
-        const result = {} as Record<InputOf<K>, InputOf<V>>
+        const result = {} as Record<string, InputOf<V>>
 
         for (const key in record) {
           if (hasOwnProperty(record, key)) {
-            result[key as InputOf<K>] = values.encode(record[key as InputOf<K>])
+            result[key] = values.encode(record[key])
           }
         }
 
@@ -62,7 +57,4 @@ class RecordCodec<K extends Codec<string>, V extends AnyCodec> extends Codec<
   }
 }
 
-export const record = <K extends Codec<string>, V extends AnyCodec>(
-  keys: K,
-  values: V
-) => new RecordCodec(keys, values)
+export const record = <V extends AnyCodec>(values: V) => new RecordCodec(values)
