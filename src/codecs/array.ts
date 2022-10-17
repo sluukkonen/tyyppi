@@ -28,6 +28,8 @@ class ArrayCodec<C extends Codec<any>> extends Codec<
           else if (ok) array.push(result.value)
         }
 
+        ctx.setPath(path)
+
         return ok ? ctx.success(array) : ctx.failures()
       },
       (array) => array.map((value) => values.encode(value))
