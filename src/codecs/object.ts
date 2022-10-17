@@ -1,7 +1,7 @@
-import { Codec, InputOf, TypeOf } from "../Codec.js"
+import { AnyCodec, Codec, InputOf, TypeOf } from "../Codec.js"
 import { hasOwnProperty } from "../utils.js"
 
-class ObjectCodec<T extends Record<string, Codec<any>>> extends Codec<
+class ObjectCodec<T extends Record<string, AnyCodec>> extends Codec<
   { [K in keyof T]: InputOf<T[K]> },
   { [K in keyof T]: TypeOf<T[K]> }
 > {
@@ -54,6 +54,6 @@ class ObjectCodec<T extends Record<string, Codec<any>>> extends Codec<
   }
 }
 
-export const object = <T extends Record<string, Codec<any>>>(
+export const object = <T extends Record<string, AnyCodec>>(
   props: T
 ): ObjectCodec<T> => new ObjectCodec(props)

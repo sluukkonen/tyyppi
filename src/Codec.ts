@@ -25,5 +25,8 @@ export class Codec<I, T = I> {
   }
 }
 
-export type InputOf<C extends Codec<any>> = C["Input"]
-export type TypeOf<C extends Codec<any>> = C["Type"]
+export type InputOf<C extends AnyCodec> = C["Input"]
+export type TypeOf<C extends AnyCodec> = C["Type"]
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type AnyCodec = Codec<any>

@@ -1,9 +1,6 @@
-import { Codec, InputOf, TypeOf } from "../Codec.js"
+import { AnyCodec, Codec, InputOf, TypeOf } from "../Codec.js"
 
-class ArrayCodec<C extends Codec<any>> extends Codec<
-  InputOf<C>[],
-  TypeOf<C>[]
-> {
+class ArrayCodec<C extends AnyCodec> extends Codec<InputOf<C>[], TypeOf<C>[]> {
   readonly tag = "array"
 
   constructor(readonly values: C) {
@@ -37,5 +34,5 @@ class ArrayCodec<C extends Codec<any>> extends Codec<
   }
 }
 
-export const array = <C extends Codec<any>>(codec: C): ArrayCodec<C> =>
+export const array = <C extends AnyCodec>(codec: C): ArrayCodec<C> =>
   new ArrayCodec(codec)

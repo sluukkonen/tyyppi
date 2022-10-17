@@ -10,3 +10,6 @@ export class SimpleCodec<T> extends Codec<T, T> {
     super(validate, identity)
   }
 }
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type AnySimpleCodec = SimpleCodec<any>

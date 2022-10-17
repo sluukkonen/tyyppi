@@ -1,5 +1,5 @@
 import { ValidationContext } from "../ValidationContext.js"
-import { SimpleCodec } from "../SimpleCodec.js"
+import { AnySimpleCodec, SimpleCodec } from "../SimpleCodec.js"
 
 type UnionInputs<T extends readonly unknown[]> = T extends readonly [
   SimpleCodec<infer I>,
@@ -12,9 +12,9 @@ type UnionInputs<T extends readonly unknown[]> = T extends readonly [
   ? I
   : never
 
-class UnionCodec<
-  C extends readonly SimpleCodec<any>[] | []
-> extends SimpleCodec<UnionInputs<C>> {
+class UnionCodec<C extends readonly AnySimpleCodec[] | []> extends SimpleCodec<
+  UnionInputs<C>
+> {
   constructor(readonly members: C) {
     super((value, ctx) => {
       const innerCtx = new ValidationContext(ctx.path)
@@ -35,6 +35,6 @@ class UnionCodec<
   }
 }
 
-export const union = <C extends readonly SimpleCodec<any>[] | []>(
+export const union = <C extends readonly AnySimpleCodec[] | []>(
   codecs: C
 ): UnionCodec<C> => new UnionCodec(codecs)

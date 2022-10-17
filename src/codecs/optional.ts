@@ -1,6 +1,6 @@
-import { Codec, InputOf, TypeOf } from "../Codec.js"
+import { AnyCodec, Codec, InputOf, TypeOf } from "../Codec.js"
 
-class OptionalCodec<C extends Codec<any>> extends Codec<
+class OptionalCodec<C extends AnyCodec> extends Codec<
   InputOf<C> | undefined,
   TypeOf<C> | undefined
 > {
@@ -14,5 +14,4 @@ class OptionalCodec<C extends Codec<any>> extends Codec<
   }
 }
 
-export const optional = <C extends Codec<any>>(type: C) =>
-  new OptionalCodec(type)
+export const optional = <C extends AnyCodec>(type: C) => new OptionalCodec(type)
