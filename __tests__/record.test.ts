@@ -1,5 +1,6 @@
-import { Codec, record, string } from "../src/index.js"
+import { record, string } from "../src/index.js"
 import { expectParseFailure, expectParseSuccess } from "./helpers.js"
+import { SimpleCodec } from "../src/SimpleCodec.js"
 
 describe("record", () => {
   test("should parse an simple records", () => {
@@ -30,7 +31,7 @@ describe("record", () => {
   })
 
   test("should not parse records with invalid keys", () => {
-    const keys = new Codec<"a">((value, ctx) =>
+    const keys = new SimpleCodec<"a">((value, ctx) =>
       value === "a"
         ? ctx.success(value)
         : ctx.failure({
@@ -39,7 +40,10 @@ describe("record", () => {
             value,
           })
     )
-    expectParseFailure(record(keys, string), { a: "1", b: "2" })
+    expectParseFailure(record(keys, string), {
+      a: "1",
+      b: "2",
+    })
   })
 
   test("path should nest with nested records", () => {
