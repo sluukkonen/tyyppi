@@ -2,7 +2,7 @@
 export default {
   collectCoverage: true,
   coverageDirectory: "coverage",
-  coverageProvider: "babel",
+  coverageProvider: "v8",
   coverageThreshold: {
     global: {
       branches: 100,
