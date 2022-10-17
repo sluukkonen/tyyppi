@@ -1,6 +1,9 @@
-import { Codec, Input, Output } from "../Codec.js"
+import { Codec, InputOf, TypeOf } from "../Codec.js"
 
-class ArrayCodec<C extends Codec<any>> extends Codec<Input<C>[], Output<C>[]> {
+class ArrayCodec<C extends Codec<any>> extends Codec<
+  InputOf<C>[],
+  TypeOf<C>[]
+> {
   readonly tag = "array"
 
   constructor(readonly values: C) {
@@ -14,7 +17,7 @@ class ArrayCodec<C extends Codec<any>> extends Codec<Input<C>[], Output<C>[]> {
           })
 
         let ok = true
-        const array: Output<C>[] = []
+        const array: TypeOf<C>[] = []
         const path = ctx.path
 
         for (let i = 0; i < value.length; i++) {

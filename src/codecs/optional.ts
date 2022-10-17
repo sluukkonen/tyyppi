@@ -1,8 +1,8 @@
-import { Codec, Input, Output } from "../Codec.js"
+import { Codec, InputOf, TypeOf } from "../Codec.js"
 
 class OptionalCodec<C extends Codec<any>> extends Codec<
-  Input<C> | undefined,
-  Output<C> | undefined
+  InputOf<C> | undefined,
+  TypeOf<C> | undefined
 > {
   readonly tag = "optional"
   constructor(readonly type: C) {

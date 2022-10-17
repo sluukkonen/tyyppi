@@ -1,9 +1,9 @@
-import { Codec, Input, Output } from "../Codec.js"
+import { Codec, InputOf, TypeOf } from "../Codec.js"
 import { hasOwnProperty } from "../utils.js"
 
 class ObjectCodec<T extends Record<string, Codec<any>>> extends Codec<
-  { [K in keyof T]: Input<T[K]> },
-  { [K in keyof T]: Output<T[K]> }
+  { [K in keyof T]: InputOf<T[K]> },
+  { [K in keyof T]: TypeOf<T[K]> }
 > {
   constructor(readonly props: T) {
     const keys = Object.keys(props)
@@ -39,7 +39,7 @@ class ObjectCodec<T extends Record<string, Codec<any>>> extends Codec<
         return ok ? ctx.success(object) : ctx.failures()
       },
       (object) => {
-        const result = {} as { [K in keyof T]: Input<T[K]> }
+        const result = {} as { [K in keyof T]: InputOf<T[K]> }
 
         for (const key in object) {
           if (hasOwnProperty(object, key)) {
