@@ -66,9 +66,9 @@ const suite: Benchmark<ComplexObject> = {
       stringArray: n.array(n.string),
       numberArray: n.array(n.number),
       booleanArray: n.array(n.boolean),
-      stringRecord: n.record(n.string),
-      numberRecord: n.record(n.number),
-      booleanRecord: n.record(n.boolean),
+      stringRecord: n.record(n.string, n.string),
+      numberRecord: n.record(n.string, n.number),
+      booleanRecord: n.record(n.string, n.boolean),
     }),
     t.type({
       string: t.string,

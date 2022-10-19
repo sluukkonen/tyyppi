@@ -44,6 +44,18 @@ exports[`record should not parse null 1`] = `
 ]
 `;
 
+exports[`record should not parse records with invalid keys 1`] = `
+[
+  {
+    "code": "invalid_literal",
+    "expected": "a",
+    "message": "Invalid literal",
+    "path": "b",
+    "value": "b",
+  },
+]
+`;
+
 exports[`record should not parse records with invalid values 1`] = `
 [
   {

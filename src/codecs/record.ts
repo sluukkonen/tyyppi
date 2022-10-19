@@ -1,11 +1,12 @@
 import { AnyCodec, Codec, InputOf, TypeOf } from "../Codec.js"
 import { hasOwnProperty } from "../utils.js"
+import { AnySimpleCodec } from "../SimpleCodec.js"
 
-class RecordCodec<V extends AnyCodec> extends Codec<
+class RecordCodec<K extends AnyCodec, V extends AnyCodec> extends Codec<
   Record<string, InputOf<V>>,
   Record<string, TypeOf<V>>
 > {
-  constructor(readonly values: V) {
+  constructor(readonly keys: K, readonly values: V) {
     super(
       (record, ctx) => {
         if (
@@ -27,6 +28,9 @@ class RecordCodec<V extends AnyCodec> extends Codec<
         for (const k in record) {
           if (hasOwnProperty(record, k)) {
             ctx.setPath(path ? `${path}.${k}` : k)
+
+            const keyResult = keys.validate(k, ctx)
+            if (!keyResult.ok) ok = false
 
             const result = values.validate(record[k], ctx)
             if (!result.ok) ok = false
@@ -53,4 +57,7 @@ class RecordCodec<V extends AnyCodec> extends Codec<
   }
 }
 
-export const record = <V extends AnyCodec>(values: V) => new RecordCodec(values)
+export const record = <K extends AnySimpleCodec, V extends AnyCodec>(
+  keys: K,
+  values: V
+) => new RecordCodec(keys, values)
