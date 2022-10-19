@@ -1,20 +1,20 @@
 interface IssueBase {
-  message: string
-  path: string
-  value: unknown
+  readonly message: string
+  readonly path: string
+  readonly value: unknown
 }
 
 export interface GenericIssue extends IssueBase {
-  code: "generic_issue"
+  readonly code: "generic_issue"
 }
 
 export interface InvalidType extends IssueBase {
-  code: "invalid_type"
+  readonly code: "invalid_type"
 }
 
 export interface InvalidUnion extends IssueBase {
-  code: "invalid_union"
-  issues: Issue[]
+  readonly code: "invalid_union"
+  readonly issues: Issue[]
 }
 
 export type Issue = GenericIssue | InvalidType | InvalidUnion

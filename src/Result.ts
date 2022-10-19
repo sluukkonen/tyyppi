@@ -1,13 +1,13 @@
 import { Issue } from "./Issue.js"
 
 export interface Failure {
-  ok: false
-  issues: Issue[]
+  readonly ok: false
+  readonly issues: Issue[]
 }
 
 export interface Success<out T> {
-  ok: true
-  value: T
+  readonly ok: true
+  readonly value: T
 }
 
 export type Result<T> = Success<T> | Failure
