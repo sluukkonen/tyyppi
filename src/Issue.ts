@@ -1,3 +1,5 @@
+import { Literal } from "./codecs/literal.js"
+
 interface IssueBase {
   readonly message: string
   readonly path: string
@@ -6,6 +8,11 @@ interface IssueBase {
 
 export interface GenericIssue extends IssueBase {
   readonly code: "generic_issue"
+}
+
+export interface InvalidLiteral<T extends Literal> extends IssueBase {
+  readonly code: "invalid_literal"
+  readonly expected: T
 }
 
 export interface InvalidType extends IssueBase {
@@ -17,4 +24,8 @@ export interface InvalidUnion extends IssueBase {
   readonly issues: Issue[]
 }
 
-export type Issue = GenericIssue | InvalidType | InvalidUnion
+export type Issue =
+  | GenericIssue
+  | InvalidLiteral<Literal>
+  | InvalidType
+  | InvalidUnion
