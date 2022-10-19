@@ -35,5 +35,5 @@ class UnionCodec<C extends readonly AnySimpleCodec[] | []> extends SimpleCodec<
 }
 
 export const union = <C extends readonly AnySimpleCodec[] | []>(
-  codecs: C
+  ...codecs: C
 ): UnionCodec<C> => new UnionCodec(codecs)
