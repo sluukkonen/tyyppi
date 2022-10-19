@@ -3,9 +3,6 @@ import { ParseError } from "./ParseError.js"
 import { Result } from "./Result.js"
 
 export class Codec<out I, in out T = I> {
-  readonly Input!: I
-  readonly Type!: T
-
   constructor(
     readonly validate: (value: unknown, ctx: ValidationContext) => Result<T>,
     readonly encode: (value: T) => I
@@ -25,7 +22,11 @@ export class Codec<out I, in out T = I> {
   }
 }
 
-export type InputOf<C extends AnyCodec> = C["Input"]
-export type TypeOf<C extends AnyCodec> = C["Type"]
+export type InputOf<C extends AnyCodec> = C extends Codec<infer Input, any>
+  ? Input
+  : never
+export type TypeOf<C extends AnyCodec> = C extends Codec<any, infer Output>
+  ? Output
+  : never
 
 export type AnyCodec = Codec<any>
