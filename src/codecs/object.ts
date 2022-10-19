@@ -15,12 +15,12 @@ type HandleOptionalTypes<T> = Id<
   {
     [K in RequiredKeys<T>]: T[K]
   } & {
-    [K in OptionalKeys<T>]?: T[K]
+    [K in OptionalKeys<T>]?: Exclude<T[K], undefined>
   }
 >
 
 class ObjectCodec<T extends Record<string, AnyCodec>> extends Codec<
-  { [K in keyof T]: InputOf<T[K]> },
+  HandleOptionalTypes<{ [K in keyof T]: InputOf<T[K]> }>,
   HandleOptionalTypes<{ [K in keyof T]: TypeOf<T[K]> }>
 > {
   constructor(readonly props: T) {
