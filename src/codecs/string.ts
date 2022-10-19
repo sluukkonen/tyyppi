@@ -7,9 +7,7 @@ class StringCodec extends SimpleCodec<string> {
         ? ctx.success(value)
         : ctx.failure({
             code: "invalid_type",
-            message: "Expected value to be a string",
             path: ctx.path,
-            value,
           })
     )
   }

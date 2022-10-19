@@ -5,9 +5,7 @@ exports[`literal should fail to parse anything else 1`] = `
   {
     "code": "invalid_literal",
     "expected": "a",
-    "message": "Invalid literal",
     "path": "",
-    "value": "",
   },
 ]
 `;

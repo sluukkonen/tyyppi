@@ -4,9 +4,7 @@ exports[`number should fail to parse non-numbers 1`] = `
 [
   {
     "code": "invalid_type",
-    "message": "Expected value to be a number",
     "path": "",
-    "value": "1",
   },
 ]
 `;

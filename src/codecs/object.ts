@@ -13,9 +13,7 @@ class ObjectCodec<T extends Record<string, AnyCodec>> extends Codec<
         if (value == null || typeof value !== "object" || Array.isArray(value))
           return ctx.failure({
             code: "invalid_type",
-            message: "Expected value to be an object",
             path: ctx.path,
-            value,
           })
 
         let ok = true

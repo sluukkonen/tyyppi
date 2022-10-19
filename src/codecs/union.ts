@@ -27,9 +27,7 @@ class UnionCodec<C extends readonly AnySimpleCodec[] | []> extends SimpleCodec<
 
       return ctx.failure({
         code: "invalid_union",
-        message: "Invalid union",
         path: ctx.path,
-        value,
         issues: innerCtx.issues,
       })
     })

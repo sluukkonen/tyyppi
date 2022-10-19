@@ -7,20 +7,14 @@ exports[`union should work with multiple members 1`] = `
     "issues": [
       {
         "code": "invalid_type",
-        "message": "Expected value to be a string",
         "path": "",
-        "value": {},
       },
       {
         "code": "invalid_type",
-        "message": "Expected value to be a number",
         "path": "",
-        "value": {},
       },
     ],
-    "message": "Invalid union",
     "path": "",
-    "value": {},
   },
 ]
 `;

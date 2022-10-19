@@ -4,9 +4,7 @@ exports[`optional should fail to parse other values 1`] = `
 [
   {
     "code": "invalid_type",
-    "message": "Expected value to be a string",
     "path": "",
-    "value": 1,
   },
 ]
 `;

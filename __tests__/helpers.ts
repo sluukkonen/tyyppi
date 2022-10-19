@@ -18,7 +18,7 @@ export function expectParseFailure(codec: AnyCodec, value: unknown) {
   if (!result.ok) {
     expect(result.issues).toMatchSnapshot()
     expect(() => codec.unsafeDecode(value)).toThrow(
-      new ParseError(result.issues[0].message, result.issues)
+      new ParseError("", result.issues)
     )
   }
 }

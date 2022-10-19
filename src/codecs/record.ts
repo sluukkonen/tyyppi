@@ -16,9 +16,7 @@ class RecordCodec<K extends AnyCodec, V extends AnyCodec> extends Codec<
         )
           return ctx.failure({
             code: "invalid_type",
-            message: "Expected value to be an object",
             path: ctx.path,
-            value: record,
           })
 
         const object = {} as Record<string, TypeOf<V>>

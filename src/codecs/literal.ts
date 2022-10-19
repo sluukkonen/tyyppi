@@ -16,10 +16,8 @@ export class LiteralCodec<T extends Literal> extends SimpleCodec<T> {
         ? ctx.success(val as T)
         : ctx.failure({
             code: "invalid_literal",
-            message: "Invalid literal",
             path: ctx.path,
             expected: value,
-            value: val,
           })
     )
   }

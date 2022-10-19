@@ -17,7 +17,7 @@ export class Codec<out I, in out T = I> {
   unsafeDecode(value: unknown): T {
     const result = this.decode(value)
     if (result.ok) return result.value
-    else throw new ParseError(result.issues[0].message, result.issues)
+    else throw new ParseError("", result.issues)
   }
 
   decode(value: unknown): Result<T> {
