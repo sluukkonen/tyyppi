@@ -12,7 +12,7 @@ export type Literal =
 export class LiteralCodec<T extends Literal> extends SimpleCodec<T> {
   constructor(readonly value: T) {
     super((val, ctx) =>
-      val === value
+      val === value || (value !== value && val !== val)
         ? ctx.success(val as T)
         : ctx.failure({
             code: "invalid_literal",

@@ -9,4 +9,8 @@ describe("literal", () => {
   test("should fail to parse anything else", () => {
     expectParseFailure(literal("a"), "")
   })
+
+  test("NaN handling", () => {
+    expectParseSuccess(literal(NaN), NaN)
+  })
 })
