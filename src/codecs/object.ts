@@ -35,7 +35,6 @@ class ObjectCodec<T extends Record<string, AnyCodec>> extends Codec<
           })
 
         let ok = true
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const object = {} as any
         const path = ctx.path
 
@@ -55,9 +54,7 @@ class ObjectCodec<T extends Record<string, AnyCodec>> extends Codec<
 
         return ok ? ctx.success(object) : ctx.failures()
       },
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (object: any) => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const result = {} as any
 
         for (const key in object) {

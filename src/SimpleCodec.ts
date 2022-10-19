@@ -11,5 +11,4 @@ export class SimpleCodec<in out T> extends Codec<T, T> {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type AnySimpleCodec = SimpleCodec<any>
