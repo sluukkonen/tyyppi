@@ -1,9 +1,27 @@
 import { AnyCodec, Codec, InputOf, TypeOf } from "../Codec.js"
 import { hasOwnProperty } from "../utils.js"
 
+type RequiredKeys<T> = {
+  [K in keyof T]: undefined extends T[K] ? never : K
+}[keyof T]
+
+type OptionalKeys<T> = {
+  [K in keyof T]: undefined extends T[K] ? K : never
+}[keyof T]
+
+type Id<T> = { [K in keyof T]: T[K] }
+
+type HandleOptionalTypes<T> = Id<
+  {
+    [K in RequiredKeys<T>]: T[K]
+  } & {
+    [K in OptionalKeys<T>]?: T[K]
+  }
+>
+
 class ObjectCodec<T extends Record<string, AnyCodec>> extends Codec<
   { [K in keyof T]: InputOf<T[K]> },
-  { [K in keyof T]: TypeOf<T[K]> }
+  HandleOptionalTypes<{ [K in keyof T]: TypeOf<T[K]> }>
 > {
   constructor(readonly props: T) {
     const keys = Object.keys(props) as (keyof T & string)[]
@@ -17,7 +35,8 @@ class ObjectCodec<T extends Record<string, AnyCodec>> extends Codec<
           })
 
         let ok = true
-        const object = {} as { [K in keyof T]: TypeOf<T[K]> }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const object = {} as any
         const path = ctx.path
 
         for (let i = 0; i < keys.length; i++) {
@@ -36,8 +55,10 @@ class ObjectCodec<T extends Record<string, AnyCodec>> extends Codec<
 
         return ok ? ctx.success(object) : ctx.failures()
       },
-      (object) => {
-        const result = {} as { [K in keyof T]: InputOf<T[K]> }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (object: any) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const result = {} as any
 
         for (const key in object) {
           if (hasOwnProperty(object, key)) {
