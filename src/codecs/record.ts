@@ -5,8 +5,6 @@ class RecordCodec<V extends AnyCodec> extends Codec<
   Record<string, InputOf<V>>,
   Record<string, TypeOf<V>>
 > {
-  readonly tag = "record"
-
   constructor(readonly values: V) {
     super(
       (record, ctx) => {

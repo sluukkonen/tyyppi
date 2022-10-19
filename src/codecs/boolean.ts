@@ -1,8 +1,6 @@
 import { SimpleCodec } from "../SimpleCodec.js"
 
 class BooleanCodec extends SimpleCodec<boolean> {
-  readonly tag = "boolean"
-
   constructor() {
     super((value, ctx) =>
       typeof value === "boolean"

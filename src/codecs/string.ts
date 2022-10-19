@@ -1,8 +1,6 @@
 import { SimpleCodec } from "../SimpleCodec.js"
 
 class StringCodec extends SimpleCodec<string> {
-  readonly tag = "string"
-
   constructor() {
     super((value, ctx) =>
       typeof value === "string"

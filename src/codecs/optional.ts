@@ -4,7 +4,6 @@ class OptionalCodec<C extends AnyCodec> extends Codec<
   InputOf<C> | undefined,
   TypeOf<C> | undefined
 > {
-  readonly tag = "optional"
   constructor(readonly type: C) {
     super(
       (value, ctx) =>

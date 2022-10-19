@@ -1,8 +1,6 @@
 import { AnyCodec, Codec, InputOf, TypeOf } from "../Codec.js"
 
 class ArrayCodec<C extends AnyCodec> extends Codec<InputOf<C>[], TypeOf<C>[]> {
-  readonly tag = "array"
-
   constructor(readonly values: C) {
     super(
       (value, ctx) => {
