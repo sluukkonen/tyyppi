@@ -32,9 +32,7 @@ class RecordCodec<V extends AnyCodec> extends Codec<
 
             const result = values.validate(record[k], ctx)
             if (!result.ok) ok = false
-            else if (ok && result.value !== undefined) {
-              object[k] = result.value
-            }
+            else if (ok && result.value !== undefined) object[k] = result.value
           }
         }
 
