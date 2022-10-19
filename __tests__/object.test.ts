@@ -40,7 +40,7 @@ describe("object", () => {
   })
 
   test("should strip extra keys", () => {
-    expect(object({}).parse({ a: 1, b: 2 })).toEqual({
+    expect(object({}).decode({ a: 1, b: 2 })).toEqual({
       ok: true,
       value: {},
     })

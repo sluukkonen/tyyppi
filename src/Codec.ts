@@ -10,17 +10,17 @@ export class Codec<out I, in out T = I> {
     readonly validate: (value: unknown, ctx: ValidationContext) => Result<T>,
     readonly encode: (value: T) => I
   ) {
-    this.parse = this.parse.bind(this)
-    this.unsafeParse = this.unsafeParse.bind(this)
+    this.decode = this.decode.bind(this)
+    this.unsafeDecode = this.unsafeDecode.bind(this)
   }
 
-  unsafeParse(value: unknown): T {
-    const result = this.parse(value)
+  unsafeDecode(value: unknown): T {
+    const result = this.decode(value)
     if (result.ok) return result.value
     else throw new ParseError(result.issues[0].message, result.issues)
   }
 
-  parse(value: unknown): Result<T> {
+  decode(value: unknown): Result<T> {
     return this.validate(value, new ValidationContext(""))
   }
 }
