@@ -6,7 +6,7 @@ class ObjectCodec<T extends Record<string, AnyCodec>> extends Codec<
   { [K in keyof T]: TypeOf<T[K]> }
 > {
   constructor(readonly props: T) {
-    const keys = Object.keys(props)
+    const keys = Object.keys(props) as (keyof T & string)[]
 
     super(
       (value, ctx) => {
@@ -19,8 +19,7 @@ class ObjectCodec<T extends Record<string, AnyCodec>> extends Codec<
           })
 
         let ok = true
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const object = {} as any
+        const object = {} as { [K in keyof T]: TypeOf<T[K]> }
         const path = ctx.path
 
         for (let i = 0; i < keys.length; i++) {
