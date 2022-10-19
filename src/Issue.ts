@@ -10,6 +10,11 @@ export interface InvalidLiteral<T extends Literal> extends IssueBase {
   readonly expected: T
 }
 
+export interface InvalidEnum<T extends Literal> extends IssueBase {
+  readonly code: "invalid_enum"
+  readonly members: T[]
+}
+
 export interface InvalidType extends IssueBase {
   readonly code: "invalid_type"
 }
@@ -19,4 +24,8 @@ export interface InvalidUnion extends IssueBase {
   readonly issues: Issue[]
 }
 
-export type Issue = InvalidLiteral<Literal> | InvalidType | InvalidUnion
+export type Issue =
+  | InvalidEnum<Literal>
+  | InvalidLiteral<Literal>
+  | InvalidType
+  | InvalidUnion
