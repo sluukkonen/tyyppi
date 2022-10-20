@@ -26,8 +26,4 @@ export class ValidationContext {
   failures(): Failure {
     return { ok: false, issues: this.issues }
   }
-
-  setPath(path: string) {
-    this.path = path
-  }
 }

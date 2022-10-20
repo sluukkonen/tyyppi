@@ -25,7 +25,7 @@ class RecordCodec<K extends AnyCodec, V extends AnyCodec> extends Codec<
 
         for (const k in record) {
           if (hasOwnProperty(record, k)) {
-            ctx.setPath(path ? `${path}.${k}` : k)
+            ctx.path = path ? `${path}.${k}` : k
 
             const keyResult = keys.validate(k, ctx)
             if (!keyResult.ok) ok = false
@@ -36,7 +36,7 @@ class RecordCodec<K extends AnyCodec, V extends AnyCodec> extends Codec<
           }
         }
 
-        ctx.setPath(path)
+        ctx.path = path
 
         return ok ? ctx.success(object) : ctx.failures()
       },

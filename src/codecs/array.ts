@@ -15,7 +15,7 @@ class ArrayCodec<C extends AnyCodec> extends Codec<InputOf<C>[], TypeOf<C>[]> {
         const path = ctx.path
 
         for (let i = 0; i < value.length; i++) {
-          ctx.setPath(path ? `${path}[${i}]` : String(i))
+          ctx.path = path ? `${path}[${i}]` : String(i)
           const element = value[i]
 
           const result = values.validate(element, ctx)
@@ -23,7 +23,7 @@ class ArrayCodec<C extends AnyCodec> extends Codec<InputOf<C>[], TypeOf<C>[]> {
           else if (ok) array.push(result.value)
         }
 
-        ctx.setPath(path)
+        ctx.path = path
 
         return ok ? ctx.success(array) : ctx.failures()
       },

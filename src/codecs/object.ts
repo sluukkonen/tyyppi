@@ -41,7 +41,7 @@ class ObjectCodec<T extends Record<string, AnyCodec>> extends Codec<
         for (let i = 0; i < keys.length; i++) {
           const key = keys[i]
           const codec = props[key]
-          ctx.setPath(path ? `${path}.${key}` : key)
+          ctx.path = path ? `${path}.${key}` : key
 
           const property = hasOwnProperty(value, key) ? value[key] : undefined
 
@@ -50,7 +50,7 @@ class ObjectCodec<T extends Record<string, AnyCodec>> extends Codec<
           else if (ok && result.value !== undefined) object[key] = result.value
         }
 
-        ctx.setPath(path)
+        ctx.path = path
 
         return ok ? ctx.success(object) : ctx.failures()
       },
