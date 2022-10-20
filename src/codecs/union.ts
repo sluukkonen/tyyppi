@@ -22,7 +22,7 @@ class UnionCodec<C extends readonly AnySimpleCodec[] | []> extends SimpleCodec<
       for (let i = 0; i < members.length; i++) {
         const codec = members[i]
         const result = codec.validate(value, innerCtx)
-        if (result.ok) return ctx.success(result.value)
+        if (result.ok) return result
       }
 
       return ctx.failure({
