@@ -5,7 +5,7 @@
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["src/**/*.ts"],
-      "outputs": ["dist/**"]
+      "outputs": ["dist/**", "tsconfig.tsbuildinfo"]
     },
     "lint": {
       "dependsOn": [],
