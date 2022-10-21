@@ -5,10 +5,11 @@ export function expectParseSuccess(
   value: unknown,
   result?: unknown
 ) {
-  expect(codec.decode(value)).toEqual({ ok: true, value })
-  const parsed = codec.unsafeDecode(value)
-  expect(parsed).toEqual(arguments.length === 3 ? result : value)
-  expect(codec.unsafeDecode(codec.encode(parsed))).toEqual(parsed)
+  const expected = arguments.length === 3 ? result : value
+  expect(codec.decode(value)).toEqual({ ok: true, value: expected })
+  const decoded = codec.unsafeDecode(value)
+  expect(decoded).toEqual(expected)
+  expect(codec.unsafeDecode(codec.encode(decoded))).toEqual(decoded)
 }
 
 export function expectParseFailure(codec: AnyCodec, value: unknown) {

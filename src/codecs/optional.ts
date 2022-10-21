@@ -1,14 +1,16 @@
-import { AnyCodec, Codec, InputOf, TypeOf } from "../Codec.js"
+import { AnyCodec, Codec, InputOf, SimpleOf, TypeOf } from "../Codec.js"
 
 class OptionalCodec<C extends AnyCodec> extends Codec<
   InputOf<C> | undefined,
-  TypeOf<C> | undefined
+  TypeOf<C> | undefined,
+  SimpleOf<C>
 > {
   constructor(readonly type: C) {
     super(
       (value, ctx) =>
         value === undefined ? ctx.success(value) : type.validate(value, ctx),
-      (value) => (value === undefined ? value : type.encode(value))
+      (value) => (value === undefined ? value : type.encode(value)),
+      type.simple
     )
   }
 }

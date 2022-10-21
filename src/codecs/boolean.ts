@@ -1,14 +1,18 @@
-import { SimpleCodec } from "../SimpleCodec.js"
+import { Codec } from "../Codec.js"
+import { identity } from "../utils.js"
 
-class BooleanCodec extends SimpleCodec<boolean> {
+class BooleanCodec extends Codec<boolean, boolean, true> {
   constructor() {
-    super((value, ctx) =>
-      typeof value === "boolean"
-        ? ctx.success(value)
-        : ctx.failure({
-            code: "invalid_type",
-            path: ctx.path,
-          })
+    super(
+      (value, ctx) =>
+        typeof value === "boolean"
+          ? ctx.success(value)
+          : ctx.failure({
+              code: "invalid_type",
+              path: ctx.path,
+            }),
+      identity,
+      true
     )
   }
 }

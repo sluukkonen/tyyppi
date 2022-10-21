@@ -1,5 +1,6 @@
 import { ValidationContext } from "../ValidationContext.js"
-import { AnySimpleCodec, SimpleCodec } from "../SimpleCodec.js"
+import { AnySimpleCodec, Codec, SimpleCodec } from "../Codec.js"
+import { identity } from "../utils.js"
 
 type UnionInputs<T extends readonly unknown[]> = T extends readonly [
   SimpleCodec<infer I>,
@@ -12,25 +13,31 @@ type UnionInputs<T extends readonly unknown[]> = T extends readonly [
   ? I
   : never
 
-class UnionCodec<C extends readonly AnySimpleCodec[] | []> extends SimpleCodec<
-  UnionInputs<C>
+class UnionCodec<C extends readonly AnySimpleCodec[] | []> extends Codec<
+  UnionInputs<C>,
+  UnionInputs<C>,
+  true
 > {
   constructor(readonly members: C) {
-    super((value, ctx) => {
-      const innerCtx = new ValidationContext(ctx.path)
+    super(
+      (value, ctx) => {
+        const innerCtx = new ValidationContext(ctx.path)
 
-      for (let i = 0; i < members.length; i++) {
-        const codec = members[i]
-        const result = codec.validate(value, innerCtx)
-        if (result.ok) return result
-      }
+        for (let i = 0; i < members.length; i++) {
+          const codec = members[i]
+          const result = codec.validate(value, innerCtx)
+          if (result.ok) return result
+        }
 
-      return ctx.failure({
-        code: "invalid_union",
-        path: ctx.path,
-        issues: innerCtx.issues,
-      })
-    })
+        return ctx.failure({
+          code: "invalid_union",
+          path: ctx.path,
+          issues: innerCtx.issues,
+        })
+      },
+      identity,
+      true
+    )
   }
 }
 

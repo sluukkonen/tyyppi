@@ -2,10 +2,14 @@ import { ValidationContext } from "./ValidationContext.js"
 import { ParseError } from "./ParseError.js"
 import { Result } from "./Result.js"
 
-export class Codec<out I, in out T = I> {
+export class Codec<I, T = I, S extends boolean = boolean> {
+  readonly Input!: I
+  readonly Type!: T
+
   constructor(
     readonly validate: (value: unknown, ctx: ValidationContext) => Result<T>,
-    readonly encode: (value: T) => I
+    readonly encode: (value: T) => I,
+    readonly simple: S
   ) {
     this.decode = this.decode.bind(this)
     this.unsafeDecode = this.unsafeDecode.bind(this)
@@ -22,11 +26,10 @@ export class Codec<out I, in out T = I> {
   }
 }
 
-export type InputOf<C extends AnyCodec> = C extends Codec<infer Input, any>
-  ? Input
-  : never
-export type TypeOf<C extends AnyCodec> = C extends Codec<any, infer Output>
-  ? Output
-  : never
+export type InputOf<C extends AnyCodec> = C["Input"]
+export type TypeOf<C extends AnyCodec> = C["Type"]
+export type SimpleOf<C extends AnyCodec> = C["simple"]
 
-export type AnyCodec = Codec<any>
+export type AnyCodec = Codec<any, any, boolean>
+export type SimpleCodec<T> = Codec<T, T, true>
+export type AnySimpleCodec = SimpleCodec<any>

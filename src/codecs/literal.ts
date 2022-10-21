@@ -1,4 +1,5 @@
-import { SimpleCodec } from "../SimpleCodec.js"
+import { Codec } from "../Codec.js"
+import { identity } from "../utils.js"
 
 export type Literal =
   | string
@@ -9,16 +10,19 @@ export type Literal =
   | symbol
   | null
 
-export class LiteralCodec<T extends Literal> extends SimpleCodec<T> {
+class LiteralCodec<T extends Literal> extends Codec<T, T, true> {
   constructor(readonly value: T) {
-    super((val, ctx) =>
-      val === value || (value !== value && val !== val)
-        ? ctx.success(val as T)
-        : ctx.failure({
-            code: "invalid_literal",
-            path: ctx.path,
-            expected: value,
-          })
+    super(
+      (val, ctx) =>
+        val === value || (value !== value && val !== val)
+          ? ctx.success(val as T)
+          : ctx.failure({
+              code: "invalid_literal",
+              path: ctx.path,
+              expected: value,
+            }),
+      identity,
+      true
     )
   }
 }

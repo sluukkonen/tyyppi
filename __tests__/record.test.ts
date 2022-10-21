@@ -1,4 +1,4 @@
-import { literal, record, string } from "../src/index.js"
+import { dateFromISOString, literal, record, string } from "../src/index.js"
 import { expectParseFailure, expectParseSuccess } from "./helpers.js"
 
 describe("record", () => {
@@ -8,7 +8,19 @@ describe("record", () => {
     expectParseSuccess(record(string, string), { a: "1", b: "2" })
   })
 
+  test("should parse complex records", () => {
+    const now = new Date()
+    expectParseSuccess(record(string, dateFromISOString), {})
+    expectParseSuccess(
+      record(string, dateFromISOString),
+      { a: now.toISOString() },
+      { a: now }
+    )
+  })
+
   test("should not parse records with invalid keys", () => {
+    expectParseSuccess(record(literal("a"), string), {})
+    expectParseSuccess(record(literal("a"), string), { a: "1" })
     expectParseFailure(record(literal("a"), string), { a: "1", b: "2" })
   })
 
@@ -25,7 +37,7 @@ describe("record", () => {
   })
 
   test("should only consider own properties", () => {
-    const obj = Object.assign(Object.create({ a: "" }), { b: "2", c: "3" })
+    const obj = Object.assign(Object.create({ a: "1" }), { b: "2", c: "3" })
     expectParseSuccess(record(string, string), obj, { b: "2", c: "3" })
   })
 

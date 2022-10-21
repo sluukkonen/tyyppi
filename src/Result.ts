@@ -5,7 +5,7 @@ export interface Failure {
   readonly issues: Issue[]
 }
 
-export interface Success<out T> {
+export interface Success<T> {
   readonly ok: true
   readonly value: T
 }

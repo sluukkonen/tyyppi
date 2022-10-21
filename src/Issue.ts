@@ -15,6 +15,10 @@ export interface InvalidEnum<T extends Literal> extends IssueBase {
   readonly members: T[]
 }
 
+export interface InvalidISOString extends IssueBase {
+  readonly code: "invalid_iso_string"
+}
+
 export interface InvalidType extends IssueBase {
   readonly code: "invalid_type"
 }
@@ -27,5 +31,6 @@ export interface InvalidUnion extends IssueBase {
 export type Issue =
   | InvalidEnum<Literal>
   | InvalidLiteral<Literal>
+  | InvalidISOString
   | InvalidType
   | InvalidUnion

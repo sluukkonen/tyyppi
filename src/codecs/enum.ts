@@ -1,17 +1,21 @@
+import { Codec } from "../Codec.js"
 import { Literal } from "./literal.js"
-import { SimpleCodec } from "../SimpleCodec.js"
+import { identity } from "../utils.js"
 
-export class EnumCodec<T extends Literal> extends SimpleCodec<T> {
+class EnumCodec<T extends Literal> extends Codec<T, T, true> {
   constructor(readonly members: T[]) {
     const set = new Set(members)
-    super((val, ctx) =>
-      set.has(val as T)
-        ? ctx.success(val as T)
-        : ctx.failure({
-            code: "invalid_enum",
-            path: ctx.path,
-            members,
-          })
+    super(
+      (val, ctx) =>
+        set.has(val as T)
+          ? ctx.success(val as T)
+          : ctx.failure({
+              code: "invalid_enum",
+              path: ctx.path,
+              members,
+            }),
+      identity,
+      true
     )
   }
 }
