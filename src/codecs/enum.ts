@@ -2,7 +2,7 @@ import { createSimpleCodec, SimpleCodec } from "../Codec.js"
 import { Literal } from "./literal.js"
 import { EnumMetadata } from "../Metadata.js"
 
-type EnumCodec<T extends Literal> = SimpleCodec<T, EnumMetadata<any>>
+type EnumCodec<T extends Literal> = SimpleCodec<T, EnumMetadata<T>>
 
 function enumCodec<T extends Literal>(...members: T[]): EnumCodec<T> {
   const set = new Set(members)
