@@ -4,11 +4,11 @@
 
 ## Goals
 
-- Idiomatic TypeScript API
+- Idiomatic and small TypeScript API
+- Bidirectional decoding/encoding
 - No external dependencies
 - Good performance
-- Lightweight, should support tree-shaking
+- Lightweight, should tree-shake well
 - Introspection to enable things like generating test data
-- Not just validation, allow transforming the input as well
-- Bidirectional parsing/unparsing
+- Both machine and programmer-readable errors 
 - Good documentation
