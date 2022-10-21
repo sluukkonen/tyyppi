@@ -1,0 +1,27 @@
+{
+  "$schema": "https://turborepo.org/schema.json",
+  "globalDependencies": ["tsconfig.json"],
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["src/**/*.ts"],
+      "outputs": ["dist/**"]
+    },
+    "lint": {
+      "dependsOn": [],
+      "inputs": ["src/**/*.ts", "eslintrc.json", ".eslintignore"],
+      "outputs": []
+    },
+    "test": {
+      "dependsOn": [],
+      "inputs": ["src/**/*.ts", "__tests__/**/*.ts", "jest.config.mjs"],
+      "outputs": ["coverage/**"]
+    },
+    "benchmark": {
+      "dependsOn": ["build"],
+      "inputs": [],
+      "outputs": [],
+      "cache": false
+    }
+  }
+}
