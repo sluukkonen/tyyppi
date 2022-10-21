@@ -1,20 +1,18 @@
-import { Codec } from "../Codec.js"
-import { identity } from "../utils.js"
+import { createSimpleCodec, SimpleCodec } from "../Codec.js"
+import { NumberMetadata } from "../Metadata.js"
 
-class NumberCodec extends Codec<number, number, true> {
-  constructor() {
-    super(
-      (value, ctx) =>
-        typeof value === "number"
-          ? ctx.success(value)
-          : ctx.failure({
-              code: "invalid_type",
-              path: ctx.path,
-            }),
-      identity,
-      true
-    )
+type NumberCodec = SimpleCodec<number, NumberMetadata>
+
+export const number: NumberCodec = createSimpleCodec(
+  (val, ctx) =>
+    typeof val === "number"
+      ? ctx.success(val)
+      : ctx.failure({
+          code: "invalid_type",
+          path: ctx.path,
+        }),
+  {
+    tag: "number",
+    simple: true,
   }
-}
-
-export const number = new NumberCodec()
+)

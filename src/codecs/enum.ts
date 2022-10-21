@@ -1,27 +1,22 @@
-import { Codec } from "../Codec.js"
+import { createSimpleCodec, SimpleCodec } from "../Codec.js"
 import { Literal } from "./literal.js"
-import { identity } from "../utils.js"
+import { EnumMetadata } from "../Metadata.js"
 
-class EnumCodec<T extends Literal> extends Codec<T, T, true> {
-  constructor(readonly members: T[]) {
-    const set = new Set(members)
-    super(
-      (val, ctx) =>
-        set.has(val as T)
-          ? ctx.success(val as T)
-          : ctx.failure({
-              code: "invalid_enum",
-              path: ctx.path,
-              members,
-            }),
-      identity,
-      true
-    )
-  }
-}
+type EnumCodec<T extends Literal> = SimpleCodec<T, EnumMetadata<any>>
 
-function enumCodec<T extends Literal>(...values: T[]): EnumCodec<T> {
-  return new EnumCodec<T>(values)
+function enumCodec<T extends Literal>(...members: T[]): EnumCodec<T> {
+  const set = new Set(members)
+  return createSimpleCodec(
+    (val, ctx) =>
+      set.has(val as T)
+        ? ctx.success(val as T)
+        : ctx.failure({
+            code: "invalid_enum",
+            path: ctx.path,
+            members,
+          }),
+    { tag: "enum", simple: true, members }
+  )
 }
 
 export { enumCodec as enum }

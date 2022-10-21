@@ -1,4 +1,4 @@
-import { object, number, string, dateFromISOString } from "../src/index.js"
+import { object, number, string, date } from "../src/index.js"
 import { expectParseFailure, expectParseSuccess } from "./helpers.js"
 
 describe("object", () => {
@@ -15,11 +15,11 @@ describe("object", () => {
   })
 
   test("should parse complex object", () => {
-    const date = new Date()
+    const now = new Date()
     expectParseSuccess(
-      object({ date: dateFromISOString }),
-      { date: date.toISOString() },
-      { date }
+      object({ date }),
+      { date: now.toISOString() },
+      { date: now }
     )
   })
 

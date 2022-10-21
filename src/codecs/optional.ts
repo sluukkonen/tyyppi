@@ -1,18 +1,17 @@
-import { AnyCodec, Codec, InputOf, SimpleOf, TypeOf } from "../Codec.js"
+import { AnyCodec, Codec, createCodec, InputOf, TypeOf } from "../Codec.js"
+import { OptionalMetadata } from "../Metadata.js"
 
-class OptionalCodec<C extends AnyCodec> extends Codec<
+type OptionalCodec<C extends AnyCodec> = Codec<
   InputOf<C> | undefined,
   TypeOf<C> | undefined,
-  SimpleOf<C>
-> {
-  constructor(readonly type: C) {
-    super(
-      (value, ctx) =>
-        value === undefined ? ctx.success(value) : type.validate(value, ctx),
-      (value) => (value === undefined ? value : type.encode(value)),
-      type.simple
-    )
-  }
-}
+  OptionalMetadata<C>
+>
 
-export const optional = <C extends AnyCodec>(type: C) => new OptionalCodec(type)
+export function optional<C extends AnyCodec>(codec: C): OptionalCodec<C> {
+  return createCodec(
+    (val, ctx) =>
+      val === undefined ? ctx.success(val) : codec.validate(val, ctx),
+    (value) => (value === undefined ? value : codec.encode(value)),
+    { tag: "optional", simple: codec.meta.simple, codec }
+  )
+}

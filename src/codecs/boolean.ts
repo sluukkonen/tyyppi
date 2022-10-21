@@ -1,20 +1,18 @@
-import { Codec } from "../Codec.js"
-import { identity } from "../utils.js"
+import { createSimpleCodec, SimpleCodec } from "../Codec.js"
+import { BooleanMetadata } from "../Metadata.js"
 
-class BooleanCodec extends Codec<boolean, boolean, true> {
-  constructor() {
-    super(
-      (value, ctx) =>
-        typeof value === "boolean"
-          ? ctx.success(value)
-          : ctx.failure({
-              code: "invalid_type",
-              path: ctx.path,
-            }),
-      identity,
-      true
-    )
+type BooleanCodec = SimpleCodec<boolean, BooleanMetadata>
+
+export const boolean: BooleanCodec = createSimpleCodec(
+  (val, ctx) =>
+    typeof val === "boolean"
+      ? ctx.success(val)
+      : ctx.failure({
+          code: "invalid_type",
+          path: ctx.path,
+        }),
+  {
+    tag: "boolean",
+    simple: true,
   }
-}
-
-export const boolean = new BooleanCodec()
+)

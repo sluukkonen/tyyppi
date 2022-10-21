@@ -1,20 +1,18 @@
-import { Codec } from "../Codec.js"
-import { identity } from "../utils.js"
+import { createSimpleCodec, SimpleCodec } from "../Codec.js"
+import { StringMetadata } from "../Metadata.js"
 
-class StringCodec extends Codec<string, string, true> {
-  constructor() {
-    super(
-      (value, ctx) =>
-        typeof value === "string"
-          ? ctx.success(value)
-          : ctx.failure({
-              code: "invalid_type",
-              path: ctx.path,
-            }),
-      identity,
-      true
-    )
+type StringCodec = SimpleCodec<string, StringMetadata>
+
+export const string: StringCodec = createSimpleCodec(
+  (val, ctx) =>
+    typeof val === "string"
+      ? ctx.success(val)
+      : ctx.failure({
+          code: "invalid_type",
+          path: ctx.path,
+        }),
+  {
+    tag: "string",
+    simple: true,
   }
-}
-
-export const string = new StringCodec()
+)

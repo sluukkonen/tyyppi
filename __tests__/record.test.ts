@@ -1,4 +1,4 @@
-import { dateFromISOString, literal, record, string } from "../src/index.js"
+import { date, literal, record, string } from "../src/index.js"
 import { expectParseFailure, expectParseSuccess } from "./helpers.js"
 
 describe("record", () => {
@@ -10,9 +10,9 @@ describe("record", () => {
 
   test("should parse complex records", () => {
     const now = new Date()
-    expectParseSuccess(record(string, dateFromISOString), {})
+    expectParseSuccess(record(string, date), {})
     expectParseSuccess(
-      record(string, dateFromISOString),
+      record(string, date),
       { a: now.toISOString() },
       { a: now }
     )

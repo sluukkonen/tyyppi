@@ -1,35 +1,51 @@
 import { ValidationContext } from "./ValidationContext.js"
 import { ParseError } from "./ParseError.js"
 import { Result } from "./Result.js"
+import { Metadata, SimpleMetadata } from "./Metadata.js"
+import { identity } from "./utils.js"
 
-export class Codec<I, T = I, S extends boolean = boolean> {
-  readonly Input!: I
-  readonly Type!: T
+export interface Codec<I, T = I, M extends Metadata = Metadata> {
+  decode(value: unknown): Result<T>
+  unsafeDecode(value: unknown): T
+  encode(value: T): I
+  meta: M
+  validate(value: unknown, context: ValidationContext): Result<T>
+}
 
-  constructor(
-    readonly validate: (value: unknown, ctx: ValidationContext) => Result<T>,
-    readonly encode: (value: T) => I,
-    readonly simple: S
-  ) {
-    this.decode = this.decode.bind(this)
-    this.unsafeDecode = this.unsafeDecode.bind(this)
-  }
+export type InputOf<C extends AnyCodec> = C extends Codec<infer I> ? I : never
+export type TypeOf<C extends AnyCodec> = C extends Codec<any, infer T>
+  ? T
+  : never
 
-  unsafeDecode(value: unknown): T {
-    const result = this.decode(value)
+export type AnyCodec = Codec<any>
+export type SimpleCodec<T, M extends SimpleMetadata = SimpleMetadata> = Codec<
+  T,
+  T,
+  M
+>
+export type AnySimpleCodec = SimpleCodec<any>
+
+export function createCodec<I, T, M extends Metadata>(
+  validate: (value: unknown, context: ValidationContext) => Result<T>,
+  encode: (value: T) => I,
+  meta: M
+): Codec<I, T, M> {
+  const decode = (value: unknown) => validate(value, new ValidationContext(""))
+  const unsafeDecode = (value: unknown) => {
+    const result = decode(value)
     if (result.ok) return result.value
     else throw new ParseError("", result.issues)
   }
-
-  decode(value: unknown): Result<T> {
-    return this.validate(value, new ValidationContext(""))
+  return {
+    decode,
+    unsafeDecode,
+    encode,
+    validate,
+    meta,
   }
 }
 
-export type InputOf<C extends AnyCodec> = C["Input"]
-export type TypeOf<C extends AnyCodec> = C["Type"]
-export type SimpleOf<C extends AnyCodec> = C["simple"]
-
-export type AnyCodec = Codec<any, any, boolean>
-export type SimpleCodec<T> = Codec<T, T, true>
-export type AnySimpleCodec = SimpleCodec<any>
+export const createSimpleCodec = <T, M extends SimpleMetadata>(
+  validate: (value: unknown, context: ValidationContext) => Result<T>,
+  meta: M
+): SimpleCodec<T, M> => createCodec(validate, identity, meta)

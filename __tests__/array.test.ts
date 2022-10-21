@@ -1,4 +1,4 @@
-import { array, dateFromISOString, number, object } from "../src/index.js"
+import { array, date, number, object } from "../src/index.js"
 import { expectParseFailure, expectParseSuccess } from "./helpers.js"
 
 describe("array", () => {
@@ -11,7 +11,7 @@ describe("array", () => {
 
   test("should parse complex arrays", () => {
     expectParseSuccess(
-      array(dateFromISOString),
+      array(date),
       ["2000-01-01T00:00:00.000Z"],
       [new Date("2000-01-01T00:00:00.000Z")]
     )
