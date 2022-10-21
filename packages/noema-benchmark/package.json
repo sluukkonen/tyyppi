@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "benny": "3.7.1",
-    "fp-ts": "2.12.3",
+    "fp-ts": "2.13.1",
     "io-ts": "2.2.19",
     "noema": "1.0.0",
     "runtypes": "6.6.0",
