@@ -1,14 +1,12 @@
+import assert from "assert/strict"
 import * as b from "benny"
 import { isLeft } from "fp-ts/lib/Either.js"
 import * as t from "io-ts"
-import * as z from "zod"
 import * as n from "noema"
 import * as r from "runtypes"
-import assert from "assert/strict"
+import * as z from "zod"
 import object from "./object.js"
 import string from "./string.js"
-
-export { t, z, n, r }
 
 export interface Benchmark<T> {
   name: string

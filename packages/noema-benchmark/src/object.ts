@@ -1,10 +1,14 @@
-import { n, t, z, r, Benchmark } from "./index.js"
+import * as t from "io-ts"
+import * as n from "noema"
+import * as r from "runtypes"
+import * as z from "zod"
+import { Benchmark } from "./index.js"
 
 interface SimpleObject {
   string: string
   number: number
   boolean: boolean
-  array: number[],
+  array: number[]
 }
 
 const suite: Benchmark<SimpleObject> = {
@@ -13,7 +17,8 @@ const suite: Benchmark<SimpleObject> = {
     string: "",
     number: 0,
     boolean: true,
-    array: [1, 2, 3]  },
+    array: [1, 2, 3],
+  },
   codecs: [
     n.object({
       string: n.string,
