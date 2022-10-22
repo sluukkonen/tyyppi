@@ -44,7 +44,8 @@ export function record<K extends AnySimpleCodec, V extends AnyCodec>(
 
           const result = values.validate(val[key], ctx)
           if (!result.ok) ok = false
-          else if (!simple && ok && result.value !== undefined) object[key] = result.value
+          else if (!simple && ok && result.value !== undefined)
+            object[key] = result.value
         }
       }
 
