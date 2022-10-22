@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
+    "composite": true,
     "declaration": true,
     "declarationMap": true,
     "esModuleInterop": true,
-    "incremental": true,
     "forceConsistentCasingInFileNames": true,
     "module": "node16",
     "outDir": "dist",

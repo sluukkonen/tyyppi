@@ -15,8 +15,8 @@
     }
   },
   "scripts": {
-    "build": "tsc",
-    "build:test": "tsc --project __tests__",
+    "build": "tsc --build",
+    "build:test": "tsc --build __tests__",
     "lint": "eslint .",
     "test": "jest"
   },
