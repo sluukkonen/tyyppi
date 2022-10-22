@@ -37,7 +37,10 @@ export function record<K extends AnySimpleCodec, V extends AnyCodec>(
           ctx.path = path ? `${path}.${key}` : key
 
           const keyResult = keys.validate(key, ctx)
-          if (!keyResult.ok) ok = false
+          if (!keyResult.ok) {
+            ok = false
+            continue
+          }
 
           const result = values.validate(val[key], ctx)
           if (!result.ok) ok = false
