@@ -5,8 +5,8 @@ import * as z from "zod"
 import * as n from "noema"
 import * as r from "runtypes"
 import assert from "assert/strict"
-import objectBenchmark from "./objectBenchmark.js"
-import stringBenchmark from "./stringBenchmark.js"
+import object from "./object.js"
+import string from "./string.js"
 
 export { t, z, n, r }
 
@@ -49,8 +49,8 @@ function runBenchmark<T>(benchmark: Benchmark<T>) {
 }
 
 const suites = [
-  ["object", objectBenchmark],
-  ["string", stringBenchmark],
+  ["object", object],
+  ["string", string],
 ] as [string, Benchmark<unknown>][]
 
 for (const [name, suite] of suites) {
