@@ -9,7 +9,7 @@
   "scripts": {
     "prepare": "git config core.hooksPath .githooks",
     "benchmark": "turbo run benchmark",
-    "build": "turbo run build",
+    "build": "turbo run build build:test",
     "lint": "turbo run lint",
     "prettier": "prettier --check .",
     "test": "turbo run test"

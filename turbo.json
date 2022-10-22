@@ -5,17 +5,26 @@
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["src/**/*.ts"],
-      "outputs": ["dist/**", "tsconfig.tsbuildinfo"]
+      "outputs": ["dist/**", "tsconfig.tsbuildinfo"],
+      "outputMode": "new-only"
+    },
+    "build:test": {
+      "dependsOn": ["build"],
+      "inputs": ["__tests__/**/*.ts"],
+      "outputs": [],
+      "outputMode": "new-only"
     },
     "lint": {
       "dependsOn": [],
-      "inputs": ["src/**/*.ts", "eslintrc.json", ".eslintignore"],
-      "outputs": []
+      "inputs": ["**/*.ts", "eslintrc.json", ".eslintignore"],
+      "outputs": [],
+      "outputMode": "new-only"
     },
     "test": {
       "dependsOn": [],
       "inputs": ["src/**/*.ts", "__tests__/**/*.ts", "jest.config.mjs"],
-      "outputs": ["coverage/**"]
+      "outputs": ["coverage/**"],
+      "outputMode": "new-only"
     },
     "benchmark": {
       "dependsOn": ["build"],

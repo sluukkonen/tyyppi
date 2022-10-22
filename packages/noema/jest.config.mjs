@@ -2,7 +2,6 @@
 export default {
   collectCoverage: true,
   coverageDirectory: "coverage",
-  coverageProvider: "v8",
   coverageThreshold: {
     global: {
       branches: 100,
@@ -11,7 +10,9 @@ export default {
       statements: 100,
     },
   },
-  preset: "ts-jest",
   resolver: "ts-jest-resolver",
   testMatch: ["**/__tests__/**/*.test.ts"],
+  transform: {
+    "^.+\\.(t|j)sx?$": ["@swc/jest"],
+  },
 }
