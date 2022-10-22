@@ -19,7 +19,7 @@ describe("record", () => {
   })
 
   test("should not parse records with invalid keys", () => {
-    expectParseSuccess(record(literal("a"), string), {})
+    expectParseSuccess(record(literal("a"), string), {} as Record<"a", string>)
     expectParseSuccess(record(literal("a"), string), { a: "1" })
     expectParseFailure(record(literal("a"), string), { a: "1", b: "2" })
   })

@@ -1,9 +1,9 @@
-import { AnyCodec, ParseError } from "../src/index.js"
+import { AnyCodec, InputOf, ParseError, TypeOf } from "../src/index.js"
 
-export function expectParseSuccess(
-  codec: AnyCodec,
-  value: unknown,
-  result?: unknown
+export function expectParseSuccess<C extends AnyCodec>(
+  codec: C,
+  value: InputOf<C>,
+  result?: TypeOf<C>
 ) {
   const expected = arguments.length === 3 ? result : value
   expect(codec.decode(value)).toEqual({ ok: true, value: expected })
