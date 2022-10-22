@@ -11,7 +11,7 @@
     "benchmark": "turbo run benchmark",
     "build": "turbo run build build:test",
     "lint": "turbo run lint",
-    "prettier": "prettier --check .",
+    "prettier": "prettier --cache --check .",
     "test": "turbo run test"
   },
   "workspaces": [
