@@ -6,7 +6,8 @@
   "private": true,
   "scripts": {
     "build": "tsc --build",
-    "benchmark": "node dist/index.js"
+    "benchmark": "node dist/index.js",
+    "lint": "eslint ."
   },
   "devDependencies": {
     "benny": "3.7.1",
