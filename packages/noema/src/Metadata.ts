@@ -1,5 +1,7 @@
-import { Literal } from "./codecs/literal.js"
 import { AnyCodec, AnySimpleCodec } from "./Codec.js"
+import { Literal } from "./codecs/literal.js"
+
+type IsSimple<C extends AnyCodec> = C["meta"]["simple"]
 
 export interface Metadata {
   readonly tag: string
@@ -12,7 +14,7 @@ export interface SimpleMetadata extends Metadata {
 
 export interface ArrayMetadata<C extends AnyCodec> extends Metadata {
   readonly tag: "array"
-  readonly simple: C["meta"]["simple"]
+  readonly simple: IsSimple<C>
   readonly codec: C
 }
 
@@ -46,19 +48,19 @@ export interface LiteralMetadata<T extends Literal> extends Metadata {
 export interface ObjectMetadata<T extends Record<string, AnyCodec>>
   extends Metadata {
   readonly tag: "object"
-  readonly simple: T[keyof T]["meta"]["simple"]
+  readonly simple: IsSimple<T[keyof T]>
   readonly props: T
 }
 
 export interface OptionalMetadata<C extends AnyCodec> extends Metadata {
   readonly tag: "optional"
-  readonly simple: C["meta"]["simple"]
+  readonly simple: IsSimple<C>
   readonly codec: C
 }
 
 export interface RecordMetadata<K extends AnySimpleCodec, V extends AnyCodec> {
   readonly tag: "record"
-  simple: V["meta"]["simple"]
+  simple: IsSimple<V>
   readonly keys: K
   readonly values: V
 }
