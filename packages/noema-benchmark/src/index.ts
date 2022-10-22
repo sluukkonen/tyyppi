@@ -6,6 +6,7 @@ import * as n from "noema"
 import * as r from "runtypes"
 import * as z from "zod"
 import object from "./object.js"
+import record from "./record.js"
 import string from "./string.js"
 
 export interface Benchmark<T> {
@@ -49,6 +50,7 @@ function runBenchmark<T>(benchmark: Benchmark<T>) {
 const suites = [
   ["object", object],
   ["string", string],
+  ["record", record],
 ] as [string, Benchmark<unknown>][]
 
 for (const [name, suite] of suites) {
