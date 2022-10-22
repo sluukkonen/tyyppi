@@ -1,5 +1,4 @@
-import { optional } from "../src/codecs/optional.js"
-import { object, string } from "../src/index.js"
+import { object, string, optional } from "../src/index.js"
 import { expectParseFailure, expectParseSuccess } from "./helpers.js"
 
 describe("optional", () => {
