@@ -18,9 +18,8 @@ export interface ArrayMetadata<C extends AnyCodec> extends Metadata {
   readonly codec: C
 }
 
-export interface BooleanMetadata extends Metadata {
+export interface BooleanMetadata extends SimpleMetadata {
   readonly tag: "boolean"
-  readonly simple: true
 }
 
 export interface DateMetadata extends Metadata {
@@ -28,20 +27,17 @@ export interface DateMetadata extends Metadata {
   readonly simple: false
 }
 
-export interface EnumMetadata<T extends Literal> extends Metadata {
+export interface EnumMetadata<T extends Literal> extends SimpleMetadata {
   readonly tag: "enum"
-  readonly simple: true
   readonly members: T[]
 }
 
-export interface NumberMetadata extends Metadata {
+export interface NumberMetadata extends SimpleMetadata {
   readonly tag: "number"
-  readonly simple: true
 }
 
-export interface LiteralMetadata<T extends Literal> extends Metadata {
+export interface LiteralMetadata<T extends Literal> extends SimpleMetadata {
   readonly tag: "literal"
-  readonly simple: true
   readonly value: T
 }
 
@@ -60,19 +56,17 @@ export interface OptionalMetadata<C extends AnyCodec> extends Metadata {
 
 export interface RecordMetadata<K extends AnySimpleCodec, V extends AnyCodec> {
   readonly tag: "record"
-  simple: IsSimple<V>
+  readonly simple: IsSimple<V>
   readonly keys: K
   readonly values: V
 }
 
-export interface StringMetadata extends Metadata {
+export interface StringMetadata extends SimpleMetadata {
   readonly tag: "string"
-  readonly simple: true
 }
 
 export interface UnionMetadata<C extends readonly AnySimpleCodec[] | []>
-  extends Metadata {
+  extends SimpleMetadata {
   readonly tag: "union"
-  readonly simple: true
   readonly members: C
 }
