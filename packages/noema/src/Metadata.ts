@@ -1,7 +1,7 @@
 import { AnyCodec, AnySimpleCodec } from "./Codec.js"
 import { Literal } from "./codecs/literal.js"
 
-type IsSimple<C extends AnyCodec> = C["meta"]["simple"]
+type IsSimple<C extends AnyCodec> = C["metadata"]["simple"]
 
 export interface Metadata {
   readonly tag: string

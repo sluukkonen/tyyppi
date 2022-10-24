@@ -19,7 +19,7 @@ export function record<K extends AnySimpleCodec, V extends AnyCodec>(
   keys: K,
   values: V
 ): RecordCodec<K, V> {
-  const simple = values.meta.simple
+  const simple = values.metadata.simple
   return createCodec(
     (val, ctx) => {
       if (val == null || typeof val !== "object" || Array.isArray(val))

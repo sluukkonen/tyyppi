@@ -6,11 +6,11 @@ describe("codec constructors", () => {
       (val, ctx) => ctx.success(val),
       (val) => val
     )
-    expect(codec.meta).toEqual({ tag: "unknown", simple: false })
+    expect(codec.metadata).toEqual({ tag: "unknown", simple: false })
   })
 
   test("createSimpleCodec with one arguments argument assigns default metadata", () => {
     const codec = createSimpleCodec((val, ctx) => ctx.success(val))
-    expect(codec.meta).toEqual({ tag: "unknown", simple: true })
+    expect(codec.metadata).toEqual({ tag: "unknown", simple: true })
   })
 })

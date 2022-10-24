@@ -31,7 +31,7 @@ export function object<T extends Record<string, AnyCodec>>(
 ): ObjectCodec<T> {
   const keys = Object.keys(props) as (keyof T & string)[]
   const codecs = Object.values(props)
-  const simple = codecs.every((codec) => codec.meta.simple)
+  const simple = codecs.every((codec) => codec.metadata.simple)
 
   return createCodec(
     (val, ctx) => {

@@ -12,6 +12,6 @@ export function optional<C extends AnyCodec>(codec: C): OptionalCodec<C> {
     (val, ctx) =>
       val === undefined ? ctx.success(val) : codec.validate(val, ctx),
     (value) => (value === undefined ? value : codec.encode(value)),
-    { tag: "optional", simple: codec.meta.simple, codec }
+    { tag: "optional", simple: codec.metadata.simple, codec }
   )
 }

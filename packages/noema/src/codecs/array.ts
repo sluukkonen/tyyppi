@@ -9,7 +9,7 @@ type ArrayCodec<C extends AnyCodec> = Codec<
 >
 
 export function array<C extends AnyCodec>(codec: C): ArrayCodec<C> {
-  const simple = codec.meta.simple
+  const simple = codec.metadata.simple
   return createCodec(
     (val, ctx) => {
       if (!Array.isArray(val))

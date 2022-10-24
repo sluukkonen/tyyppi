@@ -6,9 +6,9 @@ import { identity } from "./utils.js"
 
 export interface Codec<I, T = I, M extends Metadata = Metadata> {
   decode(value: unknown): Result<T>
-  unsafeDecode(value: unknown): T
   encode(value: T): I
-  meta: M
+  metadata: M
+  unsafeDecode(value: unknown): T
   validate(value: unknown, context: ValidationContext): Result<T>
 }
 
@@ -32,12 +32,12 @@ export function createCodec<I, T>(
 export function createCodec<I, T, M extends Metadata>(
   validate: (value: unknown, context: ValidationContext) => Result<T>,
   encode: (value: T) => I,
-  meta: M
+  metadata: M
 ): Codec<I, T, M>
 export function createCodec<I, T>(
   validate: (value: unknown, context: ValidationContext) => Result<T>,
   encode: (value: T) => I,
-  meta: Metadata = { tag: "unknown", simple: false }
+  metadata: Metadata = { tag: "unknown", simple: false }
 ): Codec<I, T> {
   const decode = (value: unknown) => validate(value, new ValidationContext(""))
   const unsafeDecode = (value: unknown) => {
@@ -47,10 +47,10 @@ export function createCodec<I, T>(
   }
   return {
     decode,
-    unsafeDecode,
     encode,
+    metadata,
+    unsafeDecode,
     validate,
-    meta,
   }
 }
 
@@ -59,11 +59,11 @@ export function createSimpleCodec<T>(
 ): SimpleCodec<T>
 export function createSimpleCodec<T, M extends SimpleMetadata>(
   validate: (value: unknown, context: ValidationContext) => Result<T>,
-  meta: M
+  metadata: M
 ): SimpleCodec<T, M>
 export function createSimpleCodec<T>(
   validate: (value: unknown, context: ValidationContext) => Result<T>,
-  meta: SimpleMetadata = { tag: "unknown", simple: true }
+  metadata: SimpleMetadata = { tag: "unknown", simple: true }
 ): SimpleCodec<T> {
-  return createCodec(validate, identity, meta)
+  return createCodec(validate, identity, metadata)
 }
