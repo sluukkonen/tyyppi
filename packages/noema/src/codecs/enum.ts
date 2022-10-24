@@ -1,18 +1,24 @@
 import { createSimpleCodec, SimpleCodec } from "../Codec.js"
 import { Literal } from "./literal.js"
 import { EnumMetadata } from "../Metadata.js"
+import { InvalidEnum } from "../DecodeError.js"
+import { failure, success } from "../Result.js"
 
-type EnumCodec<T extends Literal> = SimpleCodec<T, EnumMetadata<T>>
+type EnumCodec<T extends Literal> = SimpleCodec<
+  T,
+  InvalidEnum<T>,
+  EnumMetadata<T>
+>
 
 function enumCodec<T extends Literal>(...members: T[]): EnumCodec<T> {
   const set = new Set(members)
   return createSimpleCodec(
-    (val, ctx) =>
+    (val, path) =>
       set.has(val as T)
-        ? ctx.success(val as T)
-        : ctx.failure({
+        ? success(val as T)
+        : failure({
             code: "invalid_enum",
-            path: ctx.path,
+            path,
             members,
           }),
     { tag: "enum", simple: true, members }

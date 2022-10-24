@@ -14,11 +14,10 @@ export function expectParseSuccess<C extends AnyCodec>(
 export function expectParseFailure(codec: AnyCodec, value: unknown) {
   const result = codec.decode(value)
 
-  expect(result).toEqual({ ok: false, issues: expect.any(Array) })
   if (!result.ok) {
-    expect(result.issues).toMatchSnapshot()
+    expect(result.errors).toMatchSnapshot()
     expect(() => codec.unsafeDecode(value)).toThrow(
-      new ParseError("", result.issues)
+      new ParseError("", result.errors)
     )
   }
 }

@@ -1,5 +1,5 @@
 export * from "./Codec.js"
-export * from "./Issue.js"
+export * from "./DecodeError.js"
 export * from "./ParseError.js"
 export * from "./Result.js"
 export * from "./codecs/array.js"

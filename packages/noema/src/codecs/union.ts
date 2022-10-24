@@ -1,14 +1,18 @@
-import { ValidationContext } from "../ValidationContext.js"
 import {
   AnySimpleCodec,
   createSimpleCodec,
-  InputOf,
+  ErrorOf,
+  ResultOf,
   SimpleCodec,
+  TypeOf,
 } from "../Codec.js"
 import { UnionMetadata } from "../Metadata.js"
+import { InvalidUnion } from "../DecodeError.js"
+import { failure } from "../Result.js"
 
 type UnionCodec<C extends readonly AnySimpleCodec[] | []> = SimpleCodec<
-  InputOf<C[number]>,
+  TypeOf<C[number]>,
+  InvalidUnion<ErrorOf<C[number]>>,
   UnionMetadata<C>
 >
 
@@ -16,19 +20,20 @@ export function union<C extends readonly AnySimpleCodec[] | []>(
   ...members: C
 ): UnionCodec<C> {
   return createSimpleCodec(
-    (val, ctx) => {
-      const innerCtx = new ValidationContext(ctx.path)
+    (val, path) => {
+      const errors: ErrorOf<C[number]>[] = []
 
       for (let i = 0; i < members.length; i++) {
         const codec = members[i]
-        const result = codec.validate(val, innerCtx)
+        const result = codec.validate(val, path) as ResultOf<C[number]>
         if (result.ok) return result
+        else errors.push(...result.errors)
       }
 
-      return ctx.failure({
+      return failure({
         code: "invalid_union",
-        path: ctx.path,
-        issues: innerCtx.issues,
+        path,
+        errors,
       })
     },
     { tag: "union", simple: true, members }
