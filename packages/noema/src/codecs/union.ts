@@ -1,20 +1,14 @@
 import { ValidationContext } from "../ValidationContext.js"
-import { AnySimpleCodec, createSimpleCodec, SimpleCodec } from "../Codec.js"
+import {
+  AnySimpleCodec,
+  createSimpleCodec,
+  InputOf,
+  SimpleCodec,
+} from "../Codec.js"
 import { UnionMetadata } from "../Metadata.js"
 
-type UnionInputs<T extends readonly unknown[]> = T extends readonly [
-  SimpleCodec<infer I>,
-  ...infer Rest
-]
-  ? I | UnionInputs<Rest>
-  : T extends []
-  ? never
-  : T extends readonly SimpleCodec<infer I>[]
-  ? I
-  : never
-
 type UnionCodec<C extends readonly AnySimpleCodec[] | []> = SimpleCodec<
-  UnionInputs<C>,
+  InputOf<C[number]>,
   UnionMetadata<C>
 >
 
