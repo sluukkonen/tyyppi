@@ -1,15 +1,17 @@
 import { createSimpleCodec, SimpleCodec } from "../Codec.js"
 import { StringMetadata } from "../Metadata.js"
+import { InvalidType } from "../DecodeError.js"
+import { failure, success } from "../Result.js"
 
-type StringCodec = SimpleCodec<string, StringMetadata>
+type StringCodec = SimpleCodec<string, InvalidType, StringMetadata>
 
 export const string: StringCodec = createSimpleCodec(
-  (val, ctx) =>
+  (val, path) =>
     typeof val === "string"
-      ? ctx.success(val)
-      : ctx.failure({
+      ? success(val)
+      : failure({
           code: "invalid_type",
-          path: ctx.path,
+          path,
         }),
   {
     tag: "string",

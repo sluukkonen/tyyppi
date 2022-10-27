@@ -1,5 +1,7 @@
 import { SimpleCodec, createSimpleCodec } from "../Codec.js"
 import { LiteralMetadata } from "../Metadata.js"
+import { InvalidLiteral } from "../DecodeError.js"
+import { failure, success } from "../Result.js"
 
 export type Literal =
   | string
@@ -10,16 +12,20 @@ export type Literal =
   | symbol
   | null
 
-type LiteralCodec<T extends Literal> = SimpleCodec<T, LiteralMetadata<T>>
+type LiteralCodec<T extends Literal> = SimpleCodec<
+  T,
+  InvalidLiteral<T>,
+  LiteralMetadata<T>
+>
 
 export const literal = <T extends Literal>(value: T): LiteralCodec<T> =>
   createSimpleCodec(
-    (val, ctx) =>
+    (val, path) =>
       val === value || (value !== value && val !== val)
-        ? ctx.success(val as T)
-        : ctx.failure({
+        ? success(val as T)
+        : failure({
             code: "invalid_literal",
-            path: ctx.path,
+            path,
             expected: value,
           }),
     { tag: "literal", simple: true, value }

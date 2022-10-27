@@ -4,7 +4,7 @@ exports[`union should work with multiple members 1`] = `
 [
   {
     "code": "invalid_union",
-    "issues": [
+    "errors": [
       {
         "code": "invalid_type",
         "path": "",

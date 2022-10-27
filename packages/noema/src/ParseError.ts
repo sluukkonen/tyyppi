@@ -1,7 +1,7 @@
-import { Issue } from "./Issue.js"
+import { DecodeError } from "./DecodeError.js"
 
-export class ParseError extends Error {
-  constructor(readonly message: string, readonly issues: Issue[]) {
+export class ParseError<E extends DecodeError> extends Error {
+  constructor(readonly message: string, readonly errors: readonly E[]) {
     super(message)
   }
 }
