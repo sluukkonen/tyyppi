@@ -5,6 +5,7 @@ import * as t from "io-ts"
 import * as n from "noema"
 import * as r from "runtypes"
 import * as z from "zod"
+import array from "./array.js"
 import object from "./object.js"
 import record from "./record.js"
 import string from "./string.js"
@@ -48,9 +49,10 @@ function runBenchmark<T>(benchmark: Benchmark<T>) {
 }
 
 const suites = [
+  ["array", array],
   ["object", object],
-  ["string", string],
   ["record", record],
+  ["string", string],
 ] as [string, Benchmark<unknown>][]
 
 for (const [name, suite] of suites) {
