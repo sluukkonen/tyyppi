@@ -2,7 +2,7 @@
   "name": "noema-monorepo",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/sluukkonen/codec",
+  "repository": "https://github.com/sluukkonen/noema",
   "author": "Sakumatti Luukkonen",
   "license": "MIT",
   "private": true,
