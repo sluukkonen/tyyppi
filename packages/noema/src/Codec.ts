@@ -1,4 +1,4 @@
-import { ParseError } from "./ParseError.js"
+import { NoemaError } from "./NoemaError.js"
 import { Result } from "./Result.js"
 import { Metadata, SimpleMetadata } from "./Metadata.js"
 import { identity } from "./utils.js"
@@ -51,7 +51,7 @@ export function createCodec<I, T, E extends DecodeError>(
   const unsafeDecode = (value: unknown) => {
     const result = decode(value)
     if (result.ok) return result.value
-    else throw new ParseError("", result.errors)
+    else throw new NoemaError("", result.errors)
   }
   return {
     decode,

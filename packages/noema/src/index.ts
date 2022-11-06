@@ -1,6 +1,6 @@
 export * from "./Codec.js"
 export * from "./DecodeError.js"
-export * from "./ParseError.js"
+export * from "./NoemaError.js"
 export * from "./Result.js"
 export * from "./codecs/array.js"
 export * from "./codecs/boolean.js"
