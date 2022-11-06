@@ -36,10 +36,6 @@ export interface InvalidObject extends DecodeError {
   readonly code: "invalid_object"
 }
 
-export interface InvalidRecord extends DecodeError {
-  readonly code: "invalid_record"
-}
-
 export interface InvalidString extends DecodeError {
   readonly code: "invalid_string"
 }
@@ -57,6 +53,5 @@ export type BuiltinError =
   | InvalidLiteral<Literal>
   | InvalidNumber
   | InvalidObject
-  | InvalidRecord
   | InvalidString
   | InvalidUnion<DecodeError>

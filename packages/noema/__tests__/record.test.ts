@@ -28,7 +28,7 @@ describe("record", () => {
 
   test("should not parse non-objects", () => {
     expectParseFailure(record(string, string), "", [
-      { code: "invalid_record", actual: "", path: [] },
+      { code: "invalid_object", actual: "", path: [] },
     ])
   })
 
@@ -36,13 +36,13 @@ describe("record", () => {
     expectParseFailure(
       record(string, string),
       [],
-      [{ code: "invalid_record", actual: [], path: [] }]
+      [{ code: "invalid_object", actual: [], path: [] }]
     )
   })
 
   test("should not parse null", () => {
     expectParseFailure(record(string, string), null, [
-      { code: "invalid_record", actual: null, path: [] },
+      { code: "invalid_object", actual: null, path: [] },
     ])
   })
 

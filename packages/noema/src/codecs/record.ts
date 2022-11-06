@@ -10,13 +10,13 @@ import {
 } from "../Codec.js"
 import { hasOwnProperty, identity, pushErrors } from "../utils.js"
 import { RecordMetadata } from "../Metadata.js"
-import { InvalidRecord } from "../DecodeError.js"
+import { InvalidObject } from "../DecodeError.js"
 import { failure, failures, Result, success } from "../Result.js"
 
 type RecordCodec<K extends AnySimpleCodec, V extends AnyCodec> = Codec<
   Record<InputOf<K>, InputOf<V>>,
   Record<TypeOf<K>, TypeOf<V>>,
-  ErrorOf<K | V> | InvalidRecord,
+  ErrorOf<K | V> | InvalidObject,
   RecordMetadata<K, V>
 >
 
@@ -28,10 +28,10 @@ export function record<K extends AnySimpleCodec, V extends AnyCodec>(
   return createCodec(
     (
       val
-    ): Result<Record<TypeOf<K>, TypeOf<V>>, ErrorOf<K | V> | InvalidRecord> => {
+    ): Result<Record<TypeOf<K>, TypeOf<V>>, ErrorOf<K | V> | InvalidObject> => {
       if (val == null || typeof val !== "object" || Array.isArray(val))
         return failure({
-          code: "invalid_record",
+          code: "invalid_object",
           actual: val,
           path: [],
         })
