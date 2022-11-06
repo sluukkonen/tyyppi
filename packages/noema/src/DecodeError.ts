@@ -2,7 +2,7 @@ import { Literal } from "./codecs/literal.js"
 
 export interface DecodeError {
   readonly code: string
-  readonly path: string
+  readonly path: (string | number)[]
 }
 
 export interface InvalidLiteral<T extends Literal> extends DecodeError {

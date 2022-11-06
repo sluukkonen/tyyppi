@@ -19,10 +19,10 @@ type OptionalCodec<C extends AnyCodec> = Codec<
 
 export const optional = <C extends AnyCodec>(codec: C): OptionalCodec<C> =>
   createCodec(
-    (val, path) =>
+    (val) =>
       val === undefined
-        ? success(val)
-        : (codec.validate(val, path) as ResultOf<C>),
+        ? success(undefined)
+        : (codec.decode(val) as ResultOf<C>),
     (value) => (value === undefined ? value : codec.encode(value)),
     { tag: "optional", simple: codec.metadata.simple, codec }
   )

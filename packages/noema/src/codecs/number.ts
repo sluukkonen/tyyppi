@@ -6,12 +6,12 @@ import { failure, Result, success } from "../Result.js"
 export type NumberCodec = SimpleCodec<number, InvalidType, NumberMetadata>
 
 export const number: NumberCodec = createSimpleCodec(
-  (val, path): Result<number, InvalidType> =>
+  (val): Result<number, InvalidType> =>
     typeof val === "number"
       ? success(val)
       : failure({
           code: "invalid_type",
-          path,
+          path: [],
         }),
   {
     tag: "number",

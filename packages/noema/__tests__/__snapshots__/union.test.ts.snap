@@ -7,14 +7,14 @@ exports[`union should work with multiple members 1`] = `
     "errors": [
       {
         "code": "invalid_type",
-        "path": "",
+        "path": [],
       },
       {
         "code": "invalid_type",
-        "path": "",
+        "path": [],
       },
     ],
-    "path": "",
+    "path": [],
   },
 ]
 `;

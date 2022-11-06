@@ -8,7 +8,7 @@ exports[`enum should reject other values 1`] = `
       1,
       2,
     ],
-    "path": "",
+    "path": [],
   },
 ]
 `;

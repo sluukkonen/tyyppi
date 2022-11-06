@@ -7,7 +7,7 @@ import {
   ResultOf,
   TypeOf,
 } from "../Codec.js"
-import { hasOwnProperty, identity } from "../utils.js"
+import { hasOwnProperty, identity, pushErrors } from "../utils.js"
 import { ObjectMetadata } from "../Metadata.js"
 import { InvalidType } from "../DecodeError.js"
 import { failure, failures, Result, success } from "../Result.js"
@@ -45,14 +45,11 @@ export function object<T extends Record<string, AnyCodec>>(
   const simple = codecs.every((codec) => codec.metadata.simple)
 
   return createCodec(
-    (
-      val,
-      path
-    ): Result<TypeOf<T[keyof T]>, ErrorOf<T[keyof T]> | InvalidType> => {
+    (val): Result<TypeOf<T[keyof T]>, ErrorOf<T[keyof T]> | InvalidType> => {
       if (val == null || typeof val !== "object" || Array.isArray(val))
         return failure({
           code: "invalid_type",
-          path,
+          path: [],
         })
 
       let ok = true
@@ -65,13 +62,10 @@ export function object<T extends Record<string, AnyCodec>>(
 
         const property = hasOwnProperty(val, key) ? val[key] : undefined
 
-        const result = codec.validate(
-          property,
-          path ? `${path}.${key}` : key
-        ) as ResultOf<T[keyof T]>
+        const result = codec.decode(property) as ResultOf<T[keyof T]>
         if (!result.ok) {
           ok = false
-          errors.push(...result.errors)
+          pushErrors(errors, result.errors, key)
         } else if (ok && result.value !== undefined) {
           object[key] = result.value
         }

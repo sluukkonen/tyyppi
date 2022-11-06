@@ -13,12 +13,12 @@ type EnumCodec<T extends Literal> = SimpleCodec<
 function enumCodec<T extends Literal>(...members: T[]): EnumCodec<T> {
   const set = new Set(members)
   return createSimpleCodec(
-    (val, path) =>
+    (val) =>
       set.has(val as T)
         ? success(val as T)
         : failure({
             code: "invalid_enum",
-            path,
+            path: [],
             members,
           }),
     { tag: "enum", simple: true, members }

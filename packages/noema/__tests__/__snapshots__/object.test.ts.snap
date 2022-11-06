@@ -4,7 +4,9 @@ exports[`object should fail to parse an object with the value 1`] = `
 [
   {
     "code": "invalid_type",
-    "path": "a",
+    "path": [
+      "a",
+    ],
   },
 ]
 `;
@@ -13,7 +15,7 @@ exports[`object should fail to parse non-objects 1`] = `
 [
   {
     "code": "invalid_type",
-    "path": "",
+    "path": [],
   },
 ]
 `;
@@ -22,7 +24,7 @@ exports[`object should not accept arrays 1`] = `
 [
   {
     "code": "invalid_type",
-    "path": "",
+    "path": [],
   },
 ]
 `;
@@ -31,7 +33,7 @@ exports[`object should not accept null values 1`] = `
 [
   {
     "code": "invalid_type",
-    "path": "",
+    "path": [],
   },
 ]
 `;
@@ -40,7 +42,9 @@ exports[`object should only consider own properties 1`] = `
 [
   {
     "code": "invalid_type",
-    "path": "a",
+    "path": [
+      "a",
+    ],
   },
 ]
 `;
@@ -49,7 +53,10 @@ exports[`object the path property should work with nested objects 1`] = `
 [
   {
     "code": "invalid_type",
-    "path": "a.b",
+    "path": [
+      "a",
+      "b",
+    ],
   },
 ]
 `;

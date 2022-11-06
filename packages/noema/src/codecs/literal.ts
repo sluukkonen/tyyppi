@@ -20,12 +20,12 @@ type LiteralCodec<T extends Literal> = SimpleCodec<
 
 export const literal = <T extends Literal>(value: T): LiteralCodec<T> =>
   createSimpleCodec(
-    (val, path) =>
+    (val) =>
       val === value || (value !== value && val !== val)
         ? success(val as T)
         : failure({
             code: "invalid_literal",
-            path,
+            path: [],
             expected: value,
           }),
     { tag: "literal", simple: true, value }

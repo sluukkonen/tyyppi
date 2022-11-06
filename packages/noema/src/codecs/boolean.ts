@@ -6,12 +6,12 @@ import { failure, success } from "../Result.js"
 type BooleanCodec = SimpleCodec<boolean, InvalidType, BooleanMetadata>
 
 export const boolean: BooleanCodec = createSimpleCodec(
-  (val, path) =>
+  (val) =>
     typeof val === "boolean"
       ? success(val)
       : failure({
           code: "invalid_type",
-          path,
+          path: [],
         }),
   {
     tag: "boolean",

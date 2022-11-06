@@ -6,12 +6,12 @@ import { failure, success } from "../Result.js"
 type StringCodec = SimpleCodec<string, InvalidType, StringMetadata>
 
 export const string: StringCodec = createSimpleCodec(
-  (val, path) =>
+  (val) =>
     typeof val === "string"
       ? success(val)
       : failure({
           code: "invalid_type",
-          path,
+          path: [],
         }),
   {
     tag: "string",

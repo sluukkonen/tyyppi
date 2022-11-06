@@ -20,19 +20,19 @@ export function union<C extends readonly AnySimpleCodec[] | []>(
   ...members: C
 ): UnionCodec<C> {
   return createSimpleCodec(
-    (val, path) => {
+    (val) => {
       const errors: ErrorOf<C[number]>[] = []
 
       for (let i = 0; i < members.length; i++) {
         const codec = members[i]
-        const result = codec.validate(val, path) as ResultOf<C[number]>
+        const result = codec.decode(val) as ResultOf<C[number]>
         if (result.ok) return result
         else errors.push(...result.errors)
       }
 
       return failure({
         code: "invalid_union",
-        path,
+        path: [],
         errors,
       })
     },
