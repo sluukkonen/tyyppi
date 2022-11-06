@@ -19,6 +19,7 @@ export function expectParseFailure<C extends AnyCodec>(
 ) {
   const result = codec.decode(value)
 
+  expect(result.ok).toBe(false)
   if (!result.ok) {
     expect(result.errors).toEqual(errors)
     expect(() => codec.unsafeDecode(value)).toThrow(new ParseError("", errors))
