@@ -5,9 +5,12 @@ export interface DecodeError {
   readonly path: (string | number)[]
 }
 
-export interface InvalidLiteral<T extends Literal> extends DecodeError {
-  readonly code: "invalid_literal"
-  readonly expected: T
+export interface InvalidArray extends DecodeError {
+  readonly code: "invalid_array"
+}
+
+export interface InvalidBoolean extends DecodeError {
+  readonly code: "invalid_boolean"
 }
 
 export interface InvalidEnum<T extends Literal> extends DecodeError {
@@ -15,12 +18,29 @@ export interface InvalidEnum<T extends Literal> extends DecodeError {
   readonly members: T[]
 }
 
-export interface InvalidString extends DecodeError {
-  readonly code: "invalid_string"
+export interface InvalidISOString extends DecodeError {
+  readonly code: "invalid_iso_string"
 }
 
-export interface InvalidType extends DecodeError {
-  readonly code: "invalid_type"
+export interface InvalidLiteral<T extends Literal> extends DecodeError {
+  readonly code: "invalid_literal"
+  readonly expected: T
+}
+
+export interface InvalidNumber extends DecodeError {
+  readonly code: "invalid_number"
+}
+
+export interface InvalidObject extends DecodeError {
+  readonly code: "invalid_object"
+}
+
+export interface InvalidRecord extends DecodeError {
+  readonly code: "invalid_record"
+}
+
+export interface InvalidString extends DecodeError {
+  readonly code: "invalid_string"
 }
 
 export interface InvalidUnion<E extends DecodeError> extends DecodeError {
@@ -29,8 +49,13 @@ export interface InvalidUnion<E extends DecodeError> extends DecodeError {
 }
 
 export type BuiltinError =
+  | InvalidArray
+  | InvalidBoolean
   | InvalidEnum<Literal>
+  | InvalidISOString
   | InvalidLiteral<Literal>
+  | InvalidNumber
+  | InvalidObject
+  | InvalidRecord
   | InvalidString
-  | InvalidType
   | InvalidUnion<DecodeError>

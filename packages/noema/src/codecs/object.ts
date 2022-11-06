@@ -9,7 +9,7 @@ import {
 } from "../Codec.js"
 import { hasOwnProperty, identity, pushErrors } from "../utils.js"
 import { ObjectMetadata } from "../Metadata.js"
-import { InvalidType } from "../DecodeError.js"
+import { InvalidObject } from "../DecodeError.js"
 import { failure, failures, Result, success } from "../Result.js"
 
 type RequiredKeys<T> = {
@@ -33,7 +33,7 @@ type HandleOptionalTypes<T> = Id<
 type ObjectCodec<T extends Record<string, AnyCodec>> = Codec<
   HandleOptionalTypes<{ [K in keyof T]: InputOf<T[K]> }>,
   HandleOptionalTypes<{ [K in keyof T]: TypeOf<T[K]> }>,
-  ErrorOf<T[keyof T]> | InvalidType,
+  ErrorOf<T[keyof T]> | InvalidObject,
   ObjectMetadata<T>
 >
 
@@ -45,10 +45,10 @@ export function object<T extends Record<string, AnyCodec>>(
   const simple = codecs.every((codec) => codec.metadata.simple)
 
   return createCodec(
-    (val): Result<TypeOf<T[keyof T]>, ErrorOf<T[keyof T]> | InvalidType> => {
+    (val): Result<TypeOf<T[keyof T]>, ErrorOf<T[keyof T]> | InvalidObject> => {
       if (val == null || typeof val !== "object" || Array.isArray(val))
         return failure({
-          code: "invalid_type",
+          code: "invalid_object",
           path: [],
         })
 

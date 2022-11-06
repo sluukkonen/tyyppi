@@ -1,16 +1,16 @@
 import { createSimpleCodec, SimpleCodec } from "../Codec.js"
 import { NumberMetadata } from "../Metadata.js"
-import { InvalidType } from "../DecodeError.js"
-import { failure, Result, success } from "../Result.js"
+import { InvalidNumber } from "../DecodeError.js"
+import { failure, success } from "../Result.js"
 
-export type NumberCodec = SimpleCodec<number, InvalidType, NumberMetadata>
+export type NumberCodec = SimpleCodec<number, InvalidNumber, NumberMetadata>
 
 export const number: NumberCodec = createSimpleCodec(
-  (val): Result<number, InvalidType> =>
+  (val) =>
     typeof val === "number"
       ? success(val)
       : failure({
-          code: "invalid_type",
+          code: "invalid_number",
           path: [],
         }),
   {
