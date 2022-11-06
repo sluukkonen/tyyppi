@@ -3,6 +3,7 @@
 exports[`number should fail to parse non-numbers 1`] = `
 [
   {
+    "actual": "1",
     "code": "invalid_number",
     "path": [],
   },

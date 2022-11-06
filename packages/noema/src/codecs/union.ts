@@ -32,6 +32,7 @@ export function union<C extends readonly AnySimpleCodec[] | []>(
 
       return failure({
         code: "invalid_union",
+        actual: val,
         path: [],
         errors,
       })

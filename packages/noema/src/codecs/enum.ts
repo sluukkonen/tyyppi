@@ -18,6 +18,7 @@ function enumCodec<T extends Literal>(...members: T[]): EnumCodec<T> {
         ? success(val as T)
         : failure({
             code: "invalid_enum",
+            actual: val,
             path: [],
             members,
           }),

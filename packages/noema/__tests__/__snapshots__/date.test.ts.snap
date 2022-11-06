@@ -3,6 +3,7 @@
 exports[`dateFromISOString should reject invalid strings 1`] = `
 [
   {
+    "actual": "asdf",
     "code": "invalid_iso_string",
     "path": [],
   },
@@ -12,6 +13,7 @@ exports[`dateFromISOString should reject invalid strings 1`] = `
 exports[`dateFromISOString should reject non-strings 1`] = `
 [
   {
+    "actual": null,
     "code": "invalid_string",
     "path": [],
   },

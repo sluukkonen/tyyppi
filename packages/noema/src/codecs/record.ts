@@ -32,6 +32,7 @@ export function record<K extends AnySimpleCodec, V extends AnyCodec>(
       if (val == null || typeof val !== "object" || Array.isArray(val))
         return failure({
           code: "invalid_record",
+          actual: val,
           path: [],
         })
 

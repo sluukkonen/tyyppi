@@ -11,6 +11,7 @@ export const string: StringCodec = createSimpleCodec(
       ? success(val)
       : failure({
           code: "invalid_string",
+          actual: val,
           path: [],
         }),
   {

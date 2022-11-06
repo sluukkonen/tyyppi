@@ -24,7 +24,7 @@ export function array<C extends AnyCodec>(codec: C): ArrayCodec<C> {
   return createCodec(
     (val): Result<TypeOf<C>[], ErrorOf<C> | InvalidArray> => {
       if (!Array.isArray(val))
-        return failure({ code: "invalid_array", path: [] })
+        return failure({ code: "invalid_array", actual: val, path: [] })
 
       let ok = true
       const errors: ErrorOf<C>[] = []

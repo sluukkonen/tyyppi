@@ -49,6 +49,7 @@ export function object<T extends Record<string, AnyCodec>>(
       if (val == null || typeof val !== "object" || Array.isArray(val))
         return failure({
           code: "invalid_object",
+          actual: val,
           path: [],
         })
 

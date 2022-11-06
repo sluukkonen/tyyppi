@@ -3,6 +3,7 @@
 exports[`literal should fail to parse anything else 1`] = `
 [
   {
+    "actual": "",
     "code": "invalid_literal",
     "expected": "a",
     "path": [],

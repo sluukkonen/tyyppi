@@ -11,6 +11,7 @@ export const number: NumberCodec = createSimpleCodec(
       ? success(val)
       : failure({
           code: "invalid_number",
+          actual: val,
           path: [],
         }),
   {

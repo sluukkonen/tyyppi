@@ -3,6 +3,7 @@
 exports[`record path should nest with nested records 1`] = `
 [
   {
+    "actual": 1,
     "code": "invalid_string",
     "path": [
       "a",
@@ -15,6 +16,7 @@ exports[`record path should nest with nested records 1`] = `
 exports[`record should not parse arrays 1`] = `
 [
   {
+    "actual": [],
     "code": "invalid_record",
     "path": [],
   },
@@ -24,6 +26,7 @@ exports[`record should not parse arrays 1`] = `
 exports[`record should not parse non-objects 1`] = `
 [
   {
+    "actual": "",
     "code": "invalid_record",
     "path": [],
   },
@@ -33,6 +36,7 @@ exports[`record should not parse non-objects 1`] = `
 exports[`record should not parse null 1`] = `
 [
   {
+    "actual": null,
     "code": "invalid_record",
     "path": [],
   },
@@ -42,6 +46,7 @@ exports[`record should not parse null 1`] = `
 exports[`record should not parse records with invalid keys 1`] = `
 [
   {
+    "actual": "b",
     "code": "invalid_literal",
     "expected": "a",
     "path": [
@@ -54,6 +59,7 @@ exports[`record should not parse records with invalid keys 1`] = `
 exports[`record should not parse records with invalid values 1`] = `
 [
   {
+    "actual": 2,
     "code": "invalid_string",
     "path": [
       "b",
