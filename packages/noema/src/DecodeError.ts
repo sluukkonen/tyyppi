@@ -28,6 +28,10 @@ export interface InvalidLiteral<T extends Literal> extends DecodeError {
   readonly expected: T
 }
 
+export interface InvalidNull extends DecodeError {
+  readonly code: "invalid_null"
+}
+
 export interface InvalidNumber extends DecodeError {
   readonly code: "invalid_number"
 }
