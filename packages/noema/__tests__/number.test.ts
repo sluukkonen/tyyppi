@@ -12,15 +12,21 @@ describe("number", () => {
     ])
   })
 
-  test("should parse a NaN", () => {
-    expectParseSuccess(number, NaN)
+  test("should not parse a NaN", () => {
+    expectParseFailure(number, NaN, [
+      { code: "invalid_number", actual: NaN, path: [] },
+    ])
   })
 
-  test("should parse Infinity", () => {
-    expectParseSuccess(number, Infinity)
+  test("should not parse Infinity", () => {
+    expectParseFailure(number, Infinity, [
+      { code: "invalid_number", actual: Infinity, path: [] },
+    ])
   })
 
-  test("should parse -Infinity", () => {
-    expectParseSuccess(number, -Infinity)
+  test("should not parse -Infinity", () => {
+    expectParseFailure(number, -Infinity, [
+      { code: "invalid_number", actual: -Infinity, path: [] },
+    ])
   })
 })

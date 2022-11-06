@@ -7,7 +7,7 @@ export type NumberCodec = SimpleCodec<number, InvalidNumber, NumberMetadata>
 
 export const number: NumberCodec = createSimpleCodec(
   (val) =>
-    typeof val === "number"
+    typeof val === "number" && Number.isFinite(val)
       ? success(val)
       : failure({
           code: "invalid_number",
