@@ -70,3 +70,7 @@ export interface UnionMetadata<C extends readonly AnySimpleCodec[] | []>
   readonly tag: "union"
   readonly members: C
 }
+
+export interface UnknownMetadata extends SimpleMetadata {
+  readonly tag: "unknown"
+}
