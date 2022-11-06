@@ -11,12 +11,13 @@
   "exports": {
     ".": {
       "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
       "types": "./dist/index.d.ts"
     }
   },
   "scripts": {
-    "build": "tsc --build",
-    "build:test": "tsc --build __tests__",
+    "build": "tsup src/index.ts --format esm,cjs --dts",
+    "build:test": "tsc --project __tests__",
     "lint": "eslint .",
     "test": "jest"
   },
@@ -32,6 +33,7 @@
     "prettier": "2.7.1",
     "ts-jest": "29.0.3",
     "ts-jest-resolver": "2.0.0",
+    "tsup": "6.4.0",
     "typescript": "4.8.4"
   }
 }

@@ -5,7 +5,7 @@
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["src/**/*.ts"],
-      "outputs": ["dist/**", "tsconfig.tsbuildinfo"],
+      "outputs": ["dist/**"],
       "outputMode": "new-only"
     },
     "build:test": {
