@@ -10,7 +10,7 @@ type DateCodec = Codec<
   DateMetadata
 >
 
-export const date: DateCodec = createCodec(
+export const date: DateCodec = /* @__PURE__ */ createCodec(
   (val): Result<Date, InvalidString | InvalidISOString> => {
     if (typeof val !== "string")
       return failure({ code: "invalid_string", actual: val, path: [] })

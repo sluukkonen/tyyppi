@@ -5,7 +5,7 @@ import { failure, success } from "../Result.js"
 
 type NullCodec = SimpleCodec<null, InvalidNull, NullMetadata>
 
-const nullCodec: NullCodec = createSimpleCodec(
+const nullCodec: NullCodec = /* @__PURE__ */ createSimpleCodec(
   (val) =>
     val === null
       ? success(null)

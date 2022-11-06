@@ -21,8 +21,8 @@
       "outputMode": "new-only"
     },
     "test": {
-      "dependsOn": [],
-      "inputs": ["src/**/*.ts", "__tests__/**/*.ts", "jest.config.mjs"],
+      "dependsOn": ["build"],
+      "inputs": ["__tests__/**/*.ts", "jest.config.mjs"],
       "outputs": ["coverage/**"],
       "outputMode": "new-only"
     },
