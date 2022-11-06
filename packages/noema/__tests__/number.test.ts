@@ -7,7 +7,9 @@ describe("number", () => {
   })
 
   test("should fail to parse non-numbers", () => {
-    expectParseFailure(number, "1")
+    expectParseFailure(number, "1", [
+      { code: "invalid_number", actual: "1", path: [] },
+    ])
   })
 
   test("should parse a NaN", () => {

@@ -1,3 +1,4 @@
+import { ErrorOf } from "../dist/index.js"
 import { AnyCodec, InputOf, ParseError, TypeOf } from "../src/index.js"
 
 export function expectParseSuccess<C extends AnyCodec>(
@@ -11,13 +12,15 @@ export function expectParseSuccess<C extends AnyCodec>(
   expect(codec.encode(decoded)).toEqual(value)
 }
 
-export function expectParseFailure(codec: AnyCodec, value: unknown) {
+export function expectParseFailure<C extends AnyCodec>(
+  codec: C,
+  value: unknown,
+  errors: readonly ErrorOf<C>[]
+) {
   const result = codec.decode(value)
 
   if (!result.ok) {
-    expect(result.errors).toMatchSnapshot()
-    expect(() => codec.unsafeDecode(value)).toThrow(
-      new ParseError("", result.errors)
-    )
+    expect(result.errors).toEqual(errors)
+    expect(() => codec.unsafeDecode(value)).toThrow(new ParseError("", errors))
   }
 }

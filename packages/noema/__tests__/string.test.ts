@@ -9,6 +9,8 @@ describe("string", () => {
   })
 
   test("should fail to parse non-strings", () => {
-    expectParseFailure(string, 0)
+    expectParseFailure(string, 0, [
+      { code: "invalid_string", actual: 0, path: [] },
+    ])
   })
 })

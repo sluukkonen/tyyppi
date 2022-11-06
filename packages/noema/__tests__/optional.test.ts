@@ -8,7 +8,9 @@ describe("optional", () => {
   })
 
   test("should fail to parse other values", () => {
-    expectParseFailure(optional(string), 1)
+    expectParseFailure(optional(string), 1, [
+      { code: "invalid_string", actual: 1, path: [] },
+    ])
   })
 
   test("should work with object types", () => {
