@@ -9,6 +9,7 @@ import array from "./array.js"
 import object from "./object.js"
 import record from "./record.js"
 import string from "./string.js"
+import undefined from "./undefined.js"
 
 export interface Benchmark<T> {
   name: string
@@ -53,6 +54,7 @@ const suites = [
   ["object", object],
   ["record", record],
   ["string", string],
+  ["undefined", undefined],
 ] as [string, Benchmark<unknown>][]
 
 for (const [name, suite] of suites) {
