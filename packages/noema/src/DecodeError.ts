@@ -32,6 +32,10 @@ export interface InvalidNull extends DecodeError {
   readonly code: "invalid_null"
 }
 
+export interface InvalidUndefined extends DecodeError {
+  readonly code: "invalid_undefined"
+}
+
 export interface InvalidNumber extends DecodeError {
   readonly code: "invalid_number"
 }

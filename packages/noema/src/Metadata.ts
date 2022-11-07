@@ -36,6 +36,10 @@ export interface NullMetadata extends SimpleMetadata {
   readonly tag: "null"
 }
 
+export interface UndefinedMetadata extends SimpleMetadata {
+  readonly tag: "undefined"
+}
+
 export interface NumberMetadata extends SimpleMetadata {
   readonly tag: "number"
 }
