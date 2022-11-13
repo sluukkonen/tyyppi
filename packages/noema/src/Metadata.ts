@@ -32,6 +32,10 @@ export interface EnumMetadata<T extends Literal> extends SimpleMetadata {
   readonly members: T[]
 }
 
+export interface IntegerMetadata extends SimpleMetadata {
+  readonly tag: "integer"
+}
+
 export interface NullMetadata extends SimpleMetadata {
   readonly tag: "null"
 }

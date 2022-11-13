@@ -19,6 +19,10 @@ export interface InvalidEnum<T extends Literal> extends DecodeError {
   readonly members: T[]
 }
 
+export interface InvalidInteger extends DecodeError {
+  readonly code: "invalid_integer"
+}
+
 export interface InvalidISOString extends DecodeError {
   readonly code: "invalid_iso_string"
 }
