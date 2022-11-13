@@ -1,20 +1,20 @@
 import { expectParseFailure, expectParseSuccess } from "./helpers.js"
-import { date } from "../src/index.js"
+import { dateFromISOString } from "../src/index.js"
 
 describe("dateFromISOString", () => {
   test("should parse valid ISO dates", () => {
     const now = new Date()
-    expectParseSuccess(date, now.toISOString(), now)
+    expectParseSuccess(dateFromISOString, now.toISOString(), now)
   })
 
   test("should reject non-strings", () => {
-    expectParseFailure(date, null, [
+    expectParseFailure(dateFromISOString, null, [
       { code: "invalid_string", actual: null, path: [] },
     ])
   })
 
   test("should reject invalid strings", () => {
-    expectParseFailure(date, "asdf", [
+    expectParseFailure(dateFromISOString, "asdf", [
       { code: "invalid_iso_string", actual: "asdf", path: [] },
     ])
   })

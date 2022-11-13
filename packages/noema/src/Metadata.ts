@@ -26,8 +26,8 @@ export interface BooleanMetadata extends SimpleMetadata {
   readonly tag: "boolean"
 }
 
-export interface DateMetadata extends Metadata {
-  readonly tag: "date"
+export interface DateFromISOStringMetadata extends Metadata {
+  readonly tag: "dateFromISOString"
   readonly simple: false
 }
 
