@@ -18,6 +18,10 @@ export interface ArrayMetadata<C extends AnyCodec> extends Metadata {
   readonly codec: C
 }
 
+export interface BigIntMetadata extends SimpleMetadata {
+  readonly tag: "bigint"
+}
+
 export interface BooleanMetadata extends SimpleMetadata {
   readonly tag: "boolean"
 }

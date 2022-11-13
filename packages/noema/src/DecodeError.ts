@@ -10,6 +10,10 @@ export interface InvalidArray extends DecodeError {
   readonly code: "invalid_array"
 }
 
+export interface InvalidBigInt extends DecodeError {
+  readonly code: "invalid_bigint"
+}
+
 export interface InvalidBoolean extends DecodeError {
   readonly code: "invalid_boolean"
 }
