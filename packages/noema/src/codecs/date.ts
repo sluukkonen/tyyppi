@@ -1,0 +1,15 @@
+import { createSimpleCodec, SimpleCodec } from "../Codec.js"
+import { DateMetadata } from "../Metadata.js"
+import { InvalidDate } from "../DecodeError.js"
+import { failure, Result, success } from "../Result.js"
+import { isDate } from "../utils.js"
+
+type DateCodec = SimpleCodec<Date, InvalidDate, DateMetadata>
+
+export const date: DateCodec = /* @__PURE__ */ createSimpleCodec(
+  (val): Result<Date, InvalidDate> =>
+    isDate(val) && !Number.isNaN(val.getTime())
+      ? success(val)
+      : failure({ code: "invalid_date", actual: val, path: [] }),
+  { tag: "date", simple: true }
+)

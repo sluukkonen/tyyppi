@@ -22,3 +22,16 @@ export function pushErrors<T extends DecodeError>(
   }
   return errors
 }
+
+export function getTag(value: object): string {
+  return Object.prototype.toString.call(value)
+}
+
+export function isObjectLike(value: unknown): value is object {
+  return value != null && typeof value === "object"
+}
+
+export function isDate(value: unknown): value is Date {
+  return isObjectLike(value) && getTag(value) === "[object Date]"
+}
+

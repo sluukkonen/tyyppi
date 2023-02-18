@@ -18,6 +18,10 @@ export interface InvalidBoolean extends DecodeError {
   readonly code: "invalid_boolean"
 }
 
+export interface InvalidDate extends DecodeError {
+  readonly code: "invalid_date"
+}
+
 export interface InvalidEnum<T extends Literal> extends DecodeError {
   readonly code: "invalid_enum"
   readonly members: T[]
