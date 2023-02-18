@@ -44,6 +44,10 @@ export interface InvalidNull extends DecodeError {
   readonly code: "invalid_null"
 }
 
+export interface InvalidTuple extends DecodeError {
+  readonly code: "invalid_tuple"
+}
+
 export interface InvalidUndefined extends DecodeError {
   readonly code: "invalid_undefined"
 }

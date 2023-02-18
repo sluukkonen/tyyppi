@@ -91,6 +91,13 @@ export interface StringMetadata extends SimpleMetadata {
   readonly tag: "string"
 }
 
+export interface TupleMetadata<C extends readonly AnyCodec[] | []>
+  extends Metadata {
+  readonly tag: "tuple"
+  readonly simple: IsSimple<C[number]>
+  readonly members: C
+}
+
 export interface UnionMetadata<C extends readonly AnySimpleCodec[] | []>
   extends SimpleMetadata {
   readonly tag: "union"
