@@ -31,7 +31,10 @@ export function isObjectLike(value: unknown): value is object {
   return value != null && typeof value === "object"
 }
 
+export function isObject(value: unknown): value is object {
+  return isObjectLike(value) && !Array.isArray(value)
+}
+
 export function isDate(value: unknown): value is Date {
   return isObjectLike(value) && getTag(value) === "[object Date]"
 }
-
