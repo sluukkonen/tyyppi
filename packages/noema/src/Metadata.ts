@@ -52,6 +52,12 @@ export interface UndefinedMetadata extends SimpleMetadata {
   readonly tag: "undefined"
 }
 
+export interface NullableMetadata<C extends AnyCodec> extends Metadata {
+  readonly tag: "nullable"
+  readonly simple: IsSimple<C>
+  readonly codec: C
+}
+
 export interface NumberMetadata extends SimpleMetadata {
   readonly tag: "number"
 }
