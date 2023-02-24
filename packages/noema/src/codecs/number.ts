@@ -5,7 +5,7 @@ import { failure, success } from "../Result.js"
 
 export type NumberCodec = SimpleCodec<number, InvalidNumber, NumberMetadata>
 
-export const number: NumberCodec = /* @__PURE__ */ createSimpleCodec(
+export const number: NumberCodec = createSimpleCodec(
   (val) =>
     typeof val === "number" && Number.isFinite(val)
       ? success(val)

@@ -9,7 +9,7 @@ type UndefinedCodec = SimpleCodec<
   UndefinedMetadata
 >
 
-const undefinedCodec: UndefinedCodec = /* @__PURE__ */ createSimpleCodec(
+const undefinedCodec: UndefinedCodec = createSimpleCodec(
   (val) =>
     val === undefined
       ? success(undefined)

@@ -5,7 +5,7 @@ import { failure, success } from "../Result.js"
 
 type IntegerCodec = SimpleCodec<number, InvalidInteger, IntegerMetadata>
 
-export const integer: IntegerCodec = /* @__PURE__ */ createSimpleCodec(
+export const integer: IntegerCodec = createSimpleCodec(
   (val) =>
     typeof val === "number" && Number.isInteger(val)
       ? success(val)

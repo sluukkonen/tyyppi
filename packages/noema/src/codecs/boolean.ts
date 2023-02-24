@@ -5,7 +5,7 @@ import { failure, success } from "../Result.js"
 
 type BooleanCodec = SimpleCodec<boolean, InvalidBoolean, BooleanMetadata>
 
-export const boolean: BooleanCodec = /* @__PURE__ */ createSimpleCodec(
+export const boolean: BooleanCodec = createSimpleCodec(
   (val) =>
     typeof val === "boolean"
       ? success(val)

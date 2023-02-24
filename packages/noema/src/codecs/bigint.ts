@@ -5,7 +5,7 @@ import { failure, success } from "../Result.js"
 
 type BigIntCodec = SimpleCodec<bigint, InvalidBigInt, BigIntMetadata>
 
-export const bigint: BigIntCodec = /* @__PURE__ */ createSimpleCodec(
+export const bigint: BigIntCodec = createSimpleCodec(
   (val) =>
     typeof val === "bigint"
       ? success(val)

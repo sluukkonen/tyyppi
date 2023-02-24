@@ -8,6 +8,7 @@
   "author": "Sakumatti Luukkonen",
   "license": "MIT",
   "private": false,
+  "sideEffects": false,
   "exports": {
     ".": {
       "import": "./dist/index.js",

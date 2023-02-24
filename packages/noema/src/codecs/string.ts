@@ -5,7 +5,7 @@ import { failure, success } from "../Result.js"
 
 type StringCodec = SimpleCodec<string, InvalidString, StringMetadata>
 
-export const string: StringCodec = /* @__PURE__ */ createSimpleCodec(
+export const string: StringCodec = createSimpleCodec(
   (val) =>
     typeof val === "string"
       ? success(val)

@@ -6,7 +6,7 @@ import { isDate } from "../utils.js"
 
 type DateCodec = SimpleCodec<Date, InvalidDate, DateMetadata>
 
-export const date: DateCodec = /* @__PURE__ */ createSimpleCodec(
+export const date: DateCodec = createSimpleCodec(
   (val): Result<Date, InvalidDate> =>
     isDate(val) && !Number.isNaN(val.getTime())
       ? success(val)
