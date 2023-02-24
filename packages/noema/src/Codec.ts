@@ -18,7 +18,9 @@ export interface Codec<
 
 export type AnyCodec = Codec<any>
 
-export type InputOf<C extends AnyCodec> = C extends Codec<infer I> ? I : never
+export type InputOf<C extends AnyCodec> = C extends Codec<infer I, any>
+  ? I
+  : never
 export type TypeOf<C extends AnyCodec> = C extends Codec<any, infer T>
   ? T
   : never
