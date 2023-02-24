@@ -46,7 +46,7 @@ export function createCodec<I, T, E extends DecodeError, M extends Metadata>(
 export function createCodec<I, T, E extends DecodeError>(
   decode: (value: unknown) => Result<T, E>,
   encode: (value: T) => I,
-  metadata: Metadata = { tag: "unknown", simple: false }
+  metadata: Metadata = { simple: false }
 ): Codec<I, T, E> {
   const unsafeDecode = (value: unknown) => {
     const result = decode(value)
@@ -67,11 +67,11 @@ export function createSimpleCodec<T, E extends DecodeError>(
 export function createSimpleCodec<
   T,
   E extends DecodeError,
-  M extends SimpleMetadata
+  M extends SimpleMetadata = { simple: true }
 >(decode: (value: unknown) => Result<T, E>, metadata: M): SimpleCodec<T, E, M>
 export function createSimpleCodec<T, E extends DecodeError>(
   decode: (value: unknown) => Result<T, E>,
-  metadata: SimpleMetadata = { tag: "unknown", simple: true }
+  metadata: SimpleMetadata = { simple: true }
 ): SimpleCodec<T, E> {
   return createCodec(decode, identity, metadata)
 }

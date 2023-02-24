@@ -4,7 +4,7 @@ import { Literal } from "./codecs/literal.js"
 type IsSimple<C extends AnyCodec> = C["metadata"]["simple"]
 
 export interface Metadata {
-  readonly tag: string
+  readonly tag?: string
   readonly simple: boolean
 }
 
