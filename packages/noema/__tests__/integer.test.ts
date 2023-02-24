@@ -7,8 +7,6 @@ describe("integer", () => {
   })
 
   test("should reject other values", () => {
-    expectParseFailure(integer, 0.5, [
-      { code: "invalid_integer", actual: 0.5, path: [] },
-    ])
+    expectParseFailure(integer, 0.5, [{ code: "invalid_integer", path: [] }])
   })
 })

@@ -46,12 +46,7 @@ export function object<T extends Record<string, AnyCodec>>(
 
   return createCodec(
     (val): Result<TypeOf<T[keyof T]>, ErrorOf<T[keyof T]> | InvalidObject> => {
-      if (!isObject(val))
-        return failure({
-          code: "invalid_object",
-          actual: val,
-          path: [],
-        })
+      if (!isObject(val)) return failure({ code: "invalid_object", path: [] })
 
       let ok = true
       const errors: ErrorOf<T[keyof T]>[] = []

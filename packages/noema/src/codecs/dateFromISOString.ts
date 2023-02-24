@@ -13,13 +13,11 @@ type DateFromISOStringCodec = Codec<
 
 export const dateFromISOString: DateFromISOStringCodec = createCodec(
   (val): Result<Date, InvalidString | InvalidISOString> => {
-    if (!isString(val))
-      return failure({ code: "invalid_string", actual: val, path: [] })
+    if (!isString(val)) return failure({ code: "invalid_string", path: [] })
     const date = new Date(val)
     return isNaN(date.getTime())
       ? failure({
           code: "invalid_iso_string",
-          actual: val,
           path: [],
         })
       : success(date)

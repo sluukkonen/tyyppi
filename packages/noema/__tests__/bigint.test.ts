@@ -7,8 +7,6 @@ describe("bigint", () => {
   })
 
   test("should fail to parse other values", () => {
-    expectParseFailure(bigint, 0, [
-      { code: "invalid_bigint", actual: 0, path: [] },
-    ])
+    expectParseFailure(bigint, 0, [{ code: "invalid_bigint", path: [] }])
   })
 })

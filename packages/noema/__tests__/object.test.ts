@@ -7,9 +7,7 @@ describe("object", () => {
   })
 
   test("should fail to parse non-objects", () => {
-    expectParseFailure(object({}), "", [
-      { code: "invalid_object", actual: "", path: [] },
-    ])
+    expectParseFailure(object({}), "", [{ code: "invalid_object", path: [] }])
   })
 
   test("should parse a valid object", () => {
@@ -27,7 +25,7 @@ describe("object", () => {
 
   test("should fail to parse an object with the value", () => {
     expectParseFailure(object({ a: string }), { a: 1 }, [
-      { code: "invalid_string", actual: 1, path: ["a"] },
+      { code: "invalid_string", path: ["a"] },
     ])
   })
 
@@ -37,13 +35,13 @@ describe("object", () => {
 
   test("the path property should work with nested objects", () => {
     expectParseFailure(object({ a: object({ b: string }) }), { a: { b: 0 } }, [
-      { code: "invalid_string", actual: 0, path: ["a", "b"] },
+      { code: "invalid_string", path: ["a", "b"] },
     ])
   })
 
   test("should not accept null values", () => {
     expectParseFailure(object({ a: string }), null, [
-      { code: "invalid_object", actual: null, path: [] },
+      { code: "invalid_object", path: [] },
     ])
   })
 
@@ -51,14 +49,14 @@ describe("object", () => {
     expectParseFailure(
       object({ "0": number }),
       [0],
-      [{ code: "invalid_object", actual: [0], path: [] }]
+      [{ code: "invalid_object", path: [] }]
     )
   })
 
   test("should only consider own properties", () => {
     const obj = Object.assign(Object.create({ a: 1 }), { b: 2, c: 3 })
     expectParseFailure(object({ a: number, b: number, c: number }), obj, [
-      { code: "invalid_number", actual: undefined, path: ["a"] },
+      { code: "invalid_number", path: ["a"] },
     ])
   })
 

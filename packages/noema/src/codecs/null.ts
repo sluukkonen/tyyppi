@@ -11,7 +11,6 @@ const nullCodec: NullCodec = createSimpleCodec(
       ? success(null)
       : failure({
           code: "invalid_null",
-          actual: val,
           path: [],
         }),
   {

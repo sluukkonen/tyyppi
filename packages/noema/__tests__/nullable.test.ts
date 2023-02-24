@@ -9,7 +9,7 @@ describe("nullable", () => {
 
   test("should fail to parse other values", () => {
     expectParseFailure(nullable(string), 1, [
-      { code: "invalid_string", actual: 1, path: [] },
+      { code: "invalid_string", path: [] },
     ])
   })
 })

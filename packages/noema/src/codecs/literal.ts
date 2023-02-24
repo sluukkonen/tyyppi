@@ -25,7 +25,6 @@ export const literal = <T extends Literal>(value: T): LiteralCodec<T> =>
         ? success(val as T)
         : failure({
             code: "invalid_literal",
-            actual: val,
             expected: value,
             path: [],
           }),

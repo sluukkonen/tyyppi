@@ -29,12 +29,7 @@ export function record<K extends AnySimpleCodec, V extends AnyCodec>(
     (
       val
     ): Result<Record<TypeOf<K>, TypeOf<V>>, ErrorOf<K | V> | InvalidObject> => {
-      if (!isObject(val))
-        return failure({
-          code: "invalid_object",
-          actual: val,
-          path: [],
-        })
+      if (!isObject(val)) return failure({ code: "invalid_object", path: [] })
 
       let ok = true
       const errors: Array<ErrorOf<K> | ErrorOf<V>> = []

@@ -9,13 +9,13 @@ describe("dateFromISOString", () => {
 
   test("should reject non-strings", () => {
     expectParseFailure(dateFromISOString, null, [
-      { code: "invalid_string", actual: null, path: [] },
+      { code: "invalid_string", path: [] },
     ])
   })
 
   test("should reject invalid strings", () => {
     expectParseFailure(dateFromISOString, "asdf", [
-      { code: "invalid_iso_string", actual: "asdf", path: [] },
+      { code: "invalid_iso_string", path: [] },
     ])
   })
 })

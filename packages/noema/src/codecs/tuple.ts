@@ -40,11 +40,7 @@ export function tuple<C extends readonly AnyCodec[] | []>(
   return createCodec(
     (val): Result<TypesOf<C>, ErrorOf<C[number]> | InvalidTuple> => {
       if (!isArray(val) || val.length !== length) {
-        return failure({
-          code: "invalid_tuple",
-          actual: val,
-          path: [],
-        })
+        return failure({ code: "invalid_tuple", path: [] })
       }
 
       let ok = true

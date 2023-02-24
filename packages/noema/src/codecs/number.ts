@@ -10,11 +10,7 @@ export const number: NumberCodec = createSimpleCodec(
   (val) =>
     isNumber(val) && Number.isFinite(val)
       ? success(val)
-      : failure({
-          code: "invalid_number",
-          actual: val,
-          path: [],
-        }),
+      : failure({ code: "invalid_number", path: [] }),
   {
     tag: "number",
     simple: true,

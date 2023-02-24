@@ -7,26 +7,20 @@ describe("number", () => {
   })
 
   test("should fail to parse non-numbers", () => {
-    expectParseFailure(number, "1", [
-      { code: "invalid_number", actual: "1", path: [] },
-    ])
+    expectParseFailure(number, "1", [{ code: "invalid_number", path: [] }])
   })
 
   test("should not parse a NaN", () => {
-    expectParseFailure(number, NaN, [
-      { code: "invalid_number", actual: NaN, path: [] },
-    ])
+    expectParseFailure(number, NaN, [{ code: "invalid_number", path: [] }])
   })
 
   test("should not parse Infinity", () => {
-    expectParseFailure(number, Infinity, [
-      { code: "invalid_number", actual: Infinity, path: [] },
-    ])
+    expectParseFailure(number, Infinity, [{ code: "invalid_number", path: [] }])
   })
 
   test("should not parse -Infinity", () => {
     expectParseFailure(number, -Infinity, [
-      { code: "invalid_number", actual: -Infinity, path: [] },
+      { code: "invalid_number", path: [] },
     ])
   })
 })

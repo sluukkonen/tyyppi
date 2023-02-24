@@ -10,11 +10,7 @@ export const string: StringCodec = createSimpleCodec(
   (val) =>
     isString(val)
       ? success(val)
-      : failure({
-          code: "invalid_string",
-          actual: val,
-          path: [],
-        }),
+      : failure({ code: "invalid_string", path: [] }),
   {
     tag: "string",
     simple: true,

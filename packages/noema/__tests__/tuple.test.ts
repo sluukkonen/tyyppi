@@ -17,23 +17,21 @@ describe("tuple", () => {
     expectParseFailure(
       tuple([number]),
       [],
-      [{ code: "invalid_tuple", actual: [], path: [] }]
+      [{ code: "invalid_tuple", path: [] }]
     )
     expectParseFailure(
       tuple([number]),
       [1, 2],
-      [{ code: "invalid_tuple", actual: [1, 2], path: [] }]
+      [{ code: "invalid_tuple", path: [] }]
     )
   })
 
   test("should reject invalid values", () => {
-    expectParseFailure(tuple([]), null, [
-      { code: "invalid_tuple", actual: null, path: [] },
-    ])
+    expectParseFailure(tuple([]), null, [{ code: "invalid_tuple", path: [] }])
     expectParseFailure(
       tuple([number, number]),
       [1, "2"],
-      [{ code: "invalid_number", actual: "2", path: [1] }]
+      [{ code: "invalid_number", path: [1] }]
     )
   })
 })

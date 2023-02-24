@@ -12,7 +12,6 @@ export const integer: IntegerCodec = createSimpleCodec(
       ? success(val)
       : failure({
           code: "invalid_integer",
-          actual: val,
           path: [],
         }),
   {

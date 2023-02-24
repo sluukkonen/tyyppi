@@ -12,11 +12,10 @@ describe("union", () => {
     expectParseFailure(union(string, number), {}, [
       {
         code: "invalid_union",
-        actual: {},
         path: [],
         errors: [
-          { code: "invalid_string", actual: {}, path: [] },
-          { code: "invalid_number", actual: {}, path: [] },
+          { code: "invalid_string", path: [] },
+          { code: "invalid_number", path: [] },
         ],
       },
     ])

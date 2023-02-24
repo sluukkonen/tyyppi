@@ -11,7 +11,6 @@ export const bigint: BigIntCodec = createSimpleCodec(
       ? success(val)
       : failure({
           code: "invalid_bigint",
-          actual: val,
           path: [],
         }),
   {

@@ -11,7 +11,6 @@ export const boolean: BooleanCodec = createSimpleCodec(
       ? success(val)
       : failure({
           code: "invalid_boolean",
-          actual: val,
           path: [],
         }),
   {

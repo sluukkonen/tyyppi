@@ -16,8 +16,6 @@ describe("undefined", () => {
     [false, "invalid_undefined" as const],
     [() => 1, "invalid_undefined" as const],
   ])("should not parse other values", (actual, code) => {
-    expectParseFailure(n.undefined, actual, [
-      { code: code, actual: actual, path: [] },
-    ])
+    expectParseFailure(n.undefined, actual, [{ code: code, path: [] }])
   })
 })

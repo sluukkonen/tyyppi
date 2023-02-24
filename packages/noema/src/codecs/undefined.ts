@@ -13,11 +13,7 @@ const undefinedCodec: UndefinedCodec = createSimpleCodec(
   (val) =>
     val === undefined
       ? success(undefined)
-      : failure({
-          code: "invalid_undefined",
-          actual: val,
-          path: [],
-        }),
+      : failure({ code: "invalid_undefined", path: [] }),
   {
     tag: "undefined",
     simple: true,

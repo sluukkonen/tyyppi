@@ -22,13 +22,13 @@ describe("record", () => {
     expectParseSuccess(record(literal("a"), string), {} as Record<"a", string>)
     expectParseSuccess(record(literal("a"), string), { a: "1" })
     expectParseFailure(record(literal("a"), string), { a: "1", b: "2" }, [
-      { code: "invalid_literal", actual: "b", expected: "a", path: ["b"] },
+      { code: "invalid_literal", expected: "a", path: ["b"] },
     ])
   })
 
   test("should not parse non-objects", () => {
     expectParseFailure(record(string, string), "", [
-      { code: "invalid_object", actual: "", path: [] },
+      { code: "invalid_object", path: [] },
     ])
   })
 
@@ -36,13 +36,13 @@ describe("record", () => {
     expectParseFailure(
       record(string, string),
       [],
-      [{ code: "invalid_object", actual: [], path: [] }]
+      [{ code: "invalid_object", path: [] }]
     )
   })
 
   test("should not parse null", () => {
     expectParseFailure(record(string, string), null, [
-      { code: "invalid_object", actual: null, path: [] },
+      { code: "invalid_object", path: [] },
     ])
   })
 
@@ -53,7 +53,7 @@ describe("record", () => {
 
   test("should not parse records with invalid values", () => {
     expectParseFailure(record(string, string), { a: "1", b: 2 }, [
-      { code: "invalid_string", actual: 2, path: ["b"] },
+      { code: "invalid_string", path: ["b"] },
     ])
   })
 
@@ -61,7 +61,7 @@ describe("record", () => {
     expectParseFailure(
       record(string, record(string, string)),
       { a: { b: 1 } },
-      [{ code: "invalid_string", actual: 1, path: ["a", "b"] }]
+      [{ code: "invalid_string", path: ["a", "b"] }]
     )
   })
 })

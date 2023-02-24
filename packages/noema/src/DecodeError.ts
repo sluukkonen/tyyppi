@@ -2,7 +2,6 @@ import { Literal } from "./codecs/literal.js"
 
 export interface DecodeError {
   readonly code: string
-  readonly actual: unknown
   readonly path: (string | number)[]
 }
 

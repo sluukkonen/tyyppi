@@ -10,6 +10,6 @@ export const date: DateCodec = createSimpleCodec(
   (val): Result<Date, InvalidDate> =>
     isDate(val) && !isNaN(val.getTime())
       ? success(val)
-      : failure({ code: "invalid_date", actual: val, path: [] }),
+      : failure({ code: "invalid_date", path: [] }),
   { tag: "date", simple: true }
 )
