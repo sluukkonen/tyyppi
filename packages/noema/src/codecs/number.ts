@@ -1,6 +1,6 @@
 import { createSimpleCodec, SimpleCodec } from "../Codec.js"
 import { NumberMetadata } from "../Metadata.js"
-import { InvalidNumber } from "../DecodeError.js"
+import { invalidNumber, InvalidNumber } from "../DecodeError.js"
 import { failure, success } from "../Result.js"
 import { isNumber } from "../utils.js"
 
@@ -10,7 +10,7 @@ export const number: NumberCodec = createSimpleCodec(
   (val) =>
     isNumber(val) && Number.isFinite(val)
       ? success(val)
-      : failure({ code: "invalid_number", path: [] }),
+      : failure(invalidNumber()),
   {
     tag: "number",
     simple: true,

@@ -7,7 +7,7 @@ import {
   TypeOf,
 } from "../Codec.js"
 import { UnionMetadata } from "../Metadata.js"
-import { InvalidUnion } from "../DecodeError.js"
+import { invalidUnion, InvalidUnion } from "../DecodeError.js"
 import { failure } from "../Result.js"
 
 type UnionCodec<C extends readonly AnySimpleCodec[] | []> = SimpleCodec<
@@ -30,7 +30,7 @@ export function union<C extends readonly AnySimpleCodec[] | []>(
         else errors.push(...result.errors)
       }
 
-      return failure({ code: "invalid_union", path: [], errors })
+      return failure(invalidUnion(errors))
     },
     { tag: "union", simple: true, members }
   )

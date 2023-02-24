@@ -9,7 +9,7 @@ import {
 } from "../Codec.js"
 import { identity, isArray, pushErrors } from "../utils.js"
 import { ArrayMetadata } from "../Metadata.js"
-import { InvalidArray } from "../DecodeError.js"
+import { invalidArray, InvalidArray } from "../DecodeError.js"
 import { failure, failures, Result, success } from "../Result.js"
 
 type ArrayCodec<C extends AnyCodec> = Codec<
@@ -23,7 +23,7 @@ export function array<C extends AnyCodec>(codec: C): ArrayCodec<C> {
   const simple = codec.metadata.simple
   return createCodec(
     (val): Result<TypeOf<C>[], ErrorOf<C> | InvalidArray> => {
-      if (!isArray(val)) return failure({ code: "invalid_array", path: [] })
+      if (!isArray(val)) return failure(invalidArray())
 
       let ok = true
       const errors: ErrorOf<C>[] = []

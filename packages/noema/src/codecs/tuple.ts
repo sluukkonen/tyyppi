@@ -6,7 +6,7 @@ import {
   InputOf,
   TypeOf,
 } from "../Codec.js"
-import { InvalidTuple } from "../DecodeError.js"
+import { invalidTuple, InvalidTuple } from "../DecodeError.js"
 import { TupleMetadata } from "../Metadata.js"
 import { failure, failures, Result, success } from "../Result.js"
 import { identity, isArray, pushErrors } from "../utils.js"
@@ -40,7 +40,7 @@ export function tuple<C extends readonly AnyCodec[] | []>(
   return createCodec(
     (val): Result<TypesOf<C>, ErrorOf<C[number]> | InvalidTuple> => {
       if (!isArray(val) || val.length !== length) {
-        return failure({ code: "invalid_tuple", path: [] })
+        return failure(invalidTuple())
       }
 
       let ok = true

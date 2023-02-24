@@ -1,5 +1,5 @@
 import { createSimpleCodec, SimpleCodec } from "../Codec.js"
-import { InvalidUndefined } from "../DecodeError.js"
+import { invalidUndefined, InvalidUndefined } from "../DecodeError.js"
 import { UndefinedMetadata } from "../Metadata.js"
 import { failure, success } from "../Result.js"
 
@@ -11,9 +11,7 @@ type UndefinedCodec = SimpleCodec<
 
 const undefinedCodec: UndefinedCodec = createSimpleCodec(
   (val) =>
-    val === undefined
-      ? success(undefined)
-      : failure({ code: "invalid_undefined", path: [] }),
+    val === undefined ? success(undefined) : failure(invalidUndefined()),
   {
     tag: "undefined",
     simple: true,
