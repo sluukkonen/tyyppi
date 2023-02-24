@@ -32,9 +32,19 @@ export function isObjectLike(value: unknown): value is object {
 }
 
 export function isObject(value: unknown): value is object {
-  return isObjectLike(value) && !Array.isArray(value)
+  return isObjectLike(value) && !isArray(value)
 }
 
 export function isDate(value: unknown): value is Date {
   return isObjectLike(value) && getTag(value) === "[object Date]"
 }
+
+export function isString(value: unknown): value is string {
+  return typeof value === "string"
+}
+
+export function isNumber(value: unknown): value is number {
+  return typeof value === "number"
+}
+
+export const isArray = Array.isArray

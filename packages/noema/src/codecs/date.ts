@@ -8,7 +8,7 @@ type DateCodec = SimpleCodec<Date, InvalidDate, DateMetadata>
 
 export const date: DateCodec = createSimpleCodec(
   (val): Result<Date, InvalidDate> =>
-    isDate(val) && !Number.isNaN(val.getTime())
+    isDate(val) && !isNaN(val.getTime())
       ? success(val)
       : failure({ code: "invalid_date", actual: val, path: [] }),
   { tag: "date", simple: true }

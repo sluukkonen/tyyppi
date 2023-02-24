@@ -9,7 +9,7 @@ import {
 import { InvalidTuple } from "../DecodeError.js"
 import { TupleMetadata } from "../Metadata.js"
 import { failure, failures, Result, success } from "../Result.js"
-import { identity, pushErrors } from "../utils.js"
+import { identity, isArray, pushErrors } from "../utils.js"
 
 export type InputsOf<C extends readonly unknown[]> = C extends readonly [
   infer First extends AnyCodec,
@@ -39,7 +39,7 @@ export function tuple<C extends readonly AnyCodec[] | []>(
   const length = members.length
   return createCodec(
     (val): Result<TypesOf<C>, ErrorOf<C[number]> | InvalidTuple> => {
-      if (!Array.isArray(val) || val.length !== length) {
+      if (!isArray(val) || val.length !== length) {
         return failure({
           code: "invalid_tuple",
           actual: val,
