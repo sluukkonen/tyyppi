@@ -38,4 +38,4 @@ export const isString = (value: unknown): value is string =>
 export const isNumber = (value: unknown): value is number =>
   typeof value === "number"
 
-export const isArray = Array.isArray
+export const isArray = Array.isArray as (value: unknown) => value is unknown[]

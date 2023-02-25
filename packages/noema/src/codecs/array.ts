@@ -27,7 +27,7 @@ export const array = <C extends AnyCodec>(codec: C): ArrayCodec<C> => {
 
       let ok = true
       const errors: ErrorOf<C>[] = []
-      const array: TypeOf<C>[] = simple ? val : []
+      const array: TypeOf<C>[] = simple ? (val as TypeOf<C>[]) : []
 
       for (let i = 0; i < val.length; i++) {
         const element = val[i]
