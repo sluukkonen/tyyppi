@@ -1,5 +1,5 @@
 import { createSimpleCodec, SimpleCodec } from "../Codec.js"
-import { Literal } from "./literal.js"
+import { Literal } from "../types.js"
 import { EnumMetadata } from "../Metadata.js"
 import { invalidEnum, InvalidEnum } from "../DecodeError.js"
 import { failure, success } from "../Result.js"

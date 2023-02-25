@@ -1,16 +1,8 @@
-import { SimpleCodec, createSimpleCodec } from "../Codec.js"
-import { LiteralMetadata } from "../Metadata.js"
+import { createSimpleCodec, SimpleCodec } from "../Codec.js"
 import { invalidLiteral, InvalidLiteral } from "../DecodeError.js"
+import { LiteralMetadata } from "../Metadata.js"
 import { failure, success } from "../Result.js"
-
-export type Literal =
-  | string
-  | number
-  | bigint
-  | boolean
-  | undefined
-  | symbol
-  | null
+import { Literal } from "../types.js"
 
 type LiteralCodec<T extends Literal> = SimpleCodec<
   T,

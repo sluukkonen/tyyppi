@@ -1,6 +1,5 @@
 import { AnyCodec, AnySimpleCodec, Codec, TypeOf } from "./Codec.js"
-import { Literal } from "./codecs/literal.js"
-import { Ordered } from "./types.js"
+import { Literal, Ordered } from "./types.js"
 
 type IsSimple<C extends AnyCodec> = C["metadata"]["simple"]
 

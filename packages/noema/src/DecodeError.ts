@@ -1,5 +1,4 @@
-import { Literal } from "./codecs/literal.js"
-import { Ordered } from "./types.js"
+import { Literal, Ordered } from "./types.js"
 
 export interface DecodeError {
   readonly code: string
