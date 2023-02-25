@@ -20,10 +20,10 @@ type RecordCodec<K extends AnySimpleCodec, V extends AnyCodec> = Codec<
   RecordMetadata<K, V>
 >
 
-export function record<K extends AnySimpleCodec, V extends AnyCodec>(
+export const record = <K extends AnySimpleCodec, V extends AnyCodec>(
   keys: K,
   values: V
-): RecordCodec<K, V> {
+): RecordCodec<K, V> => {
   const simple = values.metadata.simple
   return createCodec(
     (

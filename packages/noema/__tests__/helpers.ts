@@ -1,7 +1,7 @@
 import { ErrorOf } from "../dist/index.js"
 import { AnyCodec, InputOf, NoemaError, TypeOf } from "../src/index.js"
 
-export function expectParseSuccess<C extends AnyCodec>(
+export const expectParseSuccess = function <C extends AnyCodec>(
   codec: C,
   value: InputOf<C>,
   result?: TypeOf<C>
@@ -12,11 +12,11 @@ export function expectParseSuccess<C extends AnyCodec>(
   expect(codec.encode(decoded)).toEqual(value)
 }
 
-export function expectParseFailure<C extends AnyCodec>(
+export const expectParseFailure = <C extends AnyCodec>(
   codec: C,
   value: unknown,
   errors: readonly ErrorOf<C>[]
-) {
+) => {
   const result = codec.decode(value)
 
   expect(result.ok).toBe(false)

@@ -19,7 +19,7 @@ type ArrayCodec<C extends AnyCodec> = Codec<
   ArrayMetadata<C>
 >
 
-export function array<C extends AnyCodec>(codec: C): ArrayCodec<C> {
+export const array = <C extends AnyCodec>(codec: C): ArrayCodec<C> => {
   const simple = codec.metadata.simple
   return createCodec(
     (val): Result<TypeOf<C>[], ErrorOf<C> | InvalidArray> => {

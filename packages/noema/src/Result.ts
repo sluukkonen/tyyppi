@@ -10,14 +10,14 @@ export interface Success<T> {
 
 export type Result<T, E> = Success<T> | Failure<E>
 
-export function success<T>(value: T): Success<T> {
-  return { ok: true, value }
-}
+export const success = <T>(value: T): Success<T> => ({ ok: true, value })
 
-export function failure<E>(error: E): Failure<E> {
-  return { ok: false, errors: [error] }
-}
+export const failure = <E>(error: E): Failure<E> => ({
+  ok: false,
+  errors: [error],
+})
 
-export function failures<E>(errors: readonly E[]): Failure<E> {
-  return { ok: false, errors }
-}
+export const failures = <E>(errors: readonly E[]): Failure<E> => ({
+  ok: false,
+  errors,
+})

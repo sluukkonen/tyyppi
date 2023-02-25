@@ -32,9 +32,9 @@ type TupleCodec<C extends readonly AnyCodec[] | []> = Codec<
   TupleMetadata<C>
 >
 
-export function tuple<C extends readonly AnyCodec[] | []>(
+export const tuple = <C extends readonly AnyCodec[] | []>(
   members: C
-): TupleCodec<C> {
+): TupleCodec<C> => {
   const simple = members.every((c) => c.metadata.simple)
   const length = members.length
   return createCodec(

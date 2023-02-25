@@ -37,9 +37,9 @@ type ObjectCodec<T extends Record<string, AnyCodec>> = Codec<
   ObjectMetadata<T>
 >
 
-export function object<T extends Record<string, AnyCodec>>(
+export const object = <T extends Record<string, AnyCodec>>(
   props: T
-): ObjectCodec<T> {
+): ObjectCodec<T> => {
   const keys = Object.keys(props)
   const codecs = Object.values(props)
   const simple = codecs.every((codec) => codec.metadata.simple)
