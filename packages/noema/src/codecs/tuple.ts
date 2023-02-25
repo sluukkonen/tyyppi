@@ -11,14 +11,14 @@ import { TupleMetadata } from "../Metadata.js"
 import { failure, failures, Result, success } from "../Result.js"
 import { identity, isArray, pushErrors } from "../utils.js"
 
-export type InputsOf<C extends readonly unknown[]> = C extends readonly [
+type InputsOf<C extends readonly unknown[]> = C extends readonly [
   infer First extends AnyCodec,
   ...infer Rest
 ]
   ? [InputOf<First>, ...InputsOf<Rest>]
   : []
 
-export type TypesOf<C extends readonly unknown[]> = C extends readonly [
+type TypesOf<C extends readonly unknown[]> = C extends readonly [
   infer First extends AnyCodec,
   ...infer Rest
 ]
