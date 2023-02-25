@@ -4,7 +4,7 @@ import { MinLengthMetadata } from "../Metadata.js"
 import { array, ArrayCodec } from "./array.js"
 import { minLength } from "./minLength.js"
 
-export type NonEmptyArray<T> = [T, ...T[]]
+export type NonEmptyArray<T> = readonly [T, ...T[]]
 
 export type NonEmptyArrayCodec<C extends AnyCodec> = Codec<
   NonEmptyArray<InputOf<C>>,

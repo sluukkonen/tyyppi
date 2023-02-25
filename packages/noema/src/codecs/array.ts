@@ -11,6 +11,7 @@ import { identity, isArray, pushErrors } from "../utils.js"
 import { ArrayMetadata } from "../Metadata.js"
 import { invalidArray, InvalidArray } from "../DecodeError.js"
 import { failure, failures, Result, success } from "../Result.js"
+import { NonEmptyArray } from "./nonEmptyArray.js"
 
 export type ArrayCodec<C extends AnyCodec> = Codec<
   InputOf<C>[],
@@ -40,7 +41,9 @@ export const array = <C extends AnyCodec>(codec: C): ArrayCodec<C> => {
         }
       }
 
-      return ok ? success(array) : failures(errors)
+      return ok
+        ? success(array)
+        : failures(errors as unknown as NonEmptyArray<ErrorOf<C>>)
     },
     simple ? identity : (array) => array.map((value) => codec.encode(value)),
     { tag: "array", simple, codec }

@@ -11,6 +11,7 @@ import { hasOwnProperty, identity, isObject, pushErrors } from "../utils.js"
 import { ObjectMetadata } from "../Metadata.js"
 import { invalidObject, InvalidObject } from "../DecodeError.js"
 import { failure, failures, Result, success } from "../Result.js"
+import { NonEmptyArray } from "./nonEmptyArray.js"
 
 type RequiredKeys<T> = {
   [K in keyof T]: undefined extends T[K] ? never : K
@@ -67,11 +68,13 @@ export const object = <T extends Record<string, AnyCodec>>(
         }
       }
 
-      return ok ? success(object) : failures(errors)
+      return ok
+        ? success(object)
+        : failures(errors as unknown as NonEmptyArray<ErrorOf<T[keyof T]>>)
     },
     simple
       ? identity
-      : (object: any) => {
+      : (object) => {
           const result = {} as any
 
           for (const key in object) {

@@ -10,6 +10,7 @@ import { invalidTuple, InvalidTuple } from "../DecodeError.js"
 import { TupleMetadata } from "../Metadata.js"
 import { failure, failures, Result, success } from "../Result.js"
 import { identity, isArray, pushErrors } from "../utils.js"
+import { NonEmptyArray } from "./nonEmptyArray.js"
 
 type InputsOf<C extends readonly unknown[]> = C extends readonly [
   infer First extends AnyCodec,
@@ -59,7 +60,9 @@ export const tuple = <C extends readonly AnyCodec[] | []>(
         }
       }
 
-      return ok ? success(array as TypesOf<C>) : failures(errors)
+      return ok
+        ? success(array as TypesOf<C>)
+        : failures(errors as unknown as NonEmptyArray<ErrorOf<C[number]>>)
     },
     simple
       ? identity
