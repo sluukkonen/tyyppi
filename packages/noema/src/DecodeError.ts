@@ -1,4 +1,5 @@
 import { Literal } from "./codecs/literal.js"
+import { Ordered } from "./types.js"
 
 export interface DecodeError {
   readonly code: string
@@ -150,6 +151,28 @@ export const invalidUnion = <E extends DecodeError>(
   code: "invalid_union",
   path: [],
   errors,
+})
+
+export interface TooLarge<T extends Ordered> extends DecodeError {
+  readonly code: "too_large"
+  readonly max: T
+}
+
+export const tooLarge = <T extends Ordered>(max: T): TooLarge<T> => ({
+  code: "too_large",
+  path: [],
+  max,
+})
+
+export interface TooSmall<T extends Ordered> extends DecodeError {
+  readonly code: "too_small"
+  readonly min: T
+}
+
+export const tooSmall = <T extends Ordered>(min: T): TooSmall<T> => ({
+  code: "too_small",
+  path: [],
+  min,
 })
 
 export type BuiltinError =
