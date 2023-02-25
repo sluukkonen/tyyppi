@@ -11,7 +11,7 @@ import { MaxMetadata } from "../Metadata.js"
 import { failure, Result } from "../Result.js"
 import { Ordered } from "../types.js"
 
-type MaxCodec<C extends Codec<any, Ordered>> = Codec<
+export type MaxCodec<C extends Codec<any, Ordered>> = Codec<
   InputOf<C>,
   TypeOf<C>,
   ErrorOf<C> | TooLarge<TypeOf<C>>,

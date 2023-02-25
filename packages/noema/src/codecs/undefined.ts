@@ -3,7 +3,7 @@ import { invalidUndefined, InvalidUndefined } from "../DecodeError.js"
 import { UndefinedMetadata } from "../Metadata.js"
 import { failure, success } from "../Result.js"
 
-type UndefinedCodec = SimpleCodec<
+export type UndefinedCodec = SimpleCodec<
   undefined,
   InvalidUndefined,
   UndefinedMetadata

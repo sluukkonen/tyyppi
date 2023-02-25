@@ -4,7 +4,7 @@ import { EnumMetadata } from "../Metadata.js"
 import { invalidEnum, InvalidEnum } from "../DecodeError.js"
 import { failure, success } from "../Result.js"
 
-type EnumCodec<T extends Literal> = SimpleCodec<
+export type EnumCodec<T extends Literal> = SimpleCodec<
   T,
   InvalidEnum<T>,
   EnumMetadata<T>

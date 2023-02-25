@@ -12,7 +12,7 @@ import { failure, Result } from "../Result.js"
 import { HasLength } from "../types.js"
 import { hasLength } from "../utils.js"
 
-type MaxLengthCodec<C extends Codec<HasLength, any>> = Codec<
+export type MaxLengthCodec<C extends Codec<HasLength, any>> = Codec<
   InputOf<C>,
   TypeOf<C>,
   ErrorOf<C> | TooLong,

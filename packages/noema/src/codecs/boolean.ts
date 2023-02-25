@@ -3,7 +3,7 @@ import { BooleanMetadata } from "../Metadata.js"
 import { invalidBoolean, InvalidBoolean } from "../DecodeError.js"
 import { failure, success } from "../Result.js"
 
-type BooleanCodec = SimpleCodec<boolean, InvalidBoolean, BooleanMetadata>
+export type BooleanCodec = SimpleCodec<boolean, InvalidBoolean, BooleanMetadata>
 
 export const boolean: BooleanCodec = createSimpleCodec(
   (val) =>

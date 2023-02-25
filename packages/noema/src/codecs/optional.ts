@@ -10,7 +10,7 @@ import {
 import { OptionalMetadata } from "../Metadata.js"
 import { success } from "../Result.js"
 
-type OptionalCodec<C extends AnyCodec> = Codec<
+export type OptionalCodec<C extends AnyCodec> = Codec<
   InputOf<C> | undefined,
   TypeOf<C> | undefined,
   ErrorOf<C>,

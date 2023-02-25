@@ -4,7 +4,7 @@ import { invalidDate, InvalidDate } from "../DecodeError.js"
 import { failure, Result, success } from "../Result.js"
 import { isDate } from "../utils.js"
 
-type DateCodec = SimpleCodec<Date, InvalidDate, DateMetadata>
+export type DateCodec = SimpleCodec<Date, InvalidDate, DateMetadata>
 
 export const date: DateCodec = createSimpleCodec(
   (val): Result<Date, InvalidDate> =>

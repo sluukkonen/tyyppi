@@ -4,7 +4,7 @@ import { LiteralMetadata } from "../Metadata.js"
 import { failure, success } from "../Result.js"
 import { Literal } from "../types.js"
 
-type LiteralCodec<T extends Literal> = SimpleCodec<
+export type LiteralCodec<T extends Literal> = SimpleCodec<
   T,
   InvalidLiteral<T>,
   LiteralMetadata<T>

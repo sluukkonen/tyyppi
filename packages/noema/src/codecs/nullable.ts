@@ -10,7 +10,7 @@ import {
 import { NullableMetadata } from "../Metadata.js"
 import { success } from "../Result.js"
 
-type NullableCodec<C extends AnyCodec> = Codec<
+export type NullableCodec<C extends AnyCodec> = Codec<
   InputOf<C> | null,
   TypeOf<C> | null,
   ErrorOf<C>,

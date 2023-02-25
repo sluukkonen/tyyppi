@@ -11,7 +11,7 @@ import { MinMetadata } from "../Metadata.js"
 import { failure, Result } from "../Result.js"
 import { Ordered } from "../types.js"
 
-type MinCodec<C extends Codec<any, Ordered>> = Codec<
+export type MinCodec<C extends Codec<any, Ordered>> = Codec<
   InputOf<C>,
   TypeOf<C>,
   ErrorOf<C> | TooSmall<TypeOf<C>>,

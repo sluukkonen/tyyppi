@@ -3,7 +3,7 @@ import { BigIntMetadata } from "../Metadata.js"
 import { invalidBigInt, InvalidBigInt } from "../DecodeError.js"
 import { failure, success } from "../Result.js"
 
-type BigIntCodec = SimpleCodec<bigint, InvalidBigInt, BigIntMetadata>
+export type BigIntCodec = SimpleCodec<bigint, InvalidBigInt, BigIntMetadata>
 
 export const bigint: BigIntCodec = createSimpleCodec(
   (val) => (typeof val === "bigint" ? success(val) : failure(invalidBigInt())),

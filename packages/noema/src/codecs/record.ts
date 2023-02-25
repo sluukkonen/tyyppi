@@ -13,7 +13,7 @@ import { RecordMetadata } from "../Metadata.js"
 import { invalidObject, InvalidObject } from "../DecodeError.js"
 import { failure, failures, Result, success } from "../Result.js"
 
-type RecordCodec<K extends AnySimpleCodec, V extends AnyCodec> = Codec<
+export type RecordCodec<K extends AnySimpleCodec, V extends AnyCodec> = Codec<
   Record<InputOf<K>, InputOf<V>>,
   Record<TypeOf<K>, TypeOf<V>>,
   ErrorOf<K | V> | InvalidObject,

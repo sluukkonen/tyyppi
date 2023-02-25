@@ -12,7 +12,7 @@ import { ArrayMetadata } from "../Metadata.js"
 import { invalidArray, InvalidArray } from "../DecodeError.js"
 import { failure, failures, Result, success } from "../Result.js"
 
-type ArrayCodec<C extends AnyCodec> = Codec<
+export type ArrayCodec<C extends AnyCodec> = Codec<
   InputOf<C>[],
   TypeOf<C>[],
   ErrorOf<C> | InvalidArray,

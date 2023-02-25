@@ -4,7 +4,7 @@ import { invalidString, InvalidString } from "../DecodeError.js"
 import { failure, success } from "../Result.js"
 import { isString } from "../utils.js"
 
-type StringCodec = SimpleCodec<string, InvalidString, StringMetadata>
+export type StringCodec = SimpleCodec<string, InvalidString, StringMetadata>
 
 export const string: StringCodec = createSimpleCodec(
   (val) => (isString(val) ? success(val) : failure(invalidString())),

@@ -10,7 +10,7 @@ import { UnionMetadata } from "../Metadata.js"
 import { invalidUnion, InvalidUnion } from "../DecodeError.js"
 import { failure } from "../Result.js"
 
-type UnionCodec<C extends readonly AnySimpleCodec[] | []> = SimpleCodec<
+export type UnionCodec<C extends readonly AnySimpleCodec[] | []> = SimpleCodec<
   TypeOf<C[number]>,
   InvalidUnion<ErrorOf<C[number]>>,
   UnionMetadata<C>

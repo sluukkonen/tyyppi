@@ -25,7 +25,7 @@ type TypesOf<C extends readonly unknown[]> = C extends readonly [
   ? [TypeOf<First>, ...TypesOf<Rest>]
   : []
 
-type TupleCodec<C extends readonly AnyCodec[] | []> = Codec<
+export type TupleCodec<C extends readonly AnyCodec[] | []> = Codec<
   InputsOf<C>,
   TypesOf<C>,
   ErrorOf<C[number]> | InvalidTuple,

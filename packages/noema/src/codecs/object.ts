@@ -30,7 +30,7 @@ type HandleOptionalTypes<T> = Id<
   }
 >
 
-type ObjectCodec<T extends Record<string, AnyCodec>> = Codec<
+export type ObjectCodec<T extends Record<string, AnyCodec>> = Codec<
   HandleOptionalTypes<{ [K in keyof T]: InputOf<T[K]> }>,
   HandleOptionalTypes<{ [K in keyof T]: TypeOf<T[K]> }>,
   ErrorOf<T[keyof T]> | InvalidObject,

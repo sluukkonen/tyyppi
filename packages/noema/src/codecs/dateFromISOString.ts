@@ -9,7 +9,7 @@ import {
 import { failure, Result, success } from "../Result.js"
 import { isString } from "../utils.js"
 
-type DateFromISOStringCodec = Codec<
+export type DateFromISOStringCodec = Codec<
   string,
   Date,
   InvalidString | InvalidISOString,
