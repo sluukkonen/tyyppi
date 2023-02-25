@@ -1,5 +1,5 @@
 import { AnyCodec, AnySimpleCodec, Codec, TypeOf } from "./Codec.js"
-import { Literal, Ordered } from "./types.js"
+import { HasLength, Literal, Ordered } from "./types.js"
 
 type IsSimple<C extends AnyCodec> = C["metadata"]["simple"]
 
@@ -67,6 +67,15 @@ export interface LiteralMetadata<T extends Literal> extends SimpleMetadata {
   readonly value: T
 }
 
+export interface LengthMetadata<C extends Codec<HasLength, any>>
+  extends Metadata {
+  readonly tag: "length"
+  readonly simple: IsSimple<C>
+  readonly minLength: number
+  readonly maxLength: number
+  readonly codec: C
+}
+
 export interface MaxMetadata<C extends Codec<any, Ordered>> extends Metadata {
   readonly tag: "max"
   readonly simple: IsSimple<C>
@@ -78,6 +87,22 @@ export interface MinMetadata<C extends Codec<any, Ordered>> extends Metadata {
   readonly tag: "min"
   readonly simple: IsSimple<C>
   readonly min: TypeOf<C>
+  readonly codec: C
+}
+
+export interface MaxLengthMetadata<C extends Codec<HasLength, any>>
+  extends Metadata {
+  readonly tag: "maxLength"
+  readonly simple: IsSimple<C>
+  readonly maxLength: number
+  readonly codec: C
+}
+
+export interface MinLengthMetadata<C extends Codec<HasLength, any>>
+  extends Metadata {
+  readonly tag: "minLength"
+  readonly simple: IsSimple<C>
+  readonly minLength: number
   readonly codec: C
 }
 

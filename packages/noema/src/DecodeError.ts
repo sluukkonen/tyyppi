@@ -163,6 +163,32 @@ export const tooLarge = <T extends Ordered>(max: T): TooLarge<T> => ({
   max,
 })
 
+export interface TooLong extends DecodeError {
+  readonly code: "too_long"
+  readonly maxLength: number
+  readonly length: number
+}
+
+export const tooLong = (maxLength: number, length: number): TooLong => ({
+  code: "too_long",
+  path: [],
+  maxLength,
+  length,
+})
+
+export interface TooShort extends DecodeError {
+  readonly code: "too_short"
+  readonly minLength: number
+  readonly length: number
+}
+
+export const tooShort = (minLength: number, length: number): TooShort => ({
+  code: "too_short",
+  path: [],
+  minLength,
+  length,
+})
+
 export interface TooSmall<T extends Ordered> extends DecodeError {
   readonly code: "too_small"
   readonly min: T

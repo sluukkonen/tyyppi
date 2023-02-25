@@ -8,3 +8,7 @@ export type Literal =
   | null
 
 export type Ordered = number | bigint | string | Date | boolean
+
+export interface HasLength {
+  length: number
+}

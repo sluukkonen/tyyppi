@@ -1,10 +1,13 @@
 import { DecodeError } from "./DecodeError.js"
+import { HasLength } from "./types.js"
 
 export const hasOwnProperty = <K extends string>(
   obj: unknown,
   key: K
 ): obj is Record<K, unknown> => Object.prototype.hasOwnProperty.call(obj, key)
 
+export const hasLength = (value: unknown): value is HasLength =>
+  value != null && hasOwnProperty(value, "length") && isInteger(value.length)
 
 export const identity = <T>(value: T) => value
 
@@ -39,3 +42,5 @@ export const isNumber = (value: unknown): value is number =>
   typeof value === "number"
 
 export const isArray = Array.isArray as (value: unknown) => value is unknown[]
+
+export const isInteger = Number.isInteger as (value: unknown) => value is number
