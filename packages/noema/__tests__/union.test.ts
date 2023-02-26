@@ -9,15 +9,6 @@ describe("union", () => {
   test("should work with multiple members", () => {
     expectParseSuccess(union(string, number), "")
     expectParseSuccess(union(string, number), 0)
-    expectParseFailure(union(string, number), {}, [
-      {
-        code: "invalid_union",
-        path: [],
-        errors: [
-          { code: "invalid_string", path: [] },
-          { code: "invalid_number", path: [] },
-        ],
-      },
-    ])
+    expectParseFailure(union(string, number), {})
   })
 })

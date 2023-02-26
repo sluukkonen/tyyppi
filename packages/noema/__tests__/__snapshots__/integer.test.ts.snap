@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`integer should reject other values 1`] = `
+[
+  {
+    "code": "invalid_integer",
+    "path": [],
+  },
+]
+`;

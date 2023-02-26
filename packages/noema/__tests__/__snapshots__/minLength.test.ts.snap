@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`minLength delegates to the underlying code if length is missing or is not an integer 1`] = `
+[
+  {
+    "code": "invalid_array",
+    "path": [],
+  },
+]
+`;
+
+exports[`minLength delegates to the underlying code if length is missing or is not an integer 2`] = `
+[
+  {
+    "code": "invalid_array",
+    "path": [],
+  },
+]
+`;
+
+exports[`minLength delegates to the underlying code if length is missing or is not an integer 3`] = `
+[
+  {
+    "code": "invalid_array",
+    "path": [],
+  },
+]
+`;
+
+exports[`minLength fails to parse if the length is below the minimum length 1`] = `
+[
+  {
+    "code": "too_short",
+    "length": 0,
+    "minLength": 1,
+    "path": [],
+  },
+]
+`;

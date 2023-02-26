@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`undefined should not parse other values 1`] = `
+[
+  {
+    "code": "invalid_undefined",
+    "path": [],
+  },
+]
+`;
+
+exports[`undefined should not parse other values 2`] = `
+[
+  {
+    "code": "invalid_undefined",
+    "path": [],
+  },
+]
+`;

@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`optional should fail to parse other values 1`] = `
+[
+  {
+    "code": "invalid_string",
+    "path": [],
+  },
+]
+`;

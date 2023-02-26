@@ -1,4 +1,3 @@
-import { ErrorOf } from "../dist/index.js"
 import { AnyCodec, InputOf, NoemaError, TypeOf } from "../src/index.js"
 
 export const expectParseSuccess = function <C extends AnyCodec>(
@@ -14,14 +13,15 @@ export const expectParseSuccess = function <C extends AnyCodec>(
 
 export const expectParseFailure = <C extends AnyCodec>(
   codec: C,
-  value: unknown,
-  errors: readonly ErrorOf<C>[]
+  value: unknown
 ) => {
   const result = codec.decode(value)
 
   expect(result.ok).toBe(false)
   if (!result.ok) {
-    expect(result.errors).toEqual(errors)
-    expect(() => codec.unsafeDecode(value)).toThrow(new NoemaError("", errors))
+    expect(result.errors).toMatchSnapshot()
+    expect(() => codec.unsafeDecode(value)).toThrow(
+      new NoemaError("", result.errors)
+    )
   }
 }

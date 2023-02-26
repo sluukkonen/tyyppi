@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`length delegates to the underlying codec if length is missing or is not an integer 1`] = `
+[
+  {
+    "code": "invalid_array",
+    "path": [],
+  },
+]
+`;
+
+exports[`length delegates to the underlying codec if length is missing or is not an integer 2`] = `
+[
+  {
+    "code": "invalid_array",
+    "path": [],
+  },
+]
+`;
+
+exports[`length delegates to the underlying codec if length is missing or is not an integer 3`] = `
+[
+  {
+    "code": "invalid_array",
+    "path": [],
+  },
+]
+`;
+
+exports[`length fails to parse if the length is above the maximum length 1`] = `
+[
+  {
+    "code": "too_long",
+    "length": 3,
+    "maxLength": 2,
+    "path": [],
+  },
+]
+`;
+
+exports[`length fails to parse if the length is below the minimum length 1`] = `
+[
+  {
+    "code": "too_short",
+    "length": 0,
+    "minLength": 1,
+    "path": [],
+  },
+]
+`;

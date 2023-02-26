@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tuple should reject arrays that have incorrect length 1`] = `
+[
+  {
+    "code": "invalid_tuple",
+    "path": [],
+  },
+]
+`;
+
+exports[`tuple should reject arrays that have incorrect length 2`] = `
+[
+  {
+    "code": "invalid_tuple",
+    "path": [],
+  },
+]
+`;
+
+exports[`tuple should reject invalid values 1`] = `
+[
+  {
+    "code": "invalid_tuple",
+    "path": [],
+  },
+]
+`;
+
+exports[`tuple should reject invalid values 2`] = `
+[
+  {
+    "code": "invalid_number",
+    "path": [
+      1,
+    ],
+  },
+]
+`;

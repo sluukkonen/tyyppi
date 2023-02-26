@@ -10,25 +10,10 @@ describe("nonEmptyArray", () => {
   })
 
   test("does not accept empty arrays", () => {
-    expectParseFailure(
-      nonEmptyNumberArray,
-      [],
-      [
-        {
-          code: "too_short",
-          path: [],
-          minLength: 1,
-          length: 0,
-        },
-      ]
-    )
+    expectParseFailure(nonEmptyNumberArray, [])
   })
 
   test("does not accept arrays of the wrong type", () => {
-    expectParseFailure(
-      nonEmptyNumberArray,
-      ["1"],
-      [{ code: "invalid_number", path: [0] }]
-    )
+    expectParseFailure(nonEmptyNumberArray, ["1"])
   })
 })

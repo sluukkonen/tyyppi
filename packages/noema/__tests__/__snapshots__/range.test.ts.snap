@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`min should fail to parse if value is outside the bounds 1`] = `
+[
+  {
+    "code": "too_large",
+    "max": 1,
+    "path": [],
+  },
+]
+`;
+
+exports[`min should fail to parse if value is outside the bounds 2`] = `
+[
+  {
+    "code": "too_small",
+    "min": 0,
+    "path": [],
+  },
+]
+`;
+
+exports[`min should fail to parse if value isn't parsed by the underlying codec 1`] = `
+[
+  {
+    "code": "invalid_integer",
+    "path": [],
+  },
+]
+`;

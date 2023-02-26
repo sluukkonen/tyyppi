@@ -8,12 +8,12 @@ describe("date", () => {
 
   test("should reject invalid dates", () => {
     const invalid = new Date("foo")
-    expectParseFailure(date, invalid, [{ code: "invalid_date", path: [] }])
+    expectParseFailure(date, invalid)
   })
 
   test("should reject other values", () => {
-    expectParseFailure(date, null, [{ code: "invalid_date", path: [] }])
-    expectParseFailure(date, "", [{ code: "invalid_date", path: [] }])
-    expectParseFailure(date, {}, [{ code: "invalid_date", path: [] }])
+    expectParseFailure(date, null)
+    expectParseFailure(date, "")
+    expectParseFailure(date, {})
   })
 })

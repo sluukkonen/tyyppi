@@ -7,9 +7,7 @@ describe("literal", () => {
   })
 
   test("should fail to parse anything else", () => {
-    expectParseFailure(literal("a"), "", [
-      { code: "invalid_literal", expected: "a", path: [] },
-    ])
+    expectParseFailure(literal("a"), "")
   })
 
   test("NaN handling", () => {

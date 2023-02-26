@@ -9,22 +9,12 @@ describe("minLength", () => {
   })
 
   test("delegates to the underlying code if length is missing or is not an integer", () => {
-    expectParseFailure(nonEmptyNumberArray, null, [
-      { code: "invalid_array", path: [] },
-    ])
-    expectParseFailure(nonEmptyNumberArray, { length: "0" }, [
-      { code: "invalid_array", path: [] },
-    ])
-    expectParseFailure(nonEmptyNumberArray, { length: NaN }, [
-      { code: "invalid_array", path: [] },
-    ])
+    expectParseFailure(nonEmptyNumberArray, null)
+    expectParseFailure(nonEmptyNumberArray, { length: "0" })
+    expectParseFailure(nonEmptyNumberArray, { length: NaN })
   })
 
   test("fails to parse if the length is below the minimum length", () => {
-    expectParseFailure(
-      nonEmptyNumberArray,
-      [],
-      [{ code: "too_short", path: [], length: 0, minLength: 1 }]
-    )
+    expectParseFailure(nonEmptyNumberArray, [])
   })
 })

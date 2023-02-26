@@ -8,14 +8,10 @@ describe("nonEmptyString", () => {
   })
 
   test("doesn't parse empty strings", () => {
-    expectParseFailure(nonEmptyString, "", [
-      { code: "too_short", path: [], minLength: 1, length: 0 },
-    ])
+    expectParseFailure(nonEmptyString, "")
   })
 
   test("does not parse non-strings", () => {
-    expectParseFailure(nonEmptyString, 1, [
-      { code: "invalid_string", path: [] },
-    ])
+    expectParseFailure(nonEmptyString, 1)
   })
 })

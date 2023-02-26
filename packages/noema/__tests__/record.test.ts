@@ -21,29 +21,19 @@ describe("record", () => {
   test("should not parse records with invalid keys", () => {
     expectParseSuccess(record(literal("a"), string), {} as Record<"a", string>)
     expectParseSuccess(record(literal("a"), string), { a: "1" })
-    expectParseFailure(record(literal("a"), string), { a: "1", b: "2" }, [
-      { code: "invalid_literal", expected: "a", path: ["b"] },
-    ])
+    expectParseFailure(record(literal("a"), string), { a: "1", b: "2" })
   })
 
   test("should not parse non-objects", () => {
-    expectParseFailure(record(string, string), "", [
-      { code: "invalid_object", path: [] },
-    ])
+    expectParseFailure(record(string, string), "")
   })
 
   test("should not parse arrays", () => {
-    expectParseFailure(
-      record(string, string),
-      [],
-      [{ code: "invalid_object", path: [] }]
-    )
+    expectParseFailure(record(string, string), [])
   })
 
   test("should not parse null", () => {
-    expectParseFailure(record(string, string), null, [
-      { code: "invalid_object", path: [] },
-    ])
+    expectParseFailure(record(string, string), null)
   })
 
   test("should only consider own properties", () => {
@@ -52,16 +42,10 @@ describe("record", () => {
   })
 
   test("should not parse records with invalid values", () => {
-    expectParseFailure(record(string, string), { a: "1", b: 2 }, [
-      { code: "invalid_string", path: ["b"] },
-    ])
+    expectParseFailure(record(string, string), { a: "1", b: 2 })
   })
 
   test("path should nest with nested records", () => {
-    expectParseFailure(
-      record(string, record(string, string)),
-      { a: { b: 1 } },
-      [{ code: "invalid_string", path: ["a", "b"] }]
-    )
+    expectParseFailure(record(string, record(string, string)), { a: { b: 1 } })
   })
 })

@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`date should reject invalid dates 1`] = `
+[
+  {
+    "code": "invalid_date",
+    "path": [],
+  },
+]
+`;
+
+exports[`date should reject other values 1`] = `
+[
+  {
+    "code": "invalid_date",
+    "path": [],
+  },
+]
+`;
+
+exports[`date should reject other values 2`] = `
+[
+  {
+    "code": "invalid_date",
+    "path": [],
+  },
+]
+`;
+
+exports[`date should reject other values 3`] = `
+[
+  {
+    "code": "invalid_date",
+    "path": [],
+  },
+]
+`;

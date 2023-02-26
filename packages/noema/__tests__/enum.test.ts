@@ -8,8 +8,6 @@ describe("enum", () => {
   })
 
   test("should reject other values", () => {
-    expectParseFailure(enumCodec(1, 2), 3, [
-      { code: "invalid_enum", path: [], members: [1, 2] },
-    ])
+    expectParseFailure(enumCodec(1, 2), 3)
   })
 })

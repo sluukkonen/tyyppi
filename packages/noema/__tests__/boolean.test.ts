@@ -8,6 +8,6 @@ describe("boolean", () => {
   })
 
   test("should not parse non-booleans", () => {
-    expectParseFailure(boolean, "true", [{ code: "invalid_boolean", path: [] }])
+    expectParseFailure(boolean, "true")
   })
 })

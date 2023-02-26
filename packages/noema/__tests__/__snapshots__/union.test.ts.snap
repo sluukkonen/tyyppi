@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`union should work with multiple members 1`] = `
+[
+  {
+    "code": "invalid_union",
+    "errors": [
+      {
+        "code": "invalid_string",
+        "path": [],
+      },
+      {
+        "code": "invalid_number",
+        "path": [],
+      },
+    ],
+    "path": [],
+  },
+]
+`;

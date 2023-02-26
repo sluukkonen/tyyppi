@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`null should not parse other values 1`] = `
+[
+  {
+    "code": "invalid_null",
+    "path": [],
+  },
+]
+`;

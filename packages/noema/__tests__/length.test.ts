@@ -10,30 +10,16 @@ describe("length", () => {
   })
 
   test("delegates to the underlying codec if length is missing or is not an integer", () => {
-    expectParseFailure(smallNumberArray, null, [
-      { code: "invalid_array", path: [] },
-    ])
-    expectParseFailure(smallNumberArray, { length: "0" }, [
-      { code: "invalid_array", path: [] },
-    ])
-    expectParseFailure(smallNumberArray, { length: NaN }, [
-      { code: "invalid_array", path: [] },
-    ])
+    expectParseFailure(smallNumberArray, null)
+    expectParseFailure(smallNumberArray, { length: "0" })
+    expectParseFailure(smallNumberArray, { length: NaN })
   })
 
   test("fails to parse if the length is below the minimum length", () => {
-    expectParseFailure(
-      smallNumberArray,
-      [],
-      [{ code: "too_short", path: [], length: 0, minLength: 1 }]
-    )
+    expectParseFailure(smallNumberArray, [])
   })
 
   test("fails to parse if the length is above the maximum length", () => {
-    expectParseFailure(
-      smallNumberArray,
-      [1, 2, 3],
-      [{ code: "too_long", path: [], length: 3, maxLength: 2 }]
-    )
+    expectParseFailure(smallNumberArray, [1, 2, 3])
   })
 })

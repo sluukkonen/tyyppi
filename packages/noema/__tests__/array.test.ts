@@ -18,20 +18,14 @@ describe("array", () => {
   })
 
   test("should fail to parse non-arrays", () => {
-    expectParseFailure(array(number), 0, [{ code: "invalid_array", path: [] }])
+    expectParseFailure(array(number), 0)
   })
 
   test("should fail to parse arrays with invalid values", () => {
-    expectParseFailure(
-      array(number),
-      [1, "2", 3],
-      [{ code: "invalid_number", path: [1] }]
-    )
+    expectParseFailure(array(number), [1, "2", 3])
   })
 
   test("the path property works within an object", () => {
-    expectParseFailure(object({ a: array(number) }), { a: ["1"] }, [
-      { code: "invalid_number", path: ["a", 0] },
-    ])
+    expectParseFailure(object({ a: array(number) }), { a: ["1"] })
   })
 })

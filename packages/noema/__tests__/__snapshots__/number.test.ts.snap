@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`number should fail to parse non-numbers 1`] = `
+[
+  {
+    "code": "invalid_number",
+    "path": [],
+  },
+]
+`;
+
+exports[`number should not parse -Infinity 1`] = `
+[
+  {
+    "code": "invalid_number",
+    "path": [],
+  },
+]
+`;
+
+exports[`number should not parse Infinity 1`] = `
+[
+  {
+    "code": "invalid_number",
+    "path": [],
+  },
+]
+`;
+
+exports[`number should not parse a NaN 1`] = `
+[
+  {
+    "code": "invalid_number",
+    "path": [],
+  },
+]
+`;

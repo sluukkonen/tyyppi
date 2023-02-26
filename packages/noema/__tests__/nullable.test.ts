@@ -8,8 +8,6 @@ describe("nullable", () => {
   })
 
   test("should fail to parse other values", () => {
-    expectParseFailure(nullable(string), 1, [
-      { code: "invalid_string", path: [] },
-    ])
+    expectParseFailure(nullable(string), 1)
   })
 })

@@ -10,22 +10,12 @@ describe("maxLength", () => {
   })
 
   test("delegates to the underlying code if length is missing or is not an integer", () => {
-    expectParseFailure(smallNumberArray, null, [
-      { code: "invalid_array", path: [] },
-    ])
-    expectParseFailure(smallNumberArray, { length: "0" }, [
-      { code: "invalid_array", path: [] },
-    ])
-    expectParseFailure(smallNumberArray, { length: NaN }, [
-      { code: "invalid_array", path: [] },
-    ])
+    expectParseFailure(smallNumberArray, null)
+    expectParseFailure(smallNumberArray, { length: "0" })
+    expectParseFailure(smallNumberArray, { length: NaN })
   })
 
   test("fails to parse if the length is above the maximum length", () => {
-    expectParseFailure(
-      smallNumberArray,
-      [1, 2],
-      [{ code: "too_long", path: [], length: 2, maxLength: 1 }]
-    )
+    expectParseFailure(smallNumberArray, [1, 2])
   })
 })

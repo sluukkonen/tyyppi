@@ -14,24 +14,12 @@ describe("tuple", () => {
   })
 
   test("should reject arrays that have incorrect length", () => {
-    expectParseFailure(
-      tuple([number]),
-      [],
-      [{ code: "invalid_tuple", path: [] }]
-    )
-    expectParseFailure(
-      tuple([number]),
-      [1, 2],
-      [{ code: "invalid_tuple", path: [] }]
-    )
+    expectParseFailure(tuple([number]), [])
+    expectParseFailure(tuple([number]), [1, 2])
   })
 
   test("should reject invalid values", () => {
-    expectParseFailure(tuple([]), null, [{ code: "invalid_tuple", path: [] }])
-    expectParseFailure(
-      tuple([number, number]),
-      [1, "2"],
-      [{ code: "invalid_number", path: [1] }]
-    )
+    expectParseFailure(tuple([]), null)
+    expectParseFailure(tuple([number, number]), [1, "2"])
   })
 })

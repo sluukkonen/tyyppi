@@ -7,6 +7,6 @@ describe("null", () => {
   })
 
   test("should not parse other values", () => {
-    expectParseFailure(n.null, undefined, [{ code: "invalid_null", path: [] }])
+    expectParseFailure(n.null, undefined)
   })
 })
