@@ -1,6 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`integer should reject other values 1`] = `
+exports[`integer should not parse -Infinity 1`] = `
+[
+  {
+    "code": "is_infinite",
+    "path": [],
+  },
+]
+`;
+
+exports[`integer should not parse Infinity 1`] = `
+[
+  {
+    "code": "is_infinite",
+    "path": [],
+  },
+]
+`;
+
+exports[`integer should not parse a NaN 1`] = `
+[
+  {
+    "code": "is_nan",
+    "path": [],
+  },
+]
+`;
+
+exports[`integer should not parse floats 1`] = `
 [
   {
     "code": "invalid_integer",

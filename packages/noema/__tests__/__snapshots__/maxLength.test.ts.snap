@@ -3,8 +3,10 @@
 exports[`maxLength delegates to the underlying code if length is missing or is not an integer 1`] = `
 [
   {
-    "code": "invalid_array",
+    "code": "invalid_type",
+    "expected": "array",
     "path": [],
+    "received": "null",
   },
 ]
 `;
@@ -12,8 +14,10 @@ exports[`maxLength delegates to the underlying code if length is missing or is n
 exports[`maxLength delegates to the underlying code if length is missing or is not an integer 2`] = `
 [
   {
-    "code": "invalid_array",
+    "code": "invalid_type",
+    "expected": "array",
     "path": [],
+    "received": "object",
   },
 ]
 `;
@@ -21,8 +25,10 @@ exports[`maxLength delegates to the underlying code if length is missing or is n
 exports[`maxLength delegates to the underlying code if length is missing or is not an integer 3`] = `
 [
   {
-    "code": "invalid_array",
+    "code": "invalid_type",
+    "expected": "array",
     "path": [],
+    "received": "object",
   },
 ]
 `;

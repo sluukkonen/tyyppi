@@ -7,7 +7,7 @@ import {
   ResultOf,
   TypeOf,
 } from "../Codec.js"
-import { invalidObject, InvalidObject } from "../DecodeError.js"
+import { InvalidObject, invalidType } from "../DecodeError.js"
 import { ObjectMetadata } from "../Metadata.js"
 import { failure, failures, Result, success } from "../Result.js"
 import { hasOwnProperty, identity, isObject, pushErrors } from "../utils.js"
@@ -47,7 +47,7 @@ export const object = <T extends Record<string, AnyCodec>>(
 
   return createCodec(
     (val): Result<TypeOf<T[keyof T]>, ErrorOf<T[keyof T]> | InvalidObject> => {
-      if (!isObject(val)) return failure(invalidObject())
+      if (!isObject(val)) return failure(invalidType("object", val))
 
       let ok = true
       const errors: ErrorOf<T[keyof T]>[] = []

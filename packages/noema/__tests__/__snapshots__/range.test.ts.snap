@@ -23,8 +23,10 @@ exports[`min should fail to parse if value is outside the bounds 2`] = `
 exports[`min should fail to parse if value isn't parsed by the underlying codec 1`] = `
 [
   {
-    "code": "invalid_integer",
+    "code": "invalid_type",
+    "expected": "number",
     "path": [],
+    "received": "string",
   },
 ]
 `;

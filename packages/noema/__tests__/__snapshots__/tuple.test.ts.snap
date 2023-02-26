@@ -3,7 +3,9 @@
 exports[`tuple should reject arrays that have incorrect length 1`] = `
 [
   {
-    "code": "invalid_tuple",
+    "code": "too_short",
+    "length": 0,
+    "minLength": 1,
     "path": [],
   },
 ]
@@ -12,7 +14,9 @@ exports[`tuple should reject arrays that have incorrect length 1`] = `
 exports[`tuple should reject arrays that have incorrect length 2`] = `
 [
   {
-    "code": "invalid_tuple",
+    "code": "too_long",
+    "length": 2,
+    "maxLength": 1,
     "path": [],
   },
 ]
@@ -21,8 +25,10 @@ exports[`tuple should reject arrays that have incorrect length 2`] = `
 exports[`tuple should reject invalid values 1`] = `
 [
   {
-    "code": "invalid_tuple",
+    "code": "invalid_type",
+    "expected": "array",
     "path": [],
+    "received": "null",
   },
 ]
 `;
@@ -30,10 +36,12 @@ exports[`tuple should reject invalid values 1`] = `
 exports[`tuple should reject invalid values 2`] = `
 [
   {
-    "code": "invalid_number",
+    "code": "invalid_type",
+    "expected": "number",
     "path": [
       1,
     ],
+    "received": "string",
   },
 ]
 `;

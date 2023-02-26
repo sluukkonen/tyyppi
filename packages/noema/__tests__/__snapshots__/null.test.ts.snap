@@ -3,8 +3,98 @@
 exports[`null should not parse other values 1`] = `
 [
   {
-    "code": "invalid_null",
+    "code": "invalid_type",
+    "expected": "null",
     "path": [],
+    "received": "object",
+  },
+]
+`;
+
+exports[`null should not parse other values 2`] = `
+[
+  {
+    "code": "invalid_type",
+    "expected": "null",
+    "path": [],
+    "received": "undefined",
+  },
+]
+`;
+
+exports[`null should not parse other values 3`] = `
+[
+  {
+    "code": "invalid_type",
+    "expected": "null",
+    "path": [],
+    "received": "map",
+  },
+]
+`;
+
+exports[`null should not parse other values 4`] = `
+[
+  {
+    "code": "invalid_type",
+    "expected": "null",
+    "path": [],
+    "received": "set",
+  },
+]
+`;
+
+exports[`null should not parse other values 5`] = `
+[
+  {
+    "code": "invalid_type",
+    "expected": "null",
+    "path": [],
+    "received": "promise",
+  },
+]
+`;
+
+exports[`null should not parse other values 6`] = `
+[
+  {
+    "code": "invalid_type",
+    "expected": "null",
+    "path": [],
+    "received": "error",
+  },
+]
+`;
+
+exports[`null should not parse other values 7`] = `
+[
+  {
+    "code": "invalid_type",
+    "expected": "null",
+    "path": [],
+    "received": "date",
+  },
+]
+`;
+
+exports[`null should not parse other values 8`] = `
+[
+  {
+    "code": "invalid_type",
+    "expected": "null",
+    "path": [],
+    "received": "regexp",
+  },
+]
+`;
+
+exports[`null should not parse other values 9`] = `
+[
+  {
+    "code": "invalid_type",
+    "expected": "null",
+    "path": [],
+    "received": "object",
   },
 ]
 `;

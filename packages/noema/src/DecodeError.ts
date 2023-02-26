@@ -1,3 +1,5 @@
+import { getType } from "./getTag.js"
+import { TypeName } from "./TypeName.js"
 import { Literal, Ordered } from "./types.js"
 
 export interface DecodeError {
@@ -5,41 +7,32 @@ export interface DecodeError {
   readonly path: (string | number)[]
 }
 
-export interface InvalidArray extends DecodeError {
-  readonly code: "invalid_array"
+export interface InvalidType<T extends TypeName = TypeName>
+  extends DecodeError {
+  readonly code: "invalid_type"
+  readonly expected: T
+  readonly received: TypeName
 }
 
-export const invalidArray = (): InvalidArray => ({
-  code: "invalid_array",
+export const invalidType = <T extends TypeName>(
+  expected: T,
+  value: unknown
+): InvalidType<T> => ({
+  code: "invalid_type",
+  expected,
+  received: getType(value),
   path: [],
 })
 
-export interface InvalidBigInt extends DecodeError {
-  readonly code: "invalid_bigint"
-}
-
-export const invalidBigInt = (): InvalidBigInt => ({
-  code: "invalid_bigint",
-  path: [],
-})
-
-export interface InvalidBoolean extends DecodeError {
-  readonly code: "invalid_boolean"
-}
-
-export const invalidBoolean = (): InvalidBoolean => ({
-  code: "invalid_boolean",
-  path: [],
-})
-
-export interface InvalidDate extends DecodeError {
-  readonly code: "invalid_date"
-}
-
-export const invalidDate = (): InvalidDate => ({
-  code: "invalid_date",
-  path: [],
-})
+export type InvalidArray = InvalidType<"array">
+export type InvalidBigInt = InvalidType<"bigint">
+export type InvalidBoolean = InvalidType<"boolean">
+export type InvalidDate = InvalidType<"date">
+export type InvalidNull = InvalidType<"null">
+export type InvalidNumber = InvalidType<"number">
+export type InvalidObject = InvalidType<"object">
+export type InvalidString = InvalidType<"string">
+export type InvalidUndefined = InvalidType<"undefined">
 
 export interface InvalidEnum<T extends Literal> extends DecodeError {
   readonly code: "invalid_enum"
@@ -85,60 +78,6 @@ export const invalidLiteral = <T extends Literal>(
   expected,
 })
 
-export interface InvalidNull extends DecodeError {
-  readonly code: "invalid_null"
-}
-
-export const invalidNull = (): InvalidNull => ({
-  code: "invalid_null",
-  path: [],
-})
-
-export interface InvalidTuple extends DecodeError {
-  readonly code: "invalid_tuple"
-}
-
-export const invalidTuple = (): InvalidTuple => ({
-  code: "invalid_tuple",
-  path: [],
-})
-
-export interface InvalidUndefined extends DecodeError {
-  readonly code: "invalid_undefined"
-}
-
-export const invalidUndefined = (): InvalidUndefined => ({
-  code: "invalid_undefined",
-  path: [],
-})
-
-export interface InvalidNumber extends DecodeError {
-  readonly code: "invalid_number"
-}
-
-export const invalidNumber = (): InvalidNumber => ({
-  code: "invalid_number",
-  path: [],
-})
-
-export interface InvalidObject extends DecodeError {
-  readonly code: "invalid_object"
-}
-
-export const invalidObject = (): InvalidObject => ({
-  code: "invalid_object",
-  path: [],
-})
-
-export interface InvalidString extends DecodeError {
-  readonly code: "invalid_string"
-}
-
-export const invalidString = (): InvalidString => ({
-  code: "invalid_string",
-  path: [],
-})
-
 export interface InvalidUnion<E extends DecodeError> extends DecodeError {
   readonly code: "invalid_union"
   readonly errors: E[]
@@ -151,6 +90,18 @@ export const invalidUnion = <E extends DecodeError>(
   path: [],
   errors,
 })
+
+export interface IsInfinite extends DecodeError {
+  readonly code: "is_infinite"
+}
+
+export const isInfinite = (): IsInfinite => ({ code: "is_infinite", path: [] })
+
+export interface IsNaN extends DecodeError {
+  readonly code: "is_nan"
+}
+
+export const isNaNError = (): IsNaN => ({ code: "is_nan", path: [] })
 
 export interface TooLarge<T extends Ordered> extends DecodeError {
   readonly code: "too_large"
@@ -199,14 +150,3 @@ export const tooSmall = <T extends Ordered>(min: T): TooSmall<T> => ({
   path: [],
   min,
 })
-
-export type BuiltinError =
-  | InvalidArray
-  | InvalidBoolean
-  | InvalidEnum<Literal>
-  | InvalidISOString
-  | InvalidLiteral<Literal>
-  | InvalidNumber
-  | InvalidObject
-  | InvalidString
-  | InvalidUnion<DecodeError>

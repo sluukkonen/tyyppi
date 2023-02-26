@@ -3,8 +3,10 @@
 exports[`boolean should not parse non-booleans 1`] = `
 [
   {
-    "code": "invalid_boolean",
+    "code": "invalid_type",
+    "expected": "boolean",
     "path": [],
+    "received": "string",
   },
 ]
 `;

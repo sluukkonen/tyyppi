@@ -3,10 +3,12 @@
 exports[`array should fail to parse arrays with invalid values 1`] = `
 [
   {
-    "code": "invalid_number",
+    "code": "invalid_type",
+    "expected": "number",
     "path": [
       1,
     ],
+    "received": "string",
   },
 ]
 `;
@@ -14,8 +16,10 @@ exports[`array should fail to parse arrays with invalid values 1`] = `
 exports[`array should fail to parse non-arrays 1`] = `
 [
   {
-    "code": "invalid_array",
+    "code": "invalid_type",
+    "expected": "array",
     "path": [],
+    "received": "number",
   },
 ]
 `;
@@ -23,11 +27,13 @@ exports[`array should fail to parse non-arrays 1`] = `
 exports[`array the path property works within an object 1`] = `
 [
   {
-    "code": "invalid_number",
+    "code": "invalid_type",
+    "expected": "number",
     "path": [
       "a",
       0,
     ],
+    "received": "string",
   },
 ]
 `;

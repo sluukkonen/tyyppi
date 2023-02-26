@@ -3,8 +3,10 @@
 exports[`optional should fail to parse other values 1`] = `
 [
   {
-    "code": "invalid_string",
+    "code": "invalid_type",
+    "expected": "string",
     "path": [],
+    "received": "number",
   },
 ]
 `;

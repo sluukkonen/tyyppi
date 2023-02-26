@@ -6,12 +6,16 @@ exports[`union should work with multiple members 1`] = `
     "code": "invalid_union",
     "errors": [
       {
-        "code": "invalid_string",
+        "code": "invalid_type",
+        "expected": "string",
         "path": [],
+        "received": "object",
       },
       {
-        "code": "invalid_number",
+        "code": "invalid_type",
+        "expected": "number",
         "path": [],
+        "received": "object",
       },
     ],
     "path": [],

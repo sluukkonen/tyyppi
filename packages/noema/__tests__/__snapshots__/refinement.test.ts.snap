@@ -12,8 +12,10 @@ exports[`refinement should fail to parse if the predicate returns false 1`] = `
 exports[`refinement should fail to parse if the underlying codec fails to parse the value 1`] = `
 [
   {
-    "code": "invalid_string",
+    "code": "invalid_type",
+    "expected": "string",
     "path": [],
+    "received": "number",
   },
 ]
 `;

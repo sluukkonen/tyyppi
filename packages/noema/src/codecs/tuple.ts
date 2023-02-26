@@ -6,7 +6,14 @@ import {
   InputOf,
   TypeOf,
 } from "../Codec.js"
-import { invalidTuple, InvalidTuple } from "../DecodeError.js"
+import {
+  InvalidArray,
+  invalidType,
+  tooLong,
+  TooLong,
+  tooShort,
+  TooShort,
+} from "../DecodeError.js"
 import { TupleMetadata } from "../Metadata.js"
 import { failure, failures, Result, success } from "../Result.js"
 import { identity, isArray, pushErrors } from "../utils.js"
@@ -29,7 +36,7 @@ type TypesOf<C extends readonly unknown[]> = C extends readonly [
 export type TupleCodec<C extends readonly AnyCodec[] | []> = Codec<
   InputsOf<C>,
   TypesOf<C>,
-  ErrorOf<C[number]> | InvalidTuple,
+  ErrorOf<C[number]> | InvalidArray | TooShort | TooLong,
   TupleMetadata<C>
 >
 
@@ -39,9 +46,18 @@ export const tuple = <C extends readonly AnyCodec[] | []>(
   const simple = members.every((c) => c.metadata.simple)
   const length = members.length
   return createCodec(
-    (val): Result<TypesOf<C>, ErrorOf<C[number]> | InvalidTuple> => {
-      if (!isArray(val) || val.length !== length) {
-        return failure(invalidTuple())
+    (
+      val
+    ): Result<
+      TypesOf<C>,
+      ErrorOf<C[number]> | InvalidArray | TooShort | TooLong
+    > => {
+      if (!isArray(val)) {
+        return failure(invalidType("array", val))
+      } else if (val.length < length) {
+        return failure(tooShort(length, val.length))
+      } else if (val.length > length) {
+        return failure(tooLong(length, val.length))
       }
 
       let ok = true

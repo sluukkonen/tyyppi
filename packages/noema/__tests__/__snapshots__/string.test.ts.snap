@@ -3,8 +3,10 @@
 exports[`string should fail to parse non-strings 1`] = `
 [
   {
-    "code": "invalid_string",
+    "code": "invalid_type",
+    "expected": "string",
     "path": [],
+    "received": "number",
   },
 ]
 `;

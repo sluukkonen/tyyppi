@@ -7,6 +7,14 @@ describe("null", () => {
   })
 
   test("should not parse other values", () => {
+    expectParseFailure(n.null, Object.create(null))
     expectParseFailure(n.null, undefined)
+    expectParseFailure(n.null, new Map())
+    expectParseFailure(n.null, new Set())
+    expectParseFailure(n.null, Promise.resolve(1))
+    expectParseFailure(n.null, new Error("Boom!"))
+    expectParseFailure(n.null, new Date())
+    expectParseFailure(n.null, new RegExp(""))
+    expectParseFailure(n.null, new String(""))
   })
 })

@@ -3,8 +3,10 @@
 exports[`bigint should fail to parse other values 1`] = `
 [
   {
-    "code": "invalid_bigint",
+    "code": "invalid_type",
+    "expected": "bigint",
     "path": [],
+    "received": "number",
   },
 ]
 `;

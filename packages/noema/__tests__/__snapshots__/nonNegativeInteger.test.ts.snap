@@ -3,7 +3,7 @@
 exports[`nonNegativeInteger should not accept NaN 1`] = `
 [
   {
-    "code": "invalid_integer",
+    "code": "is_nan",
     "path": [],
   },
 ]

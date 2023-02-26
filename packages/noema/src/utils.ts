@@ -1,4 +1,5 @@
 import { DecodeError } from "./DecodeError.js"
+import { dateTag } from "./getTag.js"
 import { HasLength } from "./types.js"
 
 export const hasOwnProperty = <K extends string>(
@@ -33,7 +34,7 @@ export const isObject = (value: unknown): value is object =>
   isObjectLike(value) && !isArray(value)
 
 export const isDate = (value: unknown): value is Date =>
-  isObjectLike(value) && getTag(value) === "[object Date]"
+  isObjectLike(value) && getTag(value) === dateTag
 
 export const isString = (value: unknown): value is string =>
   typeof value === "string"
@@ -42,5 +43,10 @@ export const isNumber = (value: unknown): value is number =>
   typeof value === "number"
 
 export const isArray = Array.isArray as (value: unknown) => value is unknown[]
+
+export const isFinite: (value: unknown) => value is number =
+  Number.isFinite as (value: unknown) => value is number
+
+export const isNaN = Number.isNaN
 
 export const isInteger = Number.isInteger as (value: unknown) => value is number
