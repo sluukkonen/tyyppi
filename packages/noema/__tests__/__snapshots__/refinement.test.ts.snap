@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`refinement should fail to parse if the predicate returns false 1`] = `
+[
+  {
+    "code": "hmm",
+    "path": [],
+  },
+]
+`;
+
+exports[`refinement should fail to parse if the underlying codec fails to parse the value 1`] = `
+[
+  {
+    "code": "invalid_string",
+    "path": [],
+  },
+]
+`;

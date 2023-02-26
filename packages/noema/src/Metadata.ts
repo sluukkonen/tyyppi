@@ -127,6 +127,12 @@ export interface RangeMetadata<C extends Codec<any, Ordered>> extends Metadata {
   readonly codec: C
 }
 
+export interface RefinementMetadata<C extends AnyCodec> extends Metadata {
+  readonly tag: "refinement"
+  readonly simple: IsSimple<C>
+  readonly codec: C
+}
+
 export interface RecordMetadata<K extends AnySimpleCodec, V extends AnyCodec> {
   readonly tag: "record"
   readonly simple: IsSimple<V>
