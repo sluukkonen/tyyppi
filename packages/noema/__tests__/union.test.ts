@@ -1,4 +1,4 @@
-import { union, string, number } from "../src/index.js"
+import { number, string, union } from "../src/index.js"
 import { expectParseFailure, expectParseSuccess } from "./helpers.js"
 
 describe("union", () => {

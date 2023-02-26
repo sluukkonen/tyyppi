@@ -7,10 +7,10 @@ import {
   ResultOf,
   TypeOf,
 } from "../Codec.js"
-import { identity, isArray, pushErrors } from "../utils.js"
-import { ArrayMetadata } from "../Metadata.js"
 import { invalidArray, InvalidArray } from "../DecodeError.js"
+import { ArrayMetadata } from "../Metadata.js"
 import { failure, failures, Result, success } from "../Result.js"
+import { identity, isArray, pushErrors } from "../utils.js"
 import { NonEmptyArray } from "./nonEmptyArray.js"
 
 export type ArrayCodec<C extends AnyCodec> = Codec<

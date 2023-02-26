@@ -8,10 +8,10 @@ import {
   ResultOf,
   TypeOf,
 } from "../Codec.js"
-import { hasOwnProperty, identity, isObject, pushErrors } from "../utils.js"
-import { RecordMetadata } from "../Metadata.js"
 import { invalidObject, InvalidObject } from "../DecodeError.js"
+import { RecordMetadata } from "../Metadata.js"
 import { failure, failures, Result, success } from "../Result.js"
+import { hasOwnProperty, identity, isObject, pushErrors } from "../utils.js"
 import { NonEmptyArray } from "./nonEmptyArray.js"
 
 export type RecordCodec<K extends AnySimpleCodec, V extends AnyCodec> = Codec<

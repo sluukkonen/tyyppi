@@ -1,6 +1,6 @@
 import { createSimpleCodec, SimpleCodec } from "../Codec.js"
-import { NumberMetadata } from "../Metadata.js"
 import { invalidNumber, InvalidNumber } from "../DecodeError.js"
+import { NumberMetadata } from "../Metadata.js"
 import { failure, success } from "../Result.js"
 import { isNumber } from "../utils.js"
 

@@ -1,5 +1,5 @@
-import { expectParseFailure, expectParseSuccess } from "./helpers.js"
 import { literal } from "../src/index.js"
+import { expectParseFailure, expectParseSuccess } from "./helpers.js"
 
 describe("literal", () => {
   test("should parse valid literal", () => {

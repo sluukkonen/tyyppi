@@ -1,11 +1,11 @@
 import { Codec, createCodec } from "../Codec.js"
-import { DateFromISOStringMetadata } from "../Metadata.js"
 import {
   invalidISOString,
   InvalidISOString,
   invalidString,
   InvalidString,
 } from "../DecodeError.js"
+import { DateFromISOStringMetadata } from "../Metadata.js"
 import { failure, Result, success } from "../Result.js"
 import { isString } from "../utils.js"
 

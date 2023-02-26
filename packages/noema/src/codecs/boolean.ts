@@ -1,6 +1,6 @@
 import { createSimpleCodec, SimpleCodec } from "../Codec.js"
-import { BooleanMetadata } from "../Metadata.js"
 import { invalidBoolean, InvalidBoolean } from "../DecodeError.js"
+import { BooleanMetadata } from "../Metadata.js"
 import { failure, success } from "../Result.js"
 
 export type BooleanCodec = SimpleCodec<boolean, InvalidBoolean, BooleanMetadata>

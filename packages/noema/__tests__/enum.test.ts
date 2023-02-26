@@ -1,5 +1,5 @@
-import { expectParseFailure, expectParseSuccess } from "./helpers.js"
 import { enum as enumCodec } from "../src/codecs/enum.js"
+import { expectParseFailure, expectParseSuccess } from "./helpers.js"
 
 describe("enum", () => {
   test("should parse valid members", () => {

@@ -1,8 +1,8 @@
 import { createSimpleCodec, SimpleCodec } from "../Codec.js"
-import { Literal } from "../types.js"
-import { EnumMetadata } from "../Metadata.js"
 import { invalidEnum, InvalidEnum } from "../DecodeError.js"
+import { EnumMetadata } from "../Metadata.js"
 import { failure, success } from "../Result.js"
+import { Literal } from "../types.js"
 
 export type EnumCodec<T extends Literal> = SimpleCodec<
   T,

@@ -1,8 +1,8 @@
+import { DecodeError } from "./DecodeError.js"
+import { Metadata, SimpleMetadata } from "./Metadata.js"
 import { NoemaError } from "./NoemaError.js"
 import { Result } from "./Result.js"
-import { Metadata, SimpleMetadata } from "./Metadata.js"
 import { identity } from "./utils.js"
-import { DecodeError } from "./DecodeError.js"
 
 export interface Codec<
   I,

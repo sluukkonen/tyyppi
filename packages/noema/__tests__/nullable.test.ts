@@ -1,4 +1,4 @@
-import { string, nullable } from "../src/index.js"
+import { nullable, string } from "../src/index.js"
 import { expectParseFailure, expectParseSuccess } from "./helpers.js"
 
 describe("nullable", () => {

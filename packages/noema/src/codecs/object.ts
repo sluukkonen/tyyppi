@@ -7,10 +7,10 @@ import {
   ResultOf,
   TypeOf,
 } from "../Codec.js"
-import { hasOwnProperty, identity, isObject, pushErrors } from "../utils.js"
-import { ObjectMetadata } from "../Metadata.js"
 import { invalidObject, InvalidObject } from "../DecodeError.js"
+import { ObjectMetadata } from "../Metadata.js"
 import { failure, failures, Result, success } from "../Result.js"
+import { hasOwnProperty, identity, isObject, pushErrors } from "../utils.js"
 import { NonEmptyArray } from "./nonEmptyArray.js"
 
 type RequiredKeys<T> = {

@@ -1,4 +1,4 @@
-import { object, number, string, dateFromISOString } from "../src/index.js"
+import { dateFromISOString, number, object, string } from "../src/index.js"
 import { expectParseFailure, expectParseSuccess } from "./helpers.js"
 
 describe("object", () => {

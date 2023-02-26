@@ -6,8 +6,8 @@ import {
   SimpleCodec,
   TypeOf,
 } from "../Codec.js"
-import { UnionMetadata } from "../Metadata.js"
 import { invalidUnion, InvalidUnion } from "../DecodeError.js"
+import { UnionMetadata } from "../Metadata.js"
 import { failure } from "../Result.js"
 
 export type UnionCodec<C extends readonly AnySimpleCodec[] | []> = SimpleCodec<

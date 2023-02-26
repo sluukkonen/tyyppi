@@ -1,6 +1,6 @@
 import { createSimpleCodec, SimpleCodec } from "../Codec.js"
-import { DateMetadata } from "../Metadata.js"
 import { invalidDate, InvalidDate } from "../DecodeError.js"
+import { DateMetadata } from "../Metadata.js"
 import { failure, Result, success } from "../Result.js"
 import { isDate } from "../utils.js"
 
