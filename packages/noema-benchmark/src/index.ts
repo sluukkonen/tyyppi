@@ -9,6 +9,7 @@ import array from "./array.js"
 import object from "./object.js"
 import record from "./record.js"
 import string from "./string.js"
+import integer from "./integer.js"
 import undefined from "./undefined.js"
 
 export interface Benchmark<T> {
@@ -51,6 +52,7 @@ function runBenchmark<T>(benchmark: Benchmark<T>) {
 
 const suites = [
   ["array", array],
+  ["integer", integer],
   ["object", object],
   ["record", record],
   ["string", string],
