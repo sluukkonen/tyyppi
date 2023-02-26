@@ -1,6 +1,5 @@
 import * as t from "io-ts"
 import * as n from "noema"
-import * as r from "runtypes"
 import * as z from "zod"
 import { Benchmark } from "./index.js"
 
@@ -22,7 +21,6 @@ const suite: Benchmark<Record<string, number>> = {
     n.record(n.string, n.number),
     t.record(t.string, t.number),
     z.record(z.string(), z.number()),
-    r.Dictionary(r.Number),
   ],
 }
 

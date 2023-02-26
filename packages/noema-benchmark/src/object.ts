@@ -1,6 +1,5 @@
 import * as t from "io-ts"
 import * as n from "noema"
-import * as r from "runtypes"
 import * as z from "zod"
 import { Benchmark } from "./index.js"
 
@@ -37,12 +36,6 @@ const suite: Benchmark<SimpleObject> = {
       number: z.number(),
       boolean: z.boolean(),
       array: z.array(z.number()),
-    }),
-    r.Record({
-      string: r.String,
-      number: r.Number,
-      boolean: r.Boolean,
-      array: r.Array(r.Number),
     }),
   ],
 }

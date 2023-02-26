@@ -3,19 +3,18 @@ import * as b from "benny"
 import { isLeft } from "fp-ts/lib/Either.js"
 import * as t from "io-ts"
 import * as n from "noema"
-import * as r from "runtypes"
 import * as z from "zod"
 import array from "./array.js"
+import integer from "./integer.js"
 import object from "./object.js"
 import record from "./record.js"
 import string from "./string.js"
-import integer from "./integer.js"
 import undefined from "./undefined.js"
 
 export interface Benchmark<T> {
   name: string
   data: T
-  codecs: [n.Codec<T>, t.Type<T>, z.ZodSchema<T>, r.Runtype<T>]
+  codecs: [n.Codec<T>, t.Type<T>, z.ZodSchema<T>]
 }
 
 const ioTsUnsafeParse =
@@ -30,12 +29,11 @@ const ioTsUnsafeParse =
 
 function runBenchmark<T>(benchmark: Benchmark<T>) {
   const { name, data, codecs } = benchmark
-  const [noema, ioTs, zod, runtypes] = codecs
+  const [noema, ioTs, zod] = codecs
   const benchmarks = [
     ["noema", noema.unsafeDecode],
     ["io-ts", ioTsUnsafeParse(ioTs)],
     ["zod", zod.parse],
-    ["runtypes", runtypes.check],
   ] as const
 
   for (const [name, fn] of benchmarks) {
