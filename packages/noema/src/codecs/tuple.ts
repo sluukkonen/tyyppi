@@ -7,8 +7,8 @@ import {
   TypeOf,
 } from "../Codec.js"
 import {
+  invalidArray,
   InvalidArray,
-  invalidType,
   tooLong,
   TooLong,
   tooShort,
@@ -53,7 +53,7 @@ export const tuple = <C extends readonly AnyCodec[] | []>(
       ErrorOf<C[number]> | InvalidArray | TooShort | TooLong
     > => {
       if (!isArray(val)) {
-        return failure(invalidType("array", val))
+        return failure(invalidArray(val))
       } else if (val.length < length) {
         return failure(tooShort(length, val.length))
       } else if (val.length > length) {

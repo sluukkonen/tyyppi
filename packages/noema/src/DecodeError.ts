@@ -25,14 +25,40 @@ export const invalidType = <T extends TypeName>(
 })
 
 export type InvalidArray = InvalidType<"array">
+export const invalidArray = (value: unknown): InvalidArray =>
+  invalidType("array", value)
+
 export type InvalidBigInt = InvalidType<"bigint">
+export const invalidBigInt = (value: unknown): InvalidBigInt =>
+  invalidType("bigint", value)
+
 export type InvalidBoolean = InvalidType<"boolean">
+export const invalidBoolean = (value: unknown): InvalidBoolean =>
+  invalidType("boolean", value)
+
 export type InvalidDate = InvalidType<"date">
+export const invalidDate = (value: unknown): InvalidDate =>
+  invalidType("date", value)
+
 export type InvalidNull = InvalidType<"null">
+export const invalidNull = (value: unknown): InvalidNull =>
+  invalidType("null", value)
+
 export type InvalidNumber = InvalidType<"number">
+export const invalidNumber = (value: unknown): InvalidNumber =>
+  invalidType("number", value)
+
 export type InvalidObject = InvalidType<"object">
+export const invalidObject = (value: unknown): InvalidObject =>
+  invalidType("object", value)
+
 export type InvalidString = InvalidType<"string">
+export const invalidString = (value: unknown): InvalidString =>
+  invalidType("string", value)
+
 export type InvalidUndefined = InvalidType<"undefined">
+export const invalidUndefined = (value: unknown): InvalidUndefined =>
+  invalidType("undefined", value)
 
 export interface InvalidEnum<T extends Literal> extends DecodeError {
   readonly code: "invalid_enum"

@@ -2,8 +2,8 @@ import { Codec, createCodec } from "../Codec.js"
 import {
   invalidISOString,
   InvalidISOString,
+  invalidString,
   InvalidString,
-  invalidType,
 } from "../DecodeError.js"
 import { DateFromISOStringMetadata } from "../Metadata.js"
 import { failure, Result, success } from "../Result.js"
@@ -18,7 +18,7 @@ export type DateFromISOStringCodec = Codec<
 
 export const dateFromISOString: DateFromISOStringCodec = createCodec(
   (val): Result<Date, InvalidString | InvalidISOString> => {
-    if (!isString(val)) return failure(invalidType("string", val))
+    if (!isString(val)) return failure(invalidString(val))
     const date = new Date(val)
     return isNaN(date.getTime()) ? failure(invalidISOString()) : success(date)
   },

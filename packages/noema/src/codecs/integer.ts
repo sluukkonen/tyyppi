@@ -2,8 +2,8 @@ import { createSimpleCodec, SimpleCodec } from "../Codec.js"
 import {
   invalidInteger,
   InvalidInteger,
+  invalidNumber,
   InvalidNumber,
-  invalidType,
   isInfinite,
   IsInfinite,
   IsNaN,
@@ -30,7 +30,7 @@ export const integer: IntegerCodec = createSimpleCodec(
               : isNaN(val)
               ? isNaNError()
               : isInfinite()
-            : invalidType("number", val)
+            : invalidNumber(val)
         ),
   {
     tag: "integer",
