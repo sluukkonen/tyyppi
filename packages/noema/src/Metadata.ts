@@ -156,6 +156,17 @@ export interface StringMetadata extends SimpleMetadata {
   readonly tag: "string"
 }
 
+export interface TransformMetadata<C extends AnyCodec> extends Metadata {
+  readonly tag: "transform"
+  readonly simple: boolean
+  readonly codec: C
+}
+
+export interface SimpleTransformMetadata<C extends AnySimpleCodec>
+  extends TransformMetadata<C> {
+  readonly simple: true
+}
+
 export interface TupleMetadata<C extends readonly AnyCodec[] | []>
   extends Metadata {
   readonly tag: "tuple"
