@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`map should reject a map with the wrong key type 1`] = `
+[
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "path": [],
+    "received": "number",
+  },
+]
+`;
+
+exports[`map should reject a map with the wrong value type 1`] = `
+[
+  {
+    "code": "invalid_type",
+    "expected": "number",
+    "path": [],
+    "received": "string",
+  },
+]
+`;
+
+exports[`map should reject values that are not maps 1`] = `
+[
+  {
+    "code": "invalid_type",
+    "expected": "map",
+    "path": [],
+    "received": "array",
+  },
+]
+`;
+
+exports[`map should reject values that are not maps 2`] = `
+[
+  {
+    "code": "invalid_type",
+    "expected": "map",
+    "path": [],
+    "received": "null",
+  },
+]
+`;

@@ -48,9 +48,17 @@ export type InvalidNumber = InvalidType<"number">
 export const invalidNumber = (value: unknown): InvalidNumber =>
   invalidType("number", value)
 
+export type InvalidMap = InvalidType<"map">
+export const invalidMap = (value: unknown): InvalidMap =>
+  invalidType("map", value)
+
 export type InvalidObject = InvalidType<"object">
 export const invalidObject = (value: unknown): InvalidObject =>
   invalidType("object", value)
+
+export type InvalidSet = InvalidType<"set">
+export const invalidSet = (value: unknown): InvalidSet =>
+  invalidType("set", value)
 
 export type InvalidString = InvalidType<"string">
 export const invalidString = (value: unknown): InvalidString =>

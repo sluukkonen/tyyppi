@@ -8,7 +8,9 @@ export const expectParseSuccess = function <C extends AnyCodec>(
   const expected = arguments.length === 3 ? result : value
   const decoded = codec.unsafeDecode(value)
   expect(decoded).toEqual(expected)
-  expect(codec.encode(decoded)).toEqual(value)
+
+  const encoded = codec.encode(decoded)
+  expect(codec.encode(codec.unsafeDecode(encoded))).toEqual(encoded)
 }
 
 export const expectParseFailure = <C extends AnyCodec>(

@@ -1,5 +1,5 @@
 import { DecodeError } from "./DecodeError.js"
-import { dateTag } from "./getTag.js"
+import { dateTag, mapTag, setTag } from "./getTag.js"
 import { HasLength } from "./types.js"
 
 export const hasOwnProperty = <K extends string>(
@@ -50,3 +50,9 @@ export const isFinite: (value: unknown) => value is number =
 export const isNaN = Number.isNaN
 
 export const isInteger = Number.isInteger as (value: unknown) => value is number
+
+export const isSet = (value: unknown): value is Set<unknown> =>
+  isObjectLike(value) && getTag(value) === setTag
+
+export const isMap = (value: unknown): value is Map<unknown, unknown> =>
+  isObjectLike(value) && getTag(value) === mapTag

@@ -76,6 +76,13 @@ export interface LengthMetadata<C extends Codec<HasLength, any>>
   readonly codec: C
 }
 
+export interface MapMetadata<K extends AnyCodec, V extends AnyCodec> {
+  readonly tag: "map"
+  readonly simple: IsSimple<V | K>
+  readonly keys: K
+  readonly values: V
+}
+
 export interface MaxMetadata<C extends Codec<any, Ordered>> extends Metadata {
   readonly tag: "max"
   readonly simple: IsSimple<C>
@@ -138,6 +145,11 @@ export interface RecordMetadata<K extends AnySimpleCodec, V extends AnyCodec> {
   readonly simple: IsSimple<V>
   readonly keys: K
   readonly values: V
+}
+
+export interface SetMetadata<C extends AnyCodec> extends Metadata {
+  readonly tag: "set"
+  readonly codec: C
 }
 
 export interface StringMetadata extends SimpleMetadata {
