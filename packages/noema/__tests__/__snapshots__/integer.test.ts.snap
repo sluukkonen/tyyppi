@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`integer should not parse -Infinity 1`] = `
+exports[`should not parse -Infinity 1`] = `
 [
   {
     "code": "is_infinite",
@@ -9,7 +9,7 @@ exports[`integer should not parse -Infinity 1`] = `
 ]
 `;
 
-exports[`integer should not parse Infinity 1`] = `
+exports[`should not parse Infinity 1`] = `
 [
   {
     "code": "is_infinite",
@@ -18,7 +18,7 @@ exports[`integer should not parse Infinity 1`] = `
 ]
 `;
 
-exports[`integer should not parse a NaN 1`] = `
+exports[`should not parse a NaN 1`] = `
 [
   {
     "code": "is_nan",
@@ -27,7 +27,7 @@ exports[`integer should not parse a NaN 1`] = `
 ]
 `;
 
-exports[`integer should not parse floats 1`] = `
+exports[`should not parse floats 1`] = `
 [
   {
     "code": "invalid_integer",

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`maxLength delegates to the underlying code if length is missing or is not an integer 1`] = `
+exports[`delegates to the underlying code if length is missing or is not an integer 1`] = `
 [
   {
     "code": "invalid_type",
@@ -11,7 +11,7 @@ exports[`maxLength delegates to the underlying code if length is missing or is n
 ]
 `;
 
-exports[`maxLength delegates to the underlying code if length is missing or is not an integer 2`] = `
+exports[`delegates to the underlying code if length is missing or is not an integer 2`] = `
 [
   {
     "code": "invalid_type",
@@ -22,7 +22,7 @@ exports[`maxLength delegates to the underlying code if length is missing or is n
 ]
 `;
 
-exports[`maxLength delegates to the underlying code if length is missing or is not an integer 3`] = `
+exports[`delegates to the underlying code if length is missing or is not an integer 3`] = `
 [
   {
     "code": "invalid_type",
@@ -33,7 +33,7 @@ exports[`maxLength delegates to the underlying code if length is missing or is n
 ]
 `;
 
-exports[`maxLength fails to parse if the length is above the maximum length 1`] = `
+exports[`fails to parse if the length is above the maximum length 1`] = `
 [
   {
     "code": "too_long",

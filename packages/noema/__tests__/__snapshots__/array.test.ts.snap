@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`array should fail to parse arrays with invalid values 1`] = `
+exports[`should fail to parse arrays with invalid values 1`] = `
 [
   {
     "code": "invalid_type",
@@ -13,7 +13,7 @@ exports[`array should fail to parse arrays with invalid values 1`] = `
 ]
 `;
 
-exports[`array should fail to parse non-arrays 1`] = `
+exports[`should fail to parse non-arrays 1`] = `
 [
   {
     "code": "invalid_type",
@@ -24,7 +24,7 @@ exports[`array should fail to parse non-arrays 1`] = `
 ]
 `;
 
-exports[`array the path property works within an object 1`] = `
+exports[`the path property works within an object 1`] = `
 [
   {
     "code": "invalid_type",

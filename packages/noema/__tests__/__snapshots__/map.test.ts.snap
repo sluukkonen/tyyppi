@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`map should reject a map with the wrong key type 1`] = `
+exports[`should reject a map with the wrong key type 1`] = `
 [
   {
     "code": "invalid_type",
@@ -11,7 +11,7 @@ exports[`map should reject a map with the wrong key type 1`] = `
 ]
 `;
 
-exports[`map should reject a map with the wrong value type 1`] = `
+exports[`should reject a map with the wrong value type 1`] = `
 [
   {
     "code": "invalid_type",
@@ -22,7 +22,7 @@ exports[`map should reject a map with the wrong value type 1`] = `
 ]
 `;
 
-exports[`map should reject values that are not maps 1`] = `
+exports[`should reject values that are not maps 1`] = `
 [
   {
     "code": "invalid_type",
@@ -33,7 +33,7 @@ exports[`map should reject values that are not maps 1`] = `
 ]
 `;
 
-exports[`map should reject values that are not maps 2`] = `
+exports[`should reject values that are not maps 2`] = `
 [
   {
     "code": "invalid_type",

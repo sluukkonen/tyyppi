@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`undefined should not parse other values 1`] = `
+exports[`should not parse other values 1`] = `
 [
   {
     "code": "invalid_type",
@@ -11,7 +11,7 @@ exports[`undefined should not parse other values 1`] = `
 ]
 `;
 
-exports[`undefined should not parse other values 2`] = `
+exports[`should not parse other values 2`] = `
 [
   {
     "code": "invalid_type",

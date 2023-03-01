@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`union should work with multiple members 1`] = `
+exports[`should work with multiple members 1`] = `
 [
   {
     "code": "invalid_union",

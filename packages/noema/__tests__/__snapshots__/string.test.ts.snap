@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`string should fail to parse non-strings 1`] = `
+exports[`should fail to parse non-strings 1`] = `
 [
   {
     "code": "invalid_type",

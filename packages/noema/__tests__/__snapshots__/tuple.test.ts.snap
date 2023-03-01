@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`tuple should reject arrays that have incorrect length 1`] = `
+exports[`should reject arrays that have incorrect length 1`] = `
 [
   {
     "code": "too_short",
@@ -11,7 +11,7 @@ exports[`tuple should reject arrays that have incorrect length 1`] = `
 ]
 `;
 
-exports[`tuple should reject arrays that have incorrect length 2`] = `
+exports[`should reject arrays that have incorrect length 2`] = `
 [
   {
     "code": "too_long",
@@ -22,7 +22,7 @@ exports[`tuple should reject arrays that have incorrect length 2`] = `
 ]
 `;
 
-exports[`tuple should reject invalid values 1`] = `
+exports[`should reject invalid values 1`] = `
 [
   {
     "code": "invalid_type",
@@ -33,7 +33,7 @@ exports[`tuple should reject invalid values 1`] = `
 ]
 `;
 
-exports[`tuple should reject invalid values 2`] = `
+exports[`should reject invalid values 2`] = `
 [
   {
     "code": "invalid_type",

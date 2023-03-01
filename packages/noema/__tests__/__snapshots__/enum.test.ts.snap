@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`enum should reject other values 1`] = `
+exports[`should reject other values 1`] = `
 [
   {
     "code": "invalid_enum",

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`nonPositiveInteger should not accept NaN 1`] = `
+exports[`should not accept NaN 1`] = `
 [
   {
     "code": "is_nan",
@@ -9,7 +9,7 @@ exports[`nonPositiveInteger should not accept NaN 1`] = `
 ]
 `;
 
-exports[`nonPositiveInteger should not accept non-integers 1`] = `
+exports[`should not accept non-integers 1`] = `
 [
   {
     "code": "invalid_integer",
@@ -18,7 +18,7 @@ exports[`nonPositiveInteger should not accept non-integers 1`] = `
 ]
 `;
 
-exports[`nonPositiveInteger should not accept non-integers 2`] = `
+exports[`should not accept non-integers 2`] = `
 [
   {
     "code": "invalid_integer",
@@ -27,7 +27,7 @@ exports[`nonPositiveInteger should not accept non-integers 2`] = `
 ]
 `;
 
-exports[`nonPositiveInteger should not accept positive integers 1`] = `
+exports[`should not accept positive integers 1`] = `
 [
   {
     "code": "too_large",
@@ -37,7 +37,7 @@ exports[`nonPositiveInteger should not accept positive integers 1`] = `
 ]
 `;
 
-exports[`nonPositiveInteger should not accept positive integers 2`] = `
+exports[`should not accept positive integers 2`] = `
 [
   {
     "code": "too_large",
@@ -47,7 +47,7 @@ exports[`nonPositiveInteger should not accept positive integers 2`] = `
 ]
 `;
 
-exports[`nonPositiveInteger should not accept positive integers 3`] = `
+exports[`should not accept positive integers 3`] = `
 [
   {
     "code": "too_large",

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`set should reject sets containing elements of the wrong type 1`] = `
+exports[`should reject sets containing elements of the wrong type 1`] = `
 [
   {
     "code": "invalid_type",
@@ -11,7 +11,7 @@ exports[`set should reject sets containing elements of the wrong type 1`] = `
 ]
 `;
 
-exports[`set should reject values that are not sets 1`] = `
+exports[`should reject values that are not sets 1`] = `
 [
   {
     "code": "invalid_type",

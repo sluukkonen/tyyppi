@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`refinement should fail to parse if the predicate returns false 1`] = `
+exports[`should fail to parse if the predicate returns false 1`] = `
 [
   {
     "code": "hmm",
@@ -9,7 +9,7 @@ exports[`refinement should fail to parse if the predicate returns false 1`] = `
 ]
 `;
 
-exports[`refinement should fail to parse if the underlying codec fails to parse the value 1`] = `
+exports[`should fail to parse if the underlying codec fails to parse the value 1`] = `
 [
   {
     "code": "invalid_type",

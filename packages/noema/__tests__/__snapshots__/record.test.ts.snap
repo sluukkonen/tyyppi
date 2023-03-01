@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`record path should nest with nested records 1`] = `
+exports[`path should nest with nested records 1`] = `
 [
   {
     "code": "invalid_type",
@@ -14,7 +14,7 @@ exports[`record path should nest with nested records 1`] = `
 ]
 `;
 
-exports[`record should not parse arrays 1`] = `
+exports[`should not parse arrays 1`] = `
 [
   {
     "code": "invalid_type",
@@ -25,7 +25,7 @@ exports[`record should not parse arrays 1`] = `
 ]
 `;
 
-exports[`record should not parse non-objects 1`] = `
+exports[`should not parse non-objects 1`] = `
 [
   {
     "code": "invalid_type",
@@ -36,7 +36,7 @@ exports[`record should not parse non-objects 1`] = `
 ]
 `;
 
-exports[`record should not parse null 1`] = `
+exports[`should not parse null 1`] = `
 [
   {
     "code": "invalid_type",
@@ -47,7 +47,7 @@ exports[`record should not parse null 1`] = `
 ]
 `;
 
-exports[`record should not parse records with invalid keys 1`] = `
+exports[`should not parse records with invalid keys 1`] = `
 [
   {
     "code": "invalid_literal",
@@ -59,7 +59,7 @@ exports[`record should not parse records with invalid keys 1`] = `
 ]
 `;
 
-exports[`record should not parse records with invalid values 1`] = `
+exports[`should not parse records with invalid values 1`] = `
 [
   {
     "code": "invalid_type",

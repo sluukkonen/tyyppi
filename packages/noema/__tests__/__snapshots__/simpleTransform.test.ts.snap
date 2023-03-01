@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`simpleTransform should fail if the underlying codec fails 1`] = `
+exports[`should fail if the underlying codec fails 1`] = `
 [
   {
     "code": "invalid_type",

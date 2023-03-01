@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`boolean should not parse non-booleans 1`] = `
+exports[`should not parse non-booleans 1`] = `
 [
   {
     "code": "invalid_type",
