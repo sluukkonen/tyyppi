@@ -16,7 +16,7 @@ import {
 } from "../DecodeError.js"
 import { TupleMetadata } from "../Metadata.js"
 import { failure, failures, Result, success } from "../Result.js"
-import { identity, isArray, pushErrors } from "../utils.js"
+import { identity, isArray, isEveryCodecSimple, pushErrors } from "../utils.js"
 import { NonEmptyArray } from "./nonEmptyArray.js"
 
 type InputsOf<C extends readonly unknown[]> = C extends readonly [
@@ -43,7 +43,7 @@ export type TupleCodec<C extends readonly AnyCodec[] | []> = Codec<
 export const tuple = <C extends readonly AnyCodec[] | []>(
   members: C
 ): TupleCodec<C> => {
-  const simple = members.every((c) => c.metadata.simple)
+  const simple = isEveryCodecSimple(members)
   const length = members.length
   return createCodec(
     (

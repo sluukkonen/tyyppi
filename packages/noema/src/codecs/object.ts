@@ -10,7 +10,13 @@ import {
 import { invalidObject, InvalidObject } from "../DecodeError.js"
 import { ObjectMetadata } from "../Metadata.js"
 import { failure, failures, Result, success } from "../Result.js"
-import { hasOwnProperty, identity, isObject, pushErrors } from "../utils.js"
+import {
+  hasOwnProperty,
+  identity,
+  isEveryCodecSimple,
+  isObject,
+  pushErrors,
+} from "../utils.js"
 import { NonEmptyArray } from "./nonEmptyArray.js"
 
 type RequiredKeys<T> = {
@@ -43,7 +49,7 @@ export const object = <T extends Record<string, AnyCodec>>(
 ): ObjectCodec<T> => {
   const keys = Object.keys(props)
   const codecs = Object.values(props)
-  const simple = codecs.every((codec) => codec.metadata.simple)
+  const simple = isEveryCodecSimple(codecs)
 
   return createCodec(
     (val): Result<TypeOf<T[keyof T]>, ErrorOf<T[keyof T]> | InvalidObject> => {
