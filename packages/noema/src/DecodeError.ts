@@ -1,6 +1,6 @@
-import { getType } from "./getTag.js"
 import { TypeName } from "./TypeName.js"
 import { Literal, Ordered } from "./types.js"
+import { getType } from "./utils.js"
 
 export interface DecodeError {
   readonly code: string
