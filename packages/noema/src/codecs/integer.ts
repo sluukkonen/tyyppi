@@ -10,7 +10,7 @@ import {
   isNaNError,
 } from "../DecodeError.js"
 import { IntegerMetadata } from "../Metadata.js"
-import { failure, Result, success } from "../Result.js"
+import { failure, success } from "../Result.js"
 import { isFinite, isInteger, isNaN, isNumber } from "../utils.js"
 
 export type IntegerCodec = SimpleCodec<
@@ -20,7 +20,7 @@ export type IntegerCodec = SimpleCodec<
 >
 
 export const integer: IntegerCodec = createSimpleCodec(
-  (val): Result<number, InvalidNumber | IsNaN | IsInfinite | InvalidInteger> =>
+  (val) =>
     isInteger(val)
       ? success(val)
       : failure(

@@ -8,7 +8,7 @@ import {
   isNaNError,
 } from "../DecodeError.js"
 import { NumberMetadata } from "../Metadata.js"
-import { failure, Result, success } from "../Result.js"
+import { failure, success } from "../Result.js"
 import { isFinite, isNaN, isNumber } from "../utils.js"
 
 export type NumberCodec = SimpleCodec<
@@ -18,7 +18,7 @@ export type NumberCodec = SimpleCodec<
 >
 
 export const number: NumberCodec = createSimpleCodec(
-  (val): Result<number, InvalidNumber | IsNaN | IsInfinite> =>
+  (val) =>
     isFinite(val)
       ? success(val)
       : failure(
