@@ -1,7 +1,7 @@
 import { bigint } from "../src/index.js"
 import { expectParseFailure, expectParseSuccess } from "./helpers.js"
 
-test("should parse bigints", () => {
+test("should parse a bigint", () => {
   expectParseSuccess(bigint, 0n)
 })
 

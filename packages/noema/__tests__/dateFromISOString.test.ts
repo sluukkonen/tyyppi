@@ -11,5 +11,5 @@ test("should reject non-strings", () => {
 })
 
 test("should reject invalid strings", () => {
-  expectParseFailure(dateFromISOString, "asdf")
+  expectParseFailure(dateFromISOString, "")
 })

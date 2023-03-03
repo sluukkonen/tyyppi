@@ -10,5 +10,5 @@
 - Good performance
 - Lightweight, should tree-shake well
 - Introspection for things like test data or OpenAPI generation
-- Both machine and human readable errors
+- Both machine and human-readable errors
 - Good documentation
