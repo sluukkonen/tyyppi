@@ -1,8 +1,17 @@
 import { DecodeError } from "./DecodeError.js"
-import { Metadata, SimpleMetadata } from "./Metadata.js"
 import { NoemaError } from "./NoemaError.js"
 import { Result } from "./Result.js"
 import { identity } from "./utils.js"
+
+export type IsSimple<C extends AnyCodec> = C["metadata"]["simple"]
+
+export interface Metadata {
+  readonly simple: boolean
+}
+
+export interface SimpleMetadata extends Metadata {
+  readonly simple: true
+}
 
 export interface Codec<
   I,

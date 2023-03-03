@@ -1,16 +1,13 @@
-import { AnyCodec, AnySimpleCodec, Codec, TypeOf } from "./Codec.js"
+import {
+  AnyCodec,
+  AnySimpleCodec,
+  Codec,
+  IsSimple,
+  Metadata,
+  SimpleMetadata,
+  TypeOf,
+} from "./Codec.js"
 import { HasLength, Literal, Ordered } from "./types.js"
-
-type IsSimple<C extends AnyCodec> = C["metadata"]["simple"]
-
-export interface Metadata {
-  readonly tag?: string
-  readonly simple: boolean
-}
-
-export interface SimpleMetadata extends Metadata {
-  readonly simple: true
-}
 
 export interface ArrayMetadata<C extends AnyCodec> extends Metadata {
   readonly tag: "array"
