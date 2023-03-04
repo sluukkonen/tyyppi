@@ -23,8 +23,7 @@ export function union<C extends readonly AnySimpleCodec[] | []>(
     (val) => {
       const errors: ErrorOf<C[number]>[] = []
 
-      for (let i = 0; i < members.length; i++) {
-        const codec = members[i]
+      for (const codec of members) {
         const result = codec.decode(val) as ResultOf<C[number]>
         if (result.ok) return result
         else errors.push(...result.errors)
