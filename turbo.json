@@ -16,12 +16,17 @@
     },
     "lint": {
       "dependsOn": [],
-      "inputs": ["**/*.ts", "eslintrc.json", ".eslintignore"],
+      "inputs": [
+        "src/**/*.ts",
+        "__tests__/**/*.ts",
+        ".eslintrc.json",
+        ".eslintignore"
+      ],
       "outputs": [],
       "outputMode": "new-only"
     },
     "test": {
-      "dependsOn": ["build"],
+      "dependsOn": ["build:test"],
       "inputs": ["__tests__/**/*.ts", "jest.config.mjs"],
       "outputs": ["coverage/**"],
       "outputMode": "new-only"
