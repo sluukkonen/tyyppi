@@ -88,7 +88,7 @@ export const object = <T extends Record<string, AnyCodec>>(
           for (const key in object) {
             if (hasOwnProperty(object, key)) {
               const codec = props[key]
-              result[key] = codec.encode(object[key])
+              if (codec) result[key] = codec.encode(object[key])
             }
           }
 

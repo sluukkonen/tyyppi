@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should collect errors from all codecs 1`] = `
+[
+  {
+    "code": "invalid_type",
+    "expected": "number",
+    "path": [
+      "a",
+    ],
+    "received": "undefined",
+  },
+  {
+    "code": "invalid_type",
+    "expected": "number",
+    "path": [
+      "b",
+    ],
+    "received": "undefined",
+  },
+]
+`;
+
+exports[`should collect errors from all codecs 2`] = `
+[
+  {
+    "code": "invalid_type",
+    "expected": "number",
+    "path": [
+      "a",
+    ],
+    "received": "string",
+  },
+  {
+    "code": "invalid_type",
+    "expected": "number",
+    "path": [
+      "b",
+    ],
+    "received": "string",
+  },
+]
+`;
+
+exports[`should fail to parse non-objects 1`] = `
+[
+  {
+    "code": "invalid_type",
+    "expected": "object",
+    "path": [],
+    "received": "null",
+  },
+]
+`;

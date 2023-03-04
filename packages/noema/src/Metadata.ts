@@ -39,6 +39,7 @@ export interface TaggedUnionMetadata<
   C extends TaggedUnionMember<K, V>
 > extends Metadata {
   readonly tag: "taggedUnion"
+  readonly simple: IsSimple<C>
   readonly key: K
   readonly options: readonly V[]
   readonly members: readonly C[]
@@ -51,6 +52,13 @@ export interface EnumMetadata<T extends Literal> extends SimpleMetadata {
 
 export interface IntegerMetadata extends SimpleMetadata {
   readonly tag: "integer"
+}
+
+export interface IntersectionMetadata<C extends readonly AnyCodec[]>
+  extends Metadata {
+  readonly tag: "intersection"
+  readonly simple: IsSimple<C[number]>
+  readonly codecs: C
 }
 
 export interface NullMetadata extends SimpleMetadata {
