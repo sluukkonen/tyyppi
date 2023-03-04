@@ -112,6 +112,20 @@ export const invalidLiteral = <T extends Literal>(
   expected,
 })
 
+export interface InvalidTaggedUnion<V extends Literal> extends DecodeError {
+  readonly code: "invalid_tagged_union"
+  readonly options: readonly V[]
+}
+
+export const invalidTaggedUnion = <V extends Literal>(
+  key: string,
+  options: readonly V[]
+): InvalidTaggedUnion<V> => ({
+  code: "invalid_tagged_union",
+  path: [key],
+  options,
+})
+
 export interface InvalidUnion<E extends DecodeError> extends DecodeError {
   readonly code: "invalid_union"
   readonly errors: readonly E[]

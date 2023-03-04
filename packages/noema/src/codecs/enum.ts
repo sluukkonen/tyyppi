@@ -19,4 +19,4 @@ function enumCodec<T extends Literal>(...members: readonly T[]): EnumCodec<T> {
   )
 }
 
-export { enumCodec as enum }
+export { enumCodec, enumCodec as enum }

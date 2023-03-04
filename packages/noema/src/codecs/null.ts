@@ -13,4 +13,4 @@ const nullCodec: NullCodec = createSimpleCodec(
   }
 )
 
-export { nullCodec as null }
+export { nullCodec, nullCodec as null }

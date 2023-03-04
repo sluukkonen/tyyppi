@@ -7,6 +7,7 @@ import {
   SimpleMetadata,
   TypeOf,
 } from "./Codec.js"
+import { TaggedUnionMember } from "./codecs/taggedUnion.js"
 import { HasLength, Literal, Ordered } from "./types.js"
 
 export interface ArrayMetadata<C extends AnyCodec> extends Metadata {
@@ -30,6 +31,17 @@ export interface DateMetadata extends SimpleMetadata {
 export interface DateFromISOStringMetadata extends Metadata {
   readonly tag: "dateFromISOString"
   readonly simple: false
+}
+
+export interface TaggedUnionMetadata<
+  K extends string,
+  V extends Literal,
+  C extends TaggedUnionMember<K, V>
+> extends Metadata {
+  readonly tag: "taggedUnion"
+  readonly key: K
+  readonly options: readonly V[]
+  readonly members: readonly C[]
 }
 
 export interface EnumMetadata<T extends Literal> extends SimpleMetadata {

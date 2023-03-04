@@ -18,4 +18,4 @@ const undefinedCodec: UndefinedCodec = createSimpleCodec(
   }
 )
 
-export { undefinedCodec as undefined }
+export { undefinedCodec, undefinedCodec as undefined }

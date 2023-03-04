@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should fail to objects where the tag does not match 1`] = `
+[
+  {
+    "code": "invalid_tagged_union",
+    "options": [
+      "plane",
+      "car",
+    ],
+    "path": [
+      "type",
+    ],
+  },
+]
+`;
+
+exports[`should fail to objects without the proper tag 1`] = `
+[
+  {
+    "code": "invalid_tagged_union",
+    "options": [
+      "plane",
+      "car",
+    ],
+    "path": [
+      "type",
+    ],
+  },
+]
+`;
+
+exports[`should fail to parse non-objects 1`] = `
+[
+  {
+    "code": "invalid_type",
+    "expected": "object",
+    "path": [],
+    "received": "null",
+  },
+]
+`;
