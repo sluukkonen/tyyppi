@@ -36,6 +36,7 @@ export type TypeOf<C extends AnyCodec> = C extends Codec<any, infer T>
 export type ErrorOf<C extends AnyCodec> = C extends Codec<any, any, infer E>
   ? E
   : never
+export type MetadataOf<C extends AnyCodec> = C["metadata"]
 export type ResultOf<C extends AnyCodec> = Result<TypeOf<C>, ErrorOf<C>>
 
 export type SimpleCodec<
