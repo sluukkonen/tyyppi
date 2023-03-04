@@ -48,8 +48,5 @@ test("should only consider own properties", () => {
 })
 
 test("should strip extra keys", () => {
-  expect(object({}).decode({ a: 1, b: 2 })).toEqual({
-    ok: true,
-    value: {},
-  })
+  expectParseSuccess(object({}), { a: 1, b: 2 }, {})
 })
