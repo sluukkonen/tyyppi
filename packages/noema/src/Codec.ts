@@ -21,7 +21,7 @@ export interface Codec<
 > {
   decode(value: unknown): Result<T, E>
   encode(value: T): I
-  metadata: M
+  readonly metadata: M
   unsafeDecode(value: unknown): T
 }
 

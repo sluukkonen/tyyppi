@@ -70,11 +70,11 @@ export const invalidUndefined = (value: unknown): InvalidUndefined =>
 
 export interface InvalidEnum<T extends Literal> extends DecodeError {
   readonly code: "invalid_enum"
-  readonly members: T[]
+  readonly members: readonly T[]
 }
 
 export const invalidEnum = <T extends Literal>(
-  members: T[]
+  members: readonly T[]
 ): InvalidEnum<T> => ({
   code: "invalid_enum",
   path: [],
@@ -114,11 +114,11 @@ export const invalidLiteral = <T extends Literal>(
 
 export interface InvalidUnion<E extends DecodeError> extends DecodeError {
   readonly code: "invalid_union"
-  readonly errors: E[]
+  readonly errors: readonly E[]
 }
 
 export const invalidUnion = <E extends DecodeError>(
-  errors: E[]
+  errors: readonly E[]
 ): InvalidUnion<E> => ({
   code: "invalid_union",
   path: [],

@@ -34,7 +34,7 @@ export interface DateFromISOStringMetadata extends Metadata {
 
 export interface EnumMetadata<T extends Literal> extends SimpleMetadata {
   readonly tag: "enum"
-  readonly members: T[]
+  readonly members: readonly T[]
 }
 
 export interface IntegerMetadata extends SimpleMetadata {

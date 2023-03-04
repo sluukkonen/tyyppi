@@ -10,7 +10,7 @@ export type EnumCodec<T extends Literal> = SimpleCodec<
   EnumMetadata<T>
 >
 
-function enumCodec<T extends Literal>(...members: T[]): EnumCodec<T> {
+function enumCodec<T extends Literal>(...members: readonly T[]): EnumCodec<T> {
   const set = new Set(members)
   return createSimpleCodec(
     (val) =>
