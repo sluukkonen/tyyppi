@@ -17,11 +17,11 @@ const suite: Benchmark<Record<string, number>> = {
     i: 9,
     j: 10,
   },
-  codecs: [
-    n.record(n.string, n.number),
-    t.record(t.string, t.number),
-    z.record(z.string(), z.number()),
-  ],
+  codecs: {
+    noema: n.record(n.string, n.number),
+    ioTs: t.record(t.string, t.number),
+    zod: z.record(z.string(), z.number()),
+  },
 }
 
 export default suite

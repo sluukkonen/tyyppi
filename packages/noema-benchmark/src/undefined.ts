@@ -6,7 +6,7 @@ import { Benchmark } from "./index.js"
 const suite: Benchmark<undefined> = {
   name: "undefined",
   data: undefined,
-  codecs: [n.undefined, t.undefined, z.undefined()],
+  codecs: { noema: n.undefined, ioTs: t.undefined, zod: z.undefined() },
 }
 
 export default suite

@@ -15,7 +15,11 @@ import undefined from "./undefined.js"
 export interface Benchmark<I, T = I> {
   name: string
   data: I
-  codecs: [n.Codec<I, T>, t.Type<T, I>, z.ZodType<T, z.ZodTypeDef, I>]
+  codecs: {
+    noema: n.Codec<I, T>
+    ioTs?: t.Type<T, I>
+    zod?: z.ZodType<T, z.ZodTypeDef, I>
+  }
 }
 
 const ioTsUnsafeParse =
@@ -30,12 +34,12 @@ const ioTsUnsafeParse =
 
 function runBenchmark<T>(benchmark: Benchmark<T>) {
   const { name, data, codecs } = benchmark
-  const [noema, ioTs, zod] = codecs
-  const benchmarks = [
+  const { noema, ioTs, zod } = codecs
+  const benchmarks: [string, (val: unknown) => unknown][] = [
     ["noema", noema.unsafeDecode],
-    ["io-ts", ioTsUnsafeParse(ioTs)],
-    ["zod", zod.parse],
-  ] as const
+  ]
+  if (zod) benchmarks.push(["zod", zod.parse])
+  if (ioTs) benchmarks.push(["zod", ioTsUnsafeParse(ioTs)])
 
   for (const [name, fn] of benchmarks) {
     if (noema.metadata.simple) {

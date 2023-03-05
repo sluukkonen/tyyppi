@@ -6,7 +6,7 @@ import { Benchmark } from "./index.js"
 const suite: Benchmark<string> = {
   name: "string",
   data: "asdf",
-  codecs: [n.string, t.string, z.string()],
+  codecs: { noema: n.string, ioTs: t.string, zod: z.string() },
 }
 
 export default suite
