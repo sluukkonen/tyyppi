@@ -1,12 +1,7 @@
-import { createSimpleCodec, SimpleCodec } from "../Codec.js"
-import {
-  invalidEmail,
-  InvalidEmail,
-  invalidString,
-  InvalidString,
-} from "../DecodeError.js"
-import { failure, Result, success } from "../Result.js"
-import { isString } from "../utils.js"
+import { SimpleCodec } from "../Codec.js"
+import { invalidEmail, InvalidEmail, InvalidString } from "../DecodeError.js"
+import { refinement } from "./refinement.js"
+import { string } from "./string.js"
 
 // https://html.spec.whatwg.org/#e-mail-state-(type=email)
 const emailRegexp =
@@ -20,13 +15,10 @@ export interface EmailCodec
   }
 }
 
-export const email: EmailCodec = createSimpleCodec(
-  (val): Result<string, InvalidString | InvalidEmail> =>
-    isString(val)
-      ? emailRegexp.test(val)
-        ? success(val)
-        : failure(invalidEmail())
-      : failure(invalidString(val)),
+export const email: EmailCodec = refinement(
+  string,
+  (s) => emailRegexp.test(s),
+  invalidEmail,
   {
     tag: "email",
     simple: true,

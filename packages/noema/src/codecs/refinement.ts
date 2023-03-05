@@ -5,26 +5,37 @@ import {
   ErrorOf,
   InputOf,
   IsSimple,
+  Metadata,
   ResultOf,
   TypeOf,
 } from "../Codec.js"
 import { DecodeError } from "../DecodeError.js"
 import { failure, Result } from "../Result.js"
 
-export interface RefinementCodec<C extends AnyCodec, E extends DecodeError>
-  extends Codec<InputOf<C>, TypeOf<C>, ErrorOf<C> | E> {
-  readonly metadata: {
-    readonly tag: "refinement"
-    readonly simple: IsSimple<C>
-    readonly codec: C
-  }
+interface RefinementMetadata<C extends AnyCodec> {
+  readonly tag: "refinement"
+  readonly simple: IsSimple<C>
+  readonly codec: C
 }
 
-export function refinement<C extends AnyCodec, E extends DecodeError>(
+export interface RefinementCodec<
+  C extends AnyCodec,
+  E extends DecodeError,
+  M extends Metadata = RefinementMetadata<C>
+> extends Codec<InputOf<C>, TypeOf<C>, ErrorOf<C> | E> {
+  readonly metadata: M
+}
+
+export function refinement<
+  C extends AnyCodec,
+  E extends DecodeError,
+  M extends Metadata = RefinementMetadata<C>
+>(
   codec: C,
   predicate: (value: TypeOf<C>) => boolean,
-  makeError: (value: unknown) => E
-): RefinementCodec<C, E> {
+  makeError: (value: unknown) => E,
+  metadata?: M
+): RefinementCodec<C, E, M> {
   return createCodec(
     (val): Result<TypeOf<C>, ErrorOf<C> | E> => {
       const result = codec.decode(val) as ResultOf<C>
@@ -35,6 +46,6 @@ export function refinement<C extends AnyCodec, E extends DecodeError>(
         : result
     },
     codec.encode,
-    { tag: "refinement", simple: codec.metadata.simple, codec }
-  )
+    metadata ?? { tag: "refinement", simple: codec.metadata.simple, codec }
+  ) as RefinementCodec<C, E, M>
 }
