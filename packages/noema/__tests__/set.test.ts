@@ -17,10 +17,5 @@ test("should reject sets containing elements of the wrong type", () => {
 })
 
 test("should work with non-simple element codecs", () => {
-  const now = new Date()
-  expectParseSuccess(
-    set(fromJson.date),
-    new Set([now.toISOString()]),
-    new Set([now])
-  )
+  expectParseSuccess(set(fromJson.bigint), new Set(["1"]), new Set([1n]))
 })

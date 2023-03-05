@@ -8,8 +8,7 @@ test("should parse a simple tuples", () => {
 })
 
 test("should parse complex tuples", () => {
-  const now = new Date()
-  expectParseSuccess(tuple([fromJson.date]), [now.toISOString()], [now])
+  expectParseSuccess(tuple([fromJson.bigint]), ["1"], [1n])
 })
 
 test("should reject arrays that have incorrect length", () => {

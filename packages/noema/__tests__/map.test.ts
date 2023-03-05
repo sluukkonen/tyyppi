@@ -20,19 +20,17 @@ test("should reject a map with the wrong value type", () => {
 })
 
 test("should work if the key codec not simple", () => {
-  const now = new Date()
   expectParseSuccess(
-    map(fromJson.date, number),
-    new Map([[now.toISOString(), now.valueOf()]]),
-    new Map([[now, now.valueOf()]])
+    map(fromJson.bigint, number),
+    new Map([["1", 1]]),
+    new Map([[1n, 1]])
   )
 })
 
 test("should work if the value codec not simple", () => {
-  const now = new Date()
   expectParseSuccess(
-    map(number, fromJson.date),
-    new Map([[now.valueOf(), now.toISOString()]]),
-    new Map([[now.valueOf(), now]])
+    map(number, fromJson.bigint),
+    new Map([[1, "1"]]),
+    new Map([[1, 1n]])
   )
 })

@@ -25,13 +25,12 @@ test("should fail to objects where the tag does not match", () => {
 test("should work with complex codecs", () => {
   const complex = taggedUnion("type", [
     "complex",
-    object({ type: literal("complex"), date: fromJson.date }),
+    object({ type: literal("complex"), n: fromJson.bigint }),
   ])
-  const now = new Date()
 
   expectParseSuccess(
     complex,
-    { type: "complex", date: now.toISOString() },
-    { type: "complex", date: now }
+    { type: "complex", n: "1" },
+    { type: "complex", n: 1n }
   )
 })

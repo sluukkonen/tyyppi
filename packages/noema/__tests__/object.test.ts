@@ -14,12 +14,7 @@ test("should parse a valid object", () => {
 })
 
 test("should parse complex object", () => {
-  const now = new Date()
-  expectParseSuccess(
-    object({ date: fromJson.date }),
-    { date: now.toISOString() },
-    { date: now }
-  )
+  expectParseSuccess(object({ n: fromJson.bigint }), { n: "1" }, { n: 1n })
 })
 
 test("should fail to parse an object with the value", () => {

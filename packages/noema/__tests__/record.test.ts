@@ -8,13 +8,8 @@ test("should parse an simple records", () => {
 })
 
 test("should parse complex records", () => {
-  const now = new Date()
-  expectParseSuccess(record(string, fromJson.date), {})
-  expectParseSuccess(
-    record(string, fromJson.date),
-    { a: now.toISOString() },
-    { a: now }
-  )
+  expectParseSuccess(record(string, fromJson.bigint), {})
+  expectParseSuccess(record(string, fromJson.bigint), { a: "1" }, { a: 1n })
 })
 
 test("should not parse records with invalid keys", () => {

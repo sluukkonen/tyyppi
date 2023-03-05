@@ -16,11 +16,10 @@ test("should fail if the underlying codec fails", () => {
 })
 
 test("should work with non-simple codecs", () => {
-  const milliseconds = transform(
-    fromJson.date,
-    (date) => date.valueOf(),
-    (timestamp) => new Date(timestamp)
+  const plus1 = transform(
+    fromJson.bigint,
+    (n) => n + 1n,
+    (n) => n - 1n
   )
-  const now = new Date()
-  expectParseSuccess(milliseconds, now.toISOString(), now.valueOf())
+  expectParseSuccess(plus1, "1", 2n)
 })

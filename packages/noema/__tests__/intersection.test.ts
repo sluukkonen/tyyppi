@@ -17,12 +17,7 @@ test("should collect errors from all codecs", () => {
 })
 
 test("should work with complex codecs", () => {
-  const complex = intersection(ab, object({ c: fromJson.date }))
-  const now = new Date()
+  const complex = intersection(ab, object({ c: fromJson.bigint }))
 
-  expectParseSuccess(
-    complex,
-    { a: 1, b: 1, c: now.toISOString() },
-    { a: 1, b: 1, c: now }
-  )
+  expectParseSuccess(complex, { a: 1, b: 1, c: "1" }, { a: 1, b: 1, c: 1n })
 })
