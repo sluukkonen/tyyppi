@@ -1,4 +1,4 @@
-import { dateFromISOString, number, set } from "../src/index.js"
+import { fromJson, number, set } from "../src/index.js"
 import { expectParseFailure, expectParseSuccess } from "./helpers.js"
 
 test("should parse a set containing elements of the correct type", () => {
@@ -19,7 +19,7 @@ test("should reject sets containing elements of the wrong type", () => {
 test("should work with non-simple element codecs", () => {
   const now = new Date()
   expectParseSuccess(
-    set(dateFromISOString),
+    set(fromJson.date),
     new Set([now.toISOString()]),
     new Set([now])
   )

@@ -1,4 +1,4 @@
-import { dateFromISOString, string, transform } from "../src/index.js"
+import { fromJson, string, transform } from "../src/index.js"
 import { expectParseFailure, expectParseSuccess } from "./helpers.js"
 
 const trimmedString = transform(
@@ -17,7 +17,7 @@ test("should fail if the underlying codec fails", () => {
 
 test("should work with non-simple codecs", () => {
   const milliseconds = transform(
-    dateFromISOString,
+    fromJson.date,
     (date) => date.valueOf(),
     (timestamp) => new Date(timestamp)
   )

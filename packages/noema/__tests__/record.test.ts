@@ -1,4 +1,4 @@
-import { dateFromISOString, literal, record, string } from "../src/index.js"
+import { fromJson, literal, record, string } from "../src/index.js"
 import { expectParseFailure, expectParseSuccess } from "./helpers.js"
 
 test("should parse an simple records", () => {
@@ -9,9 +9,9 @@ test("should parse an simple records", () => {
 
 test("should parse complex records", () => {
   const now = new Date()
-  expectParseSuccess(record(string, dateFromISOString), {})
+  expectParseSuccess(record(string, fromJson.date), {})
   expectParseSuccess(
-    record(string, dateFromISOString),
+    record(string, fromJson.date),
     { a: now.toISOString() },
     { a: now }
   )

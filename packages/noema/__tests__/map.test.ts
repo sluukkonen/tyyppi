@@ -1,4 +1,4 @@
-import { dateFromISOString, map, number, string } from "../src/index.js"
+import { fromJson, map, number, string } from "../src/index.js"
 import { expectParseFailure, expectParseSuccess } from "./helpers.js"
 
 test("should parse a map with valid key and value types", () => {
@@ -22,7 +22,7 @@ test("should reject a map with the wrong value type", () => {
 test("should work if the key codec not simple", () => {
   const now = new Date()
   expectParseSuccess(
-    map(dateFromISOString, number),
+    map(fromJson.date, number),
     new Map([[now.toISOString(), now.valueOf()]]),
     new Map([[now, now.valueOf()]])
   )
@@ -31,7 +31,7 @@ test("should work if the key codec not simple", () => {
 test("should work if the value codec not simple", () => {
   const now = new Date()
   expectParseSuccess(
-    map(number, dateFromISOString),
+    map(number, fromJson.date),
     new Map([[now.valueOf(), now.toISOString()]]),
     new Map([[now.valueOf(), now]])
   )

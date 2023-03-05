@@ -1,9 +1,4 @@
-import {
-  dateFromISOString,
-  intersection,
-  number,
-  object,
-} from "../src/index.js"
+import { fromJson, intersection, number, object } from "../src/index.js"
 import { expectParseFailure, expectParseSuccess } from "./helpers.js"
 
 const ab = intersection(object({ a: number }), object({ b: number }))
@@ -22,7 +17,7 @@ test("should collect errors from all codecs", () => {
 })
 
 test("should work with complex codecs", () => {
-  const complex = intersection(ab, object({ c: dateFromISOString }))
+  const complex = intersection(ab, object({ c: fromJson.date }))
   const now = new Date()
 
   expectParseSuccess(

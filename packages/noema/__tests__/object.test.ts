@@ -1,4 +1,4 @@
-import { dateFromISOString, number, object, string } from "../src/index.js"
+import { fromJson, number, object, string } from "../src/index.js"
 import { expectParseFailure, expectParseSuccess } from "./helpers.js"
 
 test("should parse an empty object", () => {
@@ -16,7 +16,7 @@ test("should parse a valid object", () => {
 test("should parse complex object", () => {
   const now = new Date()
   expectParseSuccess(
-    object({ date: dateFromISOString }),
+    object({ date: fromJson.date }),
     { date: now.toISOString() },
     { date: now }
   )

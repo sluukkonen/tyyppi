@@ -1,4 +1,4 @@
-import { dateFromISOString, number, string, tuple } from "../src/index.js"
+import { fromJson, number, string, tuple } from "../src/index.js"
 import { expectParseFailure, expectParseSuccess } from "./helpers.js"
 
 test("should parse a simple tuples", () => {
@@ -9,7 +9,7 @@ test("should parse a simple tuples", () => {
 
 test("should parse complex tuples", () => {
   const now = new Date()
-  expectParseSuccess(tuple([dateFromISOString]), [now.toISOString()], [now])
+  expectParseSuccess(tuple([fromJson.date]), [now.toISOString()], [now])
 })
 
 test("should reject arrays that have incorrect length", () => {

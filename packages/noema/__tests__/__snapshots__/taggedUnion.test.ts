@@ -1,9 +1,4 @@
-import {
-  dateFromISOString,
-  literal,
-  object,
-  taggedUnion,
-} from "../../src/index.js"
+import { fromJson, literal, object, taggedUnion } from "../../src/index.js"
 import { expectParseFailure, expectParseSuccess } from "../helpers.js"
 
 const Plane = object({ type: literal("plane") })
@@ -30,7 +25,7 @@ test("should fail to objects where the tag does not match", () => {
 test("should work with complex codecs", () => {
   const complex = taggedUnion("type", [
     "complex",
-    object({ type: literal("complex"), date: dateFromISOString }),
+    object({ type: literal("complex"), date: fromJson.date }),
   ])
   const now = new Date()
 
