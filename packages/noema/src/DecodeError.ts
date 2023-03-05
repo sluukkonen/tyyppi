@@ -112,6 +112,17 @@ export const invalidLiteral = <T extends Literal>(
   expected,
 })
 
+export interface InvalidPattern extends DecodeError {
+  readonly code: "invalid_pattern"
+  readonly pattern: string
+}
+
+export const invalidPattern = (regexp: RegExp): InvalidPattern => ({
+  code: "invalid_pattern",
+  pattern: regexp.toString(),
+  path: [],
+})
+
 export interface InvalidTaggedUnion<V extends Literal> extends DecodeError {
   readonly code: "invalid_tagged_union"
   readonly options: readonly V[]

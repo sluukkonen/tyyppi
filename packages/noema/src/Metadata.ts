@@ -33,6 +33,12 @@ export interface DateFromISOStringMetadata extends Metadata {
   readonly simple: false
 }
 
+export interface PatternMetadata<C extends AnyCodec> extends Metadata {
+  readonly tag: "pattern"
+  readonly simple: IsSimple<C>
+  readonly codec: C
+}
+
 export interface TaggedUnionMetadata<
   K extends string,
   V extends Literal,

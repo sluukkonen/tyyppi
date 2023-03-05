@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should reject non-strings 1`] = `
+[
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "path": [],
+    "received": "null",
+  },
+]
+`;
+
+exports[`should reject strings not matching the pattern 1`] = `
+[
+  {
+    "code": "invalid_pattern",
+    "path": [],
+    "pattern": "/^\\s*$/",
+  },
+]
+`;
