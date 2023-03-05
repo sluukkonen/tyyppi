@@ -159,6 +159,15 @@ export const invalidUnion = <E extends DecodeError>(
   path: [],
 })
 
+export interface InvalidUuid extends DecodeError {
+  readonly code: "invalid_uuid"
+}
+
+export const invalidUuid = (): InvalidUuid => ({
+  code: "invalid_uuid",
+  path: [],
+})
+
 export interface IsInfinite extends DecodeError {
   readonly code: "is_infinite"
 }
