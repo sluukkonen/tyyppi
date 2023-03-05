@@ -15,6 +15,7 @@ export interface PatternCodec<C extends Codec<any, string>>
   readonly metadata: {
     readonly tag: "pattern"
     readonly simple: IsSimple<C>
+    readonly regexp: RegExp
     readonly codec: C
   }
 }
@@ -36,6 +37,7 @@ export const pattern = <C extends Codec<any, string>>(
     {
       tag: "pattern",
       simple: codec.metadata.simple,
+      regexp,
       codec,
     }
   )
