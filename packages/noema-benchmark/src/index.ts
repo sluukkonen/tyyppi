@@ -41,7 +41,7 @@ function runBenchmark<T>(benchmark: Benchmark<T>) {
     ["noema", noema.unsafeDecode],
   ]
   if (zod) benchmarks.push(["zod", zod.parse])
-  if (ioTs) benchmarks.push(["zod", ioTsUnsafeParse(ioTs)])
+  if (ioTs) benchmarks.push(["io-ts", ioTsUnsafeParse(ioTs)])
 
   for (const [name, fn] of benchmarks) {
     if (noema.metadata.simple) {
