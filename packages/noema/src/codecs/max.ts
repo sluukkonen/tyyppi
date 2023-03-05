@@ -28,10 +28,10 @@ export const max = <C extends Codec<any, Ordered>>(
   createCodec(
     (val): Result<TypeOf<C>, ErrorOf<C> | TooLarge<TypeOf<C>>> => {
       const result = codec.decode(val) as ResultOf<C>
-      return !result.ok
-        ? result
-        : result.value > max
-        ? failure(tooLarge(max))
+      return result.ok
+        ? result.value > max
+          ? failure(tooLarge(max))
+          : result
         : result
     },
     codec.encode,

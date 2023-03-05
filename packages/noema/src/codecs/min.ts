@@ -28,10 +28,10 @@ export const min = <C extends Codec<any, Ordered>>(
   createCodec(
     (val): Result<TypeOf<C>, ErrorOf<C> | TooSmall<TypeOf<C>>> => {
       const result = codec.decode(val) as ResultOf<C>
-      return !result.ok
-        ? result
-        : result.value < min
-        ? failure(tooSmall(min))
+      return result.ok
+        ? result.value < min
+          ? failure(tooSmall(min))
+          : result
         : result
     },
     codec.encode,

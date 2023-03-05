@@ -28,11 +28,11 @@ export function refinement<C extends AnyCodec, E extends DecodeError>(
   return createCodec(
     (val): Result<TypeOf<C>, ErrorOf<C> | E> => {
       const result = codec.decode(val) as ResultOf<C>
-      return !result.ok
-        ? result
-        : predicate(result.value)
-        ? result
-        : failure(makeError(result.value))
+      return result.ok
+        ? predicate(result.value)
+          ? result
+          : failure(makeError(result.value))
+        : result
     },
     codec.encode,
     { tag: "refinement", simple: codec.metadata.simple, codec }

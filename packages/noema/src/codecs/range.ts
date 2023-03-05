@@ -39,12 +39,12 @@ export const range = <C extends Codec<any, Ordered>>(
       ErrorOf<C> | TooSmall<TypeOf<C>> | TooLarge<TypeOf<C>>
     > => {
       const result = codec.decode(val) as ResultOf<C>
-      return !result.ok
-        ? result
-        : result.value < min
-        ? failure(tooSmall(min))
-        : result.value > max
-        ? failure(tooLarge(max))
+      return result.ok
+        ? result.value < min
+          ? failure(tooSmall(min))
+          : result.value > max
+          ? failure(tooLarge(max))
+          : result
         : result
     },
     codec.encode,
