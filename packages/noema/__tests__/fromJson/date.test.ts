@@ -1,5 +1,5 @@
-import { fromJson } from "../src/index.js"
-import { expectParseFailure, expectParseSuccess } from "./helpers.js"
+import { fromJson } from "../../src/index.js"
+import { expectParseFailure, expectParseSuccess } from "../helpers.js"
 
 test("should parse valid ISO dates", () => {
   const now = new Date()
