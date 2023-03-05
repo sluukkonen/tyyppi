@@ -5,12 +5,14 @@ import * as t from "io-ts"
 import * as n from "noema"
 import * as z from "zod"
 import array from "./array.js"
+import email from "./email.js"
 import integer from "./integer.js"
 import fromJsonMap from "./fromJson.map.js"
 import object from "./object.js"
 import record from "./record.js"
 import string from "./string.js"
 import undefined from "./undefined.js"
+import uuid from "./uuid.js"
 
 export interface Benchmark<I, T = I> {
   name: string
@@ -57,12 +59,14 @@ function runBenchmark<T>(benchmark: Benchmark<T>) {
 
 const suites = [
   ["array", array],
+  ["email", email],
   ["integer", integer],
   ["fromJson.map", fromJsonMap],
   ["object", object],
   ["record", record],
   ["string", string],
   ["undefined", undefined],
+  ["uuid", uuid],
 ] as [string, Benchmark<unknown>][]
 
 for (const [name, suite] of suites) {
