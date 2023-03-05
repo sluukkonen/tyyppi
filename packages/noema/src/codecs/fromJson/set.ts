@@ -32,7 +32,7 @@ export const set = <C extends AnyCodec>(codec: C): SetCodec<C> => {
         const result = codec.decode(val[i]) as ResultOf<C>
         if (!result.ok) {
           ok = false
-          pushErrors(errors, result.errors, i)
+          pushErrors(errors, result.errors, [i])
         } else if (ok) {
           set.add(result.value)
         }

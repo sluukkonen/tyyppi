@@ -76,7 +76,7 @@ export const object = <T extends Record<string, AnyCodec>>(
         const result = codec.decode(property) as ResultOf<T[keyof T]>
         if (!result.ok) {
           ok = false
-          pushErrors(errors, result.errors, key)
+          pushErrors(errors, result.errors, [key])
         } else if (ok && result.value !== undefined) {
           object[key] = result.value
         }

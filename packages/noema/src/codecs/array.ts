@@ -37,7 +37,7 @@ export const array = <C extends AnyCodec>(codec: C): ArrayCodec<C> => {
         const result = codec.decode(element) as ResultOf<C>
         if (!result.ok) {
           ok = false
-          pushErrors(errors, result.errors, i)
+          pushErrors(errors, result.errors, [i])
         } else if (!simple && ok) {
           array.push(result.value)
         }

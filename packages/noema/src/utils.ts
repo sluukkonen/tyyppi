@@ -28,13 +28,20 @@ export const identity = <T>(value: T) => value
 export const pushErrors = <T extends DecodeError>(
   errors: T[],
   newErrors: readonly T[],
-  key: string | number
+  path: (string | number)[]
 ) => {
-  for (const error of newErrors) {
-    error.path.unshift(key)
-    errors.push(error)
-  }
+  for (const error of newErrors) pushError(errors, error, path)
+
   return errors
+}
+
+export const pushError = <T extends DecodeError>(
+  errors: T[],
+  newError: T,
+  path: (string | number)[]
+) => {
+  newError.path.unshift(...path)
+  errors.push(newError)
 }
 
 export const getTag = (value: object): string =>

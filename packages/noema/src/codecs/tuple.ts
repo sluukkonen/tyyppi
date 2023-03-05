@@ -76,7 +76,7 @@ export const tuple = <C extends readonly AnyCodec[] | []>(
         const result = codec.decode(value)
         if (!result.ok) {
           ok = false
-          pushErrors(errors, result.errors, i)
+          pushErrors(errors, result.errors, [i])
         } else if (!simple && ok) {
           array.push(result.value)
         }

@@ -48,14 +48,14 @@ export const record = <K extends AnySimpleCodec, V extends AnyCodec>(
           const keyResult = keys.decode(key) as ResultOf<K>
           if (!keyResult.ok) {
             ok = false
-            pushErrors(errors, keyResult.errors, key)
+            pushErrors(errors, keyResult.errors, [key])
             continue
           }
 
           const result = values.decode(val[key]) as ResultOf<V>
           if (!result.ok) {
             ok = false
-            pushErrors(errors, result.errors, key)
+            pushErrors(errors, result.errors, [key])
           } else if (!simple && ok && result.value !== undefined) {
             object[key] = result.value
           }
