@@ -99,6 +99,15 @@ export const invalidISOString = (): InvalidISOString => ({
   path: [],
 })
 
+export interface InvalidIntegerString extends DecodeError {
+  readonly code: "invalid_integer_string"
+}
+
+export const invalidIntegerString = (): InvalidIntegerString => ({
+  code: "invalid_integer_string",
+  path: [],
+})
+
 export interface InvalidLiteral<T extends Literal> extends DecodeError {
   readonly code: "invalid_literal"
   readonly expected: T

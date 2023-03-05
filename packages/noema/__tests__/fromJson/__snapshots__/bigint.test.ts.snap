@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should not parse invalid strings 1`] = `
+[
+  {
+    "code": "invalid_integer_string",
+    "path": [],
+  },
+]
+`;
+
+exports[`should not parse invalid strings 2`] = `
+[
+  {
+    "code": "invalid_integer_string",
+    "path": [],
+  },
+]
+`;
+
+exports[`should not parse invalid strings 3`] = `
+[
+  {
+    "code": "invalid_integer_string",
+    "path": [],
+  },
+]
+`;
+
+exports[`should not parse non-strings 1`] = `
+[
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "path": [],
+    "received": "null",
+  },
+]
+`;
+
+exports[`should only accept integers 1`] = `
+[
+  {
+    "code": "invalid_integer_string",
+    "path": [],
+  },
+]
+`;
