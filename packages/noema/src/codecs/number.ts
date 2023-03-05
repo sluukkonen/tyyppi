@@ -7,15 +7,16 @@ import {
   IsNaN,
   isNaNError,
 } from "../DecodeError.js"
-import { NumberMetadata } from "../Metadata.js"
 import { failure, success } from "../Result.js"
 import { isFinite, isNaN, isNumber } from "../utils.js"
 
-export type NumberCodec = SimpleCodec<
-  number,
-  InvalidNumber | IsNaN | IsInfinite,
-  NumberMetadata
->
+export interface NumberCodec
+  extends SimpleCodec<number, InvalidNumber | IsNaN | IsInfinite> {
+  readonly metadata: {
+    readonly tag: "number"
+    readonly simple: true
+  }
+}
 
 export const number: NumberCodec = createSimpleCodec(
   (val) =>

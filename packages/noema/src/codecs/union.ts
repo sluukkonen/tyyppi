@@ -7,14 +7,16 @@ import {
   TypeOf,
 } from "../Codec.js"
 import { invalidUnion, InvalidUnion } from "../DecodeError.js"
-import { UnionMetadata } from "../Metadata.js"
 import { failure } from "../Result.js"
 
-export type UnionCodec<C extends readonly AnySimpleCodec[] | []> = SimpleCodec<
-  TypeOf<C[number]>,
-  InvalidUnion<ErrorOf<C[number]>>,
-  UnionMetadata<C>
->
+export interface UnionCodec<C extends readonly AnySimpleCodec[] | []>
+  extends SimpleCodec<TypeOf<C[number]>, InvalidUnion<ErrorOf<C[number]>>> {
+  readonly metadata: {
+    readonly tag: "union"
+    readonly simple: true
+    readonly members: C
+  }
+}
 
 export function union<C extends readonly AnySimpleCodec[] | []>(
   ...members: C

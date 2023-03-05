@@ -4,18 +4,20 @@ import {
   createCodec,
   ErrorOf,
   InputOf,
+  IsSimple,
   ResultOf,
   TypeOf,
 } from "../Codec.js"
-import { NullableMetadata } from "../Metadata.js"
 import { success } from "../Result.js"
 
-export type NullableCodec<C extends AnyCodec> = Codec<
-  InputOf<C> | null,
-  TypeOf<C> | null,
-  ErrorOf<C>,
-  NullableMetadata<C>
->
+export interface NullableCodec<C extends AnyCodec>
+  extends Codec<InputOf<C> | null, TypeOf<C> | null, ErrorOf<C>> {
+  readonly metadata: {
+    readonly tag: "nullable"
+    readonly simple: IsSimple<C>
+    readonly codec: C
+  }
+}
 
 export const nullable = <C extends AnyCodec>(codec: C): NullableCodec<C> =>
   createCodec(

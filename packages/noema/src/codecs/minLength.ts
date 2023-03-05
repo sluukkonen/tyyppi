@@ -3,21 +3,24 @@ import {
   createCodec,
   ErrorOf,
   InputOf,
+  IsSimple,
   ResultOf,
   TypeOf,
 } from "../Codec.js"
 import { tooShort, TooShort } from "../DecodeError.js"
-import { MinLengthMetadata } from "../Metadata.js"
 import { failure, Result } from "../Result.js"
 import { HasLength } from "../types.js"
 import { hasLength } from "../utils.js"
 
-export type MinLengthCodec<C extends Codec<HasLength, any>> = Codec<
-  InputOf<C>,
-  TypeOf<C>,
-  ErrorOf<C> | TooShort,
-  MinLengthMetadata<C>
->
+export interface MinLengthCodec<C extends Codec<HasLength, any>>
+  extends Codec<InputOf<C>, TypeOf<C>, ErrorOf<C> | TooShort> {
+  readonly metadata: {
+    readonly tag: "minLength"
+    readonly simple: IsSimple<C>
+    readonly minLength: number
+    readonly codec: C
+  }
+}
 
 export const minLength = <C extends Codec<HasLength, any>>(
   codec: C,

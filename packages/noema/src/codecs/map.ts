@@ -4,21 +4,28 @@ import {
   createCodec,
   ErrorOf,
   InputOf,
+  IsSimple,
   ResultOf,
   TypeOf,
 } from "../Codec.js"
 import { invalidMap, InvalidMap } from "../DecodeError.js"
-import { MapMetadata } from "../Metadata.js"
 import { failure, failures, Result, success } from "../Result.js"
 import { identity, isMap } from "../utils.js"
 import { NonEmptyArray } from "./nonEmptyArray.js"
 
-export type MapCodec<K extends AnyCodec, V extends AnyCodec> = Codec<
-  Map<InputOf<K>, InputOf<V>>,
-  Map<TypeOf<K>, TypeOf<V>>,
-  ErrorOf<K | V> | InvalidMap,
-  MapMetadata<K, V>
->
+export interface MapCodec<K extends AnyCodec, V extends AnyCodec>
+  extends Codec<
+    Map<InputOf<K>, InputOf<V>>,
+    Map<TypeOf<K>, TypeOf<V>>,
+    ErrorOf<K | V> | InvalidMap
+  > {
+  readonly metadata: {
+    readonly tag: "map"
+    readonly simple: IsSimple<V | K>
+    readonly keys: K
+    readonly values: V
+  }
+}
 
 export const map = <K extends AnyCodec, V extends AnyCodec>(
   keys: K,

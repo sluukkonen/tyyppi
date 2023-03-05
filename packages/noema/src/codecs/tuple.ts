@@ -4,6 +4,7 @@ import {
   createCodec,
   ErrorOf,
   InputOf,
+  IsSimple,
   TypeOf,
 } from "../Codec.js"
 import {
@@ -14,7 +15,6 @@ import {
   tooShort,
   TooShort,
 } from "../DecodeError.js"
-import { TupleMetadata } from "../Metadata.js"
 import { failure, failures, Result, success } from "../Result.js"
 import { identity, isArray, isEveryCodecSimple, pushErrors } from "../utils.js"
 import { NonEmptyArray } from "./nonEmptyArray.js"
@@ -33,12 +33,18 @@ type TypesOf<C extends readonly unknown[]> = C extends readonly [
   ? [TypeOf<First>, ...TypesOf<Rest>]
   : []
 
-export type TupleCodec<C extends readonly AnyCodec[] | []> = Codec<
-  InputsOf<C>,
-  TypesOf<C>,
-  ErrorOf<C[number]> | InvalidArray | TooShort | TooLong,
-  TupleMetadata<C>
->
+export interface TupleCodec<C extends readonly AnyCodec[] | []>
+  extends Codec<
+    InputsOf<C>,
+    TypesOf<C>,
+    ErrorOf<C[number]> | InvalidArray | TooShort | TooLong
+  > {
+  readonly metadata: {
+    readonly tag: "tuple"
+    readonly simple: IsSimple<C[number]>
+    readonly members: C
+  }
+}
 
 export const tuple = <C extends readonly AnyCodec[] | []>(
   members: C

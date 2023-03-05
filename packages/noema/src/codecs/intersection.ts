@@ -4,11 +4,11 @@ import {
   createCodec,
   ErrorOf,
   InputOf,
+  IsSimple,
   ResultOf,
   TypeOf,
 } from "../Codec.js"
 import { InvalidObject, invalidObject } from "../DecodeError.js"
-import { IntersectionMetadata } from "../Metadata.js"
 import { failure, failures, Result, success } from "../Result.js"
 import { identity, isEveryCodecSimple, isObject } from "../utils.js"
 import { NonEmptyArray } from "./nonEmptyArray.js"
@@ -27,12 +27,18 @@ type IntersectTypesOf<T extends readonly unknown[]> = T extends readonly [
   ? TypeOf<C> & IntersectTypesOf<Rest>
   : unknown
 
-export type IntersectionCodec<C extends readonly AnyCodec[]> = Codec<
-  IntersectInputsOf<C>,
-  IntersectTypesOf<C>,
-  ErrorOf<C[number]> | InvalidObject,
-  IntersectionMetadata<C>
->
+export interface IntersectionCodec<C extends readonly AnyCodec[]>
+  extends Codec<
+    IntersectInputsOf<C>,
+    IntersectTypesOf<C>,
+    ErrorOf<C[number]> | InvalidObject
+  > {
+  readonly metadata: {
+    readonly tag: "intersection"
+    readonly simple: IsSimple<C[number]>
+    readonly codecs: C
+  }
+}
 
 export const intersection = <C extends readonly AnyCodec[]>(
   ...codecs: C

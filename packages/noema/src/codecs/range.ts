@@ -3,20 +3,28 @@ import {
   createCodec,
   ErrorOf,
   InputOf,
+  IsSimple,
   ResultOf,
   TypeOf,
 } from "../Codec.js"
 import { tooLarge, TooLarge, tooSmall, TooSmall } from "../DecodeError.js"
-import { RangeMetadata } from "../Metadata.js"
 import { failure, Result } from "../Result.js"
 import { Ordered } from "../types.js"
 
-export type RangeCodec<C extends Codec<any, Ordered>> = Codec<
-  InputOf<C>,
-  TypeOf<C>,
-  ErrorOf<C> | TooSmall<TypeOf<C>> | TooLarge<TypeOf<C>>,
-  RangeMetadata<C>
->
+export interface RangeCodec<C extends Codec<any, Ordered>>
+  extends Codec<
+    InputOf<C>,
+    TypeOf<C>,
+    ErrorOf<C> | TooSmall<TypeOf<C>> | TooLarge<TypeOf<C>>
+  > {
+  readonly metadata: {
+    readonly tag: "range"
+    readonly simple: IsSimple<C>
+    readonly min: TypeOf<C>
+    readonly max: TypeOf<C>
+    readonly codec: C
+  }
+}
 
 export const range = <C extends Codec<any, Ordered>>(
   codec: C,

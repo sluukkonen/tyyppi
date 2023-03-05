@@ -9,15 +9,19 @@ import {
   IsNaN,
   isNaNError,
 } from "../DecodeError.js"
-import { IntegerMetadata } from "../Metadata.js"
 import { failure, success } from "../Result.js"
 import { isFinite, isInteger, isNaN, isNumber } from "../utils.js"
 
-export type IntegerCodec = SimpleCodec<
-  number,
-  InvalidNumber | IsNaN | IsInfinite | InvalidInteger,
-  IntegerMetadata
->
+export interface IntegerCodec
+  extends SimpleCodec<
+    number,
+    InvalidNumber | IsNaN | IsInfinite | InvalidInteger
+  > {
+  readonly metadata: {
+    readonly tag: "integer"
+    readonly simple: true
+  }
+}
 
 export const integer: IntegerCodec = createSimpleCodec(
   (val) =>

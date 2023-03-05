@@ -4,19 +4,21 @@ import {
   createCodec,
   ErrorOf,
   InputOf,
+  IsSimple,
   ResultOf,
   TypeOf,
 } from "../Codec.js"
 import { DecodeError } from "../DecodeError.js"
-import { RefinementMetadata } from "../Metadata.js"
 import { failure, Result } from "../Result.js"
 
-export type RefinementCodec<C extends AnyCodec, E extends DecodeError> = Codec<
-  InputOf<C>,
-  TypeOf<C>,
-  ErrorOf<C> | E,
-  RefinementMetadata<C>
->
+export interface RefinementCodec<C extends AnyCodec, E extends DecodeError>
+  extends Codec<InputOf<C>, TypeOf<C>, ErrorOf<C> | E> {
+  readonly metadata: {
+    readonly tag: "refinement"
+    readonly simple: IsSimple<C>
+    readonly codec: C
+  }
+}
 
 export function refinement<C extends AnyCodec, E extends DecodeError>(
   codec: C,

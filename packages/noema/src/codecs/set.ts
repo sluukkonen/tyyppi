@@ -4,21 +4,23 @@ import {
   createCodec,
   ErrorOf,
   InputOf,
+  IsSimple,
   ResultOf,
   TypeOf,
 } from "../Codec.js"
 import { invalidSet, InvalidSet } from "../DecodeError.js"
-import { SetMetadata } from "../Metadata.js"
 import { failure, failures, Result, success } from "../Result.js"
 import { identity, isSet } from "../utils.js"
 import { NonEmptyArray } from "./nonEmptyArray.js"
 
-export type SetCodec<C extends AnyCodec> = Codec<
-  Set<InputOf<C>>,
-  Set<TypeOf<C>>,
-  ErrorOf<C> | InvalidSet,
-  SetMetadata<C>
->
+export interface SetCodec<C extends AnyCodec>
+  extends Codec<Set<InputOf<C>>, Set<TypeOf<C>>, ErrorOf<C> | InvalidSet> {
+  readonly metadata: {
+    readonly tag: "set"
+    readonly simple: IsSimple<C>
+    readonly codec: C
+  }
+}
 
 export const set = <C extends AnyCodec>(codec: C): SetCodec<C> => {
   const simple = codec.metadata.simple

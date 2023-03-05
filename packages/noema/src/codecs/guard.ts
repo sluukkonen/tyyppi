@@ -1,13 +1,25 @@
-import { AnyCodec, Codec, ErrorOf, InputOf, TypeOf } from "../Codec.js"
+import {
+  AnyCodec,
+  Codec,
+  ErrorOf,
+  InputOf,
+  IsSimple,
+  TypeOf,
+} from "../Codec.js"
 import { DecodeError } from "../DecodeError.js"
-import { RefinementMetadata } from "../Metadata.js"
 import { refinement } from "./refinement.js"
 
-export type GuardCodec<
+export interface GuardCodec<
   C extends AnyCodec,
   T extends TypeOf<C>,
   E extends DecodeError
-> = Codec<InputOf<C>, T, ErrorOf<C> | E, RefinementMetadata<C>>
+> extends Codec<InputOf<C>, T, ErrorOf<C> | E> {
+  readonly metadata: {
+    readonly tag: "refinement"
+    readonly simple: IsSimple<C>
+    readonly codec: C
+  }
+}
 
 export const guard: <
   C extends AnyCodec,

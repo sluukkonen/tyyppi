@@ -3,21 +3,24 @@ import {
   createCodec,
   ErrorOf,
   InputOf,
+  IsSimple,
   ResultOf,
   TypeOf,
 } from "../Codec.js"
 import { tooLong, TooLong } from "../DecodeError.js"
-import { MaxLengthMetadata } from "../Metadata.js"
 import { failure, Result } from "../Result.js"
 import { HasLength } from "../types.js"
 import { hasLength } from "../utils.js"
 
-export type MaxLengthCodec<C extends Codec<HasLength, any>> = Codec<
-  InputOf<C>,
-  TypeOf<C>,
-  ErrorOf<C> | TooLong,
-  MaxLengthMetadata<C>
->
+export interface MaxLengthCodec<C extends Codec<HasLength, any>>
+  extends Codec<InputOf<C>, TypeOf<C>, ErrorOf<C> | TooLong> {
+  readonly metadata: {
+    readonly tag: "maxLength"
+    readonly simple: IsSimple<C>
+    readonly maxLength: number
+    readonly codec: C
+  }
+}
 
 export const maxLength = <C extends Codec<HasLength, any>>(
   codec: C,

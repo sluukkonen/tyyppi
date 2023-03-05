@@ -13,15 +13,10 @@ export interface SimpleMetadata extends Metadata {
   readonly simple: true
 }
 
-export interface Codec<
-  I,
-  T = I,
-  E extends DecodeError = DecodeError,
-  M extends Metadata = Metadata
-> {
+export interface Codec<I, T = I, E extends DecodeError = DecodeError> {
   decode(value: unknown): Result<T, E>
   encode(value: T): I
-  readonly metadata: M
+  readonly metadata: Metadata
   unsafeDecode(value: unknown): T
 }
 
@@ -39,11 +34,10 @@ export type ErrorOf<C extends AnyCodec> = C extends Codec<any, any, infer E>
 export type MetadataOf<C extends AnyCodec> = C["metadata"]
 export type ResultOf<C extends AnyCodec> = Result<TypeOf<C>, ErrorOf<C>>
 
-export type SimpleCodec<
-  T,
-  E extends DecodeError = DecodeError,
-  M extends SimpleMetadata = SimpleMetadata
-> = Codec<T, T, E, M>
+export interface SimpleCodec<T, E extends DecodeError = DecodeError>
+  extends Codec<T, T, E> {
+  readonly metadata: SimpleMetadata
+}
 export type AnySimpleCodec = SimpleCodec<any>
 
 export function createCodec<I, T, E extends DecodeError>(
@@ -54,7 +48,7 @@ export function createCodec<I, T, E extends DecodeError, M extends Metadata>(
   decode: (value: unknown) => Result<T, E>,
   encode: (value: T) => I,
   metadata: M
-): Codec<I, T, E, M>
+): Codec<I, T, E> & { readonly metadata: M }
 export function createCodec<I, T, E extends DecodeError>(
   decode: (value: unknown) => Result<T, E>,
   encode: (value: T) => I,
@@ -80,7 +74,10 @@ export function createSimpleCodec<
   T,
   E extends DecodeError,
   M extends SimpleMetadata = { simple: true }
->(decode: (value: unknown) => Result<T, E>, metadata: M): SimpleCodec<T, E, M>
+>(
+  decode: (value: unknown) => Result<T, E>,
+  metadata: M
+): SimpleCodec<T, E> & { readonly metadata: M }
 export function createSimpleCodec<T, E extends DecodeError>(
   decode: (value: unknown) => Result<T, E>,
   metadata: SimpleMetadata = { simple: true }

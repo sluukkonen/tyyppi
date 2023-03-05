@@ -7,16 +7,17 @@ import {
   ResultOf,
   TypeOf,
 } from "../Codec.js"
-import { TransformMetadata } from "../Metadata.js"
 import { Result, success } from "../Result.js"
 import { identity } from "../utils.js"
 
-export type TransformCodec<C extends AnyCodec, T> = Codec<
-  InputOf<C>,
-  T,
-  ErrorOf<C>,
-  TransformMetadata<C>
->
+export interface TransformCodec<C extends AnyCodec, T>
+  extends Codec<InputOf<C>, T, ErrorOf<C>> {
+  readonly metadata: {
+    readonly tag: "transform"
+    readonly simple: boolean
+    readonly codec: C
+  }
+}
 
 export const transform = <C extends AnyCodec, T>(
   codec: C,

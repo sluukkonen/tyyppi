@@ -1,9 +1,13 @@
 import { createSimpleCodec, SimpleCodec } from "../Codec.js"
 import { invalidNull, InvalidNull } from "../DecodeError.js"
-import { NullMetadata } from "../Metadata.js"
 import { failure, success } from "../Result.js"
 
-export type NullCodec = SimpleCodec<null, InvalidNull, NullMetadata>
+export interface NullCodec extends SimpleCodec<null, InvalidNull> {
+  readonly metadata: {
+    readonly tag: "null"
+    readonly simple: true
+  }
+}
 
 const nullCodec: NullCodec = createSimpleCodec(
   (val) => (val === null ? success(null) : failure(invalidNull(val))),

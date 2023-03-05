@@ -1,14 +1,16 @@
 import { createSimpleCodec, SimpleCodec } from "../Codec.js"
 import { invalidLiteral, InvalidLiteral } from "../DecodeError.js"
-import { LiteralMetadata } from "../Metadata.js"
 import { failure, success } from "../Result.js"
 import { Literal } from "../types.js"
 
-export type LiteralCodec<T extends Literal> = SimpleCodec<
-  T,
-  InvalidLiteral<T>,
-  LiteralMetadata<T>
->
+export interface LiteralCodec<T extends Literal>
+  extends SimpleCodec<T, InvalidLiteral<T>> {
+  readonly metadata: {
+    readonly tag: "literal"
+    readonly simple: true
+    readonly value: T
+  }
+}
 
 export const literal = <T extends Literal>(value: T): LiteralCodec<T> =>
   createSimpleCodec(

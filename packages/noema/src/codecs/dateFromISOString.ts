@@ -5,16 +5,16 @@ import {
   invalidString,
   InvalidString,
 } from "../DecodeError.js"
-import { DateFromISOStringMetadata } from "../Metadata.js"
 import { failure, Result, success } from "../Result.js"
 import { isNaN, isString } from "../utils.js"
 
-export type DateFromISOStringCodec = Codec<
-  string,
-  Date,
-  InvalidString | InvalidISOString,
-  DateFromISOStringMetadata
->
+export interface DateFromISOStringCodec
+  extends Codec<string, Date, InvalidString | InvalidISOString> {
+  readonly metadata: {
+    readonly tag: "dateFromISOString"
+    readonly simple: false
+  }
+}
 
 export const dateFromISOString: DateFromISOStringCodec = createCodec(
   (val): Result<Date, InvalidString | InvalidISOString> => {
