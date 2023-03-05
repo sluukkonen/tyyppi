@@ -68,6 +68,15 @@ export type InvalidUndefined = InvalidType<"undefined">
 export const invalidUndefined = (value: unknown): InvalidUndefined =>
   invalidType("undefined", value)
 
+export interface InvalidEmail extends DecodeError {
+  readonly code: "invalid_email"
+}
+
+export const invalidEmail = (): InvalidEmail => ({
+  code: "invalid_email",
+  path: [],
+})
+
 export interface InvalidEnum<T extends Literal> extends DecodeError {
   readonly code: "invalid_enum"
   readonly members: readonly T[]
