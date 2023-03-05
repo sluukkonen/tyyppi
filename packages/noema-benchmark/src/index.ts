@@ -6,15 +6,16 @@ import * as n from "noema"
 import * as z from "zod"
 import array from "./array.js"
 import integer from "./integer.js"
+import fromJsonMap from "./fromJson.map.js"
 import object from "./object.js"
 import record from "./record.js"
 import string from "./string.js"
 import undefined from "./undefined.js"
 
-export interface Benchmark<T> {
+export interface Benchmark<I, T = I> {
   name: string
-  data: T
-  codecs: [n.Codec<T>, t.Type<T>, z.ZodSchema<T>]
+  data: I
+  codecs: [n.Codec<I, T>, t.Type<T, I>, z.ZodType<T, z.ZodTypeDef, I>]
 }
 
 const ioTsUnsafeParse =
@@ -37,7 +38,9 @@ function runBenchmark<T>(benchmark: Benchmark<T>) {
   ] as const
 
   for (const [name, fn] of benchmarks) {
-    assert.deepStrictEqual(fn(data), data, name)
+    if (noema.metadata.simple) {
+      assert.deepStrictEqual(fn(data), data, name)
+    }
   }
 
   return b.suite(
@@ -51,6 +54,7 @@ function runBenchmark<T>(benchmark: Benchmark<T>) {
 const suites = [
   ["array", array],
   ["integer", integer],
+  ["fromJson.map", fromJsonMap],
   ["object", object],
   ["record", record],
   ["string", string],
