@@ -1,7 +1,6 @@
 import { AnyCodec } from "./Codec.js"
 import { DecodeError } from "./DecodeError.js"
-import { TypeName } from "./TypeName.js"
-import { HasLength } from "./types.js"
+import { HasLength, TypeName } from "./types.js"
 
 export const dateTag = "[object Date]"
 export const errorTag = "[object Error]"

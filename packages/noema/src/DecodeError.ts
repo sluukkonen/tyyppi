@@ -1,5 +1,4 @@
-import { TypeName } from "./TypeName.js"
-import { Literal, Ordered } from "./types.js"
+import { Literal, Ordered, TypeName } from "./types.js"
 import { getType } from "./utils.js"
 
 export interface DecodeError {
