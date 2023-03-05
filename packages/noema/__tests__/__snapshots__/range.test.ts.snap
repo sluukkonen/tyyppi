@@ -5,6 +5,7 @@ exports[`should fail to parse if value is outside the bounds 1`] = `
   {
     "code": "too_large",
     "max": 1,
+    "min": 0,
     "path": [],
   },
 ]
@@ -14,6 +15,7 @@ exports[`should fail to parse if value is outside the bounds 2`] = `
 [
   {
     "code": "too_small",
+    "max": 1,
     "min": 0,
     "path": [],
   },

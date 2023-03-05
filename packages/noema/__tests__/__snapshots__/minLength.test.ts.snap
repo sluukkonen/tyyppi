@@ -38,6 +38,7 @@ exports[`fails to parse if the length is below the minimum length 1`] = `
   {
     "code": "too_short",
     "length": 0,
+    "maxLength": undefined,
     "minLength": 1,
     "path": [],
   },

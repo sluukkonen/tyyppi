@@ -13,6 +13,7 @@ exports[`should not accept negative integers 1`] = `
 [
   {
     "code": "too_small",
+    "max": undefined,
     "min": 0,
     "path": [],
   },
@@ -23,6 +24,7 @@ exports[`should not accept negative integers 2`] = `
 [
   {
     "code": "too_small",
+    "max": undefined,
     "min": 0,
     "path": [],
   },
@@ -33,6 +35,7 @@ exports[`should not accept negative integers 3`] = `
 [
   {
     "code": "too_small",
+    "max": undefined,
     "min": 0,
     "path": [],
   },

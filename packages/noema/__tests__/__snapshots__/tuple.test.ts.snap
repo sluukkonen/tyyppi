@@ -5,6 +5,7 @@ exports[`should reject arrays that have incorrect length 1`] = `
   {
     "code": "too_short",
     "length": 0,
+    "maxLength": 1,
     "minLength": 1,
     "path": [],
   },
@@ -17,6 +18,7 @@ exports[`should reject arrays that have incorrect length 2`] = `
     "code": "too_long",
     "length": 2,
     "maxLength": 1,
+    "minLength": 1,
     "path": [],
   },
 ]

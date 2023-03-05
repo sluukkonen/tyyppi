@@ -53,11 +53,11 @@ export const map = <K extends AnyCodec, V extends AnyCodec>(
           continue
         } else if (tuple.length < 2) {
           ok = false
-          pushError(errors, tooShort(2, tuple.length), [i])
+          pushError(errors, tooShort(tuple.length, 2, 2), [i])
           continue
         } else if (tuple.length > 2) {
           ok = false
-          pushError(errors, tooLong(2, tuple.length), [i])
+          pushError(errors, tooLong(tuple.length, 2, 2), [i])
           continue
         }
 

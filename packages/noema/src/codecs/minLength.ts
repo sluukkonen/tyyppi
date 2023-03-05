@@ -30,7 +30,7 @@ export const minLength = <C extends Codec<HasLength, any>>(
     (val): Result<TypeOf<C>, ErrorOf<C> | TooShort> => {
       if (hasLength(val)) {
         const length = val.length
-        if (length < minLength) return failure(tooShort(minLength, length))
+        if (length < minLength) return failure(tooShort(length, minLength))
       }
       return codec.decode(val) as ResultOf<C>
     },

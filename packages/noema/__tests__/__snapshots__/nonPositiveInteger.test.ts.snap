@@ -32,6 +32,7 @@ exports[`should not accept positive integers 1`] = `
   {
     "code": "too_large",
     "max": 0,
+    "min": undefined,
     "path": [],
   },
 ]
@@ -42,6 +43,7 @@ exports[`should not accept positive integers 2`] = `
   {
     "code": "too_large",
     "max": 0,
+    "min": undefined,
     "path": [],
   },
 ]
@@ -52,6 +54,7 @@ exports[`should not accept positive integers 3`] = `
   {
     "code": "too_large",
     "max": 0,
+    "min": undefined,
     "path": [],
   },
 ]

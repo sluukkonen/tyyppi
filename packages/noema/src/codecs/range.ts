@@ -41,9 +41,9 @@ export const range = <C extends Codec<any, Ordered>>(
       const result = codec.decode(val) as ResultOf<C>
       return result.ok
         ? result.value < min
-          ? failure(tooSmall(min))
+          ? failure(tooSmall(min, max))
           : result.value > max
-          ? failure(tooLarge(max))
+          ? failure(tooLarge(max, min))
           : result
         : result
     },

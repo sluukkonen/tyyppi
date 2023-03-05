@@ -173,48 +173,64 @@ export const isNaNError = (): IsNaN => ({ code: "is_nan", path: [] })
 
 export interface TooLarge<T extends Ordered> extends DecodeError {
   readonly code: "too_large"
+  readonly min?: T
   readonly max: T
 }
 
-export const tooLarge = <T extends Ordered>(max: T): TooLarge<T> => ({
+export const tooLarge = <T extends Ordered>(max: T, min?: T): TooLarge<T> => ({
   code: "too_large",
-  path: [],
+  min,
   max,
+  path: [],
 })
 
 export interface TooLong extends DecodeError {
   readonly code: "too_long"
+  readonly minLength?: number
   readonly maxLength: number
   readonly length: number
 }
 
-export const tooLong = (maxLength: number, length: number): TooLong => ({
+export const tooLong = (
+  length: number,
+  maxLength: number,
+  minLength?: number
+): TooLong => ({
   code: "too_long",
-  path: [],
-  maxLength,
   length,
+  minLength,
+  maxLength,
+  path: [],
 })
 
 export interface TooShort extends DecodeError {
   readonly code: "too_short"
   readonly minLength: number
+  readonly maxLength?: number
   readonly length: number
 }
 
-export const tooShort = (minLength: number, length: number): TooShort => ({
+export const tooShort = (
+  length: number,
+  minLength: number,
+  maxLength?: number
+): TooShort => ({
   code: "too_short",
   path: [],
-  minLength,
   length,
+  minLength,
+  maxLength,
 })
 
 export interface TooSmall<T extends Ordered> extends DecodeError {
   readonly code: "too_small"
   readonly min: T
+  readonly max?: T
 }
 
-export const tooSmall = <T extends Ordered>(min: T): TooSmall<T> => ({
+export const tooSmall = <T extends Ordered>(min: T, max?: T): TooSmall<T> => ({
   code: "too_small",
-  path: [],
   min,
+  max,
+  path: [],
 })

@@ -30,7 +30,7 @@ export const maxLength = <C extends Codec<HasLength, any>>(
     (val): Result<TypeOf<C>, ErrorOf<C> | TooLong> => {
       if (hasLength(val)) {
         const length = val.length
-        if (length > maxLength) return failure(tooLong(maxLength, length))
+        if (length > maxLength) return failure(tooLong(length, maxLength))
       }
       return codec.decode(val) as ResultOf<C>
     },

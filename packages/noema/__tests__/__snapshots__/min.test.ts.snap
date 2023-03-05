@@ -4,6 +4,7 @@ exports[`should fail to parse if value is less than the minimum 1`] = `
 [
   {
     "code": "too_small",
+    "max": undefined,
     "min": 0,
     "path": [],
   },

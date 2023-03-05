@@ -2,7 +2,6 @@
   "compilerOptions": {
     "declaration": true,
     "esModuleInterop": true,
-    "exactOptionalPropertyTypes": true,
     "forceConsistentCasingInFileNames": true,
     "module": "node16",
     "outDir": "dist",

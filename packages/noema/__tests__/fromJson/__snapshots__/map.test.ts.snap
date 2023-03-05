@@ -58,6 +58,7 @@ exports[`should not accept too long tuples 1`] = `
     "code": "too_long",
     "length": 3,
     "maxLength": 2,
+    "minLength": 2,
     "path": [
       0,
     ],
@@ -70,6 +71,7 @@ exports[`should not accept too short tuples 1`] = `
   {
     "code": "too_short",
     "length": 1,
+    "maxLength": 2,
     "minLength": 2,
     "path": [
       0,
