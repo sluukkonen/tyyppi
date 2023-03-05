@@ -72,7 +72,7 @@ const suites = [
 for (const [name, suite] of suites) {
   if (
     process.argv.length === 2 ||
-    process.argv.find((arg) => arg.includes(name))
+    process.argv.find((arg) => name.includes(arg))
   ) {
     await runBenchmark(suite)
   }
