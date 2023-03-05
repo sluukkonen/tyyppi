@@ -50,7 +50,7 @@ export const intersection = <C extends readonly AnyCodec[]>(
 
       let ok = true
       const errors: ErrorOf<C[number]>[] = []
-      const object = {} as IntersectTypesOf<C>
+      const object: any = simple ? val : {}
 
       for (const codec of codecs) {
         const result = codec.decode(val) as ResultOf<C[number]>
@@ -58,7 +58,7 @@ export const intersection = <C extends readonly AnyCodec[]>(
         if (!result.ok) {
           ok = false
           errors.push(...result.errors)
-        } else if (ok) {
+        } else if (!simple && ok) {
           Object.assign(object as any, result.value)
         }
       }

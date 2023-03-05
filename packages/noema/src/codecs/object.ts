@@ -65,19 +65,18 @@ export const object = <T extends Record<string, AnyCodec>>(
 
       let ok = true
       const errors: ErrorOf<T[keyof T]>[] = []
-      const object: any = {}
+      const object: any = simple ? val : { ...val }
 
       for (let i = 0; i < keys.length; i++) {
         const key = keys[i]
         const codec = codecs[i]
+        const value = hasOwnProperty(val, key) ? val[key] : undefined
 
-        const property = hasOwnProperty(val, key) ? val[key] : undefined
-
-        const result = codec.decode(property) as ResultOf<T[keyof T]>
+        const result = codec.decode(value) as ResultOf<T[keyof T]>
         if (!result.ok) {
           ok = false
           pushErrors(errors, result.errors, [key])
-        } else if (ok && result.value !== undefined) {
+        } else if (!simple && ok && result.value !== undefined) {
           object[key] = result.value
         }
       }
@@ -89,13 +88,13 @@ export const object = <T extends Record<string, AnyCodec>>(
     simple
       ? identity
       : (object) => {
-          const result = {} as any
+          const result = { ...object } as any
 
-          for (const key in object) {
-            if (hasOwnProperty(object, key)) {
-              const codec = props[key]
-              if (codec) result[key] = codec.encode(object[key])
-            }
+          for (let i = 0; i < keys.length; i++) {
+            const key = keys[i]
+            const codec = codecs[i]
+            const value = object[key]
+            result[key] = codec.encode(value)
           }
 
           return result

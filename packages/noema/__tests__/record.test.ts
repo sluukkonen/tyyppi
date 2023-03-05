@@ -32,7 +32,7 @@ test("should not parse null", () => {
 
 test("should only consider own properties", () => {
   const obj = Object.assign(Object.create({ a: "1" }), { b: "2", c: "3" })
-  expectParseSuccess(record(string, string), obj, { b: "2", c: "3" })
+  expectParseSuccess(record(string, string), obj)
 })
 
 test("should not parse records with invalid values", () => {

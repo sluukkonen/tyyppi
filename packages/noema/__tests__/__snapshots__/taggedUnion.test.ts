@@ -6,7 +6,7 @@ const Car = object({ type: literal("car") })
 const Vehicle = taggedUnion("type", ["plane", Plane], ["car", Car])
 
 test("should parse valid values", () => {
-  expectParseSuccess(Vehicle, { type: "car" }, { type: "car" })
+  expectParseSuccess(Vehicle, { type: "car" })
   expectParseSuccess(Vehicle, { type: "plane" })
 })
 

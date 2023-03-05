@@ -7,10 +7,24 @@ export const expectParseSuccess = function <C extends AnyCodec>(
 ) {
   const expected = arguments.length === 3 ? result : value
   const decoded = codec.unsafeDecode(value)
-  expect(decoded).toEqual(expected)
+  const simple = codec.metadata.simple
+
+  if (simple) {
+    expect(decoded).toBe(expected)
+  } else {
+    expect(decoded).toEqual(expected)
+  }
 
   const encoded = codec.encode(decoded)
-  expect(codec.encode(codec.unsafeDecode(encoded))).toEqual(encoded)
+  if (simple) expect(encoded).toBe(value)
+
+  const roundTripped = codec.unsafeDecode(encoded)
+
+  if (simple) {
+    expect(roundTripped).toBe(expected)
+  } else {
+    expect(roundTripped).toEqual(expected)
+  }
 }
 
 export const expectParseFailure = <C extends AnyCodec>(
