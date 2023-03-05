@@ -77,8 +77,8 @@ export const invalidEnum = <T extends Literal>(
   members: readonly T[]
 ): InvalidEnum<T> => ({
   code: "invalid_enum",
-  path: [],
   members,
+  path: [],
 })
 
 export interface InvalidInteger extends DecodeError {
@@ -117,8 +117,8 @@ export const invalidLiteral = <T extends Literal>(
   expected: T
 ): InvalidLiteral<T> => ({
   code: "invalid_literal",
-  path: [],
   expected,
+  path: [],
 })
 
 export interface InvalidPattern extends DecodeError {
@@ -142,8 +142,8 @@ export const invalidTaggedUnion = <V extends Literal>(
   options: readonly V[]
 ): InvalidTaggedUnion<V> => ({
   code: "invalid_tagged_union",
-  path: [key],
   options,
+  path: [key],
 })
 
 export interface InvalidUnion<E extends DecodeError> extends DecodeError {
@@ -155,8 +155,8 @@ export const invalidUnion = <E extends DecodeError>(
   errors: readonly E[]
 ): InvalidUnion<E> => ({
   code: "invalid_union",
-  path: [],
   errors,
+  path: [],
 })
 
 export interface IsInfinite extends DecodeError {
@@ -216,10 +216,10 @@ export const tooShort = (
   maxLength?: number
 ): TooShort => ({
   code: "too_short",
-  path: [],
   length,
   minLength,
   maxLength,
+  path: [],
 })
 
 export interface TooSmall<T extends Ordered> extends DecodeError {
