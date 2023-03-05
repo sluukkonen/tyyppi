@@ -9,18 +9,18 @@ import {
 import { invalidUnion, InvalidUnion } from "../DecodeError.js"
 import { failure } from "../Result.js"
 
-export interface UnionCodec<C extends readonly AnySimpleCodec[] | []>
-  extends SimpleCodec<TypeOf<C[number]>, InvalidUnion<ErrorOf<C[number]>>> {
+export interface UnionCodec<C extends AnySimpleCodec>
+  extends SimpleCodec<TypeOf<C>, InvalidUnion<ErrorOf<C>>> {
   readonly metadata: {
     readonly tag: "union"
     readonly simple: true
-    readonly members: C
+    readonly members: readonly C[]
   }
 }
 
-export function union<C extends readonly AnySimpleCodec[] | []>(
+export function union<C extends readonly AnySimpleCodec[]>(
   ...members: C
-): UnionCodec<C> {
+): UnionCodec<C[number]> {
   return createSimpleCodec(
     (val) => {
       const errors: ErrorOf<C[number]>[] = []
