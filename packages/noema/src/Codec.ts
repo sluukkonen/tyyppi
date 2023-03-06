@@ -18,6 +18,10 @@ export interface Codec<I, T = I, E extends DecodeError = DecodeError> {
   encode(value: T): I
   readonly metadata: Metadata
   unsafeDecode(value: unknown): T
+  pipe<Args extends readonly unknown[], R>(
+    fn: (codec: this, ...args: Args) => R,
+    ...args: Args
+  ): R
 }
 
 export type AnyCodec = Codec<any>
@@ -39,6 +43,14 @@ export interface SimpleCodec<T, E extends DecodeError = DecodeError>
   readonly metadata: SimpleMetadata
 }
 export type AnySimpleCodec = SimpleCodec<any>
+
+function pipe<C extends AnyCodec, Args extends readonly unknown[], R>(
+  this: C,
+  fn: (codec: C, ...args: Args) => R,
+  ...args: Args
+): R {
+  return fn(this, ...args)
+}
 
 export function createCodec<I, T, E extends DecodeError>(
   decode: (value: unknown) => Result<T, E>,
@@ -64,6 +76,7 @@ export function createCodec<I, T, E extends DecodeError>(
     encode,
     metadata,
     unsafeDecode,
+    pipe,
   }
 }
 
