@@ -1,5 +1,4 @@
-import { pattern } from "../src/codecs/pattern.js"
-import { string } from "../src/index.js"
+import { string, pattern } from "../src/index.js"
 import { expectParseFailure, expectParseSuccess } from "./helpers.js"
 
 const whitespace = pattern(string, /^\s*$/)
