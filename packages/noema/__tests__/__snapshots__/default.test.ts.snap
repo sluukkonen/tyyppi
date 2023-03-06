@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should defer to the underlying codec if the value is not undefined 1`] = `
+[
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "path": [],
+    "received": "null",
+  },
+]
+`;

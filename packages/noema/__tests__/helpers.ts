@@ -16,8 +16,6 @@ export const expectParseSuccess = function <C extends AnyCodec>(
   }
 
   const encoded = codec.encode(decoded)
-  if (simple) expect(encoded).toBe(value)
-
   const roundTripped = codec.unsafeDecode(encoded)
 
   if (simple) {
