@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should not parse an array 1`] = `
+[
+  {
+    "code": "invalid_type",
+    "expected": "object",
+    "path": [],
+    "received": "array",
+  },
+]
+`;
+
+exports[`should not parse null 1`] = `
+[
+  {
+    "code": "invalid_type",
+    "expected": "object",
+    "path": [],
+    "received": "null",
+  },
+]
+`;
