@@ -12,16 +12,20 @@ import { failure, Result } from "../Result.js"
 import { HasLength } from "../types.js"
 import { hasLength } from "../utils.js"
 
-export interface LengthCodec<C extends Codec<HasLength, any>>
-  extends Codec<InputOf<C>, TypeOf<C>, ErrorOf<C> | TooShort | TooLong> {
-  readonly metadata: {
-    readonly tag: "length"
-    readonly simple: IsSimple<C>
-    readonly minLength: number
-    readonly maxLength: number
-    readonly codec: C
-  }
+interface LengthMetadata<C extends Codec<HasLength, any>> {
+  readonly tag: "length"
+  readonly simple: IsSimple<C>
+  readonly minLength: number
+  readonly maxLength: number
+  readonly codec: C
 }
+
+export type LengthCodec<C extends Codec<HasLength, any>> = Codec<
+  InputOf<C>,
+  TypeOf<C>,
+  ErrorOf<C> | TooShort | TooLong,
+  LengthMetadata<C>
+>
 
 export const length = <C extends Codec<HasLength, any>>(
   codec: C,
@@ -43,7 +47,7 @@ export const length = <C extends Codec<HasLength, any>>(
     codec.encode as (value: TypeOf<C>) => InputOf<C>,
     {
       tag: "length",
-      simple: codec.metadata.simple,
+      simple: codec.meta.simple,
       codec,
       minLength,
       maxLength,

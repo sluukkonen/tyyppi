@@ -5,6 +5,7 @@ import {
   ErrorOf,
   InputOf,
   IsSimple,
+  Metadata,
   TypeOf,
 } from "../Codec.js"
 import {
@@ -33,18 +34,18 @@ type TypesOf<C extends readonly unknown[]> = C extends readonly [
   ? [TypeOf<First>, ...TypesOf<Rest>]
   : []
 
-export interface TupleCodec<C extends readonly AnyCodec[] | []>
-  extends Codec<
-    InputsOf<C>,
-    TypesOf<C>,
-    ErrorOf<C[number]> | InvalidArray | TooShort | TooLong
-  > {
-  readonly metadata: {
-    readonly tag: "tuple"
-    readonly simple: IsSimple<C[number]>
-    readonly members: C
-  }
+interface TupleMetadata<C extends readonly AnyCodec[] | []> extends Metadata {
+  readonly tag: "tuple"
+  readonly simple: IsSimple<C[number]>
+  readonly members: C
 }
+
+export type TupleCodec<C extends readonly AnyCodec[] | []> = Codec<
+  InputsOf<C>,
+  TypesOf<C>,
+  ErrorOf<C[number]> | InvalidArray | TooShort | TooLong,
+  TupleMetadata<C>
+>
 
 export const tuple = <C extends readonly AnyCodec[] | []>(
   members: C

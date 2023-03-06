@@ -18,13 +18,11 @@ interface RefinementMetadata<C extends AnyCodec> {
   readonly codec: C
 }
 
-export interface RefinementCodec<
+export type RefinementCodec<
   C extends AnyCodec,
   E extends DecodeError,
   M extends Metadata = RefinementMetadata<C>
-> extends Codec<InputOf<C>, TypeOf<C>, ErrorOf<C> | E> {
-  readonly metadata: M
-}
+> = Codec<InputOf<C>, TypeOf<C>, ErrorOf<C> | E, M>
 
 export function refinement<
   C extends AnyCodec,
@@ -34,7 +32,7 @@ export function refinement<
   codec: C,
   predicate: (value: TypeOf<C>) => boolean,
   makeError: (value: unknown) => E,
-  metadata?: M
+  meta?: M
 ): RefinementCodec<C, E, M> {
   return createCodec(
     (val): Result<TypeOf<C>, ErrorOf<C> | E> => {
@@ -46,6 +44,6 @@ export function refinement<
         : result
     },
     codec.encode,
-    metadata ?? { tag: "refinement", simple: codec.metadata.simple, codec }
+    meta ?? { tag: "refinement", simple: codec.meta.simple, codec }
   ) as RefinementCodec<C, E, M>
 }

@@ -4,6 +4,7 @@ import {
   createCodec,
   ErrorOf,
   InputOf,
+  Metadata,
   TypeOf,
 } from "../../Codec.js"
 import {
@@ -18,25 +19,25 @@ import { failure, failures, success } from "../../Result.js"
 import { isArray, pushError, pushErrors } from "../../utils.js"
 import { NonEmptyArray } from "../nonEmptyArray.js"
 
-export interface MapCodec<K extends AnyCodec, V extends AnyCodec>
-  extends Codec<
-    [InputOf<K>, InputOf<V>][],
-    Map<TypeOf<K>, TypeOf<V>>,
-    ErrorOf<K | V> | InvalidArray | TooShort | TooLong
-  > {
-  readonly metadata: {
-    readonly tag: "fromJson.map"
-    readonly simple: false
-    readonly keys: K
-    readonly values: V
-  }
+interface MapMetadata<K extends AnyCodec, V extends AnyCodec> extends Metadata {
+  readonly tag: "fromJson.map"
+  readonly simple: false
+  readonly keys: K
+  readonly values: V
 }
+
+export type MapCodec<K extends AnyCodec, V extends AnyCodec> = Codec<
+  [InputOf<K>, InputOf<V>][],
+  Map<TypeOf<K>, TypeOf<V>>,
+  ErrorOf<K | V> | InvalidArray | TooShort | TooLong,
+  MapMetadata<K, V>
+>
 
 export const map = <K extends AnyCodec, V extends AnyCodec>(
   keys: K,
   values: V
 ): MapCodec<K, V> => {
-  const simple = keys.metadata.simple && values.metadata.simple
+  const simple = keys.meta.simple && values.meta.simple
   return createCodec(
     (val) => {
       if (!isArray(val)) return failure(invalidArray(val))

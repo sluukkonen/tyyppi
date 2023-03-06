@@ -5,6 +5,7 @@ import {
   ErrorOf,
   InputOf,
   IsSimple,
+  Metadata,
   TypeOf,
 } from "../Codec.js"
 import {
@@ -22,23 +23,28 @@ import {
   isObject,
 } from "../utils.js"
 
-export interface TaggedUnionCodec<
+interface TaggedUnionMetadata<
   K extends string,
   V extends Literal,
   C extends TaggedUnionMember<K, V>
-> extends Codec<
-    InputOf<C>,
-    TypeOf<C>,
-    ErrorOf<C> | InvalidObject | InvalidTaggedUnion<V>
-  > {
-  readonly metadata: {
-    readonly tag: "taggedUnion"
-    readonly simple: IsSimple<C>
-    readonly key: K
-    readonly options: readonly V[]
-    readonly members: readonly C[]
-  }
+> extends Metadata {
+  readonly tag: "taggedUnion"
+  readonly simple: IsSimple<C>
+  readonly key: K
+  readonly options: readonly V[]
+  readonly members: readonly C[]
 }
+
+export type TaggedUnionCodec<
+  K extends string,
+  V extends Literal,
+  C extends TaggedUnionMember<K, V>
+> = Codec<
+  InputOf<C>,
+  TypeOf<C>,
+  ErrorOf<C> | InvalidObject | InvalidTaggedUnion<V>,
+  TaggedUnionMetadata<K, V, C>
+>
 
 export type TaggedUnionMember<K extends string, V extends Literal> = Codec<
   Record<K, V>,

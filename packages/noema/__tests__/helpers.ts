@@ -7,7 +7,7 @@ export const expectParseSuccess = function <C extends AnyCodec>(
 ) {
   const expected = arguments.length === 3 ? result : value
   const decoded = codec.unsafeDecode(value)
-  const simple = codec.metadata.simple
+  const simple = codec.meta.simple
 
   if (simple) {
     expect(decoded).toBe(expected)

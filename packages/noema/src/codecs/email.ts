@@ -1,4 +1,4 @@
-import { SimpleCodec } from "../Codec.js"
+import { SimpleCodec, SimpleMetadata } from "../Codec.js"
 import { invalidEmail, InvalidEmail, InvalidString } from "../DecodeError.js"
 import { refinement } from "./refinement.js"
 import { string } from "./string.js"
@@ -7,13 +7,15 @@ import { string } from "./string.js"
 const emailRegexp =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
 
-export interface EmailCodec
-  extends SimpleCodec<string, InvalidString | InvalidEmail> {
-  readonly metadata: {
-    readonly tag: "email"
-    readonly simple: true
-  }
+interface EmailMetadata extends SimpleMetadata {
+  readonly tag: "email"
 }
+
+export type EmailCodec = SimpleCodec<
+  string,
+  InvalidString | InvalidEmail,
+  EmailMetadata
+>
 
 export const email: EmailCodec = refinement(
   string,

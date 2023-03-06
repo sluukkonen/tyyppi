@@ -20,7 +20,7 @@ export const hasLength = (value: unknown): value is HasLength =>
   value != null && hasOwnProperty(value, "length") && isInteger(value.length)
 
 export const isEveryCodecSimple = (codecs: readonly AnyCodec[]) =>
-  codecs.every((codec) => codec.metadata.simple)
+  codecs.every((codec) => codec.meta.simple)
 
 export const identity = <T>(value: T) => value
 

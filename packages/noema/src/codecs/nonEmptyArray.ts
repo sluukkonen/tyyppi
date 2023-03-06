@@ -4,6 +4,7 @@ import {
   ErrorOf,
   InputOf,
   IsSimple,
+  Metadata,
   TypeOf,
 } from "../Codec.js"
 import { InvalidArray, TooShort } from "../DecodeError.js"
@@ -12,19 +13,20 @@ import { minLength } from "./minLength.js"
 
 export type NonEmptyArray<T> = readonly [T, ...T[]]
 
-export interface NonEmptyArrayCodec<C extends AnyCodec>
-  extends Codec<
-    NonEmptyArray<InputOf<C>>,
-    NonEmptyArray<TypeOf<C>>,
-    ErrorOf<C> | InvalidArray | TooShort
-  > {
-  readonly metadata: {
-    readonly tag: "minLength"
-    readonly simple: IsSimple<C>
-    readonly minLength: number
-    readonly codec: C
-  }
+interface NonEmptyArrayMetadata<C extends AnyCodec> extends Metadata {
+  readonly tag: "minLength"
+  readonly simple: IsSimple<C>
+  readonly minLength: number
+  readonly codec: C
 }
+
+export type NonEmptyArrayCodec<C extends AnyCodec> = Codec<
+  NonEmptyArray<InputOf<C>>,
+  NonEmptyArray<TypeOf<C>>,
+  ErrorOf<C> | InvalidArray | TooShort,
+  NonEmptyArrayMetadata<C>
+>
+
 // For whatever reason, coverage doesn't seem to work here.
 /* c8 ignore start */
 export const nonEmptyArray = <C extends AnyCodec>(

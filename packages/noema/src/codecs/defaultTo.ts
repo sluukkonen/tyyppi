@@ -4,19 +4,24 @@ import {
   createCodec,
   ErrorOf,
   InputOf,
+  Metadata,
   ResultOf,
   TypeOf,
 } from "../Codec.js"
 import { success } from "../Result.js"
 
-export interface DefaultToCodec<C extends AnyCodec>
-  extends Codec<InputOf<C> | undefined, TypeOf<C>, ErrorOf<C>> {
-  readonly metadata: {
-    readonly tag: "default"
-    readonly simple: false
-    readonly defaultValue: TypeOf<C>
-  }
+interface DefaultToMetadata<C extends AnyCodec> extends Metadata {
+  readonly tag: "default"
+  readonly simple: false
+  readonly defaultValue: TypeOf<C>
 }
+
+export type DefaultToCodec<C extends AnyCodec> = Codec<
+  InputOf<C> | undefined,
+  TypeOf<C>,
+  ErrorOf<C>,
+  DefaultToMetadata<C>
+>
 
 export const defaultTo = <C extends AnyCodec>(
   codec: C,

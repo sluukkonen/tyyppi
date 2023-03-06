@@ -10,15 +10,19 @@ import {
 import { invalidPattern, InvalidPattern } from "../DecodeError.js"
 import { failure, Result } from "../Result.js"
 
-export interface PatternCodec<C extends Codec<any, string>>
-  extends Codec<InputOf<C>, TypeOf<C>, ErrorOf<C> | InvalidPattern> {
-  readonly metadata: {
-    readonly tag: "pattern"
-    readonly simple: IsSimple<C>
-    readonly regexp: RegExp
-    readonly codec: C
-  }
+interface PatternMetadata<C extends Codec<any, string>> {
+  readonly tag: "pattern"
+  readonly simple: IsSimple<C>
+  readonly regexp: RegExp
+  readonly codec: C
 }
+
+export type PatternCodec<C extends Codec<any, string>> = Codec<
+  InputOf<C>,
+  TypeOf<C>,
+  ErrorOf<C> | InvalidPattern,
+  PatternMetadata<C>
+>
 
 export const pattern = <C extends Codec<any, string>>(
   codec: C,
@@ -36,7 +40,7 @@ export const pattern = <C extends Codec<any, string>>(
     codec.encode,
     {
       tag: "pattern",
-      simple: codec.metadata.simple,
+      simple: codec.meta.simple,
       regexp,
       codec,
     }

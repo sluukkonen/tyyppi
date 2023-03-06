@@ -4,19 +4,24 @@ import {
   createCodec,
   ErrorOf,
   InputOf,
+  Metadata,
   ResultOf,
   TypeOf,
 } from "../Codec.js"
 import { Result, success } from "../Result.js"
 
-export interface TransformCodec<C extends AnyCodec, T>
-  extends Codec<InputOf<C>, T, ErrorOf<C>> {
-  readonly metadata: {
-    readonly tag: "transform"
-    readonly simple: false
-    readonly codec: C
-  }
+interface TransformMetadata<C extends AnyCodec> extends Metadata {
+  readonly tag: "transform"
+  readonly simple: false
+  readonly codec: C
 }
+
+export type TransformCodec<C extends AnyCodec, T> = Codec<
+  InputOf<C>,
+  T,
+  ErrorOf<C>,
+  TransformMetadata<C>
+>
 
 export const transform = <C extends AnyCodec, T>(
   codec: C,

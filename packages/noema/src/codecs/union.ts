@@ -4,19 +4,22 @@ import {
   ErrorOf,
   ResultOf,
   SimpleCodec,
+  SimpleMetadata,
   TypeOf,
 } from "../Codec.js"
 import { invalidUnion, InvalidUnion } from "../DecodeError.js"
 import { failure } from "../Result.js"
 
-export interface UnionCodec<C extends AnySimpleCodec>
-  extends SimpleCodec<TypeOf<C>, InvalidUnion<ErrorOf<C>>> {
-  readonly metadata: {
-    readonly tag: "union"
-    readonly simple: true
-    readonly members: readonly C[]
-  }
+interface UnionMetadata<C extends AnySimpleCodec> extends SimpleMetadata {
+  readonly tag: "union"
+  readonly members: readonly C[]
 }
+
+export type UnionCodec<C extends AnySimpleCodec> = SimpleCodec<
+  TypeOf<C>,
+  InvalidUnion<ErrorOf<C>>,
+  UnionMetadata<C>
+>
 
 export function union<C extends readonly AnySimpleCodec[]>(
   ...members: C

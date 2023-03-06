@@ -5,6 +5,7 @@ import {
   ErrorOf,
   InputOf,
   IsSimple,
+  Metadata,
   ResultOf,
   TypeOf,
 } from "../Codec.js"
@@ -27,18 +28,18 @@ type IntersectTypesOf<T extends readonly unknown[]> = T extends readonly [
   ? TypeOf<C> & IntersectTypesOf<Rest>
   : unknown
 
-export interface IntersectionCodec<C extends readonly AnyCodec[]>
-  extends Codec<
-    IntersectInputsOf<C>,
-    IntersectTypesOf<C>,
-    ErrorOf<C[number]> | InvalidObject
-  > {
-  readonly metadata: {
-    readonly tag: "intersection"
-    readonly simple: IsSimple<C[number]>
-    readonly codecs: C
-  }
+interface IntersectionMetadata<C extends readonly AnyCodec[]> extends Metadata {
+  readonly tag: "intersection"
+  readonly simple: IsSimple<C[number]>
+  readonly codecs: C
 }
+
+export type IntersectionCodec<C extends readonly AnyCodec[]> = Codec<
+  IntersectInputsOf<C>,
+  IntersectTypesOf<C>,
+  ErrorOf<C[number]> | InvalidObject,
+  IntersectionMetadata<C>
+>
 
 export const intersection = <C extends readonly AnyCodec[]>(
   ...codecs: C

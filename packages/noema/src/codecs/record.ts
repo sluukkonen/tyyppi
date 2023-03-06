@@ -6,6 +6,7 @@ import {
   ErrorOf,
   InputOf,
   IsSimple,
+  Metadata,
   ResultOf,
   TypeOf,
 } from "../Codec.js"
@@ -14,25 +15,26 @@ import { failure, failures, Result, success } from "../Result.js"
 import { hasOwnProperty, identity, isObject, pushErrors } from "../utils.js"
 import { NonEmptyArray } from "./nonEmptyArray.js"
 
-export interface RecordCodec<K extends AnySimpleCodec, V extends AnyCodec>
-  extends Codec<
-    Record<InputOf<K>, InputOf<V>>,
-    Record<TypeOf<K>, TypeOf<V>>,
-    ErrorOf<K | V> | InvalidObject
-  > {
-  readonly metadata: {
-    readonly tag: "record"
-    readonly simple: IsSimple<V>
-    readonly keys: K
-    readonly values: V
-  }
+interface RecordMetadata<K extends AnySimpleCodec, V extends AnyCodec>
+  extends Metadata {
+  readonly tag: "record"
+  readonly simple: IsSimple<V>
+  readonly keys: K
+  readonly values: V
 }
+
+export type RecordCodec<K extends AnySimpleCodec, V extends AnyCodec> = Codec<
+  Record<InputOf<K>, InputOf<V>>,
+  Record<TypeOf<K>, TypeOf<V>>,
+  ErrorOf<K | V> | InvalidObject,
+  RecordMetadata<K, V>
+>
 
 export const record = <K extends AnySimpleCodec, V extends AnyCodec>(
   keys: K,
   values: V
 ): RecordCodec<K, V> => {
-  const simple = values.metadata.simple
+  const simple = values.meta.simple
   return createCodec(
     (
       val

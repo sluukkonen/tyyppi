@@ -44,7 +44,7 @@ function runBenchmark<T>(benchmark: Benchmark<T>) {
   if (ioTs) benchmarks.push(["io-ts", ioTsUnsafeParse(ioTs)])
 
   for (const [name, fn] of benchmarks) {
-    if (noema.metadata.simple) {
+    if (noema.meta.simple) {
       assert.deepStrictEqual(fn(data), data, name)
     }
   }

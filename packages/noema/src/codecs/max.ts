@@ -11,15 +11,19 @@ import { tooLarge, TooLarge } from "../DecodeError.js"
 import { failure, Result } from "../Result.js"
 import { Ordered } from "../types.js"
 
-export interface MaxCodec<C extends Codec<any, Ordered>>
-  extends Codec<InputOf<C>, TypeOf<C>, ErrorOf<C> | TooLarge<TypeOf<C>>> {
-  readonly metadata: {
-    readonly tag: "max"
-    readonly simple: IsSimple<C>
-    readonly max: TypeOf<C>
-    readonly codec: C
-  }
+interface MaxMetadata<C extends Codec<any, Ordered>> {
+  readonly tag: "max"
+  readonly simple: IsSimple<C>
+  readonly max: TypeOf<C>
+  readonly codec: C
 }
+
+export type MaxCodec<C extends Codec<any, Ordered>> = Codec<
+  InputOf<C>,
+  TypeOf<C>,
+  ErrorOf<C> | TooLarge<TypeOf<C>>,
+  MaxMetadata<C>
+>
 
 export const max = <C extends Codec<any, Ordered>>(
   codec: C,
@@ -35,5 +39,5 @@ export const max = <C extends Codec<any, Ordered>>(
         : result
     },
     codec.encode,
-    { tag: "max", simple: codec.metadata.simple, codec, max }
+    { tag: "max", simple: codec.meta.simple, codec, max }
   )

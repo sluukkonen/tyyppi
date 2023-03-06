@@ -1,13 +1,12 @@
-import { createSimpleCodec, SimpleCodec } from "../Codec.js"
+import { createSimpleCodec, SimpleCodec, SimpleMetadata } from "../Codec.js"
 import { invalidBigInt, InvalidBigInt } from "../DecodeError.js"
 import { failure, success } from "../Result.js"
 
-export interface BigIntCodec extends SimpleCodec<bigint, InvalidBigInt> {
-  readonly metadata: {
-    readonly tag: "bigint"
-    readonly simple: true
-  }
+interface BigIntMetadata extends SimpleMetadata {
+  readonly tag: "bigint"
 }
+
+export type BigIntCodec = SimpleCodec<bigint, InvalidBigInt, BigIntMetadata>
 
 export const bigint: BigIntCodec = createSimpleCodec(
   (val) =>

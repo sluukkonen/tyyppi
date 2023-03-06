@@ -39,12 +39,12 @@ test("should fail to parse if the underlying codec fails to parse the value", ()
 })
 
 test("should allow configuring the metadata", () => {
-  const metadata = { tag: "hmm", simple: true }
+  const meta = { tag: "hmm", simple: true }
   const codec = refinement(
     string,
     () => true,
     () => ({ code: "hmm", path: [] }),
-    metadata
+    meta
   )
-  expect(codec.metadata).toEqual(metadata)
+  expect(codec.meta).toEqual(meta)
 })

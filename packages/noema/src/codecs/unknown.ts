@@ -1,12 +1,11 @@
-import { createSimpleCodec, SimpleCodec } from "../Codec.js"
+import { createSimpleCodec, SimpleCodec, SimpleMetadata } from "../Codec.js"
 import { success } from "../Result.js"
 
-export interface UnknownCodec extends SimpleCodec<unknown, never> {
-  readonly metadata: {
-    readonly tag: "unknown"
-    readonly simple: true
-  }
+interface UnknownMetadata extends SimpleMetadata {
+  readonly tag: "unknown"
 }
+
+export type UnknownCodec = SimpleCodec<unknown, never, UnknownMetadata>
 
 export const unknown: UnknownCodec = createSimpleCodec(success, {
   tag: "unknown",

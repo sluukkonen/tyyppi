@@ -14,12 +14,12 @@ test("createCodec with two arguments argument assigns default metadata", () => {
     (val) => success(val),
     (val) => val
   )
-  expect(codec.metadata).toEqual({ simple: false })
+  expect(codec.meta).toEqual({ simple: false })
 })
 
 test("createSimpleCodec with one arguments argument assigns default metadata", () => {
   const codec = createSimpleCodec((val) => success(val))
-  expect(codec.metadata).toEqual({ simple: true })
+  expect(codec.meta).toEqual({ simple: true })
 })
 
 test("supports left-to-right piping of combinators for convenience", () => {

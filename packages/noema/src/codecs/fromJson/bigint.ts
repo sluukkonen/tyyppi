@@ -1,4 +1,4 @@
-import { Codec, createCodec } from "../../Codec.js"
+import { Codec, createCodec, Metadata } from "../../Codec.js"
 import {
   invalidIntegerString,
   InvalidIntegerString,
@@ -8,13 +8,17 @@ import {
 import { failure, Result, success } from "../../Result.js"
 import { isString } from "../../utils.js"
 
-export interface BigIntCodec
-  extends Codec<string, bigint, InvalidString | InvalidIntegerString> {
-  readonly metadata: {
-    tag: "fromJson.bigint"
-    readonly simple: false
-  }
+interface BigIntMetadata extends Metadata {
+  readonly tag: "fromJson.bigint"
+  readonly simple: false
 }
+
+export type BigIntCodec = Codec<
+  string,
+  bigint,
+  InvalidString | InvalidIntegerString,
+  BigIntMetadata
+>
 
 export const bigint: BigIntCodec = createCodec(
   (val): Result<bigint, InvalidString | InvalidIntegerString> => {

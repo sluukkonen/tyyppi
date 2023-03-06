@@ -1,4 +1,4 @@
-import { Codec, createCodec } from "../../Codec.js"
+import { Codec, createCodec, Metadata } from "../../Codec.js"
 import {
   invalidISOString,
   InvalidISOString,
@@ -8,13 +8,17 @@ import {
 import { failure, Result, success } from "../../Result.js"
 import { isNaN, isString } from "../../utils.js"
 
-export interface DateCodec
-  extends Codec<string, Date, InvalidString | InvalidISOString> {
-  readonly metadata: {
-    readonly tag: "fromJson.date"
-    readonly simple: false
-  }
+interface DateMetadata extends Metadata {
+  readonly tag: "fromJson.date"
+  readonly simple: false
 }
+
+export type DateCodec = Codec<
+  string,
+  Date,
+  InvalidString | InvalidISOString,
+  DateMetadata
+>
 
 export const date: DateCodec = createCodec(
   (val): Result<Date, InvalidString | InvalidISOString> => {

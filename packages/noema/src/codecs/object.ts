@@ -5,6 +5,7 @@ import {
   ErrorOf,
   InputOf,
   IsSimple,
+  Metadata,
   ResultOf,
   TypeOf,
 } from "../Codec.js"
@@ -39,18 +40,18 @@ type HandleOptionalTypes<T> = Flatten<
   }
 >
 
-export interface ObjectCodec<T extends Record<string, AnyCodec>>
-  extends Codec<
-    HandleOptionalTypes<{ [K in keyof T]: InputOf<T[K]> }>,
-    HandleOptionalTypes<{ [K in keyof T]: TypeOf<T[K]> }>,
-    ErrorOf<T[keyof T]> | InvalidObject
-  > {
-  readonly metadata: {
-    readonly tag: "object"
-    readonly simple: IsSimple<T[keyof T]>
-    readonly props: T
-  }
+interface ObjectMetadata<T extends Record<string, AnyCodec>> extends Metadata {
+  readonly tag: "object"
+  readonly simple: IsSimple<T[keyof T]>
+  readonly props: T
 }
+
+export type ObjectCodec<T extends Record<string, AnyCodec>> = Codec<
+  HandleOptionalTypes<{ [K in keyof T]: InputOf<T[K]> }>,
+  HandleOptionalTypes<{ [K in keyof T]: TypeOf<T[K]> }>,
+  ErrorOf<T[keyof T]> | InvalidObject,
+  ObjectMetadata<T>
+>
 
 export const object = <T extends Record<string, AnyCodec>>(
   props: T

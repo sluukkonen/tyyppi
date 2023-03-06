@@ -1,13 +1,12 @@
-import { createSimpleCodec, SimpleCodec } from "../Codec.js"
+import { createSimpleCodec, SimpleCodec, SimpleMetadata } from "../Codec.js"
 import { invalidBoolean, InvalidBoolean } from "../DecodeError.js"
 import { failure, success } from "../Result.js"
 
-export interface BooleanCodec extends SimpleCodec<boolean, InvalidBoolean> {
-  readonly metadata: {
-    readonly tag: "boolean"
-    readonly simple: true
-  }
+interface BooleanMetadata extends SimpleMetadata {
+  readonly tag: "boolean"
 }
+
+export type BooleanCodec = SimpleCodec<boolean, InvalidBoolean, BooleanMetadata>
 
 export const boolean: BooleanCodec = createSimpleCodec(
   (val) =>

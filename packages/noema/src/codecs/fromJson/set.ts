@@ -4,6 +4,7 @@ import {
   createCodec,
   ErrorOf,
   InputOf,
+  Metadata,
   ResultOf,
   TypeOf,
 } from "../../Codec.js"
@@ -12,13 +13,17 @@ import { failure, failures, Result, success } from "../../Result.js"
 import { isArray, pushErrors } from "../../utils.js"
 import { NonEmptyArray } from "../nonEmptyArray.js"
 
-export interface SetCodec<C extends AnyCodec>
-  extends Codec<InputOf<C>[], Set<TypeOf<C>>, ErrorOf<C> | InvalidArray> {
-  readonly metadata: {
-    tag: "fromJson.set"
-    simple: false
-  }
+interface SetMetadata extends Metadata {
+  readonly tag: "fromJson.set"
+  readonly simple: false
 }
+
+export type SetCodec<C extends AnyCodec> = Codec<
+  InputOf<C>[],
+  Set<TypeOf<C>>,
+  ErrorOf<C> | InvalidArray,
+  SetMetadata
+>
 export const set = <C extends AnyCodec>(codec: C): SetCodec<C> => {
   return createCodec(
     (val): Result<Set<TypeOf<C>>, ErrorOf<C> | InvalidArray> => {
@@ -42,7 +47,7 @@ export const set = <C extends AnyCodec>(codec: C): SetCodec<C> => {
         ? success(set)
         : failures(errors as unknown as NonEmptyArray<ErrorOf<C>>)
     },
-    codec.metadata.simple
+    codec.meta.simple
       ? (set) => [...set] as InputOf<C>[]
       : (set) => {
           const result: InputOf<C>[] = []

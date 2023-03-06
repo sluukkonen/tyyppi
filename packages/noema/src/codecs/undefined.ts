@@ -1,14 +1,16 @@
-import { createSimpleCodec, SimpleCodec } from "../Codec.js"
+import { createSimpleCodec, SimpleCodec, SimpleMetadata } from "../Codec.js"
 import { invalidUndefined, InvalidUndefined } from "../DecodeError.js"
 import { failure, success } from "../Result.js"
 
-export interface UndefinedCodec
-  extends SimpleCodec<undefined, InvalidUndefined> {
-  readonly metadata: {
-    readonly tag: "undefined"
-    readonly simple: true
-  }
+interface UndefinedMetadata extends SimpleMetadata {
+  readonly tag: "undefined"
 }
+
+export type UndefinedCodec = SimpleCodec<
+  undefined,
+  InvalidUndefined,
+  UndefinedMetadata
+>
 
 const undefinedCodec: UndefinedCodec = createSimpleCodec(
   (val) =>

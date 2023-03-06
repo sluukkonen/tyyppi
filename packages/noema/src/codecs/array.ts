@@ -5,6 +5,7 @@ import {
   ErrorOf,
   InputOf,
   IsSimple,
+  Metadata,
   ResultOf,
   TypeOf,
 } from "../Codec.js"
@@ -13,17 +14,21 @@ import { failure, failures, Result, success } from "../Result.js"
 import { identity, isArray, pushErrors } from "../utils.js"
 import { NonEmptyArray } from "./nonEmptyArray.js"
 
-export interface ArrayCodec<C extends AnyCodec>
-  extends Codec<InputOf<C>[], TypeOf<C>[], ErrorOf<C> | InvalidArray> {
-  readonly metadata: {
-    readonly tag: "array"
-    readonly simple: IsSimple<C>
-    readonly codec: C
-  }
+interface ArrayMetadata<C extends AnyCodec> extends Metadata {
+  readonly tag: "array"
+  readonly simple: IsSimple<C>
+  readonly codec: C
 }
 
+export type ArrayCodec<C extends AnyCodec> = Codec<
+  InputOf<C>[],
+  TypeOf<C>[],
+  ErrorOf<C> | InvalidArray,
+  ArrayMetadata<C>
+>
+
 export const array = <C extends AnyCodec>(codec: C): ArrayCodec<C> => {
-  const simple = codec.metadata.simple
+  const simple = codec.meta.simple
   return createCodec(
     (val): Result<TypeOf<C>[], ErrorOf<C> | InvalidArray> => {
       if (!isArray(val)) return failure(invalidArray(val))
