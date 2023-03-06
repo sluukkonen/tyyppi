@@ -11,7 +11,7 @@ import {
 } from "../Codec.js"
 import { success } from "../Result.js"
 
-export interface OptionalMetadata<C extends AnyCodec> extends Metadata {
+interface OptionalMetadata<C extends AnyCodec> extends Metadata {
   readonly tag: "optional"
   readonly simple: IsSimple<C>
   readonly codec: C

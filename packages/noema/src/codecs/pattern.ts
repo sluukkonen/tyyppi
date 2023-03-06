@@ -4,13 +4,14 @@ import {
   ErrorOf,
   InputOf,
   IsSimple,
+  Metadata,
   ResultOf,
   TypeOf,
 } from "../Codec.js"
 import { invalidPattern, InvalidPattern } from "../DecodeError.js"
 import { failure, Result } from "../Result.js"
 
-interface PatternMetadata<C extends Codec<any, string>> {
+interface PatternMetadata<C extends Codec<any, string>> extends Metadata {
   readonly tag: "pattern"
   readonly simple: IsSimple<C>
   readonly regexp: RegExp

@@ -12,7 +12,7 @@ import {
 import { DecodeError } from "../DecodeError.js"
 import { failure, Result } from "../Result.js"
 
-interface RefinementMetadata<C extends AnyCodec> {
+interface RefinementMetadata<C extends AnyCodec> extends Metadata {
   readonly tag: "refinement"
   readonly simple: IsSimple<C>
   readonly codec: C

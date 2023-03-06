@@ -4,6 +4,7 @@ import {
   ErrorOf,
   InputOf,
   IsSimple,
+  Metadata,
   ResultOf,
   TypeOf,
 } from "../Codec.js"
@@ -11,7 +12,7 @@ import { tooLarge, TooLarge } from "../DecodeError.js"
 import { failure, Result } from "../Result.js"
 import { Ordered } from "../types.js"
 
-interface MaxMetadata<C extends Codec<any, Ordered>> {
+interface MaxMetadata<C extends Codec<any, Ordered>> extends Metadata {
   readonly tag: "max"
   readonly simple: IsSimple<C>
   readonly max: TypeOf<C>

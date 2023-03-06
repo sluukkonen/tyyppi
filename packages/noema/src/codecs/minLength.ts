@@ -4,6 +4,7 @@ import {
   ErrorOf,
   InputOf,
   IsSimple,
+  Metadata,
   ResultOf,
   TypeOf,
 } from "../Codec.js"
@@ -12,7 +13,7 @@ import { failure, Result } from "../Result.js"
 import { HasLength } from "../types.js"
 import { hasLength } from "../utils.js"
 
-interface MinLengthMetadata<C extends Codec<HasLength, any>> {
+interface MinLengthMetadata<C extends Codec<HasLength, any>> extends Metadata {
   readonly tag: "minLength"
   readonly simple: IsSimple<C>
   readonly minLength: number
