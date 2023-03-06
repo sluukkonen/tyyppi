@@ -1,4 +1,4 @@
-import { AnyCodec, InputOf, NoemaError, TypeOf } from "../src/index.js"
+import { AnyCodec, array, InputOf, NoemaError, TypeOf } from "../src/index.js"
 
 export const expectParseSuccess = function <C extends AnyCodec>(
   codec: C,
@@ -22,6 +22,10 @@ export const expectParseSuccess = function <C extends AnyCodec>(
     expect(roundTripped).toBe(expected)
   } else {
     expect(roundTripped).toEqual(expected)
+  }
+
+  if (simple) {
+    expect(array(codec).unsafeDecode([value])).toEqual([expected])
   }
 }
 
