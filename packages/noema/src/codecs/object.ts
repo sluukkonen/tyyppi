@@ -94,8 +94,10 @@ export const object = <T extends Record<string, AnyCodec>>(
           for (let i = 0; i < keys.length; i++) {
             const key = keys[i]
             const codec = codecs[i]
-            const value = object[key]
-            result[key] = codec.encode(value)
+            const value = codec.encode(
+              hasOwnProperty(object, key) ? object[key] : undefined
+            )
+            if (value !== undefined) result[key] = value
           }
 
           return result

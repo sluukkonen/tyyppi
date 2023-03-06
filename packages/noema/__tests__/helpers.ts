@@ -21,11 +21,11 @@ export const expectParseSuccess = function <C extends AnyCodec>(
   if (simple) {
     expect(roundTripped).toBe(expected)
   } else {
-    expect(roundTripped).toEqual(expected)
+    expect(roundTripped).toStrictEqual(expected)
   }
 
   if (simple) {
-    expect(array(codec).unsafeDecode([value])).toEqual([expected])
+    expect(array(codec).unsafeDecode([value])).toStrictEqual([expected])
   }
 }
 
