@@ -24,10 +24,6 @@ type RequiredKeys<T> = {
   [K in keyof T]: undefined extends T[K] ? never : K
 }[keyof T]
 
-type OptionalKeys<T> = {
-  [K in keyof T]: undefined extends T[K] ? K : never
-}[keyof T]
-
 type Identity<T> = T
 
 type Flatten<T> = Identity<{ [K in keyof T]: T[K] }>
@@ -36,7 +32,7 @@ type HandleOptionalTypes<T> = Flatten<
   {
     [K in RequiredKeys<T>]: T[K]
   } & {
-    [K in OptionalKeys<T>]?: Exclude<T[K], undefined>
+    [K in Exclude<keyof T, RequiredKeys<T>>]?: Exclude<T[K], undefined>
   }
 >
 
