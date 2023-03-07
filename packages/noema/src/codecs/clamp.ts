@@ -12,26 +12,26 @@ import { tooLarge, TooLarge, tooSmall, TooSmall } from "../DecodeError.js"
 import { failure, Result } from "../Result.js"
 import { Ordered } from "../types.js"
 
-interface RangeMetadata<C extends Codec<any, Ordered>> extends Metadata {
-  readonly tag: "range"
+interface ClampMetadata<C extends Codec<any, Ordered>> extends Metadata {
+  readonly tag: "clamp"
   readonly simple: IsSimple<C>
   readonly min: TypeOf<C>
   readonly max: TypeOf<C>
   readonly codec: C
 }
 
-export type RangeCodec<C extends Codec<any, Ordered>> = Codec<
+export type ClampCodec<C extends Codec<any, Ordered>> = Codec<
   InputOf<C>,
   TypeOf<C>,
   ErrorOf<C> | TooSmall<TypeOf<C>> | TooLarge<TypeOf<C>>,
-  RangeMetadata<C>
+  ClampMetadata<C>
 >
 
-export const range = <C extends Codec<any, Ordered>>(
+export const clamp = <C extends Codec<any, Ordered>>(
   codec: C,
   min: TypeOf<C>,
   max: TypeOf<C>
-): RangeCodec<C> =>
+): ClampCodec<C> =>
   createCodec(
     (
       val
@@ -50,7 +50,7 @@ export const range = <C extends Codec<any, Ordered>>(
     },
     codec.encode,
     {
-      tag: "range",
+      tag: "clamp",
       simple: codec.meta.simple,
       codec,
       min,
