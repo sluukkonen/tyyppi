@@ -13,6 +13,7 @@ import record from "./record.js"
 import string from "./string.js"
 import undefined from "./undefined.js"
 import uuid from "./uuid.js"
+import length from "./length.js"
 
 export interface Benchmark<I, T = I> {
   name: string
@@ -62,6 +63,7 @@ const suites = [
   ["email", email],
   ["integer", integer],
   ["fromJson.map", fromJsonMap],
+  ["length", length],
   ["object", object],
   ["record", record],
   ["string", string],

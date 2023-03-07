@@ -17,7 +17,7 @@ export const hasOwnProperty = <K extends string>(
 ): obj is Record<K, unknown> => objectProto.hasOwnProperty.call(obj, key)
 
 export const hasLength = (value: unknown): value is HasLength =>
-  value != null && hasOwnProperty(value, "length") && isInteger(value.length)
+  isString(value) || isArray(value)
 
 export const isEveryCodecSimple = (codecs: readonly AnyCodec[]) =>
   codecs.every((codec) => codec.meta.simple)

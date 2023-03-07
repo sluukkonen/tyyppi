@@ -9,9 +9,7 @@ export type Literal =
 
 export type Ordered = number | bigint | string | Date | boolean
 
-export interface HasLength {
-  length: number
-}
+export type HasLength = string | unknown[]
 
 export type TypeName =
   | "array"
