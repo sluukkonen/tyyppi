@@ -5,6 +5,7 @@ import * as t from "io-ts"
 import * as n from "noema"
 import * as z from "zod"
 import array from "./array.js"
+import clamp from "./clamp.js"
 import email from "./email.js"
 import integer from "./integer.js"
 import fromJsonMap from "./fromJson.map.js"
@@ -60,6 +61,7 @@ function runBenchmark<T>(benchmark: Benchmark<T>) {
 
 const suites = [
   ["array", array],
+  ["clamp", clamp],
   ["email", email],
   ["integer", integer],
   ["fromJson.map", fromJsonMap],
