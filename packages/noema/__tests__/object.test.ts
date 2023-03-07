@@ -31,7 +31,7 @@ test("the path property should work with nested objects", () => {
 
 test("should not write undefined properties", () => {
   const codec = object({ a: fromJson.bigint, b: optional(string) })
-  expect(codec.unsafeDecode({ a: "1" })).toEqual({ a: 1n })
+  expect(codec.decodeOrThrow({ a: "1" })).toEqual({ a: 1n })
   expect(codec.encode({ a: 1n })).toStrictEqual({ a: "1" })
 })
 

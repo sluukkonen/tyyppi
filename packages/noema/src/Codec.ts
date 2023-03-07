@@ -20,8 +20,8 @@ export interface Codec<
   M extends Metadata = Metadata
 > {
   decode(value: unknown): Result<T, E>
+  decodeOrThrow(value: unknown): T
   encode(value: T): I
-  unsafeDecode(value: unknown): T
   readonly meta: M
   pipe<Args extends readonly unknown[], R>(
     fn: (codec: this, ...args: Args) => R,
@@ -67,15 +67,15 @@ export function createCodec<I, T, E extends DecodeError, M extends Metadata>(
   encode: (value: T) => I,
   meta?: M
 ): Codec<I, T, E, M> {
-  const unsafeDecode = (value: unknown) => {
+  function decodeOrThrow(value: unknown) {
     const result = decode(value)
     if (result.ok) return result.value
     else throw new NoemaError("", result.errors)
   }
   return Object.assign(Object.create(codecProto), {
     decode,
+    decodeOrThrow,
     encode,
-    unsafeDecode,
     meta: meta ?? { simple: false },
   })
 }

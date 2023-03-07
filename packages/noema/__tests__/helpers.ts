@@ -6,7 +6,7 @@ export const expectParseSuccess = function <C extends AnyCodec>(
   result?: TypeOf<C>
 ) {
   const expected = arguments.length === 3 ? result : value
-  const decoded = codec.unsafeDecode(value)
+  const decoded = codec.decodeOrThrow(value)
   const simple = codec.meta.simple
 
   if (simple) {
@@ -16,7 +16,7 @@ export const expectParseSuccess = function <C extends AnyCodec>(
   }
 
   const encoded = codec.encode(decoded)
-  const roundTripped = codec.unsafeDecode(encoded)
+  const roundTripped = codec.decodeOrThrow(encoded)
 
   if (simple) {
     expect(roundTripped).toBe(expected)
@@ -25,7 +25,7 @@ export const expectParseSuccess = function <C extends AnyCodec>(
   }
 
   if (simple) {
-    expect(array(codec).unsafeDecode([value])).toStrictEqual([expected])
+    expect(array(codec).decodeOrThrow([value])).toStrictEqual([expected])
   }
 }
 
@@ -38,7 +38,7 @@ export const expectParseFailure = <C extends AnyCodec>(
   expect(result.ok).toBe(false)
   if (!result.ok) {
     expect(result.errors).toMatchSnapshot()
-    expect(() => codec.unsafeDecode(value)).toThrow(
+    expect(() => codec.decodeOrThrow(value)).toThrow(
       new NoemaError("", result.errors)
     )
   }

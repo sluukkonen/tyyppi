@@ -38,7 +38,7 @@ function runBenchmark<T>(benchmark: Benchmark<T>) {
   const { name, data, codecs } = benchmark
   const { noema, ioTs, zod } = codecs
   const benchmarks: [string, (val: unknown) => unknown][] = [
-    ["noema", noema.unsafeDecode],
+    ["noema", noema.decodeOrThrow],
   ]
   if (zod) benchmarks.push(["zod", zod.parse])
   if (ioTs) benchmarks.push(["io-ts", ioTsUnsafeParse(ioTs)])
