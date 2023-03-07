@@ -24,7 +24,7 @@ test("createSimpleCodec with one arguments argument assigns default metadata", (
 
 test("supports left-to-right piping of combinators for convenience", () => {
   const optionalWhitespaceString = string
-    .pipe(length, 1, 1)
+    .pipe(length, 5)
     .pipe(pattern, /^\s+$/)
     .pipe(optional)
 

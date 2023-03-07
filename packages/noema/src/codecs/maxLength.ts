@@ -32,13 +32,10 @@ export const maxLength = <C extends Codec<HasLength, any>>(
   maxLength: number
 ): MaxLengthCodec<C> =>
   createCodec(
-    (val): Result<TypeOf<C>, ErrorOf<C> | TooLong> => {
-      if (hasLength(val)) {
-        const length = val.length
-        if (length > maxLength) return failure(tooLong(length, maxLength))
-      }
-      return codec.decode(val) as ResultOf<C>
-    },
+    (val): Result<TypeOf<C>, ErrorOf<C> | TooLong> =>
+      hasLength(val) && val.length > maxLength
+        ? failure(tooLong(val.length, maxLength))
+        : (codec.decode(val) as ResultOf<C>),
     codec.encode as (value: TypeOf<C>) => InputOf<C>,
     { tag: "maxLength", simple: codec.meta.simple, codec, maxLength }
   )
