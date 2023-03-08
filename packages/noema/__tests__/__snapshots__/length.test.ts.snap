@@ -39,7 +39,7 @@ exports[`fails to parse if the length is above the maximum length 1`] = `
     "code": "too_long",
     "length": 3,
     "maxLength": 2,
-    "minLength": undefined,
+    "minLength": 2,
     "path": [],
   },
 ]
@@ -50,7 +50,7 @@ exports[`fails to parse if the length is below the minimum length 1`] = `
   {
     "code": "too_short",
     "length": 1,
-    "maxLength": undefined,
+    "maxLength": 2,
     "minLength": 2,
     "path": [],
   },
