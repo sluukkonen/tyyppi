@@ -9,8 +9,8 @@ import {
   ResultOf,
   TypeOf,
 } from "../Codec.js"
-import { InvalidObject, invalidObject } from "../DecodeError.js"
-import { failure, failures, Result, success } from "../Result.js"
+import { InvalidObject } from "../DecodeError.js"
+import { failures, Result, success } from "../Result.js"
 import { identity, isEveryCodecSimple, isObject } from "../utils.js"
 import { NonEmptyArray } from "./nonEmptyArray.js"
 
@@ -46,12 +46,10 @@ export const intersection = <C extends readonly AnyCodec[]>(
 ): IntersectionCodec<C> => {
   const simple = isEveryCodecSimple(codecs)
   return createCodec(
-    (val): Result<IntersectTypesOf<C>, ErrorOf<C[number]> | InvalidObject> => {
-      if (!isObject(val)) return failure(invalidObject(val))
-
+    (val): Result<IntersectTypesOf<C>, ErrorOf<C[number]>> => {
       let ok = true
       const errors: ErrorOf<C[number]>[] = []
-      const object: any = simple ? val : {}
+      let intersection: any = simple ? val : undefined
 
       for (const codec of codecs) {
         const result = codec.decode(val) as ResultOf<C[number]>
@@ -60,21 +58,21 @@ export const intersection = <C extends readonly AnyCodec[]>(
           ok = false
           errors.push(...result.errors)
         } else if (!simple && ok) {
-          Object.assign(object as any, result.value)
+          intersection = intersect(intersection, result.value)
         }
       }
 
       return ok
-        ? success(object)
+        ? success(intersection)
         : failures(errors as unknown as NonEmptyArray<ErrorOf<C[number]>>)
     },
     simple
       ? (identity as any)
-      : (object) => {
-          const result = {} as IntersectInputsOf<C>
+      : (intersection) => {
+          let result: any
 
           for (const codec of codecs) {
-            Object.assign(result as any, codec.encode(object))
+            result = intersect(result, codec.encode(intersection))
           }
 
           return result
@@ -82,3 +80,6 @@ export const intersection = <C extends readonly AnyCodec[]>(
     { tag: "intersection", simple, codecs }
   )
 }
+
+const intersect = <A, B>(a: A, b: B) =>
+  isObject(a) && isObject(b) ? { ...a, ...b } : b

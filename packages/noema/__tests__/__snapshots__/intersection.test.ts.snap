@@ -4,19 +4,15 @@ exports[`should collect errors from all codecs 1`] = `
 [
   {
     "code": "invalid_type",
-    "expected": "number",
-    "path": [
-      "a",
-    ],
-    "received": "undefined",
+    "expected": "object",
+    "path": [],
+    "received": "null",
   },
   {
     "code": "invalid_type",
-    "expected": "number",
-    "path": [
-      "b",
-    ],
-    "received": "undefined",
+    "expected": "object",
+    "path": [],
+    "received": "null",
   },
 ]
 `;
@@ -29,6 +25,27 @@ exports[`should collect errors from all codecs 2`] = `
     "path": [
       "a",
     ],
+    "received": "undefined",
+  },
+  {
+    "code": "invalid_type",
+    "expected": "number",
+    "path": [
+      "b",
+    ],
+    "received": "undefined",
+  },
+]
+`;
+
+exports[`should collect errors from all codecs 3`] = `
+[
+  {
+    "code": "invalid_type",
+    "expected": "number",
+    "path": [
+      "a",
+    ],
     "received": "string",
   },
   {
@@ -42,13 +59,61 @@ exports[`should collect errors from all codecs 2`] = `
 ]
 `;
 
-exports[`should fail to parse non-objects 1`] = `
+exports[`should work with complex codecs 1`] = `
 [
   {
     "code": "invalid_type",
-    "expected": "object",
+    "expected": "string",
+    "path": [
+      "c",
+    ],
+    "received": "number",
+  },
+]
+`;
+
+exports[`should work with non-object types 1`] = `
+[
+  {
+    "code": "invalid_union",
+    "errors": [
+      {
+        "code": "invalid_type",
+        "expected": "number",
+        "path": [],
+        "received": "boolean",
+      },
+      {
+        "code": "invalid_type",
+        "expected": "string",
+        "path": [],
+        "received": "boolean",
+      },
+    ],
     "path": [],
-    "received": "null",
+  },
+]
+`;
+
+exports[`should work with non-object types 2`] = `
+[
+  {
+    "code": "invalid_union",
+    "errors": [
+      {
+        "code": "invalid_type",
+        "expected": "boolean",
+        "path": [],
+        "received": "string",
+      },
+      {
+        "code": "invalid_type",
+        "expected": "number",
+        "path": [],
+        "received": "string",
+      },
+    ],
+    "path": [],
   },
 ]
 `;
