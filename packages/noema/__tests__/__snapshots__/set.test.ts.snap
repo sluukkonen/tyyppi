@@ -5,6 +5,7 @@ exports[`should reject sets containing elements of the wrong type 1`] = `
   {
     "code": "invalid_type",
     "expected": "number",
+    "message": "Expected a number, received a string",
     "path": [],
     "received": "string",
   },
@@ -16,6 +17,7 @@ exports[`should reject values that are not sets 1`] = `
   {
     "code": "invalid_type",
     "expected": "set",
+    "message": "Expected a set, received an array",
     "path": [],
     "received": "array",
   },

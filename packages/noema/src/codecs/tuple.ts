@@ -62,9 +62,9 @@ export const tuple = <C extends readonly AnyCodec[] | []>(
       if (!isArray(val)) {
         return failure(invalidArray(val))
       } else if (val.length < length) {
-        return failure(tooShort(val.length, length, length))
+        return failure(tooShort(val, length))
       } else if (val.length > length) {
-        return failure(tooLong(val.length, length, length))
+        return failure(tooLong(val, length))
       }
 
       let ok = true

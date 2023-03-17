@@ -5,6 +5,7 @@ exports[`should not accept arrays containing invalid keys 1`] = `
   {
     "code": "invalid_type",
     "expected": "string",
+    "message": "Expected a string, received a number",
     "path": [
       0,
       0,
@@ -19,6 +20,7 @@ exports[`should not accept arrays containing invalid values 1`] = `
   {
     "code": "invalid_type",
     "expected": "number",
+    "message": "Expected a number, received a string",
     "path": [
       0,
       1,
@@ -33,6 +35,7 @@ exports[`should not accept arrays containing non-arrays 1`] = `
   {
     "code": "invalid_type",
     "expected": "array",
+    "message": "Expected an array, received null",
     "path": [
       0,
     ],
@@ -46,6 +49,7 @@ exports[`should not accept non-arrays 1`] = `
   {
     "code": "invalid_type",
     "expected": "array",
+    "message": "Expected an array, received null",
     "path": [],
     "received": "null",
   },
@@ -58,10 +62,11 @@ exports[`should not accept too long tuples 1`] = `
     "code": "too_long",
     "length": 3,
     "maxLength": 2,
-    "minLength": 2,
+    "message": "Expected the array to contain at least 2 element(s)",
     "path": [
       0,
     ],
+    "type": "array",
   },
 ]
 `;
@@ -71,11 +76,12 @@ exports[`should not accept too short tuples 1`] = `
   {
     "code": "too_short",
     "length": 1,
-    "maxLength": 2,
+    "message": "Expected the array to contain at least 2 element(s)",
     "minLength": 2,
     "path": [
       0,
     ],
+    "type": "array",
   },
 ]
 `;

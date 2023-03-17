@@ -5,6 +5,7 @@ exports[`should defer to the underlying codec if the value is not undefined 1`] 
   {
     "code": "invalid_type",
     "expected": "string",
+    "message": "Expected a string, received null",
     "path": [],
     "received": "null",
   },

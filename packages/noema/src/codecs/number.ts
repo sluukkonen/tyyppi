@@ -28,7 +28,7 @@ export const number: NumberCodec = createSimpleCodec(
           isNumber(val)
             ? isNaN(val)
               ? isNaNError()
-              : isInfinite()
+              : isInfinite(val)
             : invalidNumber(val)
         ),
   {

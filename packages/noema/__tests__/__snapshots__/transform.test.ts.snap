@@ -5,6 +5,7 @@ exports[`should fail if the underlying codec fails 1`] = `
   {
     "code": "invalid_type",
     "expected": "string",
+    "message": "Expected a string, received null",
     "path": [],
     "received": "null",
   },

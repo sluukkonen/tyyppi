@@ -1,32 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`delegates to the underlying code if length is missing or is not an integer 1`] = `
+exports[`delegates to the underlying codec if length is missing or is not an integer 1`] = `
 [
   {
     "code": "invalid_type",
     "expected": "array",
+    "message": "Expected an array, received null",
     "path": [],
     "received": "null",
   },
 ]
 `;
 
-exports[`delegates to the underlying code if length is missing or is not an integer 2`] = `
+exports[`delegates to the underlying codec if length is missing or is not an integer 2`] = `
 [
   {
     "code": "invalid_type",
     "expected": "array",
+    "message": "Expected an array, received an object",
     "path": [],
     "received": "object",
   },
 ]
 `;
 
-exports[`delegates to the underlying code if length is missing or is not an integer 3`] = `
+exports[`delegates to the underlying codec if length is missing or is not an integer 3`] = `
 [
   {
     "code": "invalid_type",
     "expected": "array",
+    "message": "Expected an array, received an object",
     "path": [],
     "received": "object",
   },
@@ -39,8 +42,22 @@ exports[`fails to parse if the length is above the maximum length 1`] = `
     "code": "too_long",
     "length": 2,
     "maxLength": 1,
-    "minLength": undefined,
+    "message": "Expected the array to contain at least 1 element(s)",
     "path": [],
+    "type": "array",
+  },
+]
+`;
+
+exports[`fails to parse if the length is above the maximum length 2`] = `
+[
+  {
+    "code": "too_long",
+    "length": 2,
+    "maxLength": 1,
+    "message": "Expected the string to contain at least 1 character(s)",
+    "path": [],
+    "type": "string",
   },
 ]
 `;

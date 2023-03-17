@@ -42,9 +42,9 @@ export const clamp = <C extends Codec<any, Ordered>>(
       const result = codec.decode(val) as ResultOf<C>
       return result.ok
         ? result.value < min
-          ? failure(tooSmall(min, max))
+          ? failure(tooSmall(result.value, min))
           : result.value > max
-          ? failure(tooLarge(max, min))
+          ? failure(tooLarge(result.value, max))
           : result
         : result
     },

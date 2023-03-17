@@ -8,16 +8,19 @@ exports[`should work with multiple members 1`] = `
       {
         "code": "invalid_type",
         "expected": "string",
+        "message": "Expected a string, received an object",
         "path": [],
         "received": "object",
       },
       {
         "code": "invalid_type",
         "expected": "number",
+        "message": "Expected a number, received an object",
         "path": [],
         "received": "object",
       },
     ],
+    "message": "Invalid union",
     "path": [],
   },
 ]

@@ -14,11 +14,11 @@ test("should fail to parse non-objects", () => {
   expectParseFailure(Vehicle, null)
 })
 
-test("should fail to objects without the proper tag", () => {
+test("should fail to parse objects without the proper tag", () => {
   expectParseFailure(Vehicle, { foo: "bar" })
 })
 
-test("should fail to objects where the tag does not match", () => {
+test("should fail to parse objects where the tag does not match", () => {
   expectParseFailure(Vehicle, { type: "boat" })
 })
 

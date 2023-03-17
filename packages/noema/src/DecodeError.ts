@@ -1,8 +1,9 @@
 import { Literal, Ordered, TypeName } from "./types.js"
-import { getType } from "./utils.js"
+import { getType, isString } from "./utils.js"
 
 export interface DecodeError {
   readonly code: string
+  readonly message: string
   readonly path: (string | number)[]
 }
 
@@ -16,12 +17,18 @@ export interface InvalidType<T extends TypeName = TypeName>
 export const invalidType = <T extends TypeName>(
   expected: T,
   value: unknown
-): InvalidType<T> => ({
-  code: "invalid_type",
-  expected,
-  received: getType(value),
-  path: [],
-})
+): InvalidType<T> => {
+  const received = getType(value)
+  return {
+    code: "invalid_type",
+    message: `Expected ${indefinite(expected)}, received ${indefinite(
+      received
+    )}`,
+    expected,
+    received,
+    path: [],
+  }
+}
 
 export type InvalidArray = InvalidType<"array">
 export const invalidArray = (value: unknown): InvalidArray =>
@@ -73,21 +80,31 @@ export interface InvalidEmail extends DecodeError {
 
 export const invalidEmail = (): InvalidEmail => ({
   code: "invalid_email",
+  message: "Expected the string to be a valid email address",
   path: [],
 })
 
 export interface InvalidEnum<T extends Literal> extends DecodeError {
   readonly code: "invalid_enum"
+  readonly received: TypeName
   readonly members: readonly T[]
 }
 
 export const invalidEnum = <T extends Literal>(
+  value: unknown,
   members: readonly T[]
-): InvalidEnum<T> => ({
-  code: "invalid_enum",
-  members,
-  path: [],
-})
+): InvalidEnum<T> => {
+  const received = getType(value)
+  return {
+    code: "invalid_enum",
+    message: `Expected ${stringifyOptions(members)}, received ${indefinite(
+      received
+    )}`,
+    members,
+    received,
+    path: [],
+  }
+}
 
 export interface InvalidInteger extends DecodeError {
   readonly code: "invalid_integer"
@@ -95,6 +112,7 @@ export interface InvalidInteger extends DecodeError {
 
 export const invalidInteger = (): InvalidInteger => ({
   code: "invalid_integer",
+  message: "Expected the number to be an integer",
   path: [],
 })
 
@@ -104,6 +122,7 @@ export interface InvalidISOString extends DecodeError {
 
 export const invalidISOString = (): InvalidISOString => ({
   code: "invalid_iso_string",
+  message: "Expected the string to be a valid RFC 3339 date-time",
   path: [],
 })
 
@@ -113,32 +132,46 @@ export interface InvalidIntegerString extends DecodeError {
 
 export const invalidIntegerString = (): InvalidIntegerString => ({
   code: "invalid_integer_string",
+  message: "Expected the string to be an integer",
   path: [],
 })
 
 export interface InvalidLiteral<T extends Literal> extends DecodeError {
   readonly code: "invalid_literal"
   readonly expected: T
+  readonly received: TypeName
 }
 
 export const invalidLiteral = <T extends Literal>(
+  value: unknown,
   expected: T
-): InvalidLiteral<T> => ({
-  code: "invalid_literal",
-  expected,
-  path: [],
-})
+): InvalidLiteral<T> => {
+  const received = getType(value)
+  return {
+    code: "invalid_literal",
+    message: `Expected ${stringify(expected)}, received ${indefinite(
+      received
+    )}`,
+    expected,
+    received,
+    path: [],
+  }
+}
 
 export interface InvalidPattern extends DecodeError {
   readonly code: "invalid_pattern"
   readonly pattern: string
 }
 
-export const invalidPattern = (regexp: RegExp): InvalidPattern => ({
-  code: "invalid_pattern",
-  pattern: regexp.toString(),
-  path: [],
-})
+export const invalidPattern = (regexp: RegExp): InvalidPattern => {
+  const pattern = regexp.toString()
+  return {
+    code: "invalid_pattern",
+    message: `Expected the string to match the pattern ${pattern}`,
+    pattern,
+    path: [],
+  }
+}
 
 export interface InvalidTaggedUnion<V extends Literal> extends DecodeError {
   readonly code: "invalid_tagged_union"
@@ -147,12 +180,19 @@ export interface InvalidTaggedUnion<V extends Literal> extends DecodeError {
 
 export const invalidTaggedUnion = <V extends Literal>(
   key: string,
+  value: unknown,
   options: readonly V[]
-): InvalidTaggedUnion<V> => ({
-  code: "invalid_tagged_union",
-  options,
-  path: [key],
-})
+): InvalidTaggedUnion<V> => {
+  const received = getType(value)
+  return {
+    code: "invalid_tagged_union",
+    message: `Expected ${stringifyOptions(options)}, received ${indefinite(
+      received
+    )}`,
+    options,
+    path: [key],
+  }
+}
 
 export interface InvalidUnion<E extends DecodeError> extends DecodeError {
   readonly code: "invalid_union"
@@ -163,6 +203,7 @@ export const invalidUnion = <E extends DecodeError>(
   errors: readonly E[]
 ): InvalidUnion<E> => ({
   code: "invalid_union",
+  message: "Invalid union",
   errors,
   path: [],
 })
@@ -173,6 +214,7 @@ export interface InvalidUuid extends DecodeError {
 
 export const invalidUuid = (): InvalidUuid => ({
   code: "invalid_uuid",
+  message: "Expected the string to be an UUID",
   path: [],
 })
 
@@ -180,74 +222,112 @@ export interface IsInfinite extends DecodeError {
   readonly code: "is_infinite"
 }
 
-export const isInfinite = (): IsInfinite => ({ code: "is_infinite", path: [] })
+export const isInfinite = (value: number): IsInfinite => ({
+  code: "is_infinite",
+  message: `Expected a finite number, received ${value}`,
+  path: [],
+})
 
 export interface IsNaN extends DecodeError {
   readonly code: "is_nan"
 }
 
-export const isNaNError = (): IsNaN => ({ code: "is_nan", path: [] })
+export const isNaNError = (): IsNaN => ({
+  code: "is_nan",
+  message: "Expected a number, received NaN",
+  path: [],
+})
 
 export interface TooLarge<T extends Ordered> extends DecodeError {
   readonly code: "too_large"
-  readonly min?: T
   readonly max: T
+  readonly type: TypeName
 }
 
-export const tooLarge = <T extends Ordered>(max: T, min?: T): TooLarge<T> => ({
-  code: "too_large",
-  min,
-  max,
-  path: [],
-})
+export const tooLarge = <T extends Ordered>(val: T, max: T): TooLarge<T> => {
+  const type = getType(val)
+  return {
+    code: "too_large",
+    message: `Expected the ${type} to be less than or equal to ${max}`,
+    max,
+    type,
+    path: [],
+  }
+}
 
 export interface TooLong extends DecodeError {
   readonly code: "too_long"
-  readonly minLength?: number
-  readonly maxLength: number
   readonly length: number
+  readonly maxLength: number
+  readonly type: TypeName
 }
 
 export const tooLong = (
-  length: number,
-  maxLength: number,
-  minLength?: number
-): TooLong => ({
-  code: "too_long",
-  length,
-  minLength,
-  maxLength,
-  path: [],
-})
+  value: string | readonly unknown[],
+  maxLength: number
+): TooLong => {
+  const type = getType(value)
+  return {
+    code: "too_long",
+    message: `Expected the ${type} to contain at least ${maxLength} ${
+      type === "string" ? "character" : "element"
+    }(s)`,
+    length: value.length,
+    maxLength,
+    type,
+    path: [],
+  }
+}
 
 export interface TooShort extends DecodeError {
   readonly code: "too_short"
-  readonly minLength: number
-  readonly maxLength?: number
   readonly length: number
+  readonly minLength: number
+  readonly type: TypeName
 }
 
 export const tooShort = (
-  length: number,
-  minLength: number,
-  maxLength?: number
-): TooShort => ({
-  code: "too_short",
-  length,
-  minLength,
-  maxLength,
-  path: [],
-})
+  value: string | readonly unknown[],
+  minLength: number
+): TooShort => {
+  const type = getType(value)
+  return {
+    code: "too_short",
+    message: `Expected the ${type} to contain at least ${minLength} ${
+      type === "string" ? "character" : "element"
+    }(s)`,
+    length: value.length,
+    minLength,
+    type,
+    path: [],
+  }
+}
 
 export interface TooSmall<T extends Ordered> extends DecodeError {
   readonly code: "too_small"
+  readonly type: TypeName
   readonly min: T
-  readonly max?: T
 }
 
-export const tooSmall = <T extends Ordered>(min: T, max?: T): TooSmall<T> => ({
-  code: "too_small",
-  min,
-  max,
-  path: [],
-})
+export const tooSmall = <T extends Ordered>(value: T, min: T): TooSmall<T> => {
+  const type = getType(value)
+  return {
+    code: "too_small",
+    message: `Expected the ${type} to be greater than or equal to ${min}`,
+    min,
+    type,
+    path: [],
+  }
+}
+export const indefinite = (type: TypeName) =>
+  type === "null" || type === "undefined"
+    ? type
+    : type === "array" || type === "object" || type === "error"
+    ? `an ${type}`
+    : `a ${type}`
+
+export const stringify = (value: Literal): string =>
+  isString(value) ? JSON.stringify(value) : String(value)
+
+const stringifyOptions = (options: readonly Literal[]) =>
+  options.map(stringify).join(" | ")

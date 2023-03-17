@@ -4,6 +4,7 @@ exports[`should fail to parse if the predicate returns false 1`] = `
 [
   {
     "code": "hmm",
+    "message": "hmm?",
     "path": [],
   },
 ]
@@ -14,6 +15,7 @@ exports[`should fail to parse if the underlying codec fails to parse the value 1
   {
     "code": "invalid_type",
     "expected": "string",
+    "message": "Expected a string, received a number",
     "path": [],
     "received": "number",
   },

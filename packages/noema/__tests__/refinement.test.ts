@@ -19,7 +19,7 @@ test("should fail to parse if the predicate returns false", () => {
     refinement(
       unknown,
       () => false,
-      () => ({ code: "hmm", path: [] })
+      () => ({ code: "hmm", message: "hmm?", path: [] })
     ),
     1
   )
@@ -43,7 +43,7 @@ test("should allow configuring the metadata", () => {
   const codec = refinement(
     string,
     () => true,
-    () => ({ code: "hmm", path: [] }),
+    () => ({ code: "hmm", message: "hmm?", path: [] }),
     meta
   )
   expect(codec.meta).toEqual(meta)

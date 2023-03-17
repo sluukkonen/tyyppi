@@ -32,7 +32,7 @@ export const integer: IntegerCodec = createSimpleCodec(
               ? invalidInteger()
               : isNaN(val)
               ? isNaNError()
-              : isInfinite()
+              : isInfinite(val)
             : invalidNumber(val)
         ),
   {

@@ -5,9 +5,10 @@ exports[`should reject arrays that have incorrect length 1`] = `
   {
     "code": "too_short",
     "length": 0,
-    "maxLength": 1,
+    "message": "Expected the array to contain at least 1 element(s)",
     "minLength": 1,
     "path": [],
+    "type": "array",
   },
 ]
 `;
@@ -18,8 +19,9 @@ exports[`should reject arrays that have incorrect length 2`] = `
     "code": "too_long",
     "length": 2,
     "maxLength": 1,
-    "minLength": 1,
+    "message": "Expected the array to contain at least 1 element(s)",
     "path": [],
+    "type": "array",
   },
 ]
 `;
@@ -29,6 +31,7 @@ exports[`should reject invalid values 1`] = `
   {
     "code": "invalid_type",
     "expected": "array",
+    "message": "Expected an array, received null",
     "path": [],
     "received": "null",
   },
@@ -40,6 +43,7 @@ exports[`should reject invalid values 2`] = `
   {
     "code": "invalid_type",
     "expected": "number",
+    "message": "Expected a number, received a string",
     "path": [
       1,
     ],

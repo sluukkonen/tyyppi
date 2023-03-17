@@ -19,6 +19,6 @@ export const literal = <T extends Literal>(value: T): LiteralCodec<T> =>
     (val) =>
       val === value || (value !== value && val !== val)
         ? success(val as T)
-        : failure(invalidLiteral(value)),
+        : failure(invalidLiteral(val, value)),
     { tag: "literal", simple: true, value }
   )

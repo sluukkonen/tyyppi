@@ -5,6 +5,7 @@ exports[`path should nest with nested records 1`] = `
   {
     "code": "invalid_type",
     "expected": "string",
+    "message": "Expected a string, received a number",
     "path": [
       "a",
       "b",
@@ -19,6 +20,7 @@ exports[`should not parse arrays 1`] = `
   {
     "code": "invalid_type",
     "expected": "object",
+    "message": "Expected an object, received an array",
     "path": [],
     "received": "array",
   },
@@ -30,6 +32,7 @@ exports[`should not parse non-objects 1`] = `
   {
     "code": "invalid_type",
     "expected": "object",
+    "message": "Expected an object, received a string",
     "path": [],
     "received": "string",
   },
@@ -41,6 +44,7 @@ exports[`should not parse null 1`] = `
   {
     "code": "invalid_type",
     "expected": "object",
+    "message": "Expected an object, received null",
     "path": [],
     "received": "null",
   },
@@ -52,9 +56,11 @@ exports[`should not parse records with invalid keys 1`] = `
   {
     "code": "invalid_literal",
     "expected": "a",
+    "message": "Expected "a", received a string",
     "path": [
       "b",
     ],
+    "received": "string",
   },
 ]
 `;
@@ -64,6 +70,7 @@ exports[`should not parse records with invalid values 1`] = `
   {
     "code": "invalid_type",
     "expected": "string",
+    "message": "Expected a string, received a number",
     "path": [
       "b",
     ],

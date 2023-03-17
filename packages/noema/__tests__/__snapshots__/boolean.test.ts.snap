@@ -5,6 +5,7 @@ exports[`should not parse non-booleans 1`] = `
   {
     "code": "invalid_type",
     "expected": "boolean",
+    "message": "Expected a boolean, received a string",
     "path": [],
     "received": "string",
   },

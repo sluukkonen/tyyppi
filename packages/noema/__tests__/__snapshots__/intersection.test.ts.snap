@@ -5,12 +5,14 @@ exports[`should collect errors from all codecs 1`] = `
   {
     "code": "invalid_type",
     "expected": "object",
+    "message": "Expected an object, received null",
     "path": [],
     "received": "null",
   },
   {
     "code": "invalid_type",
     "expected": "object",
+    "message": "Expected an object, received null",
     "path": [],
     "received": "null",
   },
@@ -22,6 +24,7 @@ exports[`should collect errors from all codecs 2`] = `
   {
     "code": "invalid_type",
     "expected": "number",
+    "message": "Expected a number, received undefined",
     "path": [
       "a",
     ],
@@ -30,6 +33,7 @@ exports[`should collect errors from all codecs 2`] = `
   {
     "code": "invalid_type",
     "expected": "number",
+    "message": "Expected a number, received undefined",
     "path": [
       "b",
     ],
@@ -43,6 +47,7 @@ exports[`should collect errors from all codecs 3`] = `
   {
     "code": "invalid_type",
     "expected": "number",
+    "message": "Expected a number, received a string",
     "path": [
       "a",
     ],
@@ -51,6 +56,7 @@ exports[`should collect errors from all codecs 3`] = `
   {
     "code": "invalid_type",
     "expected": "number",
+    "message": "Expected a number, received a string",
     "path": [
       "b",
     ],
@@ -64,6 +70,7 @@ exports[`should work with complex codecs 1`] = `
   {
     "code": "invalid_type",
     "expected": "string",
+    "message": "Expected a string, received a number",
     "path": [
       "c",
     ],
@@ -80,16 +87,19 @@ exports[`should work with non-object types 1`] = `
       {
         "code": "invalid_type",
         "expected": "number",
+        "message": "Expected a number, received a boolean",
         "path": [],
         "received": "boolean",
       },
       {
         "code": "invalid_type",
         "expected": "string",
+        "message": "Expected a string, received a boolean",
         "path": [],
         "received": "boolean",
       },
     ],
+    "message": "Invalid union",
     "path": [],
   },
 ]
@@ -103,16 +113,19 @@ exports[`should work with non-object types 2`] = `
       {
         "code": "invalid_type",
         "expected": "boolean",
+        "message": "Expected a boolean, received a string",
         "path": [],
         "received": "string",
       },
       {
         "code": "invalid_type",
         "expected": "number",
+        "message": "Expected a number, received a string",
         "path": [],
         "received": "string",
       },
     ],
+    "message": "Invalid union",
     "path": [],
   },
 ]

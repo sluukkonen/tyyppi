@@ -5,6 +5,7 @@ exports[`should not accept non-strings 1`] = `
   {
     "code": "invalid_type",
     "expected": "string",
+    "message": "Expected a string, received null",
     "path": [],
     "received": "null",
   },
@@ -15,6 +16,7 @@ exports[`should not accept other strings 1`] = `
 [
   {
     "code": "invalid_email",
+    "message": "Expected the string to be a valid email address",
     "path": [],
   },
 ]

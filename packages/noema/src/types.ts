@@ -1,13 +1,6 @@
-export type Literal =
-  | string
-  | number
-  | bigint
-  | boolean
-  | undefined
-  | symbol
-  | null
+export type Literal = string | number | bigint | boolean | undefined | null
 
-export type Ordered = number | bigint | string | Date | boolean
+export type Ordered = number | bigint | string | Date
 
 export type HasLength = string | unknown[]
 

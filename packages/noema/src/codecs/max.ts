@@ -35,7 +35,7 @@ export const max = <C extends Codec<any, Ordered>>(
       const result = codec.decode(val) as ResultOf<C>
       return result.ok
         ? result.value > max
-          ? failure(tooLarge(max))
+          ? failure(tooLarge(result.value, max))
           : result
         : result
     },

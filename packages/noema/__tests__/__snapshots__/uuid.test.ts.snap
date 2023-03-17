@@ -5,6 +5,7 @@ exports[`should not parse non-strings 1`] = `
   {
     "code": "invalid_type",
     "expected": "string",
+    "message": "Expected a string, received null",
     "path": [],
     "received": "null",
   },
@@ -15,6 +16,7 @@ exports[`should not parse other strings 1`] = `
 [
   {
     "code": "invalid_uuid",
+    "message": "Expected the string to be an UUID",
     "path": [],
   },
 ]

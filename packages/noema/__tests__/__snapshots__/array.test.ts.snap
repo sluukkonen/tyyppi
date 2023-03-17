@@ -5,6 +5,7 @@ exports[`should fail to parse arrays with invalid values 1`] = `
   {
     "code": "invalid_type",
     "expected": "number",
+    "message": "Expected a number, received a string",
     "path": [
       1,
     ],
@@ -18,6 +19,7 @@ exports[`should fail to parse non-arrays 1`] = `
   {
     "code": "invalid_type",
     "expected": "array",
+    "message": "Expected an array, received a number",
     "path": [],
     "received": "number",
   },
@@ -29,6 +31,7 @@ exports[`the path property works within an object 1`] = `
   {
     "code": "invalid_type",
     "expected": "number",
+    "message": "Expected a number, received a string",
     "path": [
       "a",
       0,

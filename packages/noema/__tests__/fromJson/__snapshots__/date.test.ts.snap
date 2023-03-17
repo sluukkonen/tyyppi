@@ -4,6 +4,7 @@ exports[`should reject invalid strings 1`] = `
 [
   {
     "code": "invalid_iso_string",
+    "message": "Expected the string to be a valid RFC 3339 date-time",
     "path": [],
   },
 ]
@@ -14,6 +15,7 @@ exports[`should reject non-strings 1`] = `
   {
     "code": "invalid_type",
     "expected": "string",
+    "message": "Expected a string, received null",
     "path": [],
     "received": "null",
   },

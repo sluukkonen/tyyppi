@@ -5,8 +5,9 @@ exports[`should fail to parse if value is outside the bounds 1`] = `
   {
     "code": "too_large",
     "max": 1,
-    "min": 0,
+    "message": "Expected the number to be less than or equal to 1",
     "path": [],
+    "type": "number",
   },
 ]
 `;
@@ -15,9 +16,10 @@ exports[`should fail to parse if value is outside the bounds 2`] = `
 [
   {
     "code": "too_small",
-    "max": 1,
+    "message": "Expected the number to be greater than or equal to 0",
     "min": 0,
     "path": [],
+    "type": "number",
   },
 ]
 `;
@@ -27,6 +29,7 @@ exports[`should fail to parse if value isn't parsed by the underlying codec 1`] 
   {
     "code": "invalid_type",
     "expected": "number",
+    "message": "Expected a number, received a string",
     "path": [],
     "received": "string",
   },

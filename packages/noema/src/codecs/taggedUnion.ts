@@ -294,12 +294,13 @@ export function taggedUnion<
     (val) => {
       if (!isObject(val)) return failure(invalidObject(val))
       if (!hasOwnProperty(val, key))
-        return failure(invalidTaggedUnion(key, options))
+        return failure(invalidTaggedUnion(key, undefined, options))
 
-      const codec = codecs.get(val[key] as V)
+      const value = val[key]
+      const codec = codecs.get(value as V)
       return codec
         ? (codec.decode(val) as any)
-        : failure(invalidTaggedUnion(key, options))
+        : failure(invalidTaggedUnion(key, value, options))
     },
     simple
       ? identity

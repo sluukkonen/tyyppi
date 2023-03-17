@@ -5,6 +5,7 @@ exports[`should fail to parse other values 1`] = `
   {
     "code": "invalid_type",
     "expected": "bigint",
+    "message": "Expected a bigint, received a number",
     "path": [],
     "received": "number",
   },

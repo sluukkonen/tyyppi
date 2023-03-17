@@ -5,6 +5,7 @@ exports[`should not parse other values 1`] = `
   {
     "code": "invalid_type",
     "expected": "null",
+    "message": "Expected null, received an object",
     "path": [],
     "received": "object",
   },
@@ -16,6 +17,7 @@ exports[`should not parse other values 2`] = `
   {
     "code": "invalid_type",
     "expected": "null",
+    "message": "Expected null, received undefined",
     "path": [],
     "received": "undefined",
   },
@@ -27,6 +29,7 @@ exports[`should not parse other values 3`] = `
   {
     "code": "invalid_type",
     "expected": "null",
+    "message": "Expected null, received a map",
     "path": [],
     "received": "map",
   },
@@ -38,6 +41,7 @@ exports[`should not parse other values 4`] = `
   {
     "code": "invalid_type",
     "expected": "null",
+    "message": "Expected null, received a set",
     "path": [],
     "received": "set",
   },
@@ -49,6 +53,7 @@ exports[`should not parse other values 5`] = `
   {
     "code": "invalid_type",
     "expected": "null",
+    "message": "Expected null, received a promise",
     "path": [],
     "received": "promise",
   },
@@ -60,6 +65,7 @@ exports[`should not parse other values 6`] = `
   {
     "code": "invalid_type",
     "expected": "null",
+    "message": "Expected null, received an error",
     "path": [],
     "received": "error",
   },
@@ -71,6 +77,7 @@ exports[`should not parse other values 7`] = `
   {
     "code": "invalid_type",
     "expected": "null",
+    "message": "Expected null, received a date",
     "path": [],
     "received": "date",
   },
@@ -82,6 +89,7 @@ exports[`should not parse other values 8`] = `
   {
     "code": "invalid_type",
     "expected": "null",
+    "message": "Expected null, received a regexp",
     "path": [],
     "received": "regexp",
   },
@@ -93,6 +101,7 @@ exports[`should not parse other values 9`] = `
   {
     "code": "invalid_type",
     "expected": "null",
+    "message": "Expected null, received an object",
     "path": [],
     "received": "object",
   },

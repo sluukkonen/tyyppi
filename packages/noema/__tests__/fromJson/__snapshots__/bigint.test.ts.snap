@@ -4,6 +4,7 @@ exports[`should not parse invalid strings 1`] = `
 [
   {
     "code": "invalid_integer_string",
+    "message": "Expected the string to be an integer",
     "path": [],
   },
 ]
@@ -13,6 +14,7 @@ exports[`should not parse invalid strings 2`] = `
 [
   {
     "code": "invalid_integer_string",
+    "message": "Expected the string to be an integer",
     "path": [],
   },
 ]
@@ -22,6 +24,7 @@ exports[`should not parse invalid strings 3`] = `
 [
   {
     "code": "invalid_integer_string",
+    "message": "Expected the string to be an integer",
     "path": [],
   },
 ]
@@ -32,6 +35,7 @@ exports[`should not parse non-strings 1`] = `
   {
     "code": "invalid_type",
     "expected": "string",
+    "message": "Expected a string, received null",
     "path": [],
     "received": "null",
   },
@@ -42,6 +46,7 @@ exports[`should only accept integers 1`] = `
 [
   {
     "code": "invalid_integer_string",
+    "message": "Expected the string to be an integer",
     "path": [],
   },
 ]

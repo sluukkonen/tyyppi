@@ -5,6 +5,7 @@ exports[`should reject non-strings 1`] = `
   {
     "code": "invalid_type",
     "expected": "string",
+    "message": "Expected a string, received null",
     "path": [],
     "received": "null",
   },
@@ -15,6 +16,7 @@ exports[`should reject strings not matching the pattern 1`] = `
 [
   {
     "code": "invalid_pattern",
+    "message": "Expected the string to match the pattern /^\\s*$/",
     "path": [],
     "pattern": "/^\\s*$/",
   },

@@ -34,7 +34,7 @@ export const minLength = <C extends Codec<HasLength, any>>(
   createCodec(
     (val): Result<TypeOf<C>, ErrorOf<C> | TooShort> =>
       hasLength(val) && val.length < minLength
-        ? failure(tooShort(val.length, minLength))
+        ? failure(tooShort(val, minLength))
         : (codec.decode(val) as ResultOf<C>),
     codec.encode as (value: TypeOf<C>) => InputOf<C>,
     { tag: "minLength", simple: codec.meta.simple, codec, minLength }

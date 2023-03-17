@@ -34,10 +34,8 @@ export const length = <C extends Codec<HasLength, any>>(
   createCodec(
     (val): Result<TypeOf<C>, ErrorOf<C> | TooShort | TooLong> => {
       if (hasLength(val)) {
-        if (val.length < length)
-          return failure(tooShort(val.length, length, length))
-        if (val.length > length)
-          return failure(tooLong(val.length, length, length))
+        if (val.length < length) return failure(tooShort(val, length))
+        if (val.length > length) return failure(tooLong(val, length))
       }
 
       return codec.decode(val) as ResultOf<C>

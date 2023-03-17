@@ -5,6 +5,7 @@ exports[`should not parse arrays with invalid values 1`] = `
   {
     "code": "invalid_type",
     "expected": "number",
+    "message": "Expected a number, received a string",
     "path": [
       0,
     ],
@@ -13,6 +14,7 @@ exports[`should not parse arrays with invalid values 1`] = `
   {
     "code": "invalid_type",
     "expected": "number",
+    "message": "Expected a number, received a string",
     "path": [
       1,
     ],
@@ -21,6 +23,7 @@ exports[`should not parse arrays with invalid values 1`] = `
   {
     "code": "invalid_type",
     "expected": "number",
+    "message": "Expected a number, received a string",
     "path": [
       2,
     ],
@@ -34,6 +37,7 @@ exports[`should not parse non-arrays 1`] = `
   {
     "code": "invalid_type",
     "expected": "array",
+    "message": "Expected an array, received null",
     "path": [],
     "received": "null",
   },

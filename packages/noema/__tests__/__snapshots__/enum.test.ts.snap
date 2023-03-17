@@ -8,7 +8,24 @@ exports[`should reject other values 1`] = `
       1,
       2,
     ],
+    "message": "Expected 1 | 2, received a number",
     "path": [],
+    "received": "number",
+  },
+]
+`;
+
+exports[`should reject other values 2`] = `
+[
+  {
+    "code": "invalid_enum",
+    "members": [
+      1n,
+      2n,
+    ],
+    "message": "Expected 1 | 2, received a bigint",
+    "path": [],
+    "received": "bigint",
   },
 ]
 `;

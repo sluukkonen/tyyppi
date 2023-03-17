@@ -5,6 +5,7 @@ exports[`should fail to parse an object with the value 1`] = `
   {
     "code": "invalid_type",
     "expected": "string",
+    "message": "Expected a string, received a number",
     "path": [
       "a",
     ],
@@ -18,6 +19,7 @@ exports[`should fail to parse non-objects 1`] = `
   {
     "code": "invalid_type",
     "expected": "object",
+    "message": "Expected an object, received a string",
     "path": [],
     "received": "string",
   },
@@ -29,6 +31,7 @@ exports[`should not accept arrays 1`] = `
   {
     "code": "invalid_type",
     "expected": "object",
+    "message": "Expected an object, received an array",
     "path": [],
     "received": "array",
   },
@@ -40,6 +43,7 @@ exports[`should not accept null values 1`] = `
   {
     "code": "invalid_type",
     "expected": "object",
+    "message": "Expected an object, received null",
     "path": [],
     "received": "null",
   },
@@ -51,6 +55,7 @@ exports[`should only consider own properties 1`] = `
   {
     "code": "invalid_type",
     "expected": "number",
+    "message": "Expected a number, received undefined",
     "path": [
       "a",
     ],
@@ -64,6 +69,7 @@ exports[`the path property should work with nested objects 1`] = `
   {
     "code": "invalid_type",
     "expected": "string",
+    "message": "Expected a string, received a number",
     "path": [
       "a",
       "b",

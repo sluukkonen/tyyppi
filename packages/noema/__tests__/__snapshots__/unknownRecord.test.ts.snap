@@ -5,6 +5,7 @@ exports[`should not parse an array 1`] = `
   {
     "code": "invalid_type",
     "expected": "object",
+    "message": "Expected an object, received an array",
     "path": [],
     "received": "array",
   },
@@ -16,6 +17,7 @@ exports[`should not parse null 1`] = `
   {
     "code": "invalid_type",
     "expected": "object",
+    "message": "Expected an object, received null",
     "path": [],
     "received": "null",
   },

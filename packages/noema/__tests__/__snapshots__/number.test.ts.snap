@@ -5,6 +5,7 @@ exports[`should fail to parse non-numbers 1`] = `
   {
     "code": "invalid_type",
     "expected": "number",
+    "message": "Expected a number, received a string",
     "path": [],
     "received": "string",
   },
@@ -15,6 +16,7 @@ exports[`should not parse -Infinity 1`] = `
 [
   {
     "code": "is_infinite",
+    "message": "Expected a finite number, received -Infinity",
     "path": [],
   },
 ]
@@ -24,6 +26,7 @@ exports[`should not parse Infinity 1`] = `
 [
   {
     "code": "is_infinite",
+    "message": "Expected a finite number, received Infinity",
     "path": [],
   },
 ]
@@ -33,6 +36,7 @@ exports[`should not parse a NaN 1`] = `
 [
   {
     "code": "is_nan",
+    "message": "Expected a number, received NaN",
     "path": [],
   },
 ]

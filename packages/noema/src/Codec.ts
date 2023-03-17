@@ -70,7 +70,11 @@ export function createCodec<I, T, E extends DecodeError, M extends Metadata>(
   function decodeOrThrow(value: unknown) {
     const result = decode(value)
     if (result.ok) return result.value
-    else throw new NoemaError("", result.errors)
+    else
+      throw new NoemaError(
+        `Found ${result.errors.length} validation error(s)`,
+        result.errors
+      )
   }
   return Object.assign(Object.create(codecProto), {
     decode,

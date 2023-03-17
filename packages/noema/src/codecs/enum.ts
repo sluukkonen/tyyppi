@@ -18,7 +18,9 @@ function enumCodec<T extends Literal>(...members: readonly T[]): EnumCodec<T> {
   const set = new Set(members)
   return createSimpleCodec(
     (val) =>
-      set.has(val as T) ? success(val as T) : failure(invalidEnum(members)),
+      set.has(val as T)
+        ? success(val as T)
+        : failure(invalidEnum(val, members)),
     { tag: "enum", simple: true, members }
   )
 }

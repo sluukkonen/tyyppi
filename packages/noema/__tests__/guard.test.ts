@@ -12,7 +12,11 @@ test("should parse successfully if the predicate returns true", () => {
 
 test("should fail to parse if the predicate returns false", () => {
   expectParseFailure(
-    guard(unknown, Array.isArray, () => ({ code: "hmm", path: [] })),
+    guard(unknown, Array.isArray, () => ({
+      code: "hmm",
+      message: "hmm?",
+      path: [],
+    })),
     1
   )
 })

@@ -7,6 +7,7 @@ test("should parse valid literal", () => {
 
 test("should fail to parse anything else", () => {
   expectParseFailure(literal("a"), "")
+  expectParseFailure(literal(0n), "")
 })
 
 test("NaN handling", () => {

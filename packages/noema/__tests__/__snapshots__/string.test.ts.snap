@@ -5,6 +5,7 @@ exports[`should fail to parse non-strings 1`] = `
   {
     "code": "invalid_type",
     "expected": "string",
+    "message": "Expected a string, received a number",
     "path": [],
     "received": "number",
   },

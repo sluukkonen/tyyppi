@@ -5,6 +5,7 @@ exports[`fails to parse if length property is missing or is not an integer 1`] =
   {
     "code": "invalid_type",
     "expected": "string",
+    "message": "Expected a string, received null",
     "path": [],
     "received": "null",
   },
@@ -16,6 +17,7 @@ exports[`fails to parse if length property is missing or is not an integer 2`] =
   {
     "code": "invalid_type",
     "expected": "string",
+    "message": "Expected a string, received an object",
     "path": [],
     "received": "object",
   },
@@ -27,6 +29,7 @@ exports[`fails to parse if length property is missing or is not an integer 3`] =
   {
     "code": "invalid_type",
     "expected": "string",
+    "message": "Expected a string, received an object",
     "path": [],
     "received": "object",
   },
@@ -39,8 +42,9 @@ exports[`fails to parse if the length is above the maximum length 1`] = `
     "code": "too_long",
     "length": 3,
     "maxLength": 2,
-    "minLength": 2,
+    "message": "Expected the string to contain at least 2 character(s)",
     "path": [],
+    "type": "string",
   },
 ]
 `;
@@ -50,9 +54,10 @@ exports[`fails to parse if the length is below the minimum length 1`] = `
   {
     "code": "too_short",
     "length": 1,
-    "maxLength": 2,
+    "message": "Expected the string to contain at least 2 character(s)",
     "minLength": 2,
     "path": [],
+    "type": "string",
   },
 ]
 `;

@@ -5,7 +5,21 @@ exports[`should fail to parse anything else 1`] = `
   {
     "code": "invalid_literal",
     "expected": "a",
+    "message": "Expected "a", received a string",
     "path": [],
+    "received": "string",
+  },
+]
+`;
+
+exports[`should fail to parse anything else 2`] = `
+[
+  {
+    "code": "invalid_literal",
+    "expected": 0n,
+    "message": "Expected 0, received a string",
+    "path": [],
+    "received": "string",
   },
 ]
 `;

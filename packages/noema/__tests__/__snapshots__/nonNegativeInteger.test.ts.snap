@@ -4,6 +4,7 @@ exports[`should not accept NaN 1`] = `
 [
   {
     "code": "is_nan",
+    "message": "Expected a number, received NaN",
     "path": [],
   },
 ]
@@ -13,9 +14,10 @@ exports[`should not accept negative integers 1`] = `
 [
   {
     "code": "too_small",
-    "max": undefined,
+    "message": "Expected the number to be greater than or equal to 0",
     "min": 0,
     "path": [],
+    "type": "number",
   },
 ]
 `;
@@ -24,9 +26,10 @@ exports[`should not accept negative integers 2`] = `
 [
   {
     "code": "too_small",
-    "max": undefined,
+    "message": "Expected the number to be greater than or equal to 0",
     "min": 0,
     "path": [],
+    "type": "number",
   },
 ]
 `;
@@ -35,9 +38,10 @@ exports[`should not accept negative integers 3`] = `
 [
   {
     "code": "too_small",
-    "max": undefined,
+    "message": "Expected the number to be greater than or equal to 0",
     "min": 0,
     "path": [],
+    "type": "number",
   },
 ]
 `;
@@ -46,6 +50,7 @@ exports[`should not accept non-integers 1`] = `
 [
   {
     "code": "invalid_integer",
+    "message": "Expected the number to be an integer",
     "path": [],
   },
 ]
@@ -55,6 +60,7 @@ exports[`should not accept non-integers 2`] = `
 [
   {
     "code": "invalid_integer",
+    "message": "Expected the number to be an integer",
     "path": [],
   },
 ]

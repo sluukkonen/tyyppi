@@ -5,6 +5,7 @@ exports[`should not parse other values 1`] = `
   {
     "code": "invalid_type",
     "expected": "undefined",
+    "message": "Expected undefined, received null",
     "path": [],
     "received": "null",
   },
@@ -16,6 +17,7 @@ exports[`should not parse other values 2`] = `
   {
     "code": "invalid_type",
     "expected": "undefined",
+    "message": "Expected undefined, received a string",
     "path": [],
     "received": "string",
   },

@@ -8,4 +8,5 @@ test("should parse valid members", () => {
 
 test("should reject other values", () => {
   expectParseFailure(enumCodec(1, 2), 3)
+  expectParseFailure(enumCodec(1n, 2n), 3n)
 })

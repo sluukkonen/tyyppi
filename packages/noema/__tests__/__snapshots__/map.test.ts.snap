@@ -5,6 +5,7 @@ exports[`should reject a map with the wrong key type 1`] = `
   {
     "code": "invalid_type",
     "expected": "string",
+    "message": "Expected a string, received a number",
     "path": [],
     "received": "number",
   },
@@ -16,6 +17,7 @@ exports[`should reject a map with the wrong value type 1`] = `
   {
     "code": "invalid_type",
     "expected": "number",
+    "message": "Expected a number, received a string",
     "path": [],
     "received": "string",
   },
@@ -27,6 +29,7 @@ exports[`should reject values that are not maps 1`] = `
   {
     "code": "invalid_type",
     "expected": "map",
+    "message": "Expected a map, received an array",
     "path": [],
     "received": "array",
   },
@@ -38,6 +41,7 @@ exports[`should reject values that are not maps 2`] = `
   {
     "code": "invalid_type",
     "expected": "map",
+    "message": "Expected a map, received null",
     "path": [],
     "received": "null",
   },
