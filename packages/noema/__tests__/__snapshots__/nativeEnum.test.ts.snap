@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`supports const objects 1`] = `
+[
+  {
+    "code": "invalid_enum",
+    "members": [
+      "ONE",
+      2n,
+    ],
+    "message": "Expected "ONE" | 2, received a string",
+    "path": [],
+    "received": "string",
+  },
+]
+`;
+
+exports[`supports mixed enums 1`] = `
+[
+  {
+    "code": "invalid_enum",
+    "members": [
+      "One",
+      2,
+    ],
+    "message": "Expected "One" | 2, received a string",
+    "path": [],
+    "received": "string",
+  },
+]
+`;
+
+exports[`supports mixed enums 2`] = `
+[
+  {
+    "code": "invalid_enum",
+    "members": [
+      "One",
+      2,
+    ],
+    "message": "Expected "One" | 2, received a string",
+    "path": [],
+    "received": "string",
+  },
+]
+`;
+
+exports[`supports numeric enums 1`] = `
+[
+  {
+    "code": "invalid_enum",
+    "members": [
+      1,
+      2,
+    ],
+    "message": "Expected 1 | 2, received a string",
+    "path": [],
+    "received": "string",
+  },
+]
+`;
+
+exports[`supports numeric enums 2`] = `
+[
+  {
+    "code": "invalid_enum",
+    "members": [
+      1,
+      2,
+    ],
+    "message": "Expected 1 | 2, received a string",
+    "path": [],
+    "received": "string",
+  },
+]
+`;
+
+exports[`supports string enums 1`] = `
+[
+  {
+    "code": "invalid_enum",
+    "members": [
+      "ONE",
+      "Two",
+    ],
+    "message": "Expected "ONE" | "Two", received a string",
+    "path": [],
+    "received": "string",
+  },
+]
+`;
