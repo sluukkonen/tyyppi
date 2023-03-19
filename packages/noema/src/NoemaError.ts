@@ -5,3 +5,5 @@ export class NoemaError<E extends DecodeError> extends Error {
     super(message)
   }
 }
+
+NoemaError.prototype.name = NoemaError.name
