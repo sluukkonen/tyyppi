@@ -39,10 +39,7 @@ export const expectParseFailure = <C extends AnyCodec>(
   if (!result.ok) {
     expect(result.errors).toMatchSnapshot()
     expect(() => codec.decodeOrThrow(value)).toThrow(
-      new NoemaError(
-        `Found ${result.errors.length} validation error(s)`,
-        result.errors
-      )
+      new NoemaError(`Found ${result.errors.length} error(s)`, result.errors)
     )
   }
 }
