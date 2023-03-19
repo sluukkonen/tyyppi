@@ -2,7 +2,7 @@ import { createSimpleCodec, SimpleCodec, SimpleMetadata } from "../Codec.js"
 import { InvalidEnum, invalidEnum } from "../DecodeError.js"
 import { failure, success } from "../Result.js"
 import { Primitive } from "../types.js"
-import { isNumber } from "../utils.js"
+import { isNumber, isString } from "../utils.js"
 
 type EnumLike = Record<string, Primitive>
 
@@ -20,10 +20,11 @@ export type NativeEnumCodec<T extends EnumLike> = SimpleCodec<
 export const nativeEnum = <T extends EnumLike>(
   enumObj: T
 ): NativeEnumCodec<T> => {
-  const members = Object.values(enumObj).filter((v) => {
-    // Filter out reverse mappings for numeric enums
-    return isNumber(v) || !isNumber(enumObj[v as any])
-  }) as T[keyof T][]
+  const members = Object.values(enumObj).filter(
+    (v) =>
+      // Filter out reverse mappings for numeric enums
+      !isString(v) || !isNumber(enumObj[v as any])
+  ) as T[keyof T][]
   const set = new Set(members)
 
   return createSimpleCodec(
