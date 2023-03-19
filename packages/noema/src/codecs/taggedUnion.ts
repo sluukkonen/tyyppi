@@ -15,7 +15,7 @@ import {
   invalidTaggedUnion,
 } from "../DecodeError.js"
 import { failure } from "../Result.js"
-import { Literal } from "../types.js"
+import { Primitive } from "../types.js"
 import {
   hasOwnProperty,
   identity,
@@ -25,7 +25,7 @@ import {
 
 interface TaggedUnionMetadata<
   K extends string,
-  V extends Literal,
+  V extends Primitive,
   C extends TaggedUnionMember<K, V>
 > extends Metadata {
   readonly tag: "taggedUnion"
@@ -37,7 +37,7 @@ interface TaggedUnionMetadata<
 
 export type TaggedUnionCodec<
   K extends string,
-  V extends Literal,
+  V extends Primitive,
   C extends TaggedUnionMember<K, V>
 > = Codec<
   InputOf<C>,
@@ -46,21 +46,21 @@ export type TaggedUnionCodec<
   TaggedUnionMetadata<K, V, C>
 >
 
-export type TaggedUnionMember<K extends string, V extends Literal> = Codec<
+export type TaggedUnionMember<K extends string, V extends Primitive> = Codec<
   Record<K, V>,
   Record<K, V>
 >
 
 export function taggedUnion<
   K extends string,
-  V1 extends Literal,
+  V1 extends Primitive,
   C1 extends TaggedUnionMember<K, V1>
 >(key: K, first: readonly [value: V1, codec: C1]): TaggedUnionCodec<K, V1, C1>
 export function taggedUnion<
   K extends string,
-  V1 extends Literal,
+  V1 extends Primitive,
   C1 extends TaggedUnionMember<K, V1>,
-  V2 extends Literal,
+  V2 extends Primitive,
   C2 extends TaggedUnionMember<K, V2>
 >(
   key: K,
@@ -69,11 +69,11 @@ export function taggedUnion<
 ): TaggedUnionCodec<K, V1 | V2, C1 | C2>
 export function taggedUnion<
   K extends string,
-  V1 extends Literal,
+  V1 extends Primitive,
   C1 extends TaggedUnionMember<K, V1>,
-  V2 extends Literal,
+  V2 extends Primitive,
   C2 extends TaggedUnionMember<K, V2>,
-  V3 extends Literal,
+  V3 extends Primitive,
   C3 extends TaggedUnionMember<K, V3>
 >(
   key: K,
@@ -83,13 +83,13 @@ export function taggedUnion<
 ): TaggedUnionCodec<K, V1 | V2 | V3, C1 | C2 | C3>
 export function taggedUnion<
   K extends string,
-  V1 extends Literal,
+  V1 extends Primitive,
   C1 extends TaggedUnionMember<K, V1>,
-  V2 extends Literal,
+  V2 extends Primitive,
   C2 extends TaggedUnionMember<K, V2>,
-  V3 extends Literal,
+  V3 extends Primitive,
   C3 extends TaggedUnionMember<K, V3>,
-  V4 extends Literal,
+  V4 extends Primitive,
   C4 extends TaggedUnionMember<K, V4>
 >(
   key: K,
@@ -100,15 +100,15 @@ export function taggedUnion<
 ): TaggedUnionCodec<K, V1 | V2 | V3 | V4, C1 | C2 | C3 | C4>
 export function taggedUnion<
   K extends string,
-  V1 extends Literal,
+  V1 extends Primitive,
   C1 extends TaggedUnionMember<K, V1>,
-  V2 extends Literal,
+  V2 extends Primitive,
   C2 extends TaggedUnionMember<K, V2>,
-  V3 extends Literal,
+  V3 extends Primitive,
   C3 extends TaggedUnionMember<K, V3>,
-  V4 extends Literal,
+  V4 extends Primitive,
   C4 extends TaggedUnionMember<K, V4>,
-  V5 extends Literal,
+  V5 extends Primitive,
   C5 extends TaggedUnionMember<K, V5>
 >(
   key: K,
@@ -120,17 +120,17 @@ export function taggedUnion<
 ): TaggedUnionCodec<K, V1 | V2 | V3 | V4 | V5, C1 | C2 | C3 | C4 | C5>
 export function taggedUnion<
   K extends string,
-  V1 extends Literal,
+  V1 extends Primitive,
   C1 extends TaggedUnionMember<K, V1>,
-  V2 extends Literal,
+  V2 extends Primitive,
   C2 extends TaggedUnionMember<K, V2>,
-  V3 extends Literal,
+  V3 extends Primitive,
   C3 extends TaggedUnionMember<K, V3>,
-  V4 extends Literal,
+  V4 extends Primitive,
   C4 extends TaggedUnionMember<K, V4>,
-  V5 extends Literal,
+  V5 extends Primitive,
   C5 extends TaggedUnionMember<K, V5>,
-  V6 extends Literal,
+  V6 extends Primitive,
   C6 extends TaggedUnionMember<K, V6>
 >(
   key: K,
@@ -143,19 +143,19 @@ export function taggedUnion<
 ): TaggedUnionCodec<K, V1 | V2 | V3 | V4 | V5 | V6, C1 | C2 | C3 | C4 | C5 | C6>
 export function taggedUnion<
   K extends string,
-  V1 extends Literal,
+  V1 extends Primitive,
   C1 extends TaggedUnionMember<K, V1>,
-  V2 extends Literal,
+  V2 extends Primitive,
   C2 extends TaggedUnionMember<K, V2>,
-  V3 extends Literal,
+  V3 extends Primitive,
   C3 extends TaggedUnionMember<K, V3>,
-  V4 extends Literal,
+  V4 extends Primitive,
   C4 extends TaggedUnionMember<K, V4>,
-  V5 extends Literal,
+  V5 extends Primitive,
   C5 extends TaggedUnionMember<K, V5>,
-  V6 extends Literal,
+  V6 extends Primitive,
   C6 extends TaggedUnionMember<K, V6>,
-  V7 extends Literal,
+  V7 extends Primitive,
   C7 extends TaggedUnionMember<K, V7>
 >(
   key: K,
@@ -173,21 +173,21 @@ export function taggedUnion<
 >
 export function taggedUnion<
   K extends string,
-  V1 extends Literal,
+  V1 extends Primitive,
   C1 extends TaggedUnionMember<K, V1>,
-  V2 extends Literal,
+  V2 extends Primitive,
   C2 extends TaggedUnionMember<K, V2>,
-  V3 extends Literal,
+  V3 extends Primitive,
   C3 extends TaggedUnionMember<K, V3>,
-  V4 extends Literal,
+  V4 extends Primitive,
   C4 extends TaggedUnionMember<K, V4>,
-  V5 extends Literal,
+  V5 extends Primitive,
   C5 extends TaggedUnionMember<K, V5>,
-  V6 extends Literal,
+  V6 extends Primitive,
   C6 extends TaggedUnionMember<K, V6>,
-  V7 extends Literal,
+  V7 extends Primitive,
   C7 extends TaggedUnionMember<K, V7>,
-  V8 extends Literal,
+  V8 extends Primitive,
   C8 extends TaggedUnionMember<K, V8>
 >(
   key: K,
@@ -206,23 +206,23 @@ export function taggedUnion<
 >
 export function taggedUnion<
   K extends string,
-  V1 extends Literal,
+  V1 extends Primitive,
   C1 extends TaggedUnionMember<K, V1>,
-  V2 extends Literal,
+  V2 extends Primitive,
   C2 extends TaggedUnionMember<K, V2>,
-  V3 extends Literal,
+  V3 extends Primitive,
   C3 extends TaggedUnionMember<K, V3>,
-  V4 extends Literal,
+  V4 extends Primitive,
   C4 extends TaggedUnionMember<K, V4>,
-  V5 extends Literal,
+  V5 extends Primitive,
   C5 extends TaggedUnionMember<K, V5>,
-  V6 extends Literal,
+  V6 extends Primitive,
   C6 extends TaggedUnionMember<K, V6>,
-  V7 extends Literal,
+  V7 extends Primitive,
   C7 extends TaggedUnionMember<K, V7>,
-  V8 extends Literal,
+  V8 extends Primitive,
   C8 extends TaggedUnionMember<K, V8>,
-  V9 extends Literal,
+  V9 extends Primitive,
   C9 extends TaggedUnionMember<K, V9>
 >(
   key: K,
@@ -242,25 +242,25 @@ export function taggedUnion<
 >
 export function taggedUnion<
   K extends string,
-  V1 extends Literal,
+  V1 extends Primitive,
   C1 extends TaggedUnionMember<K, V1>,
-  V2 extends Literal,
+  V2 extends Primitive,
   C2 extends TaggedUnionMember<K, V2>,
-  V3 extends Literal,
+  V3 extends Primitive,
   C3 extends TaggedUnionMember<K, V3>,
-  V4 extends Literal,
+  V4 extends Primitive,
   C4 extends TaggedUnionMember<K, V4>,
-  V5 extends Literal,
+  V5 extends Primitive,
   C5 extends TaggedUnionMember<K, V5>,
-  V6 extends Literal,
+  V6 extends Primitive,
   C6 extends TaggedUnionMember<K, V6>,
-  V7 extends Literal,
+  V7 extends Primitive,
   C7 extends TaggedUnionMember<K, V7>,
-  V8 extends Literal,
+  V8 extends Primitive,
   C8 extends TaggedUnionMember<K, V8>,
-  V9 extends Literal,
+  V9 extends Primitive,
   C9 extends TaggedUnionMember<K, V9>,
-  V10 extends Literal,
+  V10 extends Primitive,
   C10 extends TaggedUnionMember<K, V10>
 >(
   key: K,
@@ -281,7 +281,7 @@ export function taggedUnion<
 >
 export function taggedUnion<
   K extends string,
-  V extends Literal,
+  V extends Primitive,
   M extends readonly [value: V, codec: TaggedUnionMember<K, V>][]
 >(key: K, ...mapping: M): TaggedUnionCodec<K, V, M[number][1]> {
   const codecs = new Map(mapping)

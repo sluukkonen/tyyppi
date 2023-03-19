@@ -1,4 +1,4 @@
-import { Literal, Ordered, TypeName } from "./types.js"
+import { Primitive, Ordered, TypeName } from "./types.js"
 import { getType, isString } from "./utils.js"
 
 export interface DecodeError {
@@ -84,13 +84,13 @@ export const invalidEmail = (): InvalidEmail => ({
   path: [],
 })
 
-export interface InvalidEnum<T extends Literal> extends DecodeError {
+export interface InvalidEnum<T extends Primitive> extends DecodeError {
   readonly code: "invalid_enum"
   readonly received: TypeName
   readonly members: readonly T[]
 }
 
-export const invalidEnum = <T extends Literal>(
+export const invalidEnum = <T extends Primitive>(
   value: unknown,
   members: readonly T[]
 ): InvalidEnum<T> => {
@@ -136,13 +136,13 @@ export const invalidIntegerString = (): InvalidIntegerString => ({
   path: [],
 })
 
-export interface InvalidLiteral<T extends Literal> extends DecodeError {
+export interface InvalidLiteral<T extends Primitive> extends DecodeError {
   readonly code: "invalid_literal"
   readonly expected: T
   readonly received: TypeName
 }
 
-export const invalidLiteral = <T extends Literal>(
+export const invalidLiteral = <T extends Primitive>(
   value: unknown,
   expected: T
 ): InvalidLiteral<T> => {
@@ -173,12 +173,12 @@ export const invalidPattern = (regexp: RegExp): InvalidPattern => {
   }
 }
 
-export interface InvalidTaggedUnion<V extends Literal> extends DecodeError {
+export interface InvalidTaggedUnion<V extends Primitive> extends DecodeError {
   readonly code: "invalid_tagged_union"
   readonly options: readonly V[]
 }
 
-export const invalidTaggedUnion = <V extends Literal>(
+export const invalidTaggedUnion = <V extends Primitive>(
   key: string,
   value: unknown,
   options: readonly V[]
@@ -326,8 +326,8 @@ export const indefinite = (type: TypeName) =>
     ? `an ${type}`
     : `a ${type}`
 
-export const stringify = (value: Literal): string =>
+export const stringify = (value: Primitive): string =>
   isString(value) ? JSON.stringify(value) : String(value)
 
-const stringifyOptions = (options: readonly Literal[]) =>
+const stringifyOptions = (options: readonly Primitive[]) =>
   options.map(stringify).join(" | ")

@@ -1,4 +1,4 @@
-export type Literal = string | number | bigint | boolean | undefined | null
+export type Primitive = string | number | bigint | boolean | undefined | null
 
 export type Ordered = number | bigint | string | Date
 
