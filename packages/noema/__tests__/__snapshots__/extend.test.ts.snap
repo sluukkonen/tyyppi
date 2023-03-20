@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should create a new object codec, merging the new properties 1`] = `
+[
+  {
+    "code": "invalid_type",
+    "expected": "boolean",
+    "message": "Expected a boolean, received undefined",
+    "path": [
+      "c",
+    ],
+    "received": "undefined",
+  },
+]
+`;
+
+exports[`should prefer properties from the right hand side codec 1`] = `
+[
+  {
+    "code": "invalid_type",
+    "expected": "number",
+    "message": "Expected a number, received a string",
+    "path": [
+      "b",
+    ],
+    "received": "string",
+  },
+]
+`;
