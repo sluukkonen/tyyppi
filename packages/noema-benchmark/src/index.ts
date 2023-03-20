@@ -7,6 +7,7 @@ import * as z from "zod"
 import array from "./array.js"
 import clamp from "./clamp.js"
 import email from "./email.js"
+import enumB from "./enum.js"
 import integer from "./integer.js"
 import fromJsonMap from "./fromJson.map.js"
 import object from "./object.js"
@@ -63,6 +64,7 @@ const suites = [
   ["array", array],
   ["clamp", clamp],
   ["email", email],
+  ["enum", enumB],
   ["integer", integer],
   ["fromJson.map", fromJsonMap],
   ["length", length],
