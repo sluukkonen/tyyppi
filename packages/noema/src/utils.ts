@@ -9,7 +9,8 @@ export const regexpTag = "[object RegExp]"
 export const promiseTag = "[object Promise]"
 export const setTag = "[object Set]"
 
-const objectProto = Object.prototype
+const builtinObject = Object
+const objectProto = builtinObject.prototype
 
 export const hasOwnProperty = <K extends string>(
   obj: unknown,
@@ -59,7 +60,7 @@ export const getType = (value: unknown): TypeName => {
   if (value === null) return "null"
   if (isArray(value)) return "array"
 
-  const proto = Object.getPrototypeOf(value)
+  const proto = builtinObject.getPrototypeOf(value)
   if (proto === objectProto || !proto) return "object"
 
   const tag = getTag(value as object)
@@ -104,3 +105,11 @@ export const isSet = (value: unknown): value is Set<unknown> =>
 
 export const isMap = (value: unknown): value is Map<unknown, unknown> =>
   isObjectLike(value) && getTag(value) === mapTag
+
+export const entries: <T extends object>(
+  object: T
+) => Array<[keyof T & string, T[keyof T & string]]> = builtinObject.entries
+
+export const fromEntries: <K extends string, V>(
+  entries: readonly [K, V][]
+) => Record<K, V> = builtinObject.fromEntries
