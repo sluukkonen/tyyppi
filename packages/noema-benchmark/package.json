@@ -11,7 +11,7 @@
   },
   "devDependencies": {
     "benny": "3.7.1",
-    "fp-ts": "2.16.0",
+    "fp-ts": "2.16.1",
     "io-ts": "2.2.20",
     "noema": "1.0.0",
     "typescript": "5.1.6",
