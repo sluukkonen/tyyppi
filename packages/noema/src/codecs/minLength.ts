@@ -9,7 +9,7 @@ import {
   TypeOf,
 } from "../Codec.js"
 import { tooShort, TooShort } from "../DecodeError.js"
-import { failure, Result } from "../Result.js"
+import { failure } from "../Result.js"
 import { HasLength } from "../types.js"
 import { hasLength } from "../utils.js"
 
@@ -32,7 +32,7 @@ export const minLength = <C extends Codec<HasLength, any>>(
   minLength: number
 ): MinLengthCodec<C> =>
   createCodec(
-    (val): Result<TypeOf<C>, ErrorOf<C> | TooShort> =>
+    (val) =>
       hasLength(val) && val.length < minLength
         ? failure(tooShort(val, minLength))
         : (codec.decode(val) as ResultOf<C>),

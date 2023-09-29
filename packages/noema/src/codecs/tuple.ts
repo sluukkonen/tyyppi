@@ -16,7 +16,7 @@ import {
   tooShort,
   TooShort,
 } from "../DecodeError.js"
-import { failure, failures, Result, success } from "../Result.js"
+import { failure, failures, success } from "../Result.js"
 import { identity, isArray, isEveryCodecSimple, pushErrors } from "../utils.js"
 import { NonEmptyArray } from "./nonEmptyArray.js"
 
@@ -53,12 +53,7 @@ export const tuple = <C extends readonly AnyCodec[] | []>(
   const simple = isEveryCodecSimple(members)
   const length = members.length
   return createCodec(
-    (
-      val
-    ): Result<
-      TypesOf<C>,
-      ErrorOf<C[number]> | InvalidArray | TooShort | TooLong
-    > => {
+    (val) => {
       if (!isArray(val)) {
         return failure(invalidArray(val))
       } else if (val.length < length) {

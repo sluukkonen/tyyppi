@@ -10,7 +10,7 @@ import {
   TypeOf,
 } from "../Codec.js"
 import { invalidObject, InvalidObject } from "../DecodeError.js"
-import { failure, failures, Result, success } from "../Result.js"
+import { failure, failures, success } from "../Result.js"
 import {
   hasOwnProperty,
   identity,
@@ -57,7 +57,7 @@ export const object = <T extends Record<string, AnyCodec>>(
   const simple = isEveryCodecSimple(codecs)
 
   return createCodec(
-    (val): Result<TypeOf<T[keyof T]>, ErrorOf<T[keyof T]> | InvalidObject> => {
+    (val) => {
       if (!isObject(val)) return failure(invalidObject(val))
 
       let ok = true

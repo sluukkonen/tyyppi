@@ -10,7 +10,7 @@ import {
   TypeOf,
 } from "../Codec.js"
 import { invalidMap, InvalidMap } from "../DecodeError.js"
-import { failure, failures, Result, success } from "../Result.js"
+import { failure, failures, success } from "../Result.js"
 import { identity, isMap } from "../utils.js"
 import { NonEmptyArray } from "./nonEmptyArray.js"
 
@@ -34,7 +34,7 @@ export const map = <K extends AnyCodec, V extends AnyCodec>(
 ): MapCodec<K, V> => {
   const simple = keys.meta.simple && values.meta.simple
   return createCodec(
-    (val): Result<Map<TypeOf<K>, TypeOf<V>>, ErrorOf<K | V> | InvalidMap> => {
+    (val) => {
       if (!isMap(val)) return failure(invalidMap(val))
 
       let ok = true

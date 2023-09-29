@@ -10,7 +10,7 @@ import {
   TypeOf,
 } from "../Codec.js"
 import { DecodeError } from "../DecodeError.js"
-import { failure, Result } from "../Result.js"
+import { failure } from "../Result.js"
 
 interface RefinementMetadata<C extends AnyCodec> extends Metadata {
   readonly tag: "refinement"
@@ -35,7 +35,7 @@ export function refinement<
   meta?: M
 ): RefinementCodec<C, E, M> {
   return createCodec(
-    (val): Result<TypeOf<C>, ErrorOf<C> | E> => {
+    (val) => {
       const result = codec.decode(val) as ResultOf<C>
       return result.ok
         ? predicate(result.value)

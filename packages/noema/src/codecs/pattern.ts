@@ -9,7 +9,7 @@ import {
   TypeOf,
 } from "../Codec.js"
 import { invalidPattern, InvalidPattern } from "../DecodeError.js"
-import { failure, Result } from "../Result.js"
+import { failure } from "../Result.js"
 
 interface PatternMetadata<C extends Codec<any, string>> extends Metadata {
   readonly tag: "pattern"
@@ -30,7 +30,7 @@ export const pattern = <C extends Codec<any, string>>(
   regexp: RegExp
 ): PatternCodec<C> =>
   createCodec(
-    (val): Result<TypeOf<C>, ErrorOf<C> | InvalidPattern> => {
+    (val) => {
       const result = codec.decode(val) as ResultOf<C>
       return result.ok
         ? regexp.test(result.value)

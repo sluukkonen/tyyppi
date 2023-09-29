@@ -5,7 +5,7 @@ import {
   invalidString,
   InvalidString,
 } from "../../DecodeError.js"
-import { failure, Result, success } from "../../Result.js"
+import { failure, success } from "../../Result.js"
 import { isNaN, isString } from "../../utils.js"
 
 interface DateMetadata extends Metadata {
@@ -21,7 +21,7 @@ export type DateCodec = Codec<
 >
 
 export const date: DateCodec = createCodec(
-  (val): Result<Date, InvalidString | InvalidISOString> => {
+  (val) => {
     if (!isString(val)) return failure(invalidString(val))
     const date = new Date(val)
     return isNaN(date.getTime()) ? failure(invalidISOString()) : success(date)

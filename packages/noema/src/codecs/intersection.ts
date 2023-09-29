@@ -10,7 +10,7 @@ import {
   TypeOf,
 } from "../Codec.js"
 import { InvalidObject } from "../DecodeError.js"
-import { failures, Result, success } from "../Result.js"
+import { failures, success } from "../Result.js"
 import { identity, isEveryCodecSimple, isObject } from "../utils.js"
 import { NonEmptyArray } from "./nonEmptyArray.js"
 
@@ -46,7 +46,7 @@ export const intersection = <C extends readonly AnyCodec[]>(
 ): IntersectionCodec<C> => {
   const simple = isEveryCodecSimple(codecs)
   return createCodec(
-    (val): Result<IntersectTypesOf<C>, ErrorOf<C[number]>> => {
+    (val) => {
       let ok = true
       const errors: ErrorOf<C[number]>[] = []
       let intersection: any = simple ? val : undefined

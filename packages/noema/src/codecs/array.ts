@@ -10,7 +10,7 @@ import {
   TypeOf,
 } from "../Codec.js"
 import { invalidArray, InvalidArray } from "../DecodeError.js"
-import { failure, failures, Result, success } from "../Result.js"
+import { failure, failures, success } from "../Result.js"
 import { identity, isArray, pushErrors } from "../utils.js"
 import { NonEmptyArray } from "./nonEmptyArray.js"
 
@@ -30,7 +30,7 @@ export type ArrayCodec<C extends AnyCodec> = Codec<
 export const array = <C extends AnyCodec>(codec: C): ArrayCodec<C> => {
   const simple = codec.meta.simple
   return createCodec(
-    (val): Result<TypeOf<C>[], ErrorOf<C> | InvalidArray> => {
+    (val) => {
       if (!isArray(val)) return failure(invalidArray(val))
 
       let ok = true

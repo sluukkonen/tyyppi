@@ -10,7 +10,7 @@ import {
   TypeOf,
 } from "../Codec.js"
 import { invalidSet, InvalidSet } from "../DecodeError.js"
-import { failure, failures, Result, success } from "../Result.js"
+import { failure, failures, success } from "../Result.js"
 import { identity, isSet } from "../utils.js"
 import { NonEmptyArray } from "./nonEmptyArray.js"
 
@@ -30,7 +30,7 @@ export type SetCodec<C extends AnyCodec> = Codec<
 export const set = <C extends AnyCodec>(codec: C): SetCodec<C> => {
   const simple = codec.meta.simple
   return createCodec(
-    (val): Result<Set<TypeOf<C>>, ErrorOf<C> | InvalidSet> => {
+    (val) => {
       if (!isSet(val)) return failure(invalidSet(val))
 
       let ok = true

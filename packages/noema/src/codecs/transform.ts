@@ -8,7 +8,7 @@ import {
   ResultOf,
   TypeOf,
 } from "../Codec.js"
-import { Result, success } from "../Result.js"
+import { success } from "../Result.js"
 
 interface TransformMetadata<C extends AnyCodec> extends Metadata {
   readonly tag: "transform"
@@ -29,7 +29,7 @@ export const transform = <C extends AnyCodec, T>(
   backwards: (value: T) => TypeOf<C>
 ): TransformCodec<C, T> => {
   return createCodec(
-    (val): Result<T, ErrorOf<C>> => {
+    (val) => {
       const result = codec.decode(val) as ResultOf<C>
       return result.ok ? success(forwards(result.value)) : result
     },

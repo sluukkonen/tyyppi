@@ -1,6 +1,6 @@
 import { DecodeError } from "./DecodeError.js"
 import { NoemaError } from "./NoemaError.js"
-import { Result } from "./Result.js"
+import { AnyResult, FailureOf, Result, SuccessOf } from "./Result.js"
 import { identity } from "./utils.js"
 
 export type IsSimple<C extends AnyCodec> = C["meta"]["simple"]
@@ -62,11 +62,11 @@ const codecProto = {
   },
 }
 
-export function createCodec<I, T, E extends DecodeError, M extends Metadata>(
-  decode: (value: unknown) => Result<T, E>,
-  encode: (value: T) => I,
+export function createCodec<R extends AnyResult, I, M extends Metadata>(
+  decode: (value: unknown) => R,
+  encode: (value: SuccessOf<R>) => I,
   meta?: M
-): Codec<I, T, E, M> {
+): Codec<I, SuccessOf<R>, FailureOf<R>, M> {
   function decodeOrThrow(value: unknown) {
     const result = decode(value)
     if (result.ok) return result.value
@@ -82,13 +82,15 @@ export function createCodec<I, T, E extends DecodeError, M extends Metadata>(
 }
 
 export function createSimpleCodec<
-  T,
-  E extends DecodeError,
+  R extends AnyResult,
   M extends SimpleMetadata
->(decode: (value: unknown) => Result<T, E>, meta?: M): SimpleCodec<T, E, M> {
+>(
+  decode: (value: unknown) => R,
+  meta?: M
+): SimpleCodec<SuccessOf<R>, FailureOf<R>, M> {
   return createCodec(decode, identity, meta ?? { simple: true }) as SimpleCodec<
-    T,
-    E,
+    SuccessOf<R>,
+    FailureOf<R>,
     M
   >
 }

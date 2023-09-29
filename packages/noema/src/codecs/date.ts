@@ -1,6 +1,6 @@
 import { createSimpleCodec, SimpleCodec, SimpleMetadata } from "../Codec.js"
 import { invalidDate, InvalidDate, IsNaN, isNaNError } from "../DecodeError.js"
-import { failure, Result, success } from "../Result.js"
+import { failure, success } from "../Result.js"
 import { isDate, isNaN } from "../utils.js"
 
 interface DateMetadata extends SimpleMetadata {
@@ -10,7 +10,7 @@ interface DateMetadata extends SimpleMetadata {
 export type DateCodec = SimpleCodec<Date, InvalidDate | IsNaN, DateMetadata>
 
 export const date: DateCodec = createSimpleCodec(
-  (val): Result<Date, InvalidDate | IsNaN> =>
+  (val) =>
     !isDate(val)
       ? failure(invalidDate(val))
       : isNaN(val.getTime())

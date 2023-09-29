@@ -1,6 +1,7 @@
 import { NonEmptyArray } from "./codecs/nonEmptyArray.js"
+import { DecodeError } from "./DecodeError.js"
 
-export interface Failure<E> {
+export interface Failure<E extends DecodeError> {
   readonly ok: false
   readonly errors: NonEmptyArray<E>
 }
@@ -10,16 +11,22 @@ export interface Success<T> {
   readonly value: T
 }
 
-export type Result<T, E> = Success<T> | Failure<E>
+export type Result<T, E extends DecodeError> = Success<T> | Failure<E>
+export type AnyResult = Result<any, DecodeError>
 
-export const success = <T>(value: T): Result<T, never> => ({ ok: true, value })
+export type SuccessOf<R> = R extends Success<infer T> ? T : never
+export type FailureOf<R> = R extends Failure<infer E> ? E : never
 
-export const failure = <E>(error: E): Result<never, E> => ({
+export const success = <T>(value: T): Success<T> => ({ ok: true, value })
+
+export const failure = <E extends DecodeError>(error: E): Failure<E> => ({
   ok: false,
   errors: [error],
 })
 
-export const failures = <E>(errors: NonEmptyArray<E>): Result<never, E> => ({
+export const failures = <E extends DecodeError>(
+  errors: NonEmptyArray<E>
+): Failure<E> => ({
   ok: false,
   errors,
 })

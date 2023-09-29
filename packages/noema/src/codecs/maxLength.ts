@@ -9,7 +9,7 @@ import {
   TypeOf,
 } from "../Codec.js"
 import { tooLong, TooLong } from "../DecodeError.js"
-import { failure, Result } from "../Result.js"
+import { failure } from "../Result.js"
 import { HasLength } from "../types.js"
 import { hasLength } from "../utils.js"
 
@@ -32,7 +32,7 @@ export const maxLength = <C extends Codec<HasLength, any>>(
   maxLength: number
 ): MaxLengthCodec<C> =>
   createCodec(
-    (val): Result<TypeOf<C>, ErrorOf<C> | TooLong> =>
+    (val) =>
       hasLength(val) && val.length > maxLength
         ? failure(tooLong(val, maxLength))
         : (codec.decode(val) as ResultOf<C>),

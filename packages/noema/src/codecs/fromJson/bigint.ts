@@ -5,7 +5,7 @@ import {
   InvalidString,
   invalidString,
 } from "../../DecodeError.js"
-import { failure, Result, success } from "../../Result.js"
+import { failure, success } from "../../Result.js"
 import { isString } from "../../utils.js"
 
 interface BigIntMetadata extends Metadata {
@@ -21,7 +21,7 @@ export type BigIntCodec = Codec<
 >
 
 export const bigint: BigIntCodec = createCodec(
-  (val): Result<bigint, InvalidString | InvalidIntegerString> => {
+  (val) => {
     if (!isString(val)) return failure(invalidString(val))
     // A string like BigInt("") or BigInt("   ") return 0n
     const trimmed = val.trim()

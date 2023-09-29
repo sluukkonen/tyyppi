@@ -9,7 +9,7 @@ import {
   TypeOf,
 } from "../Codec.js"
 import { tooSmall, TooSmall } from "../DecodeError.js"
-import { failure, Result } from "../Result.js"
+import { failure } from "../Result.js"
 import { Ordered } from "../types.js"
 
 interface MinMetadata<C extends Codec<any, Ordered>> extends Metadata {
@@ -31,7 +31,7 @@ export const min = <C extends Codec<any, Ordered>>(
   min: TypeOf<C>
 ): MinCodec<C> =>
   createCodec(
-    (val): Result<TypeOf<C>, ErrorOf<C> | TooSmall<TypeOf<C>>> => {
+    (val) => {
       const result = codec.decode(val) as ResultOf<C>
       return result.ok
         ? result.value < min

@@ -9,7 +9,7 @@ import {
   TypeOf,
 } from "../Codec.js"
 import { tooLarge, TooLarge } from "../DecodeError.js"
-import { failure, Result } from "../Result.js"
+import { failure } from "../Result.js"
 import { Ordered } from "../types.js"
 
 interface MaxMetadata<C extends Codec<any, Ordered>> extends Metadata {
@@ -31,7 +31,7 @@ export const max = <C extends Codec<any, Ordered>>(
   max: TypeOf<C>
 ): MaxCodec<C> =>
   createCodec(
-    (val): Result<TypeOf<C>, ErrorOf<C> | TooLarge<TypeOf<C>>> => {
+    (val) => {
       const result = codec.decode(val) as ResultOf<C>
       return result.ok
         ? result.value > max

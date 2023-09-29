@@ -9,7 +9,7 @@ import {
   TypeOf,
 } from "../../Codec.js"
 import { InvalidArray, invalidArray } from "../../DecodeError.js"
-import { failure, failures, Result, success } from "../../Result.js"
+import { failure, failures, success } from "../../Result.js"
 import { isArray, pushErrors } from "../../utils.js"
 import { NonEmptyArray } from "../nonEmptyArray.js"
 
@@ -26,7 +26,7 @@ export type SetCodec<C extends AnyCodec> = Codec<
 >
 export const set = <C extends AnyCodec>(codec: C): SetCodec<C> => {
   return createCodec(
-    (val): Result<Set<TypeOf<C>>, ErrorOf<C> | InvalidArray> => {
+    (val) => {
       if (!isArray(val)) return failure(invalidArray(val))
 
       let ok = true
