@@ -173,27 +173,6 @@ export const invalidPattern = (regexp: RegExp): InvalidPattern => {
   }
 }
 
-export interface InvalidTaggedUnion<V extends Primitive> extends DecodeError {
-  readonly code: "invalid_tagged_union"
-  readonly options: readonly V[]
-}
-
-export const invalidTaggedUnion = <V extends Primitive>(
-  key: string,
-  value: unknown,
-  options: readonly V[]
-): InvalidTaggedUnion<V> => {
-  const received = getType(value)
-  return {
-    code: "invalid_tagged_union",
-    message: `Expected ${stringifyOptions(options)}, received ${indefinite(
-      received
-    )}`,
-    options,
-    path: [key],
-  }
-}
-
 export interface InvalidUnion<E extends DecodeError> extends DecodeError {
   readonly code: "invalid_union"
   readonly errors: readonly E[]
