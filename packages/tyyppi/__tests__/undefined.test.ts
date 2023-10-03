@@ -1,11 +1,11 @@
-import * as n from "../src/index.js"
+import * as t from "../src/index.js"
 import { expectParseFailure, expectParseSuccess } from "./helpers.js"
 
 test("should parse undefined", () => {
-  expectParseSuccess(n.undefined, undefined)
+  expectParseSuccess(t.undefined, undefined)
 })
 
 test("should not parse other values", () => {
-  expectParseFailure(n.undefined, null)
-  expectParseFailure(n.undefined, "")
+  expectParseFailure(t.undefined, null)
+  expectParseFailure(t.undefined, "")
 })

@@ -1,8 +1,8 @@
 {
-  "name": "noema-monorepo",
+  "name": "tyyppi-monorepo",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/sluukkonen/noema",
+  "repository": "https://github.com/sluukkonen/tyyppi",
   "author": "Sakumatti Luukkonen",
   "license": "MIT",
   "private": true,

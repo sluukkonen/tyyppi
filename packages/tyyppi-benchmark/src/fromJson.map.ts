@@ -1,4 +1,4 @@
-import * as n from "noema"
+import * as t from "tyyppi"
 import { Benchmark } from "./index.js"
 
 const suite: Benchmark<[string, number][], Map<string, number>> = {
@@ -17,7 +17,7 @@ const suite: Benchmark<[string, number][], Map<string, number>> = {
     ["10", 10],
   ],
   codecs: {
-    noema: n.fromJson.map(n.string, n.number),
+    tyyppi: t.fromJson.map(t.string, t.number),
   },
 }
 

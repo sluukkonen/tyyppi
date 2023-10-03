@@ -1,4 +1,4 @@
-import * as n from "noema"
+import * as t from "tyyppi"
 import * as z from "zod"
 import { Benchmark } from "./index.js"
 
@@ -6,7 +6,7 @@ const suite: Benchmark<number> = {
   name: "clamp",
   data: 5,
   codecs: {
-    noema: n.integer.pipe(n.clamp, 1, 10),
+    tyyppi: t.integer.pipe(t.clamp, 1, 10),
     zod: z.number().int().min(1).max(10),
   },
 }

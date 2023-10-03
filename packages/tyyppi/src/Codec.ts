@@ -1,5 +1,5 @@
 import { DecodeError } from "./DecodeError.js"
-import { NoemaError } from "./NoemaError.js"
+import { TyyppiError } from "./TyyppiError.js"
 import { AnyResult, FailureOf, Result, SuccessOf } from "./Result.js"
 import { identity } from "./utils.js"
 
@@ -71,7 +71,7 @@ export function createCodec<R extends AnyResult, I, M extends Metadata>(
     const result = decode(value)
     if (result.ok) return result.value
     const errors = result.errors
-    throw new NoemaError(`Found ${errors.length} error(s)`, errors)
+    throw new TyyppiError(`Found ${errors.length} error(s)`, errors)
   }
   return Object.assign(Object.create(codecProto), {
     decode,

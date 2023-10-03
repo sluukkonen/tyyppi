@@ -1,5 +1,5 @@
-import * as t from "io-ts"
-import * as n from "noema"
+import * as i from "io-ts"
+import * as t from "tyyppi"
 import * as z from "zod"
 import { Benchmark } from "./index.js"
 
@@ -19,17 +19,17 @@ const suite: Benchmark<SimpleObject> = {
     array: [1, 2, 3],
   },
   codecs: {
-    noema: n.object({
-      string: n.string,
-      number: n.number,
-      boolean: n.boolean,
-      array: n.array(n.number),
-    }),
-    ioTs: t.type({
+    tyyppi: t.object({
       string: t.string,
       number: t.number,
       boolean: t.boolean,
       array: t.array(t.number),
+    }),
+    ioTs: i.type({
+      string: i.string,
+      number: i.number,
+      boolean: i.boolean,
+      array: i.array(i.number),
     }),
     zod: z.object({
       string: z.string(),

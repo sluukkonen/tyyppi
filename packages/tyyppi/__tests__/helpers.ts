@@ -1,4 +1,4 @@
-import { AnyCodec, array, InputOf, NoemaError, TypeOf } from "../src/index.js"
+import { AnyCodec, array, InputOf, TyyppiError, TypeOf } from "../src/index.js"
 
 export const expectParseSuccess = function <C extends AnyCodec>(
   codec: C,
@@ -39,7 +39,7 @@ export const expectParseFailure = <C extends AnyCodec>(
   if (!result.ok) {
     expect(result.errors).toMatchSnapshot()
     expect(() => codec.decodeOrThrow(value)).toThrow(
-      new NoemaError(`Found ${result.errors.length} error(s)`, result.errors)
+      new TyyppiError(`Found ${result.errors.length} error(s)`, result.errors)
     )
   }
 }

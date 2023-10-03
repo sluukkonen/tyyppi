@@ -2,7 +2,7 @@
 export * as Errors from "./DecodeError.js"
 export * as fromJson from "./codecs/fromJson/index.js"
 export * from "./Codec.js"
-export * from "./NoemaError.js"
+export * from "./TyyppiError.js"
 export * from "./Result.js"
 export * from "./codecs/array.js"
 export * from "./codecs/bigint.js"

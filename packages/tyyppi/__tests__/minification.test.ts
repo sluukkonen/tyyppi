@@ -5,7 +5,7 @@ const exec = promisify(execCb)
 
 test("should minify properly", async () => {
   const result = await exec(
-    `echo 'import * as n from "noema"' | esbuild --bundle --format=esm`
+    `echo 'import * as t from "tyyppi"' | esbuild --bundle --format=esm`
   )
 
   expect(result.stdout).toBe("")

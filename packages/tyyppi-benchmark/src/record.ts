@@ -1,5 +1,5 @@
-import * as t from "io-ts"
-import * as n from "noema"
+import * as i from "io-ts"
+import * as t from "tyyppi"
 import * as z from "zod"
 import { Benchmark } from "./index.js"
 
@@ -18,8 +18,8 @@ const suite: Benchmark<Record<string, number>> = {
     j: 10,
   },
   codecs: {
-    noema: n.record(n.string, n.number),
-    ioTs: t.record(t.string, t.number),
+    tyyppi: t.record(t.string, t.number),
+    ioTs: i.record(i.string, i.number),
     zod: z.record(z.string(), z.number()),
   },
 }
