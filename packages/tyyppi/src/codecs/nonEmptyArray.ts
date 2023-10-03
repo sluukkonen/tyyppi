@@ -30,6 +30,6 @@ export type NonEmptyArrayCodec<C extends AnyCodec> = Codec<
 // For whatever reason, coverage doesn't seem to work here.
 /* c8 ignore start */
 export const nonEmptyArray = <C extends AnyCodec>(
-  codec: C
+  codec: C,
 ): NonEmptyArrayCodec<C> =>
   minLength(array(codec), 1) as unknown as NonEmptyArrayCodec<C>

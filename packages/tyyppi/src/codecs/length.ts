@@ -9,5 +9,5 @@ export type LengthCodec<C extends Codec<HasLength, any>> = MinLengthCodec<
 
 export const length = <C extends Codec<HasLength, any>>(
   codec: C,
-  length: number
+  length: number,
 ): LengthCodec<C> => minLength(maxLength(codec, length), length)

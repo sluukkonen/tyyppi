@@ -16,14 +16,14 @@ import { NonEmptyArray } from "./nonEmptyArray.js"
 
 type IntersectInputsOf<T extends readonly unknown[]> = T extends readonly [
   infer C extends AnyCodec,
-  ...infer Rest
+  ...infer Rest,
 ]
   ? InputOf<C> & IntersectInputsOf<Rest>
   : unknown
 
 type IntersectTypesOf<T extends readonly unknown[]> = T extends readonly [
   infer C extends AnyCodec,
-  ...infer Rest
+  ...infer Rest,
 ]
   ? TypeOf<C> & IntersectTypesOf<Rest>
   : unknown
@@ -77,7 +77,7 @@ export const intersection = <C extends readonly AnyCodec[]>(
 
           return result
         },
-    { tag: "intersection", simple, codecs }
+    { tag: "intersection", simple, codecs },
   )
 }
 

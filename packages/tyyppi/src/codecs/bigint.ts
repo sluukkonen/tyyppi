@@ -14,5 +14,5 @@ export const bigint: BigIntCodec = createSimpleCodec(
   {
     tag: "bigint",
     simple: true,
-  }
+  },
 )

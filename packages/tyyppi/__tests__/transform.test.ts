@@ -4,7 +4,7 @@ import { expectParseFailure, expectParseSuccess } from "./helpers.js"
 const trimmedString = transform(
   string,
   (s) => s.trim(),
-  (s) => s
+  (s) => s,
 )
 
 test("should run the parsed value through the transformation function", () => {
@@ -19,7 +19,7 @@ test("should work with non-simple codecs", () => {
   const plus1 = transform(
     fromJson.bigint,
     (n) => n + 1n,
-    (n) => n - 1n
+    (n) => n - 1n,
   )
   expectParseSuccess(plus1, "1", 2n)
 })

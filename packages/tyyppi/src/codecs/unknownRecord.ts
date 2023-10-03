@@ -18,5 +18,5 @@ export const unknownRecord: UnknownRecordCodec = createSimpleCodec(
     isObject(val)
       ? success(val as Record<string, unknown>)
       : failure(invalidObject(val)),
-  { tag: "unknownRecord", simple: true }
+  { tag: "unknownRecord", simple: true },
 )

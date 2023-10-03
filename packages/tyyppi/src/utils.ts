@@ -14,7 +14,7 @@ const objectProto = builtinObject.prototype
 
 export const hasOwnProperty = <K extends string>(
   obj: unknown,
-  key: K
+  key: K,
 ): obj is Record<K, unknown> => objectProto.hasOwnProperty.call(obj, key)
 
 export const hasLength = (value: unknown): value is HasLength =>
@@ -28,7 +28,7 @@ export const identity = <T>(value: T) => value
 export const pushErrors = <T extends DecodeError>(
   errors: T[],
   newErrors: readonly T[],
-  path: (string | number)[]
+  path: (string | number)[],
 ) => {
   for (const error of newErrors) pushError(errors, error, path)
 
@@ -38,7 +38,7 @@ export const pushErrors = <T extends DecodeError>(
 export const pushError = <T extends DecodeError>(
   errors: T[],
   newError: T,
-  path: (string | number)[]
+  path: (string | number)[],
 ) => {
   newError.path.unshift(...path)
   errors.push(newError)
@@ -107,15 +107,15 @@ export const isMap = (value: unknown): value is Map<unknown, unknown> =>
   isObjectLike(value) && getTag(value) === mapTag
 
 export const entries: <T extends object>(
-  object: T
+  object: T,
 ) => Array<[keyof T & string, T[keyof T & string]]> = builtinObject.entries
 
 export const fromEntries: <K extends string, V>(
-  entries: readonly [K, V][]
+  entries: readonly [K, V][],
 ) => Record<K, V> = builtinObject.fromEntries
 
 export const mapObject = <K extends string, T, U>(
   object: Record<K, T>,
-  fn: (value: T) => U
+  fn: (value: T) => U,
 ): Record<K, U> =>
   fromEntries(entries(object).map(([key, value]) => [key, fn(value)]))

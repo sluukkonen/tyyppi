@@ -33,5 +33,5 @@ export const bigint: BigIntCodec = createCodec(
     }
   },
   (bigint) => bigint.toString(),
-  { tag: "fromJson.bigint", simple: false }
+  { tag: "fromJson.bigint", simple: false },
 )

@@ -22,14 +22,14 @@ import { NonEmptyArray } from "./nonEmptyArray.js"
 
 type InputsOf<C extends readonly unknown[]> = C extends readonly [
   infer First extends AnyCodec,
-  ...infer Rest
+  ...infer Rest,
 ]
   ? [InputOf<First>, ...InputsOf<Rest>]
   : []
 
 type TypesOf<C extends readonly unknown[]> = C extends readonly [
   infer First extends AnyCodec,
-  ...infer Rest
+  ...infer Rest,
 ]
   ? [TypeOf<First>, ...TypesOf<Rest>]
   : []
@@ -48,7 +48,7 @@ export type TupleCodec<C extends readonly AnyCodec[] | []> = Codec<
 >
 
 export const tuple = <C extends readonly AnyCodec[] | []>(
-  items: C
+  items: C,
 ): TupleCodec<C> => {
   const simple = isEveryCodecSimple(items)
   const length = items.length
@@ -89,6 +89,6 @@ export const tuple = <C extends readonly AnyCodec[] | []>(
       tag: "tuple",
       simple,
       items,
-    }
+    },
   )
 }

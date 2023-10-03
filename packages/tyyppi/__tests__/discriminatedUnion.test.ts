@@ -5,7 +5,7 @@ test("should work with simple codecs", () => {
   const codec = discriminatedUnion(
     "type",
     object({ type: literal("a") }),
-    object({ type: literal("b"), extra: literal(true) })
+    object({ type: literal("b"), extra: literal(true) }),
   )
 
   expectParseSuccess(codec, { type: "a" })
@@ -19,7 +19,7 @@ test("should work with complex codecs", () => {
   const codec = discriminatedUnion(
     "type",
     object({ type: literal("a") }),
-    object({ type: literal("b"), extra: fromJson.bigint })
+    object({ type: literal("b"), extra: fromJson.bigint }),
   )
 
   expectParseSuccess(codec, { type: "a" })

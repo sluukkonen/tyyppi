@@ -26,7 +26,7 @@ import { LiteralCodec } from "./literal.js"
 
 export interface DiscriminatedUnionMetadata<
   K extends string,
-  C extends DiscriminatedUnionMember<K, Primitive>
+  C extends DiscriminatedUnionMember<K, Primitive>,
 > extends Metadata {
   readonly tag: "discriminatedUnion"
   readonly simple: IsSimple<C>
@@ -34,7 +34,7 @@ export interface DiscriminatedUnionMetadata<
 }
 interface DiscriminatedUnionMemberMetadata<
   K extends string,
-  V extends Primitive
+  V extends Primitive,
 > extends Metadata {
   readonly props: Record<K, LiteralCodec<V>>
 }
@@ -48,7 +48,7 @@ type DiscriminatedUnionMember<K extends string, V extends Primitive> = Codec<
 
 export type DiscriminatedUnionCodec<
   K extends string,
-  C extends DiscriminatedUnionMember<K, Primitive>
+  C extends DiscriminatedUnionMember<K, Primitive>,
 > = Codec<
   InputOf<C>,
   TypeOf<C>,
@@ -60,14 +60,14 @@ export type DiscriminatedUnionCodec<
 
 export const discriminatedUnion = <
   K extends string,
-  C extends readonly DiscriminatedUnionMember<K, Primitive>[] | []
+  C extends readonly DiscriminatedUnionMember<K, Primitive>[] | [],
 >(
   key: K,
   ...members: C
 ): DiscriminatedUnionCodec<K, C[number]> => {
   const simple = isEveryCodecSimple(members)
   const codecs = new Map(
-    members.map((codec) => [codec.meta.props[key].meta.value, codec])
+    members.map((codec) => [codec.meta.props[key].meta.value, codec]),
   )
   const options = Array.from(codecs.keys())
   return createCodec(
@@ -88,6 +88,6 @@ export const discriminatedUnion = <
           const codec = codecs.get(val[key])!
           return codec.encode(val)
         },
-    { tag: "discriminatedUnion", simple, members }
+    { tag: "discriminatedUnion", simple, members },
   ) as unknown as DiscriminatedUnionCodec<K, C[number]>
 }

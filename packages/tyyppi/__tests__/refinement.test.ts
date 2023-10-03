@@ -8,9 +8,9 @@ test("should parse successfully if the predicate returns true", () => {
       () => true,
       () => {
         throw "Boom!"
-      }
+      },
     ),
-    1
+    1,
   )
 })
 
@@ -19,9 +19,9 @@ test("should fail to parse if the predicate returns false", () => {
     refinement(
       unknown,
       () => false,
-      () => ({ code: "hmm", message: "hmm?", path: [] })
+      () => ({ code: "hmm", message: "hmm?", path: [] }),
     ),
-    1
+    1,
   )
 })
 
@@ -32,9 +32,9 @@ test("should fail to parse if the underlying codec fails to parse the value", ()
       () => true,
       () => {
         throw "Boom!"
-      }
+      },
     ),
-    1
+    1,
   )
 })
 
@@ -44,7 +44,7 @@ test("should allow configuring the metadata", () => {
     string,
     () => true,
     () => ({ code: "hmm", message: "hmm?", path: [] }),
-    meta
+    meta,
   )
   expect(codec.meta).toEqual(meta)
 })

@@ -15,6 +15,6 @@ test("should work with object types", () => {
     object({
       a: optional(string),
     }),
-    {}
+    {},
   )
 })

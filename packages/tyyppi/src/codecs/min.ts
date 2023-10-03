@@ -25,7 +25,7 @@ export type MinCodec<C extends Codec<any, Ordered>> = Codec<
 
 export const min = <C extends Codec<any, Ordered>>(
   codec: C,
-  min: TypeOf<C>
+  min: TypeOf<C>,
 ): MinCodec<C> =>
   createCodec(
     (val) => {
@@ -37,5 +37,5 @@ export const min = <C extends Codec<any, Ordered>>(
         : result
     },
     codec.encode,
-    { ...codec.meta, min }
+    { ...codec.meta, min },
   )

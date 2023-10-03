@@ -26,7 +26,7 @@ export type TransformCodec<C extends AnyCodec, T> = Codec<
 export const transform = <C extends AnyCodec, T>(
   codec: C,
   forwards: (value: TypeOf<C>) => T,
-  backwards: (value: T) => TypeOf<C>
+  backwards: (value: T) => TypeOf<C>,
 ): TransformCodec<C, T> => {
   return createCodec(
     (val) => {
@@ -34,6 +34,6 @@ export const transform = <C extends AnyCodec, T>(
       return result.ok ? success(forwards(result.value)) : result
     },
     (val) => codec.encode(backwards(val)),
-    { tag: "transform", simple: false, codec }
+    { tag: "transform", simple: false, codec },
   )
 }

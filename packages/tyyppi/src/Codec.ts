@@ -17,7 +17,7 @@ export interface Codec<
   I,
   T = I,
   E extends DecodeError = DecodeError,
-  M extends Metadata = Metadata
+  M extends Metadata = Metadata,
 > {
   decode(value: unknown): Result<T, E>
   decodeOrThrow(value: unknown): T
@@ -46,7 +46,7 @@ export type ResultOf<C extends AnyCodec> = Result<TypeOf<C>, ErrorOf<C>>
 export type SimpleCodec<
   T,
   E extends DecodeError = DecodeError,
-  M extends SimpleMetadata = SimpleMetadata
+  M extends SimpleMetadata = SimpleMetadata,
 > = Codec<T, T, E, M>
 export type AnySimpleCodec = SimpleCodec<any>
 
@@ -65,7 +65,7 @@ const codecProto = {
 export function createCodec<R extends AnyResult, I, M extends Metadata>(
   decode: (value: unknown) => R,
   encode: (value: SuccessOf<R>) => I,
-  meta?: M
+  meta?: M,
 ): Codec<I, SuccessOf<R>, FailureOf<R>, M> {
   function decodeOrThrow(value: unknown) {
     const result = decode(value)
@@ -83,10 +83,10 @@ export function createCodec<R extends AnyResult, I, M extends Metadata>(
 
 export function createSimpleCodec<
   R extends AnyResult,
-  M extends SimpleMetadata
+  M extends SimpleMetadata,
 >(
   decode: (value: unknown) => R,
-  meta?: M
+  meta?: M,
 ): SimpleCodec<SuccessOf<R>, FailureOf<R>, M> {
   return createCodec(decode, identity, meta ?? { simple: true }) as SimpleCodec<
     SuccessOf<R>,

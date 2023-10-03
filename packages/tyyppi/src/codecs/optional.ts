@@ -29,5 +29,5 @@ export const optional = <C extends AnyCodec>(codec: C): OptionalCodec<C> =>
         ? success(undefined)
         : (codec.decode(val) as ResultOf<C>),
     (value) => (value === undefined ? value : codec.encode(value)),
-    { ...codec.meta, optional: true }
+    { ...codec.meta, optional: true },
   )

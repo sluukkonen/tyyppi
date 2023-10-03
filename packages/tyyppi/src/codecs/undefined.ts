@@ -18,7 +18,7 @@ const undefinedCodec: UndefinedCodec = createSimpleCodec(
   {
     tag: "undefined",
     simple: true,
-  }
+  },
 )
 
 export { undefinedCodec, undefinedCodec as undefined }

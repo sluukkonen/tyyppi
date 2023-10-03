@@ -3,7 +3,7 @@ import { AnyCodec, array, InputOf, TyyppiError, TypeOf } from "../src/index.js"
 export const expectParseSuccess = function <C extends AnyCodec>(
   codec: C,
   value: InputOf<C>,
-  result?: TypeOf<C>
+  result?: TypeOf<C>,
 ) {
   const expected = arguments.length === 3 ? result : value
   const decoded = codec.decodeOrThrow(value)
@@ -31,7 +31,7 @@ export const expectParseSuccess = function <C extends AnyCodec>(
 
 export const expectParseFailure = <C extends AnyCodec>(
   codec: C,
-  value: unknown
+  value: unknown,
 ) => {
   const result = codec.decode(value)
 
@@ -39,7 +39,7 @@ export const expectParseFailure = <C extends AnyCodec>(
   if (!result.ok) {
     expect(result.errors).toMatchSnapshot()
     expect(() => codec.decodeOrThrow(value)).toThrow(
-      new TyyppiError(`Found ${result.errors.length} error(s)`, result.errors)
+      new TyyppiError(`Found ${result.errors.length} error(s)`, result.errors),
     )
   }
 }

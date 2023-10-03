@@ -26,7 +26,7 @@ export type MaxLengthCodec<C extends Codec<HasLength, any>> = Codec<
 
 export const maxLength = <C extends Codec<HasLength, any>>(
   codec: C,
-  maxLength: number
+  maxLength: number,
 ): MaxLengthCodec<C> =>
   createCodec(
     (val) =>
@@ -34,5 +34,5 @@ export const maxLength = <C extends Codec<HasLength, any>>(
         ? failure(tooLong(val, maxLength))
         : (codec.decode(val) as ResultOf<C>),
     codec.encode as (value: TypeOf<C>) => InputOf<C>,
-    { ...codec.meta, maxLength }
+    { ...codec.meta, maxLength },
   )

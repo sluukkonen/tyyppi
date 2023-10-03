@@ -14,5 +14,5 @@ export const boolean: BooleanCodec = createSimpleCodec(
   {
     tag: "boolean",
     simple: true,
-  }
+  },
 )

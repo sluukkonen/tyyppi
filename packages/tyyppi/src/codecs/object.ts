@@ -89,13 +89,13 @@ export const object = <T extends Props>(props: T): ObjectCodec<T> => {
             const key = keys[i]
             const codec = codecs[i]
             const value = codec.encode(
-              hasOwnProperty(object, key) ? object[key] : undefined
+              hasOwnProperty(object, key) ? object[key] : undefined,
             )
             if (value !== undefined) result[key] = value
           }
 
           return result
         },
-    { tag: "object", simple, props }
+    { tag: "object", simple, props },
   )
 }

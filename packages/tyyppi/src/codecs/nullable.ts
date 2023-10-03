@@ -27,5 +27,5 @@ export const nullable = <C extends AnyCodec>(codec: C): NullableCodec<C> =>
     (val) =>
       val === null ? success(null) : (codec.decode(val) as ResultOf<C>),
     (value) => (value === null ? value : codec.encode(value)),
-    { ...codec.meta, nullable: true }
+    { ...codec.meta, nullable: true },
   )

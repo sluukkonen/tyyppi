@@ -29,10 +29,10 @@ export const number: NumberCodec = createSimpleCodec(
             ? isNaN(val)
               ? isNaNError()
               : isInfinite(val)
-            : invalidNumber(val)
+            : invalidNumber(val),
         ),
   {
     tag: "number",
     simple: true,
-  }
+  },
 )

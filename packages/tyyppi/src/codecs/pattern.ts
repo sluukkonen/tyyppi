@@ -24,7 +24,7 @@ export type PatternCodec<C extends Codec<any, string>> = Codec<
 
 export const pattern = <C extends Codec<any, string>>(
   codec: C,
-  pattern: RegExp
+  pattern: RegExp,
 ): PatternCodec<C> =>
   createCodec(
     (val) => {
@@ -36,5 +36,5 @@ export const pattern = <C extends Codec<any, string>>(
         : result
     },
     codec.encode,
-    { ...codec.meta, pattern }
+    { ...codec.meta, pattern },
   )

@@ -60,6 +60,6 @@ export const set = <C extends AnyCodec>(items: C): SetCodec<C> => {
           }
           return result
         },
-    { tag: "set", simple, items }
+    { tag: "set", simple, items },
   )
 }
