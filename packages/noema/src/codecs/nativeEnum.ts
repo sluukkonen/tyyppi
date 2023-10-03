@@ -1,10 +1,8 @@
 import { createSimpleCodec, SimpleCodec, SimpleMetadata } from "../Codec.js"
 import { InvalidEnum, invalidEnum } from "../DecodeError.js"
 import { failure, success } from "../Result.js"
-import { Primitive } from "../types.js"
+import { EnumLike } from "../types.js"
 import { isNumber, isString } from "../utils.js"
-
-type EnumLike = Record<string, Primitive>
 
 interface NativeEnumMetadata<T extends EnumLike> extends SimpleMetadata {
   readonly tag: "nativeEnum"

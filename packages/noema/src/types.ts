@@ -21,3 +21,5 @@ export type TypeName =
   | "string"
   | "symbol"
   | "undefined"
+
+export type EnumLike = Record<string, Primitive>
