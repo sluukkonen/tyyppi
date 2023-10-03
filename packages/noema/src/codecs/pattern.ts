@@ -3,7 +3,6 @@ import {
   createCodec,
   ErrorOf,
   InputOf,
-  IsSimple,
   Metadata,
   MetadataOf,
   ResultOf,

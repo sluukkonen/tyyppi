@@ -7,7 +7,7 @@ import {
   TypeOf,
 } from "../Codec.js"
 import { DecodeError } from "../DecodeError.js"
-import { refinement, RefinementCodec } from "./refinement.js"
+import { refinement } from "./refinement.js"
 
 export type GuardCodec<
   C extends AnyCodec,

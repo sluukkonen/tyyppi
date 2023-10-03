@@ -4,7 +4,6 @@ import {
   createCodec,
   ErrorOf,
   InputOf,
-  Metadata,
   MetadataOf,
   ResultOf,
   TypeOf,
