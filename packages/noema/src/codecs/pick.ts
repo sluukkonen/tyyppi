@@ -1,9 +1,9 @@
-import { AnyCodec } from "../Codec.js"
+import { Props } from "../types.js"
 import { entries, fromEntries } from "../utils.js"
 import { object, ObjectCodec } from "./object.js"
 
 /* c8 ignore start */
-export const pick = <T extends Record<string, AnyCodec>, K extends keyof T>(
+export const pick = <T extends Props, K extends keyof T>(
   codec: ObjectCodec<T>,
   keys: readonly K[]
 ): ObjectCodec<Pick<T, K>> =>

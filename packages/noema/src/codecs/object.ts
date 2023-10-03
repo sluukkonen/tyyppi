@@ -1,5 +1,4 @@
 import {
-  AnyCodec,
   Codec,
   createCodec,
   ErrorOf,
@@ -11,6 +10,7 @@ import {
 } from "../Codec.js"
 import { invalidObject, InvalidObject } from "../DecodeError.js"
 import { failure, failures, success } from "../Result.js"
+import { Props } from "../types.js"
 import {
   hasOwnProperty,
   identity,
@@ -36,22 +36,20 @@ type HandleOptionalTypes<T> = Flatten<
   }
 >
 
-interface ObjectMetadata<T extends Record<string, AnyCodec>> extends Metadata {
+interface ObjectMetadata<T extends Props> extends Metadata {
   readonly tag: "object"
   readonly simple: IsSimple<T[keyof T]>
   readonly props: T
 }
 
-export type ObjectCodec<T extends Record<string, AnyCodec>> = Codec<
+export type ObjectCodec<T extends Props> = Codec<
   HandleOptionalTypes<{ [K in keyof T]: InputOf<T[K]> }>,
   HandleOptionalTypes<{ [K in keyof T]: TypeOf<T[K]> }>,
   ErrorOf<T[keyof T]> | InvalidObject,
   ObjectMetadata<T>
 >
 
-export const object = <T extends Record<string, AnyCodec>>(
-  props: T
-): ObjectCodec<T> => {
+export const object = <T extends Props>(props: T): ObjectCodec<T> => {
   const keys = Object.keys(props)
   const codecs = Object.values(props)
   const simple = isEveryCodecSimple(codecs)

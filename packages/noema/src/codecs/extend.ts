@@ -1,10 +1,7 @@
-import { AnyCodec } from "../Codec.js"
+import { Props } from "../types.js"
 import { object, ObjectCodec } from "./object.js"
 
-export const extend = <
-  A extends Record<string, AnyCodec>,
-  B extends Record<string, AnyCodec>
->(
+export const extend = <A extends Props, B extends Props>(
   codec: ObjectCodec<A>,
   props: B
 ): ObjectCodec<A & B> => object({ ...codec.meta.props, ...props })

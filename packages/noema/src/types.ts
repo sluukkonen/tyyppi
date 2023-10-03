@@ -1,3 +1,5 @@
+import { AnyCodec } from "./Codec.js"
+
 export type Primitive = string | number | bigint | boolean | undefined | null
 
 export type Ordered = number | bigint | string | Date
@@ -23,3 +25,5 @@ export type TypeName =
   | "undefined"
 
 export type EnumLike = Record<string, Primitive>
+
+export type Props = Record<string, AnyCodec>
