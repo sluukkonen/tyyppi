@@ -17,7 +17,7 @@ import { NonEmptyArray } from "./nonEmptyArray.js"
 interface ArrayMetadata<C extends AnyCodec> extends Metadata {
   readonly tag: "array"
   readonly simple: IsSimple<C>
-  readonly codec: C
+  readonly items: C
 }
 
 export type ArrayCodec<C extends AnyCodec> = Codec<
@@ -27,8 +27,8 @@ export type ArrayCodec<C extends AnyCodec> = Codec<
   ArrayMetadata<C>
 >
 
-export const array = <C extends AnyCodec>(codec: C): ArrayCodec<C> => {
-  const simple = codec.meta.simple
+export const array = <C extends AnyCodec>(items: C): ArrayCodec<C> => {
+  const simple = items.meta.simple
   return createCodec(
     (val) => {
       if (!isArray(val)) return failure(invalidArray(val))
@@ -39,7 +39,7 @@ export const array = <C extends AnyCodec>(codec: C): ArrayCodec<C> => {
 
       for (let i = 0; i < val.length; i++) {
         const element = val[i]
-        const result = codec.decode(element) as ResultOf<C>
+        const result = items.decode(element) as ResultOf<C>
         if (!result.ok) {
           ok = false
           pushErrors(errors, result.errors, [i])
@@ -52,7 +52,7 @@ export const array = <C extends AnyCodec>(codec: C): ArrayCodec<C> => {
         ? success(array)
         : failures(errors as unknown as NonEmptyArray<ErrorOf<C>>)
     },
-    simple ? identity : (array) => array.map((value) => codec.encode(value)),
-    { tag: "array", simple, codec }
+    simple ? identity : (array) => array.map((value) => items.encode(value)),
+    { tag: "array", simple, items }
   )
 }

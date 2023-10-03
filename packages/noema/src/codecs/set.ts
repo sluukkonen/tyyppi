@@ -17,7 +17,7 @@ import { NonEmptyArray } from "./nonEmptyArray.js"
 interface SetMetadata<C extends AnyCodec> extends Metadata {
   readonly tag: "set"
   readonly simple: IsSimple<C>
-  readonly codec: C
+  readonly items: C
 }
 
 export type SetCodec<C extends AnyCodec> = Codec<
@@ -27,8 +27,8 @@ export type SetCodec<C extends AnyCodec> = Codec<
   SetMetadata<C>
 >
 
-export const set = <C extends AnyCodec>(codec: C): SetCodec<C> => {
-  const simple = codec.meta.simple
+export const set = <C extends AnyCodec>(items: C): SetCodec<C> => {
+  const simple = items.meta.simple
   return createCodec(
     (val) => {
       if (!isSet(val)) return failure(invalidSet(val))
@@ -38,7 +38,7 @@ export const set = <C extends AnyCodec>(codec: C): SetCodec<C> => {
       const set: Set<TypeOf<C>> = simple ? (val as Set<TypeOf<C>>) : new Set()
 
       for (const value of val) {
-        const result = codec.decode(value) as ResultOf<C>
+        const result = items.decode(value) as ResultOf<C>
         if (!result.ok) {
           ok = false
           errors.push(...result.errors)
@@ -56,10 +56,10 @@ export const set = <C extends AnyCodec>(codec: C): SetCodec<C> => {
       : (set) => {
           const result = new Set<InputOf<C>>()
           for (const value of set) {
-            result.add(codec.encode(value))
+            result.add(items.encode(value))
           }
           return result
         },
-    { tag: "set", simple, codec }
+    { tag: "set", simple, items }
   )
 }
