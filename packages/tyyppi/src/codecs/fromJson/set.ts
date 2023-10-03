@@ -55,6 +55,6 @@ export const set = <C extends AnyCodec>(items: C): SetCodec<C> => {
           for (const value of set) result.push(items.encode(value))
           return result
         },
-    { tag: "fromJson.set", simple: false, items }
+    { tag: "fromJson.set", simple: false, items },
   )
 }

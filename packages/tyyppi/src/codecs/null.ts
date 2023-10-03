@@ -13,7 +13,7 @@ const nullCodec: NullCodec = createSimpleCodec(
   {
     tag: "null",
     simple: true,
-  }
+  },
 )
 
 export { nullCodec, nullCodec as null }

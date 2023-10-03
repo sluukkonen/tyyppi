@@ -33,10 +33,10 @@ export const integer: IntegerCodec = createSimpleCodec(
               : isNaN(val)
               ? isNaNError()
               : isInfinite(val)
-            : invalidNumber(val)
+            : invalidNumber(val),
         ),
   {
     tag: "integer",
     simple: true,
-  }
+  },
 )

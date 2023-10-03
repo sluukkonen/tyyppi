@@ -6,7 +6,7 @@ test("should parse successfully if the predicate returns true", () => {
     guard(unknown, Array.isArray, () => {
       throw "Boom!"
     }),
-    []
+    [],
   )
 })
 
@@ -17,7 +17,7 @@ test("should fail to parse if the predicate returns false", () => {
       message: "hmm?",
       path: [],
     })),
-    1
+    1,
   )
 })
 
@@ -26,6 +26,6 @@ test("should fail to parse if the underlying codec fails to parse the value", ()
     guard(array(number), Array.isArray, () => {
       throw "Boom!"
     }),
-    1
+    1,
   )
 })

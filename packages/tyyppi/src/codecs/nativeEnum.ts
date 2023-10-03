@@ -16,12 +16,12 @@ export type NativeEnumCodec<T extends EnumLike> = SimpleCodec<
 >
 
 export const nativeEnum = <T extends EnumLike>(
-  enumObj: T
+  enumObj: T,
 ): NativeEnumCodec<T> => {
   const members = Object.values(enumObj).filter(
     (v) =>
       // Filter out reverse mappings for numeric enums
-      !isString(v) || !isNumber(enumObj[v as any])
+      !isString(v) || !isNumber(enumObj[v as any]),
   ) as T[keyof T][]
   const set = new Set(members)
 
@@ -30,6 +30,6 @@ export const nativeEnum = <T extends EnumLike>(
       set.has(val as T[keyof T])
         ? success(val as T[keyof T])
         : failure(invalidEnum(val, members)),
-    { tag: "nativeEnum", simple: true, enum: enumObj }
+    { tag: "nativeEnum", simple: true, enum: enumObj },
   )
 }

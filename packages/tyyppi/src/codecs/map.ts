@@ -30,7 +30,7 @@ export type MapCodec<K extends AnyCodec, V extends AnyCodec> = Codec<
 
 export const map = <K extends AnyCodec, V extends AnyCodec>(
   keys: K,
-  values: V
+  values: V,
 ): MapCodec<K, V> => {
   const simple = keys.meta.simple && values.meta.simple
   return createCodec(
@@ -75,6 +75,6 @@ export const map = <K extends AnyCodec, V extends AnyCodec>(
 
           return result
         },
-    { tag: "map", simple, keys, values }
+    { tag: "map", simple, keys, values },
   )
 }

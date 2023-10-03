@@ -56,6 +56,6 @@ test("should not strip extra keys (complex)", () => {
   expectParseSuccess(
     object({ n: fromJson.bigint }),
     { n: "1", a: 1, b: 2 } as { n: string },
-    { n: 1n, a: 1, b: 2 } as { n: bigint }
+    { n: 1n, a: 1, b: 2 } as { n: bigint },
   )
 })

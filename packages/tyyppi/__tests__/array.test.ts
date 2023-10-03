@@ -12,7 +12,7 @@ test("should parse complex arrays", () => {
   expectParseSuccess(
     array(fromJson.date),
     ["2000-01-01T00:00:00.000Z"],
-    [new Date("2000-01-01T00:00:00.000Z")]
+    [new Date("2000-01-01T00:00:00.000Z")],
   )
 })
 

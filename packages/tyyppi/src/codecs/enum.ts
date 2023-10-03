@@ -23,7 +23,7 @@ function enumCodec<T extends Primitive>(
       set.has(val as T)
         ? success(val as T)
         : failure(invalidEnum(val, members)),
-    { tag: "enum", simple: true, members }
+    { tag: "enum", simple: true, members },
   )
 }
 

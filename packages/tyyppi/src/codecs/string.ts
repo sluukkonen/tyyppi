@@ -14,5 +14,5 @@ export const string: StringCodec = createSimpleCodec(
   {
     tag: "string",
     simple: true,
-  }
+  },
 )

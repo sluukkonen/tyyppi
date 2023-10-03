@@ -32,12 +32,12 @@ export type RecordCodec<K extends AnySimpleCodec, V extends AnyCodec> = Codec<
 
 export const record = <K extends AnySimpleCodec, V extends AnyCodec>(
   keys: K,
-  values: V
+  values: V,
 ): RecordCodec<K, V> => {
   const simple = values.meta.simple
   return createCodec(
     (
-      val
+      val,
     ): Result<Record<TypeOf<K>, TypeOf<V>>, ErrorOf<K | V> | InvalidObject> => {
       if (!isObject(val)) return failure(invalidObject(val))
 
@@ -81,6 +81,6 @@ export const record = <K extends AnySimpleCodec, V extends AnyCodec>(
 
           return result
         },
-    { tag: "record", simple, keys, values }
+    { tag: "record", simple, keys, values },
   )
 }

@@ -8,6 +8,6 @@ export type ClampCodec<C extends Codec<any, Ordered>> = MinCodec<MaxCodec<C>>
 export const clamp = <C extends Codec<any, Ordered>>(
   codec: C,
   min: TypeOf<C>,
-  max: TypeOf<C>
+  max: TypeOf<C>,
 ): ClampCodec<C> =>
   minCodec(maxCodec(codec, max), min as unknown as TypeOf<MaxCodec<C>>)

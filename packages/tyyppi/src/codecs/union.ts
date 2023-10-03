@@ -36,6 +36,6 @@ export function union<C extends readonly AnySimpleCodec[]>(
 
       return failure(invalidUnion(errors))
     },
-    { tag: "union", simple: true, members }
+    { tag: "union", simple: true, members },
   )
 }

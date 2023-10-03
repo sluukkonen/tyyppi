@@ -23,7 +23,7 @@ test("should work if the key codec not simple", () => {
   expectParseSuccess(
     map(fromJson.bigint, number),
     new Map([["1", 1]]),
-    new Map([[1n, 1]])
+    new Map([[1n, 1]]),
   )
 })
 
@@ -31,6 +31,6 @@ test("should work if the value codec not simple", () => {
   expectParseSuccess(
     map(number, fromJson.bigint),
     new Map([[1, "1"]]),
-    new Map([[1, 1n]])
+    new Map([[1, 1n]]),
   )
 })

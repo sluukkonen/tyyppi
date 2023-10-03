@@ -25,7 +25,7 @@ export const failure = <E extends DecodeError>(error: E): Failure<E> => ({
 })
 
 export const failures = <E extends DecodeError>(
-  errors: NonEmptyArray<E>
+  errors: NonEmptyArray<E>,
 ): Failure<E> => ({
   ok: false,
   errors,

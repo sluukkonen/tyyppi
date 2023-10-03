@@ -27,5 +27,5 @@ export const date: DateCodec = createCodec(
     return isNaN(date.getTime()) ? failure(invalidISOString()) : success(date)
   },
   (date) => date.toISOString(),
-  { tag: "fromJson.date", simple: false }
+  { tag: "fromJson.date", simple: false },
 )

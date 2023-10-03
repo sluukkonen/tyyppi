@@ -12,7 +12,7 @@ import { expectParseSuccess } from "./helpers.js"
 test("createCodec with two arguments argument assigns default metadata", () => {
   const codec = createCodec(
     (val) => success(val),
-    (val) => val
+    (val) => val,
   )
   expect(codec.meta).toEqual({ simple: false })
 })

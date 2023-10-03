@@ -5,10 +5,10 @@ import { object, ObjectCodec } from "./object.js"
 /* c8 ignore start */
 export const pick = <T extends Props, K extends keyof T>(
   codec: ObjectCodec<T>,
-  keys: readonly K[]
+  keys: readonly K[],
 ): ObjectCodec<Pick<T, K>> =>
   object(
     fromEntries(
-      entries(codec.meta.props).filter(([k]) => keys.includes(k as K))
-    )
+      entries(codec.meta.props).filter(([k]) => keys.includes(k as K)),
+    ),
   ) as unknown as ObjectCodec<Pick<T, K>>

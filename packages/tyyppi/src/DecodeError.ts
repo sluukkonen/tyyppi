@@ -16,13 +16,13 @@ export interface InvalidType<T extends TypeName = TypeName>
 
 export const invalidType = <T extends TypeName>(
   expected: T,
-  value: unknown
+  value: unknown,
 ): InvalidType<T> => {
   const received = getType(value)
   return {
     code: "invalid_type",
     message: `Expected ${indefinite(expected)}, received ${indefinite(
-      received
+      received,
     )}`,
     expected,
     received,
@@ -53,7 +53,7 @@ export interface InvalidDiscriminatedUnion<T extends Primitive>
 }
 export const invalidDiscriminatedUnion = <T extends Primitive>(
   key: string,
-  options: readonly T[]
+  options: readonly T[],
 ): InvalidDiscriminatedUnion<T> => ({
   code: "invalid_discriminated_union",
   message: "Invalid discriminated union",
@@ -107,13 +107,13 @@ export interface InvalidEnum<T extends Primitive> extends DecodeError {
 
 export const invalidEnum = <T extends Primitive>(
   value: unknown,
-  members: readonly T[]
+  members: readonly T[],
 ): InvalidEnum<T> => {
   const received = getType(value)
   return {
     code: "invalid_enum",
     message: `Expected ${stringifyOptions(members)}, received ${indefinite(
-      received
+      received,
     )}`,
     members,
     received,
@@ -159,13 +159,13 @@ export interface InvalidLiteral<T extends Primitive> extends DecodeError {
 
 export const invalidLiteral = <T extends Primitive>(
   value: unknown,
-  expected: T
+  expected: T,
 ): InvalidLiteral<T> => {
   const received = getType(value)
   return {
     code: "invalid_literal",
     message: `Expected ${stringify(expected)}, received ${indefinite(
-      received
+      received,
     )}`,
     expected,
     received,
@@ -194,7 +194,7 @@ export interface InvalidUnion<E extends DecodeError> extends DecodeError {
 }
 
 export const invalidUnion = <E extends DecodeError>(
-  errors: readonly E[]
+  errors: readonly E[],
 ): InvalidUnion<E> => ({
   code: "invalid_union",
   message: "Invalid union",
@@ -258,7 +258,7 @@ export interface TooLong extends DecodeError {
 
 export const tooLong = (
   value: string | readonly unknown[],
-  maxLength: number
+  maxLength: number,
 ): TooLong => {
   const type = getType(value)
   return {
@@ -282,7 +282,7 @@ export interface TooShort extends DecodeError {
 
 export const tooShort = (
   value: string | readonly unknown[],
-  minLength: number
+  minLength: number,
 ): TooShort => {
   const type = getType(value)
   return {

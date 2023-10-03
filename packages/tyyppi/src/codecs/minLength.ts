@@ -25,7 +25,7 @@ export type MinLengthCodec<C extends Codec<HasLength, any>> = Codec<
 
 export const minLength = <C extends Codec<HasLength, any>>(
   codec: C,
-  minLength: number
+  minLength: number,
 ): MinLengthCodec<C> =>
   createCodec(
     (val) =>
@@ -33,5 +33,5 @@ export const minLength = <C extends Codec<HasLength, any>>(
         ? failure(tooShort(val, minLength))
         : (codec.decode(val) as ResultOf<C>),
     codec.encode as (value: TypeOf<C>) => InputOf<C>,
-    { ...codec.meta, minLength }
+    { ...codec.meta, minLength },
   )

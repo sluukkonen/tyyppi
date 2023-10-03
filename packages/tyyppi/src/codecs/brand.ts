@@ -22,5 +22,5 @@ export type BrandedCodec<C extends AnyCodec, B> = Codec<
 export const brand: <C extends AnyCodec, B extends string>(
   codec: C,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  brand: B
+  brand: B,
 ) => BrandedCodec<C, B> = identity as any

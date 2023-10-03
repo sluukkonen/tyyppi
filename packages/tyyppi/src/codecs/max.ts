@@ -24,7 +24,7 @@ export type MaxCodec<C extends Codec<any, Ordered>> = Codec<
 
 export const max = <C extends Codec<any, Ordered>>(
   codec: C,
-  max: TypeOf<C>
+  max: TypeOf<C>,
 ): MaxCodec<C> =>
   createCodec(
     (val) => {
@@ -36,5 +36,5 @@ export const max = <C extends Codec<any, Ordered>>(
         : result
     },
     codec.encode,
-    { ...codec.meta, max }
+    { ...codec.meta, max },
   )

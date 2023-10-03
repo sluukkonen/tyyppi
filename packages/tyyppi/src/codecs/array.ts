@@ -53,6 +53,6 @@ export const array = <C extends AnyCodec>(items: C): ArrayCodec<C> => {
         : failures(errors as unknown as NonEmptyArray<ErrorOf<C>>)
     },
     simple ? identity : (array) => array.map((value) => items.encode(value)),
-    { tag: "array", simple, items }
+    { tag: "array", simple, items },
   )
 }

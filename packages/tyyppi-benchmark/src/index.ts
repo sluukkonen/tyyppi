@@ -56,7 +56,7 @@ function runBenchmark<T>(benchmark: Benchmark<T>) {
     name,
     ...benchmarks.map(([name, fn]) => b.add(name, () => fn(data))),
     b.cycle(),
-    b.complete()
+    b.complete(),
   )
 }
 

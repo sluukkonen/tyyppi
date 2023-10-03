@@ -25,7 +25,7 @@ export type DefaultValueCodec<C extends AnyCodec> = Codec<
 
 export const defaultValue = <C extends AnyCodec>(
   codec: C,
-  defaultValue: TypeOf<C>
+  defaultValue: TypeOf<C>,
 ): DefaultValueCodec<C> =>
   createCodec(
     (val) =>
@@ -33,5 +33,5 @@ export const defaultValue = <C extends AnyCodec>(
         ? success(defaultValue)
         : (codec.decode(val) as ResultOf<C>),
     codec.encode,
-    { ...codec.meta, simple: false, optional: true, defaultValue } as any
+    { ...codec.meta, simple: false, optional: true, defaultValue } as any,
   )
