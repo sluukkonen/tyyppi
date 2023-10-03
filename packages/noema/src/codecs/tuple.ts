@@ -37,7 +37,7 @@ type TypesOf<C extends readonly unknown[]> = C extends readonly [
 interface TupleMetadata<C extends readonly AnyCodec[] | []> extends Metadata {
   readonly tag: "tuple"
   readonly simple: IsSimple<C[number]>
-  readonly members: C
+  readonly items: C
 }
 
 export type TupleCodec<C extends readonly AnyCodec[] | []> = Codec<
@@ -48,10 +48,10 @@ export type TupleCodec<C extends readonly AnyCodec[] | []> = Codec<
 >
 
 export const tuple = <C extends readonly AnyCodec[] | []>(
-  members: C
+  items: C
 ): TupleCodec<C> => {
-  const simple = isEveryCodecSimple(members)
-  const length = members.length
+  const simple = isEveryCodecSimple(items)
+  const length = items.length
   return createCodec(
     (val) => {
       if (!isArray(val)) {
@@ -68,7 +68,7 @@ export const tuple = <C extends readonly AnyCodec[] | []>(
 
       for (let i = 0; i < length; i++) {
         const value = val[i]
-        const codec = members[i]
+        const codec = items[i]
         const result = codec.decode(value)
         if (!result.ok) {
           ok = false
@@ -84,11 +84,11 @@ export const tuple = <C extends readonly AnyCodec[] | []>(
     },
     simple
       ? identity
-      : (array) => array.map((value, i) => members[i].encode(value)) as any,
+      : (array) => array.map((value, i) => items[i].encode(value)) as any,
     {
       tag: "tuple",
       simple,
-      members,
+      items,
     }
   )
 }
