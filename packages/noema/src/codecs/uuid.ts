@@ -21,5 +21,5 @@ export const uuid: UuidCodec = refinement(
   string,
   (s) => uuidRegexp.test(s),
   invalidUuid,
-  { tag: "uuid", simple: true }
+  { tag: "uuid" }
 )

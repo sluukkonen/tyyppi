@@ -21,8 +21,5 @@ export const email: EmailCodec = refinement(
   string,
   (s) => emailRegexp.test(s),
   invalidEmail,
-  {
-    tag: "email",
-    simple: true,
-  }
+  { tag: "email" }
 )

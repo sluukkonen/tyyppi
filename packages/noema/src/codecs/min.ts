@@ -3,8 +3,8 @@ import {
   createCodec,
   ErrorOf,
   InputOf,
-  IsSimple,
   Metadata,
+  MetadataOf,
   ResultOf,
   TypeOf,
 } from "../Codec.js"
@@ -12,18 +12,15 @@ import { tooSmall, TooSmall } from "../DecodeError.js"
 import { failure } from "../Result.js"
 import { Ordered } from "../types.js"
 
-interface MinMetadata<C extends Codec<any, Ordered>> extends Metadata {
-  readonly tag: "min"
-  readonly simple: IsSimple<C>
-  readonly min: TypeOf<C>
-  readonly codec: C
+interface MinMetadata<T extends Ordered> extends Metadata {
+  readonly min: T
 }
 
 export type MinCodec<C extends Codec<any, Ordered>> = Codec<
   InputOf<C>,
   TypeOf<C>,
   ErrorOf<C> | TooSmall<TypeOf<C>>,
-  MinMetadata<C>
+  MetadataOf<C> & MinMetadata<TypeOf<C>>
 >
 
 export const min = <C extends Codec<any, Ordered>>(
@@ -40,5 +37,5 @@ export const min = <C extends Codec<any, Ordered>>(
         : result
     },
     codec.encode,
-    { tag: "min", simple: codec.meta.simple, codec, min }
+    { ...codec.meta, min }
   )

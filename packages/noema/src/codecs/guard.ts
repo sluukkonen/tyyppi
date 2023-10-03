@@ -3,31 +3,27 @@ import {
   Codec,
   ErrorOf,
   InputOf,
-  IsSimple,
-  Metadata,
+  MetadataOf,
   TypeOf,
 } from "../Codec.js"
 import { DecodeError } from "../DecodeError.js"
-import { refinement } from "./refinement.js"
-
-interface GuardMetadata<C extends AnyCodec> extends Metadata {
-  readonly tag: "refinement"
-  readonly simple: IsSimple<C>
-  readonly codec: C
-}
+import { refinement, RefinementCodec } from "./refinement.js"
 
 export type GuardCodec<
   C extends AnyCodec,
   T extends TypeOf<C>,
-  E extends DecodeError
-> = Codec<InputOf<C>, T, ErrorOf<C> | E, GuardMetadata<C>>
+  E extends DecodeError,
+  M extends object
+> = Codec<InputOf<C>, T, ErrorOf<C> | E, MetadataOf<C> & M>
 
 export const guard: <
   C extends AnyCodec,
   T extends TypeOf<C>,
-  E extends DecodeError
+  E extends DecodeError,
+  M extends object
 >(
   codec: C,
   guard: (value: TypeOf<C>) => value is T,
-  makeError: (value: unknown) => E
-) => GuardCodec<C, T, E> = refinement
+  makeError: (value: unknown) => E,
+  meta?: M
+) => GuardCodec<C, T, E, M> = refinement

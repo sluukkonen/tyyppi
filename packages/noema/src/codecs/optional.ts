@@ -4,24 +4,22 @@ import {
   createCodec,
   ErrorOf,
   InputOf,
-  IsSimple,
   Metadata,
+  MetadataOf,
   ResultOf,
   TypeOf,
 } from "../Codec.js"
 import { success } from "../Result.js"
 
-interface OptionalMetadata<C extends AnyCodec> extends Metadata {
-  readonly tag: "optional"
-  readonly simple: IsSimple<C>
-  readonly codec: C
+interface OptionalMetadata extends Metadata {
+  readonly optional: true
 }
 
 export type OptionalCodec<C extends AnyCodec> = Codec<
   InputOf<C> | undefined,
   TypeOf<C> | undefined,
   ErrorOf<C>,
-  OptionalMetadata<C>
+  MetadataOf<C> & OptionalMetadata
 >
 
 export const optional = <C extends AnyCodec>(codec: C): OptionalCodec<C> =>
@@ -31,5 +29,5 @@ export const optional = <C extends AnyCodec>(codec: C): OptionalCodec<C> =>
         ? success(undefined)
         : (codec.decode(val) as ResultOf<C>),
     (value) => (value === undefined ? value : codec.encode(value)),
-    { tag: "optional", simple: codec.meta.simple, codec }
+    { ...codec.meta, optional: true }
   )
