@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should not accept illegal values 1`] = `
+[
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "message": "Expected a string, received null",
+    "path": [
+      "a",
+    ],
+    "received": "null",
+  },
+]
+`;

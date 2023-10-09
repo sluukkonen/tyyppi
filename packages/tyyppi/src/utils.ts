@@ -113,3 +113,9 @@ export const entries: <T extends object>(
 export const fromEntries: <K extends string, V>(
   entries: readonly [K, V][]
 ) => Record<K, V> = builtinObject.fromEntries
+
+export const mapObject = <K extends string, T, U>(
+  object: Record<K, T>,
+  fn: (value: T) => U
+): Record<K, U> =>
+  fromEntries(entries(object).map(([key, value]) => [key, fn(value)]))
