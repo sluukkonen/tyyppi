@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should work with complex codecs 1`] = `
+[
+  {
+    "code": "invalid_type",
+    "expected": "object",
+    "message": "Expected an object, received null",
+    "path": [],
+    "received": "null",
+  },
+]
+`;
+
+exports[`should work with complex codecs 2`] = `
+[
+  {
+    "code": "invalid_discriminated_union",
+    "message": "Invalid discriminated union",
+    "options": [
+      "a",
+      "b",
+    ],
+    "path": [
+      "type",
+    ],
+  },
+]
+`;
+
+exports[`should work with complex codecs 3`] = `
+[
+  {
+    "code": "invalid_discriminated_union",
+    "message": "Invalid discriminated union",
+    "options": [
+      "a",
+      "b",
+    ],
+    "path": [
+      "type",
+    ],
+  },
+]
+`;
+
+exports[`should work with simple codecs 1`] = `
+[
+  {
+    "code": "invalid_type",
+    "expected": "object",
+    "message": "Expected an object, received null",
+    "path": [],
+    "received": "null",
+  },
+]
+`;
+
+exports[`should work with simple codecs 2`] = `
+[
+  {
+    "code": "invalid_discriminated_union",
+    "message": "Invalid discriminated union",
+    "options": [
+      "a",
+      "b",
+    ],
+    "path": [
+      "type",
+    ],
+  },
+]
+`;
+
+exports[`should work with simple codecs 3`] = `
+[
+  {
+    "code": "invalid_discriminated_union",
+    "message": "Invalid discriminated union",
+    "options": [
+      "a",
+      "b",
+    ],
+    "path": [
+      "type",
+    ],
+  },
+]
+`;

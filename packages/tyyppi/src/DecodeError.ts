@@ -46,6 +46,21 @@ export type InvalidDate = InvalidType<"date">
 export const invalidDate = (value: unknown): InvalidDate =>
   invalidType("date", value)
 
+export interface InvalidDiscriminatedUnion<T extends Primitive>
+  extends DecodeError {
+  readonly code: "invalid_discriminated_union"
+  readonly options: readonly T[]
+}
+export const invalidDiscriminatedUnion = <T extends Primitive>(
+  key: string,
+  options: readonly T[]
+): InvalidDiscriminatedUnion<T> => ({
+  code: "invalid_discriminated_union",
+  message: "Invalid discriminated union",
+  options,
+  path: [key],
+})
+
 export type InvalidNull = InvalidType<"null">
 export const invalidNull = (value: unknown): InvalidNull =>
   invalidType("null", value)
