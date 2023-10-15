@@ -23,7 +23,7 @@ exports[`should reject other values 2`] = `
       1n,
       2n,
     ],
-    "message": "Expected 1 | 2, received a bigint",
+    "message": "Expected 1n | 2n, received a bigint",
     "path": [],
     "received": "bigint",
   },

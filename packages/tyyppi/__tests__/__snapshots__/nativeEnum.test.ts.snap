@@ -8,7 +8,7 @@ exports[`supports const objects 1`] = `
       "ONE",
       2n,
     ],
-    "message": "Expected "ONE" | 2, received a string",
+    "message": "Expected "ONE" | 2n, received a string",
     "path": [],
     "received": "string",
   },

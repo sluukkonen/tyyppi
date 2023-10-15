@@ -17,7 +17,7 @@ exports[`should fail to parse anything else 2`] = `
   {
     "code": "invalid_literal",
     "expected": 0n,
-    "message": "Expected 0, received a string",
+    "message": "Expected 0n, received a string",
     "path": [],
     "received": "string",
   },

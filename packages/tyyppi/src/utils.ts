@@ -82,6 +82,10 @@ export const getType = (value: unknown): TypeName => {
       return "object"
   }
 }
+
+export const isBigInt = (value: unknown): value is bigint =>
+  typeof value === "bigint"
+
 export const isDate = (value: unknown): value is Date =>
   isObjectLike(value) && getTag(value) === dateTag
 

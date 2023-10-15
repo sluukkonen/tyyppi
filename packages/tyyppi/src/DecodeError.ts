@@ -1,5 +1,5 @@
 import { Primitive, Ordered, TypeName } from "./types.js"
-import { getType, isString } from "./utils.js"
+import { getType, isBigInt, isString } from "./utils.js"
 
 export interface DecodeError {
   readonly code: string
@@ -321,7 +321,11 @@ export const indefinite = (type: TypeName) =>
     : `a ${type}`
 
 export const stringify = (value: Primitive): string =>
-  isString(value) ? JSON.stringify(value) : String(value)
+  isString(value)
+    ? JSON.stringify(value)
+    : isBigInt(value)
+    ? `${value}n`
+    : String(value)
 
 const stringifyOptions = (options: readonly Primitive[]) =>
   options.map(stringify).join(" | ")
