@@ -11,7 +11,7 @@ import { InvalidArray, TooShort } from "../DecodeError.js"
 import { array } from "./array.js"
 import { minLength } from "./minLength.js"
 
-export type NonEmptyArray<T> = readonly [T, ...T[]]
+export type NonEmptyArray<T> = [T, ...T[]]
 
 interface NonEmptyArrayMetadata<C extends AnyCodec> extends Metadata {
   readonly tag: "minLength"
