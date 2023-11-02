@@ -2,7 +2,6 @@ import { Props } from "../types.js"
 import { entries, fromEntries } from "../utils.js"
 import { object, ObjectCodec } from "./object.js"
 
-/* c8 ignore start */
 export const omit = <T extends Props, K extends keyof T>(
   codec: ObjectCodec<T>,
   keys: readonly K[],

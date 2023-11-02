@@ -27,8 +27,6 @@ export type NonEmptyArrayCodec<C extends AnyCodec> = Codec<
   NonEmptyArrayMetadata<C>
 >
 
-// For whatever reason, coverage doesn't seem to work here.
-/* c8 ignore start */
 export const nonEmptyArray = <C extends AnyCodec>(
   codec: C,
 ): NonEmptyArrayCodec<C> =>

@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`does not parse non-strings 1`] = `
+[
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "message": "Expected a string, received a number",
+    "path": [],
+    "received": "number",
+  },
+]
+`;
+
+exports[`doesn't parse empty strings 1`] = `
+[
+  {
+    "code": "too_short",
+    "length": 0,
+    "message": "Expected the string to contain at least 1 character(s)",
+    "minLength": 1,
+    "path": [],
+    "type": "string",
+  },
+]
+`;
