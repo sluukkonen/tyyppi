@@ -27,7 +27,7 @@
     },
     "test": {
       "dependsOn": ["build:test"],
-      "inputs": ["__tests__/**/*.ts", "jest.config.mjs"],
+      "inputs": ["__tests__/**/*.ts", "vitest.config.ts"],
       "outputs": ["coverage/**"],
       "outputMode": "new-only"
     },
