@@ -317,15 +317,15 @@ export const indefinite = (type: TypeName) =>
   type === "null" || type === "undefined"
     ? type
     : type === "array" || type === "object" || type === "error"
-    ? `an ${type}`
-    : `a ${type}`
+      ? `an ${type}`
+      : `a ${type}`
 
 export const stringify = (value: Primitive): string =>
   isString(value)
     ? JSON.stringify(value)
     : isBigInt(value)
-    ? `${value}n`
-    : String(value)
+      ? `${value}n`
+      : String(value)
 
 const stringifyOptions = (options: readonly Primitive[]) =>
   options.map(stringify).join(" | ")

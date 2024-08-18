@@ -31,8 +31,8 @@ export const integer: IntegerCodec = createSimpleCodec(
             ? isFinite(val)
               ? invalidInteger()
               : isNaN(val)
-              ? isNaNError()
-              : isInfinite(val)
+                ? isNaNError()
+                : isInfinite(val)
             : invalidNumber(val),
         ),
   {

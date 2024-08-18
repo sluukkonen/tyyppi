@@ -14,7 +14,7 @@ export const date: DateCodec = createSimpleCodec(
     !isDate(val)
       ? failure(invalidDate(val))
       : isNaN(val.getTime())
-      ? failure(isNaNError())
-      : success(val),
+        ? failure(isNaNError())
+        : success(val),
   { tag: "date", simple: true },
 )

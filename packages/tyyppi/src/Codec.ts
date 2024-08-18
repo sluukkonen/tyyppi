@@ -31,15 +31,12 @@ export interface Codec<
 
 export type AnyCodec = Codec<any>
 
-export type InputOf<C extends AnyCodec> = C extends Codec<infer I, any>
-  ? I
-  : never
-export type TypeOf<C extends AnyCodec> = C extends Codec<any, infer T>
-  ? T
-  : never
-export type ErrorOf<C extends AnyCodec> = C extends Codec<any, any, infer E>
-  ? E
-  : never
+export type InputOf<C extends AnyCodec> =
+  C extends Codec<infer I, any> ? I : never
+export type TypeOf<C extends AnyCodec> =
+  C extends Codec<any, infer T> ? T : never
+export type ErrorOf<C extends AnyCodec> =
+  C extends Codec<any, any, infer E> ? E : never
 export type MetadataOf<C extends AnyCodec> = C["meta"]
 export type ResultOf<C extends AnyCodec> = Result<TypeOf<C>, ErrorOf<C>>
 
