@@ -13,7 +13,7 @@
     "benny": "3.7.1",
     "fp-ts": "2.16.9",
     "io-ts": "2.2.21",
-    "tyyppi": "1.0.0",
+    "tyyppi": "workspace:*",
     "typescript": "5.5.4",
     "zod": "3.23.8"
   }
