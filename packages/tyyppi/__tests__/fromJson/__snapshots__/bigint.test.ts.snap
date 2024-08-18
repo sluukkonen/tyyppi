@@ -1,5 +1,105 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`should ignore leading and trailing whitespace 1`] = `
+[
+  {
+    "code": "invalid_integer_string",
+    "message": "Expected the string to be an integer",
+    "path": [],
+  },
+]
+`;
+
+exports[`should ignore leading and trailing whitespace 2`] = `
+[
+  {
+    "code": "invalid_integer_string",
+    "message": "Expected the string to be an integer",
+    "path": [],
+  },
+]
+`;
+
+exports[`should ignore leading and trailing whitespace 3`] = `
+[
+  {
+    "code": "invalid_integer_string",
+    "message": "Expected the string to be an integer",
+    "path": [],
+  },
+]
+`;
+
+exports[`should not accept binary, octal and hexadecimal numbers 1`] = `
+[
+  {
+    "code": "invalid_integer_string",
+    "message": "Expected the string to be an integer",
+    "path": [],
+  },
+]
+`;
+
+exports[`should not accept binary, octal and hexadecimal numbers 2`] = `
+[
+  {
+    "code": "invalid_integer_string",
+    "message": "Expected the string to be an integer",
+    "path": [],
+  },
+]
+`;
+
+exports[`should not accept binary, octal and hexadecimal numbers 3`] = `
+[
+  {
+    "code": "invalid_integer_string",
+    "message": "Expected the string to be an integer",
+    "path": [],
+  },
+]
+`;
+
+exports[`should not accept binary, octal and hexadecimal numbers 4`] = `
+[
+  {
+    "code": "invalid_integer_string",
+    "message": "Expected the string to be an integer",
+    "path": [],
+  },
+]
+`;
+
+exports[`should not accept leading or trailing whitespace 1`] = `
+[
+  {
+    "code": "invalid_integer_string",
+    "message": "Expected the string to be an integer",
+    "path": [],
+  },
+]
+`;
+
+exports[`should not accept leading or trailing whitespace 2`] = `
+[
+  {
+    "code": "invalid_integer_string",
+    "message": "Expected the string to be an integer",
+    "path": [],
+  },
+]
+`;
+
+exports[`should not accept leading or trailing whitespace 3`] = `
+[
+  {
+    "code": "invalid_integer_string",
+    "message": "Expected the string to be an integer",
+    "path": [],
+  },
+]
+`;
+
 exports[`should not parse invalid strings 1`] = `
 [
   {

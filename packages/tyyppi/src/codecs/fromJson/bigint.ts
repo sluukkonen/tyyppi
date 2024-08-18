@@ -23,14 +23,8 @@ export type BigIntCodec = Codec<
 export const bigint: BigIntCodec = createCodec(
   (val) => {
     if (!isString(val)) return failure(invalidString(val))
-    // A string like BigInt("") or BigInt("   ") return 0n
-    const trimmed = val.trim()
-    if (trimmed === "") return failure(invalidIntegerString())
-    try {
-      return success(BigInt(trimmed))
-    } catch (err) {
-      return failure(invalidIntegerString())
-    }
+    if (!/^[+-]?\d+$/.test(val)) return failure(invalidIntegerString())
+    return success(BigInt(val))
   },
   (bigint) => bigint.toString(),
   { tag: "fromJson.bigint", simple: false },

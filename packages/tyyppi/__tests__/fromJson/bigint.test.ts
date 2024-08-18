@@ -5,19 +5,20 @@ test("should parse valid strings", () => {
   expectParseSuccess(fromJson.bigint, "0", 0n)
   expectParseSuccess(fromJson.bigint, "123", 123n)
   expectParseSuccess(fromJson.bigint, "-1000", -1000n)
+  expectParseSuccess(fromJson.bigint, "+1000", 1000n)
 })
 
-test("should ignore leading and trailing whitespace", () => {
-  expectParseSuccess(fromJson.bigint, "  123", 123n)
-  expectParseSuccess(fromJson.bigint, "123   ", 123n)
-  expectParseSuccess(fromJson.bigint, "   123   ", 123n)
+test("should not accept leading or trailing whitespace", () => {
+  expectParseFailure(fromJson.bigint, "  123")
+  expectParseFailure(fromJson.bigint, "123   ")
+  expectParseFailure(fromJson.bigint, "   123   ")
 })
 
-test("should allow binary, octal and hexadecimal numbers", () => {
-  expectParseSuccess(fromJson.bigint, "0b11", 3n)
-  expectParseSuccess(fromJson.bigint, "0o53", 43n)
-  expectParseSuccess(fromJson.bigint, "0xFF", 255n)
-  expectParseSuccess(fromJson.bigint, "0xff", 255n)
+test("should not accept binary, octal and hexadecimal numbers", () => {
+  expectParseFailure(fromJson.bigint, "0b11")
+  expectParseFailure(fromJson.bigint, "0o53")
+  expectParseFailure(fromJson.bigint, "0xFF")
+  expectParseFailure(fromJson.bigint, "0xff")
 })
 
 test("should only accept integers", () => {
