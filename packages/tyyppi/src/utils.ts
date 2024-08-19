@@ -112,7 +112,7 @@ export const isMap = (value: unknown): value is Map<unknown, unknown> =>
 
 export const entries: <T extends object>(
   object: T,
-) => Array<[keyof T & string, T[keyof T & string]]> = builtinObject.entries
+) => [keyof T & string, T[keyof T & string]][] = builtinObject.entries
 
 export const fromEntries: <K extends string, V>(
   entries: readonly [K, V][],

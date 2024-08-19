@@ -42,7 +42,7 @@ export const record = <K extends AnySimpleCodec, V extends AnyCodec>(
       if (!isObject(val)) return failure(invalidObject(val))
 
       let ok = true
-      const errors: Array<ErrorOf<K> | ErrorOf<V>> = []
+      const errors: (ErrorOf<K> | ErrorOf<V>)[] = []
       const object: any = simple ? val : {}
 
       for (const key in val) {
