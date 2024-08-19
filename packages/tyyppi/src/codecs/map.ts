@@ -38,7 +38,7 @@ export const map = <K extends AnyCodec, V extends AnyCodec>(
       if (!isMap(val)) return failure(invalidMap(val))
 
       let ok = true
-      const errors: Array<ErrorOf<K | V>> = []
+      const errors: ErrorOf<K | V>[] = []
       const map: Map<TypeOf<K>, TypeOf<V>> = simple
         ? (val as Map<TypeOf<K>, TypeOf<V>>)
         : new Map()

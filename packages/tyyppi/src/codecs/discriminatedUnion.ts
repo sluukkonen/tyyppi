@@ -84,7 +84,6 @@ export const discriminatedUnion = <
     simple
       ? identity
       : (val) => {
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           const codec = codecs.get(val[key])!
           return codec.encode(val)
         },

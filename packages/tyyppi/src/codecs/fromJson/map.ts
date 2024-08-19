@@ -44,7 +44,7 @@ export const map = <K extends AnyCodec, V extends AnyCodec>(
 
       let ok = true
       const errors: ErrorOf<MapCodec<K, V>>[] = []
-      const map: Map<TypeOf<K>, TypeOf<V>> = new Map()
+      const map = new Map<TypeOf<K>, TypeOf<V>>()
 
       for (let i = 0; i < val.length; i++) {
         const tuple = val[i]
