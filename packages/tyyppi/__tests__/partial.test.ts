@@ -22,7 +22,7 @@ test("should not accept illegal values", () => {
   expectParseFailure(partialAbc, { a: null })
 })
 
-test("should make all props optional", async () => {
+test("should make all props optional", () => {
   expect(partialAbc.meta.props.a.meta.optional).toBe(true)
   expect(partialAbc.meta.props.b.meta.optional).toBe(true)
   expect(partialAbc.meta.props.c.meta.optional).toBe(true)

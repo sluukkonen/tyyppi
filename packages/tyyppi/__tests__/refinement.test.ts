@@ -7,7 +7,7 @@ test("should parse successfully if the predicate returns true", () => {
       unknown,
       () => true,
       () => {
-        throw "Boom!"
+        throw new Error("Boom!")
       },
     ),
     1,
@@ -31,7 +31,7 @@ test("should fail to parse if the underlying codec fails to parse the value", ()
       string,
       () => true,
       () => {
-        throw "Boom!"
+        throw new Error("Boom!")
       },
     ),
     1,

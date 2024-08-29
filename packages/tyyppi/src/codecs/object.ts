@@ -83,7 +83,7 @@ export const object = <T extends Props>(props: T): ObjectCodec<T> => {
     simple
       ? identity
       : (object) => {
-          const result = { ...object } as any
+          const result = { ...object }
 
           for (let i = 0; i < keys.length; i++) {
             const key = keys[i]

@@ -19,9 +19,9 @@ export interface Codec<
   E extends DecodeError = DecodeError,
   M extends Metadata = Metadata,
 > {
-  decode(value: unknown): Result<T, E>
-  decodeOrThrow(value: unknown): T
-  encode(value: T): I
+  decode(this: void, value: unknown): Result<T, E>
+  decodeOrThrow(this: void, value: unknown): T
+  encode(this: void, value: T): I
   readonly meta: M
   pipe<Args extends readonly unknown[], R>(
     fn: (codec: this, ...args: Args) => R,

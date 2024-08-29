@@ -4,7 +4,7 @@ import { expectParseFailure, expectParseSuccess } from "./helpers.js"
 test("should parse successfully if the predicate returns true", () => {
   expectParseSuccess(
     guard(unknown, Array.isArray, () => {
-      throw "Boom!"
+      throw new Error("Boom!")
     }),
     [],
   )
@@ -24,7 +24,7 @@ test("should fail to parse if the predicate returns false", () => {
 test("should fail to parse if the underlying codec fails to parse the value", () => {
   expectParseFailure(
     guard(array(number), Array.isArray, () => {
-      throw "Boom!"
+      throw new Error("Boom!")
     }),
     1,
   )

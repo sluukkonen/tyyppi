@@ -242,7 +242,7 @@ export const tooLarge = <T extends Ordered>(val: T, max: T): TooLarge<T> => {
   const type = getType(val)
   return {
     code: "too_large",
-    message: `Expected the ${type} to be less than or equal to ${max}`,
+    message: `Expected the ${type} to be less than or equal to ${String(max)}`,
     max,
     type,
     path: [],
@@ -307,13 +307,14 @@ export const tooSmall = <T extends Ordered>(value: T, min: T): TooSmall<T> => {
   const type = getType(value)
   return {
     code: "too_small",
-    message: `Expected the ${type} to be greater than or equal to ${min}`,
+    message: `Expected the ${type} to be greater than or equal to ${String(min)}`,
     min,
     type,
     path: [],
   }
 }
-export const indefinite = (type: TypeName) =>
+
+const indefinite = (type: TypeName) =>
   type === "null" || type === "undefined"
     ? type
     : type === "array" || type === "object" || type === "error"
