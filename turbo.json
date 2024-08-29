@@ -16,12 +16,7 @@
     },
     "lint": {
       "dependsOn": [],
-      "inputs": [
-        "src/**/*.ts",
-        "__tests__/**/*.ts",
-        ".eslintrc.json",
-        ".eslintignore"
-      ],
+      "inputs": ["src/**/*.ts", "__tests__/**/*.ts", "eslint.config.mjs"],
       "outputs": [],
       "outputLogs": "new-only"
     },
