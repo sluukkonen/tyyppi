@@ -1,9 +1,8 @@
-import { NonEmptyArray } from "./codecs/nonEmptyArray.js"
 import { DecodeError } from "./DecodeError.js"
 
 export interface Failure<E extends DecodeError> {
   readonly ok: false
-  readonly errors: NonEmptyArray<E>
+  readonly errors: E[]
 }
 
 export interface Success<T> {
@@ -24,9 +23,7 @@ export const failure = <E extends DecodeError>(error: E): Failure<E> => ({
   errors: [error],
 })
 
-export const failures = <E extends DecodeError>(
-  errors: NonEmptyArray<E>,
-): Failure<E> => ({
+export const failures = <E extends DecodeError>(errors: E[]): Failure<E> => ({
   ok: false,
   errors,
 })

@@ -12,7 +12,6 @@ import {
 import { invalidMap, InvalidMap } from "../DecodeError.js"
 import { failure, failures, success } from "../Result.js"
 import { identity, isMap } from "../utils.js"
-import { NonEmptyArray } from "./nonEmptyArray.js"
 
 interface MapMetadata<K extends AnyCodec, V extends AnyCodec> extends Metadata {
   readonly tag: "map"
@@ -60,9 +59,7 @@ export const map = <K extends AnyCodec, V extends AnyCodec>(
         }
       }
 
-      return ok
-        ? success(map)
-        : failures(errors as unknown as NonEmptyArray<ErrorOf<K | V>>)
+      return ok ? success(map) : failures(errors)
     },
     simple
       ? identity

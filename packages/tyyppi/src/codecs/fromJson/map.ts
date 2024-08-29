@@ -17,7 +17,6 @@ import {
 } from "../../DecodeError.js"
 import { failure, failures, success } from "../../Result.js"
 import { isArray, pushError, pushErrors } from "../../utils.js"
-import { NonEmptyArray } from "../nonEmptyArray.js"
 
 interface MapMetadata<K extends AnyCodec, V extends AnyCodec> extends Metadata {
   readonly tag: "fromJson.map"
@@ -78,9 +77,7 @@ export const map = <K extends AnyCodec, V extends AnyCodec>(
         }
       }
 
-      return ok
-        ? success(map)
-        : failures(errors as unknown as NonEmptyArray<ErrorOf<MapCodec<K, V>>>)
+      return ok ? success(map) : failures(errors)
     },
     simple
       ? (map) => [...map.entries()] as [InputOf<K>, InputOf<V>][]

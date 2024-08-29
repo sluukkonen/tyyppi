@@ -18,7 +18,6 @@ import {
   isObject,
   pushErrors,
 } from "../utils.js"
-import { NonEmptyArray } from "./nonEmptyArray.js"
 
 type RequiredKeys<T> = {
   [K in keyof T]: undefined extends T[K] ? never : K
@@ -76,9 +75,7 @@ export const object = <T extends Props>(props: T): ObjectCodec<T> => {
         }
       }
 
-      return ok
-        ? success(object)
-        : failures(errors as unknown as NonEmptyArray<ErrorOf<T[keyof T]>>)
+      return ok ? success(object) : failures(errors)
     },
     simple
       ? identity

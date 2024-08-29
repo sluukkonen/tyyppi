@@ -13,7 +13,6 @@ import {
 import { invalidObject, InvalidObject } from "../DecodeError.js"
 import { failure, failures, Result, success } from "../Result.js"
 import { hasOwnProperty, identity, isObject, pushErrors } from "../utils.js"
-import { NonEmptyArray } from "./nonEmptyArray.js"
 
 interface RecordMetadata<K extends AnySimpleCodec, V extends AnyCodec>
   extends Metadata {
@@ -64,9 +63,7 @@ export const record = <K extends AnySimpleCodec, V extends AnyCodec>(
         }
       }
 
-      return ok
-        ? success(object)
-        : failures(errors as unknown as NonEmptyArray<ErrorOf<K> | ErrorOf<V>>)
+      return ok ? success(object) : failures(errors)
     },
     simple
       ? identity

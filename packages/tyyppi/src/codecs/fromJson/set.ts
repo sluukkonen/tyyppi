@@ -11,7 +11,6 @@ import {
 import { InvalidArray, invalidArray } from "../../DecodeError.js"
 import { failure, failures, success } from "../../Result.js"
 import { isArray, pushErrors } from "../../utils.js"
-import { NonEmptyArray } from "../nonEmptyArray.js"
 
 interface SetMetadata<C extends AnyCodec> extends Metadata {
   readonly tag: "fromJson.set"
@@ -44,9 +43,7 @@ export const set = <C extends AnyCodec>(items: C): SetCodec<C> => {
         }
       }
 
-      return ok
-        ? success(set)
-        : failures(errors as unknown as NonEmptyArray<ErrorOf<C>>)
+      return ok ? success(set) : failures(errors)
     },
     items.meta.simple
       ? (set) => [...set] as InputOf<C>[]

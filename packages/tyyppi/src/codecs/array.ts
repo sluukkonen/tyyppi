@@ -12,7 +12,6 @@ import {
 import { invalidArray, InvalidArray } from "../DecodeError.js"
 import { failure, failures, success } from "../Result.js"
 import { identity, isArray, pushErrors } from "../utils.js"
-import { NonEmptyArray } from "./nonEmptyArray.js"
 
 interface ArrayMetadata<C extends AnyCodec> extends Metadata {
   readonly tag: "array"
@@ -48,9 +47,7 @@ export const array = <C extends AnyCodec>(items: C): ArrayCodec<C> => {
         }
       }
 
-      return ok
-        ? success(array)
-        : failures(errors as unknown as NonEmptyArray<ErrorOf<C>>)
+      return ok ? success(array) : failures(errors)
     },
     simple ? identity : (array) => array.map((value) => items.encode(value)),
     { tag: "array", simple, items },

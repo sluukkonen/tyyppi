@@ -12,7 +12,6 @@ import {
 import { InvalidObject } from "../DecodeError.js"
 import { failures, success } from "../Result.js"
 import { identity, isEveryCodecSimple, isObject } from "../utils.js"
-import { NonEmptyArray } from "./nonEmptyArray.js"
 
 type IntersectInputsOf<T extends readonly unknown[]> = T extends readonly [
   infer C extends AnyCodec,
@@ -62,9 +61,7 @@ export const intersection = <C extends readonly AnyCodec[]>(
         }
       }
 
-      return ok
-        ? success(intersection)
-        : failures(errors as unknown as NonEmptyArray<ErrorOf<C[number]>>)
+      return ok ? success(intersection) : failures(errors)
     },
     simple
       ? (identity as any)
