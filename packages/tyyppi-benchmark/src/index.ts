@@ -8,14 +8,14 @@ import array from "./array.js"
 import clamp from "./clamp.js"
 import email from "./email.js"
 import enumB from "./enum.js"
-import integer from "./integer.js"
 import fromJsonMap from "./fromJson.map.js"
+import integer from "./integer.js"
+import length from "./length.js"
 import object from "./object.js"
 import record from "./record.js"
 import string from "./string.js"
 import undefined from "./undefined.js"
 import uuid from "./uuid.js"
-import length from "./length.js"
 
 export interface Benchmark<I, T = I> {
   name: string
@@ -43,6 +43,7 @@ function runBenchmark<T>(benchmark: Benchmark<T>) {
   const benchmarks: [string, (val: unknown) => unknown][] = [
     ["tyyppi", tyyppi.decodeOrThrow],
   ]
+  // eslint-disable-next-line @typescript-eslint/unbound-method
   if (zod) benchmarks.push(["zod", zod.parse])
   if (ioTs) benchmarks.push(["io-ts", ioTsUnsafeParse(ioTs)])
 
