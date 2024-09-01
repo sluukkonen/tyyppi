@@ -1,5 +1,5 @@
 import { SimpleCodec, SimpleMetadata } from "../Codec.js"
-import { invalidEmail, InvalidEmail, InvalidString } from "../DecodeError.js"
+import { invalidFormat } from "../errors/index.js"
 import { refinement } from "./refinement.js"
 import { string } from "./string.js"
 
@@ -11,15 +11,11 @@ interface EmailMetadata extends SimpleMetadata {
   readonly tag: "email"
 }
 
-export type EmailCodec = SimpleCodec<
-  string,
-  InvalidString | InvalidEmail,
-  EmailMetadata
->
+export type EmailCodec = SimpleCodec<string, EmailMetadata>
 
 export const email: EmailCodec = refinement(
   string,
   (s) => emailRegexp.test(s),
-  invalidEmail,
+  () => invalidFormat({ format: "email" }),
   { tag: "email" },
 )

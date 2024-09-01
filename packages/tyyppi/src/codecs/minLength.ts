@@ -1,16 +1,7 @@
-import {
-  Codec,
-  createCodec,
-  ErrorOf,
-  InputOf,
-  MetadataOf,
-  ResultOf,
-  TypeOf,
-} from "../Codec.js"
-import { tooShort, TooShort } from "../DecodeError.js"
+import { Codec, createCodec, InputOf, MetadataOf, TypeOf } from "../Codec.js"
+import { tooShort } from "../errors/index.js"
 import { failure } from "../Result.js"
 import { HasLength } from "../types.js"
-import { hasLength } from "../utils.js"
 
 interface MinLengthMetadata {
   readonly minLength: number
@@ -19,19 +10,20 @@ interface MinLengthMetadata {
 export type MinLengthCodec<C extends Codec<HasLength, any>> = Codec<
   InputOf<C>,
   TypeOf<C>,
-  ErrorOf<C> | TooShort,
   MetadataOf<C> & MinLengthMetadata
 >
 
-export const minLength = <C extends Codec<HasLength, any>>(
+export const minLength = <C extends Codec<any, HasLength>>(
   codec: C,
   minLength: number,
 ): MinLengthCodec<C> =>
   createCodec(
-    (val) =>
-      hasLength(val) && val.length < minLength
-        ? failure(tooShort(val, minLength))
-        : (codec.decode(val) as ResultOf<C>),
-    codec.encode as (value: TypeOf<C>) => InputOf<C>,
+    (val) => {
+      const result = codec.decode(val)
+      return result.ok && result.value.length < minLength
+        ? failure(tooShort({ val, length: result.value.length, minLength }))
+        : result
+    },
+    codec.encode,
     { ...codec.meta, minLength },
   )

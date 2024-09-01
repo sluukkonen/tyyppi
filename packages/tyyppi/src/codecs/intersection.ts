@@ -2,14 +2,12 @@ import {
   AnyCodec,
   Codec,
   createCodec,
-  ErrorOf,
   InputOf,
   IsSimple,
   Metadata,
-  ResultOf,
   TypeOf,
 } from "../Codec.js"
-import { InvalidObject } from "../DecodeError.js"
+import { DecodeError } from "../errors/index.js"
 import { failures, success } from "../Result.js"
 import { identity, isEveryCodecSimple, isObject } from "../utils.js"
 
@@ -36,7 +34,6 @@ interface IntersectionMetadata<C extends readonly AnyCodec[]> extends Metadata {
 export type IntersectionCodec<C extends readonly AnyCodec[]> = Codec<
   IntersectInputsOf<C>,
   IntersectTypesOf<C>,
-  ErrorOf<C[number]> | InvalidObject,
   IntersectionMetadata<C>
 >
 
@@ -47,11 +44,11 @@ export const intersection = <C extends readonly AnyCodec[]>(
   return createCodec(
     (val) => {
       let ok = true
-      const errors: ErrorOf<C[number]>[] = []
+      const errors: DecodeError[] = []
       let intersection: any = simple ? val : undefined
 
       for (const codec of codecs) {
-        const result = codec.decode(val) as ResultOf<C[number]>
+        const result = codec.decode(val)
 
         if (!result.ok) {
           ok = false
@@ -64,7 +61,7 @@ export const intersection = <C extends readonly AnyCodec[]>(
       return ok ? success(intersection) : failures(errors)
     },
     simple
-      ? (identity as any)
+      ? identity
       : (intersection) => {
           let result: any
 

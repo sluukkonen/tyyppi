@@ -2,34 +2,28 @@ import {
   AnyCodec,
   Codec,
   createCodec,
-  ErrorOf,
   InputOf,
   MetadataOf,
-  ResultOf,
   TypeOf,
 } from "../Codec.js"
-import { DecodeError } from "../DecodeError.js"
+import { DecodeError } from "../errors/index.js"
 import { failure } from "../Result.js"
 
-export type RefinementCodec<
-  C extends AnyCodec,
-  E extends DecodeError,
-  M extends object,
-> = Codec<InputOf<C>, TypeOf<C>, ErrorOf<C> | E, MetadataOf<C> & M>
+export type RefinementCodec<C extends AnyCodec, M extends object> = Codec<
+  InputOf<C>,
+  TypeOf<C>,
+  MetadataOf<C> & M
+>
 
-export function refinement<
-  C extends AnyCodec,
-  E extends DecodeError,
-  M extends object,
->(
+export function refinement<C extends AnyCodec, M extends object>(
   codec: C,
   predicate: (value: TypeOf<C>) => boolean,
-  makeError: (value: unknown) => E,
+  makeError: (value: unknown) => DecodeError,
   meta?: M,
-): RefinementCodec<C, E, M> {
+): RefinementCodec<C, M> {
   return createCodec(
     (val) => {
-      const result = codec.decode(val) as ResultOf<C>
+      const result = codec.decode(val)
       return result.ok
         ? predicate(result.value)
           ? result
@@ -38,5 +32,5 @@ export function refinement<
     },
     codec.encode,
     meta ? { ...codec.meta, ...meta } : codec.meta,
-  ) as RefinementCodec<C, E, M>
+  ) as RefinementCodec<C, M>
 }

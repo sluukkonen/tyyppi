@@ -1,12 +1,6 @@
 import { createSimpleCodec, SimpleCodec, SimpleMetadata } from "../Codec.js"
-import {
-  invalidNumber,
-  InvalidNumber,
-  isInfinite,
-  IsInfinite,
-  IsNaN,
-  isNaNError,
-} from "../DecodeError.js"
+import { isInfinite, isNaNError } from "../errors/index.js"
+import { invalidNumber } from "../errors/utils.js"
 import { failure, success } from "../Result.js"
 import { isFinite, isNaN, isNumber } from "../utils.js"
 
@@ -14,11 +8,7 @@ interface NumberMetadata extends SimpleMetadata {
   readonly tag: "number"
 }
 
-export type NumberCodec = SimpleCodec<
-  number,
-  InvalidNumber | IsNaN | IsInfinite,
-  NumberMetadata
->
+export type NumberCodec = SimpleCodec<number, NumberMetadata>
 
 export const number: NumberCodec = createSimpleCodec(
   (val) =>
@@ -28,7 +18,7 @@ export const number: NumberCodec = createSimpleCodec(
           isNumber(val)
             ? isNaN(val)
               ? isNaNError()
-              : isInfinite(val)
+              : isInfinite({ val })
             : invalidNumber(val),
         ),
   {

@@ -2,14 +2,13 @@ import {
   AnyCodec,
   Codec,
   createCodec,
-  ErrorOf,
   InputOf,
   IsSimple,
   Metadata,
-  ResultOf,
   TypeOf,
 } from "../Codec.js"
-import { invalidArray, InvalidArray } from "../DecodeError.js"
+import { DecodeError } from "../errors/index.js"
+import { invalidArray } from "../errors/utils.js"
 import { failure, failures, success } from "../Result.js"
 import { identity, isArray, pushErrors } from "../utils.js"
 
@@ -22,23 +21,24 @@ interface ArrayMetadata<C extends AnyCodec> extends Metadata {
 export type ArrayCodec<C extends AnyCodec> = Codec<
   InputOf<C>[],
   TypeOf<C>[],
-  ErrorOf<C> | InvalidArray,
   ArrayMetadata<C>
 >
 
 export const array = <C extends AnyCodec>(items: C): ArrayCodec<C> => {
   const simple = items.meta.simple
+
   return createCodec(
     (val) => {
       if (!isArray(val)) return failure(invalidArray(val))
 
       let ok = true
-      const errors: ErrorOf<C>[] = []
-      const array: TypeOf<C>[] = simple ? (val as TypeOf<C>[]) : []
+      const errors: DecodeError[] = []
+      const array = simple ? val : []
 
       for (let i = 0; i < val.length; i++) {
         const element = val[i]
-        const result = items.decode(element) as ResultOf<C>
+        const result = items.decode(element)
+
         if (!result.ok) {
           ok = false
           pushErrors(errors, result.errors, [i])

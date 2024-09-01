@@ -2,14 +2,12 @@ import {
   AnyCodec,
   Codec,
   createCodec,
-  ErrorOf,
   InputOf,
   IsSimple,
   Metadata,
-  ResultOf,
   TypeOf,
 } from "../Codec.js"
-import { invalidMap, InvalidMap } from "../DecodeError.js"
+import { DecodeError, invalidType } from "../errors/index.js"
 import { failure, failures, success } from "../Result.js"
 import { identity, isMap } from "../utils.js"
 
@@ -23,7 +21,6 @@ interface MapMetadata<K extends AnyCodec, V extends AnyCodec> extends Metadata {
 export type MapCodec<K extends AnyCodec, V extends AnyCodec> = Codec<
   Map<InputOf<K>, InputOf<V>>,
   Map<TypeOf<K>, TypeOf<V>>,
-  ErrorOf<K | V> | InvalidMap,
   MapMetadata<K, V>
 >
 
@@ -34,28 +31,26 @@ export const map = <K extends AnyCodec, V extends AnyCodec>(
   const simple = keys.meta.simple && values.meta.simple
   return createCodec(
     (val) => {
-      if (!isMap(val)) return failure(invalidMap(val))
+      if (!isMap(val)) return failure(invalidType({ val, expected: "map" }))
 
       let ok = true
-      const errors: ErrorOf<K | V>[] = []
-      const map: Map<TypeOf<K>, TypeOf<V>> = simple
-        ? (val as Map<TypeOf<K>, TypeOf<V>>)
-        : new Map()
+      const errors: DecodeError[] = []
+      const map = simple ? val : new Map()
 
       for (const [key, value] of val) {
-        const keyResult = keys.decode(key) as ResultOf<K>
+        const keyResult = keys.decode(key)
         if (!keyResult.ok) {
           ok = false
           errors.push(...keyResult.errors)
           continue
         }
 
-        const result = values.decode(value) as ResultOf<V>
-        if (!result.ok) {
+        const valueResult = values.decode(value)
+        if (!valueResult.ok) {
           ok = false
-          errors.push(...result.errors)
+          errors.push(...valueResult.errors)
         } else if (!simple && ok) {
-          map.set(keyResult.value, result.value)
+          map.set(keyResult.value, valueResult.value)
         }
       }
 

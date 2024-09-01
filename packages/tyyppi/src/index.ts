@@ -1,5 +1,5 @@
 /* c8 ignore next */
-export * as Errors from "./DecodeError.js"
+export * as errors from "./errors/index.js"
 export * as fromJson from "./codecs/fromJson/index.js"
 export * from "./Codec.js"
 export * from "./TyyppiError.js"

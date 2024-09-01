@@ -1,14 +1,13 @@
 import {
   Codec,
   createCodec,
-  ErrorOf,
   InputOf,
   IsSimple,
   Metadata,
-  ResultOf,
   TypeOf,
 } from "../Codec.js"
-import { invalidObject, InvalidObject } from "../DecodeError.js"
+import { DecodeError } from "../errors/index.js"
+import { invalidObject } from "../errors/utils.js"
 import { failure, failures, success } from "../Result.js"
 import { Props } from "../types.js"
 import {
@@ -29,9 +28,9 @@ type Flatten<T> = Identity<{ [K in keyof T]: T[K] }>
 
 type HandleOptionalTypes<T> = Flatten<
   {
-    [K in RequiredKeys<T>]: T[K]
+    readonly [K in RequiredKeys<T>]: T[K]
   } & {
-    [K in Exclude<keyof T, RequiredKeys<T>>]?: Exclude<T[K], undefined>
+    readonly [K in Exclude<keyof T, RequiredKeys<T>>]?: Exclude<T[K], undefined>
   }
 >
 
@@ -44,7 +43,6 @@ interface ObjectMetadata<T extends Props> extends Metadata {
 export type ObjectCodec<T extends Props> = Codec<
   HandleOptionalTypes<{ [K in keyof T]: InputOf<T[K]> }>,
   HandleOptionalTypes<{ [K in keyof T]: TypeOf<T[K]> }>,
-  ErrorOf<T[keyof T]> | InvalidObject,
   ObjectMetadata<T>
 >
 
@@ -58,7 +56,7 @@ export const object = <T extends Props>(props: T): ObjectCodec<T> => {
       if (!isObject(val)) return failure(invalidObject(val))
 
       let ok = true
-      const errors: ErrorOf<T[keyof T]>[] = []
+      const errors: DecodeError[] = []
       const object: any = simple ? val : { ...val }
 
       for (let i = 0; i < keys.length; i++) {
@@ -66,7 +64,7 @@ export const object = <T extends Props>(props: T): ObjectCodec<T> => {
         const codec = codecs[i]
         const value = hasOwnProperty(val, key) ? val[key] : undefined
 
-        const result = codec.decode(value) as ResultOf<T[keyof T]>
+        const result = codec.decode(value)
         if (!result.ok) {
           ok = false
           pushErrors(errors, result.errors, [key])

@@ -3,15 +3,14 @@ import {
   AnySimpleCodec,
   Codec,
   createCodec,
-  ErrorOf,
   InputOf,
   IsSimple,
   Metadata,
-  ResultOf,
   TypeOf,
 } from "../Codec.js"
-import { invalidObject, InvalidObject } from "../DecodeError.js"
-import { failure, failures, Result, success } from "../Result.js"
+import { DecodeError } from "../errors/index.js"
+import { invalidObject } from "../errors/utils.js"
+import { failure, failures, success } from "../Result.js"
 import { hasOwnProperty, identity, isObject, pushErrors } from "../utils.js"
 
 interface RecordMetadata<K extends AnySimpleCodec, V extends AnyCodec>
@@ -25,7 +24,6 @@ interface RecordMetadata<K extends AnySimpleCodec, V extends AnyCodec>
 export type RecordCodec<K extends AnySimpleCodec, V extends AnyCodec> = Codec<
   Record<InputOf<K>, InputOf<V>>,
   Record<TypeOf<K>, TypeOf<V>>,
-  ErrorOf<K | V> | InvalidObject,
   RecordMetadata<K, V>
 >
 
@@ -35,30 +33,28 @@ export const record = <K extends AnySimpleCodec, V extends AnyCodec>(
 ): RecordCodec<K, V> => {
   const simple = values.meta.simple
   return createCodec(
-    (
-      val,
-    ): Result<Record<TypeOf<K>, TypeOf<V>>, ErrorOf<K | V> | InvalidObject> => {
+    (val) => {
       if (!isObject(val)) return failure(invalidObject(val))
 
       let ok = true
-      const errors: (ErrorOf<K> | ErrorOf<V>)[] = []
+      const errors: DecodeError[] = []
       const object: any = simple ? val : {}
 
       for (const key in val) {
         if (hasOwnProperty(val, key)) {
-          const keyResult = keys.decode(key) as ResultOf<K>
+          const keyResult = keys.decode(key)
           if (!keyResult.ok) {
             ok = false
             pushErrors(errors, keyResult.errors, [key])
             continue
           }
 
-          const result = values.decode(val[key]) as ResultOf<V>
-          if (!result.ok) {
+          const valueResult = values.decode(val[key])
+          if (!valueResult.ok) {
             ok = false
-            pushErrors(errors, result.errors, [key])
-          } else if (!simple && ok && result.value !== undefined) {
-            object[key] = result.value
+            pushErrors(errors, valueResult.errors, [key])
+          } else if (!simple && ok && valueResult.value !== undefined) {
+            object[key] = valueResult.value
           }
         }
       }
@@ -67,7 +63,7 @@ export const record = <K extends AnySimpleCodec, V extends AnyCodec>(
     },
     simple
       ? identity
-      : (record: any) => {
+      : (record) => {
           const result = {} as any
 
           for (const key in record) {

@@ -1,19 +1,13 @@
 import {
   Codec,
   createCodec,
-  ErrorOf,
   InputOf,
   IsSimple,
   Metadata,
   TypeOf,
 } from "../Codec.js"
-import {
-  DecodeError,
-  InvalidDiscriminatedUnion,
-  invalidDiscriminatedUnion,
-  InvalidObject,
-  invalidObject,
-} from "../DecodeError.js"
+import { invalidDiscriminatedUnion } from "../errors/index.js"
+import { invalidObject } from "../errors/utils.js"
 import { failure } from "../Result.js"
 import { Primitive } from "../types.js"
 import {
@@ -42,21 +36,13 @@ interface DiscriminatedUnionMemberMetadata<
 type DiscriminatedUnionMember<K extends string, V extends Primitive> = Codec<
   Record<K, V>,
   Record<K, V>,
-  DecodeError,
   DiscriminatedUnionMemberMetadata<K, V>
 >
 
 export type DiscriminatedUnionCodec<
   K extends string,
   C extends DiscriminatedUnionMember<K, Primitive>,
-> = Codec<
-  InputOf<C>,
-  TypeOf<C>,
-  | ErrorOf<C>
-  | InvalidObject
-  | InvalidDiscriminatedUnion<C["meta"]["props"][K]["meta"]["value"]>,
-  DiscriminatedUnionMetadata<K, C>
->
+> = Codec<InputOf<C>, TypeOf<C>, DiscriminatedUnionMetadata<K, C>>
 
 export const discriminatedUnion = <
   K extends string,
@@ -74,12 +60,12 @@ export const discriminatedUnion = <
     (val) => {
       if (!isObject(val)) return failure(invalidObject(val))
       if (!hasOwnProperty(val, key))
-        return failure(invalidDiscriminatedUnion(key, options))
+        return failure(invalidDiscriminatedUnion({ key, options }))
 
       const codec = codecs.get(val[key] as Primitive)
       return codec
         ? codec.decode(val)
-        : failure(invalidDiscriminatedUnion(key, options))
+        : failure(invalidDiscriminatedUnion({ key, options }))
     },
     simple
       ? identity
@@ -88,5 +74,5 @@ export const discriminatedUnion = <
           return codec.encode(val)
         },
     { tag: "discriminatedUnion", simple, members },
-  ) as unknown as DiscriminatedUnionCodec<K, C[number]>
+  )
 }

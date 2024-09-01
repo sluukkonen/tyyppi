@@ -1,5 +1,5 @@
 import { createSimpleCodec, SimpleCodec, SimpleMetadata } from "../Codec.js"
-import { invalidEnum, InvalidEnum } from "../DecodeError.js"
+import { invalidEnum } from "../errors/index.js"
 import { failure, success } from "../Result.js"
 import { Primitive } from "../types.js"
 
@@ -8,11 +8,7 @@ interface EnumMetadata<T extends Primitive> extends SimpleMetadata {
   readonly members: readonly T[]
 }
 
-export type EnumCodec<T extends Primitive> = SimpleCodec<
-  T,
-  InvalidEnum<T>,
-  EnumMetadata<T>
->
+export type EnumCodec<T extends Primitive> = SimpleCodec<T, EnumMetadata<T>>
 
 function enumCodec<T extends Primitive>(
   ...members: readonly T[]
@@ -22,7 +18,7 @@ function enumCodec<T extends Primitive>(
     (val) =>
       set.has(val as T)
         ? success(val as T)
-        : failure(invalidEnum(val, members)),
+        : failure(invalidEnum({ val, members })),
     { tag: "enum", simple: true, members },
   )
 }

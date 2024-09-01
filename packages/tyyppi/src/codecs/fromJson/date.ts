@@ -1,10 +1,6 @@
 import { Codec, createCodec, Metadata } from "../../Codec.js"
-import {
-  invalidISOString,
-  InvalidISOString,
-  invalidString,
-  InvalidString,
-} from "../../DecodeError.js"
+import { invalidFormat } from "../../errors/index.js"
+import { invalidString } from "../../errors/utils.js"
 import { failure, success } from "../../Result.js"
 import { isNaN, isString } from "../../utils.js"
 
@@ -13,18 +9,15 @@ interface DateMetadata extends Metadata {
   readonly simple: false
 }
 
-export type DateCodec = Codec<
-  string,
-  Date,
-  InvalidString | InvalidISOString,
-  DateMetadata
->
+export type DateCodec = Codec<string, Date, DateMetadata>
 
 export const date: DateCodec = createCodec(
   (val) => {
     if (!isString(val)) return failure(invalidString(val))
     const date = new Date(val)
-    return isNaN(date.getTime()) ? failure(invalidISOString()) : success(date)
+    return isNaN(date.getTime())
+      ? failure(invalidFormat({ format: "date-time" }))
+      : success(date)
   },
   (date) => date.toISOString(),
   { tag: "fromJson.date", simple: false },

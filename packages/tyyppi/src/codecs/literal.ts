@@ -1,5 +1,5 @@
 import { createSimpleCodec, SimpleCodec, SimpleMetadata } from "../Codec.js"
-import { invalidLiteral, InvalidLiteral } from "../DecodeError.js"
+import { invalidLiteral } from "../errors/index.js"
 import { failure, success } from "../Result.js"
 import { Primitive } from "../types.js"
 
@@ -10,7 +10,6 @@ interface LiteralMetadata<T extends Primitive> extends SimpleMetadata {
 
 export type LiteralCodec<T extends Primitive> = SimpleCodec<
   T,
-  InvalidLiteral<T>,
   LiteralMetadata<T>
 >
 
@@ -19,6 +18,6 @@ export const literal = <T extends Primitive>(value: T): LiteralCodec<T> =>
     (val) =>
       val === value || (value !== value && val !== val)
         ? success(val as T)
-        : failure(invalidLiteral(val, value)),
+        : failure(invalidLiteral({ val, expected: value })),
     { tag: "literal", simple: true, value },
   )

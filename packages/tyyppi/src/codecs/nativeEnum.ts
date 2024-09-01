@@ -1,5 +1,5 @@
 import { createSimpleCodec, SimpleCodec, SimpleMetadata } from "../Codec.js"
-import { InvalidEnum, invalidEnum } from "../DecodeError.js"
+import { invalidEnum } from "../errors/index.js"
 import { failure, success } from "../Result.js"
 import { EnumLike } from "../types.js"
 import { isNumber, isString } from "../utils.js"
@@ -11,7 +11,6 @@ interface NativeEnumMetadata<T extends EnumLike> extends SimpleMetadata {
 
 export type NativeEnumCodec<T extends EnumLike> = SimpleCodec<
   T[keyof T],
-  InvalidEnum<T[keyof T]>,
   NativeEnumMetadata<T>
 >
 
@@ -29,7 +28,7 @@ export const nativeEnum = <T extends EnumLike>(
     (val) =>
       set.has(val as T[keyof T])
         ? success(val as T[keyof T])
-        : failure(invalidEnum(val, members)),
+        : failure(invalidEnum({ val, members })),
     { tag: "nativeEnum", simple: true, enum: enumObj },
   )
 }

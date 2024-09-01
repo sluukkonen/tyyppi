@@ -3,8 +3,9 @@
 exports[`should reject invalid strings 1`] = `
 [
   {
-    "code": "invalid_iso_string",
-    "message": "Expected the string to be a valid RFC 3339 date-time",
+    "code": "invalid_format",
+    "format": "date-time",
+    "message": "Invalid date-time",
     "path": [],
   },
 ]

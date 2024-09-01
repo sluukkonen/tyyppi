@@ -14,7 +14,7 @@ exports[`should create a new object codec, merging the new properties 1`] = `
 ]
 `;
 
-exports[`should prefer properties from the right hand side codec 1`] = `
+exports[`should prefer properties from the right hand side 1`] = `
 [
   {
     "code": "invalid_type",

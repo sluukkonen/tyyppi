@@ -27,3 +27,9 @@ export type TypeName =
 export type EnumLike = Record<string, Primitive>
 
 export type Props = Record<string, AnyCodec>
+
+export type Merge<A extends object, B extends object> = Pick<
+  A,
+  Exclude<keyof A, keyof B>
+> &
+  B

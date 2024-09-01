@@ -1,4 +1,4 @@
-import { refinement, string, unknown } from "../src/index.js"
+import { errors, refinement, string, unknown } from "../src/index.js"
 import { expectParseFailure, expectParseSuccess } from "./helpers.js"
 
 test("should parse successfully if the predicate returns true", () => {
@@ -19,7 +19,7 @@ test("should fail to parse if the predicate returns false", () => {
     refinement(
       unknown,
       () => false,
-      () => ({ code: "hmm", message: "hmm?", path: [] }),
+      () => errors.custom({ message: "hmm?" }),
     ),
     1,
   )
@@ -43,7 +43,7 @@ test("should allow configuring the metadata", () => {
   const codec = refinement(
     string,
     () => true,
-    () => ({ code: "hmm", message: "hmm?", path: [] }),
+    () => errors.custom({ message: "hmm?" }),
     meta,
   )
   expect(codec.meta).toEqual(meta)

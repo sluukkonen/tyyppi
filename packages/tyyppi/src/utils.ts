@@ -1,6 +1,6 @@
 import { AnyCodec } from "./Codec.js"
-import { DecodeError } from "./DecodeError.js"
-import { HasLength, TypeName } from "./types.js"
+import { DecodeError } from "./errors/decodeError.js"
+import { TypeName } from "./types.js"
 
 export const dateTag = "[object Date]"
 export const errorTag = "[object Error]"
@@ -16,9 +16,6 @@ export const hasOwnProperty = <K extends string>(
   obj: unknown,
   key: K,
 ): obj is Record<K, unknown> => objectProto.hasOwnProperty.call(obj, key)
-
-export const hasLength = (value: unknown): value is HasLength =>
-  isString(value) || isArray(value)
 
 export const isEveryCodecSimple = (codecs: readonly AnyCodec[]) =>
   codecs.every((codec) => codec.meta.simple)

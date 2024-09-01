@@ -1,6 +1,5 @@
-import { DecodeError } from "./DecodeError.js"
+import { Result } from "./Result.js"
 import { TyyppiError } from "./TyyppiError.js"
-import { AnyResult, FailureOf, Result, SuccessOf } from "./Result.js"
 import { identity } from "./utils.js"
 
 export type IsSimple<C extends AnyCodec> = C["meta"]["simple"]
@@ -13,38 +12,30 @@ export interface SimpleMetadata extends Metadata {
   readonly simple: true
 }
 
-export interface Codec<
-  I,
-  T = I,
-  E extends DecodeError = DecodeError,
-  M extends Metadata = Metadata,
-> {
-  decode(this: void, value: unknown): Result<T, E>
+export interface Codec<I, T = I, M extends Metadata = Metadata> {
+  decode(this: void, value: unknown): Result<T>
   decodeOrThrow(this: void, value: unknown): T
   encode(this: void, value: T): I
-  readonly meta: M
   pipe<Args extends readonly unknown[], R>(
     fn: (codec: this, ...args: Args) => R,
     ...args: Args
   ): R
+  readonly meta: M
+  readonly Input: I
+  readonly Type: T
 }
 
 export type AnyCodec = Codec<any>
 
-export type InputOf<C extends AnyCodec> =
-  C extends Codec<infer I, any> ? I : never
-export type TypeOf<C extends AnyCodec> =
-  C extends Codec<any, infer T> ? T : never
-export type ErrorOf<C extends AnyCodec> =
-  C extends Codec<any, any, infer E> ? E : never
+export type InputOf<C extends AnyCodec> = C["Input"]
+export type TypeOf<C extends AnyCodec> = C["Type"]
 export type MetadataOf<C extends AnyCodec> = C["meta"]
-export type ResultOf<C extends AnyCodec> = Result<TypeOf<C>, ErrorOf<C>>
 
-export type SimpleCodec<
+export type SimpleCodec<T, M extends SimpleMetadata = SimpleMetadata> = Codec<
   T,
-  E extends DecodeError = DecodeError,
-  M extends SimpleMetadata = SimpleMetadata,
-> = Codec<T, T, E, M>
+  T,
+  M
+>
 export type AnySimpleCodec = SimpleCodec<any>
 
 // Need to do inheritance in ES5 style, since the encode function needs to be
@@ -59,11 +50,11 @@ const codecProto = {
   },
 }
 
-export function createCodec<R extends AnyResult, I, M extends Metadata>(
-  decode: (value: unknown) => R,
-  encode: (value: SuccessOf<R>) => I,
+export function createCodec<I, T, M extends Metadata>(
+  decode: (value: unknown) => Result<T>,
+  encode: (value: T) => I,
   meta?: M,
-): Codec<I, SuccessOf<R>, FailureOf<R>, M> {
+): Codec<I, T, M> {
   function decodeOrThrow(value: unknown) {
     const result = decode(value)
     if (result.ok) return result.value
@@ -78,16 +69,12 @@ export function createCodec<R extends AnyResult, I, M extends Metadata>(
   })
 }
 
-export function createSimpleCodec<
-  R extends AnyResult,
-  M extends SimpleMetadata,
->(
-  decode: (value: unknown) => R,
+export function createSimpleCodec<T, M extends SimpleMetadata>(
+  decode: (value: unknown) => Result<T>,
   meta?: M,
-): SimpleCodec<SuccessOf<R>, FailureOf<R>, M> {
+): SimpleCodec<T, M> {
   return createCodec(decode, identity, meta ?? { simple: true }) as SimpleCodec<
-    SuccessOf<R>,
-    FailureOf<R>,
+    T,
     M
   >
 }

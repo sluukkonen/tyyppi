@@ -2,13 +2,12 @@ import {
   AnyCodec,
   Codec,
   createCodec,
-  ErrorOf,
   InputOf,
   Metadata,
-  ResultOf,
   TypeOf,
 } from "../../Codec.js"
-import { InvalidArray, invalidArray } from "../../DecodeError.js"
+import { DecodeError } from "../../errors/index.js"
+import { invalidArray } from "../../errors/utils.js"
 import { failure, failures, success } from "../../Result.js"
 import { isArray, pushErrors } from "../../utils.js"
 
@@ -21,20 +20,19 @@ interface SetMetadata<C extends AnyCodec> extends Metadata {
 export type SetCodec<C extends AnyCodec> = Codec<
   InputOf<C>[],
   Set<TypeOf<C>>,
-  ErrorOf<C> | InvalidArray,
   SetMetadata<C>
 >
-export const set = <C extends AnyCodec>(items: C): SetCodec<C> => {
-  return createCodec(
+export const set = <C extends AnyCodec>(items: C): SetCodec<C> =>
+  createCodec(
     (val) => {
       if (!isArray(val)) return failure(invalidArray(val))
 
       let ok = true
-      const errors: ErrorOf<C>[] = []
+      const errors: DecodeError[] = []
       const set = new Set<TypeOf<C>>()
 
       for (let i = 0; i < val.length; i++) {
-        const result = items.decode(val[i]) as ResultOf<C>
+        const result = items.decode(val[i])
         if (!result.ok) {
           ok = false
           pushErrors(errors, result.errors, [i])
@@ -46,12 +44,7 @@ export const set = <C extends AnyCodec>(items: C): SetCodec<C> => {
       return ok ? success(set) : failures(errors)
     },
     items.meta.simple
-      ? (set) => [...set] as InputOf<C>[]
-      : (set) => {
-          const result: InputOf<C>[] = []
-          for (const value of set) result.push(items.encode(value))
-          return result
-        },
+      ? (set) => [...set]
+      : (set) => Array.from(set, (v) => items.encode(v)),
     { tag: "fromJson.set", simple: false, items },
   )
-}

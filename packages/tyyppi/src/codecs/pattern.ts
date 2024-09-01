@@ -1,14 +1,13 @@
 import {
   Codec,
   createCodec,
-  ErrorOf,
   InputOf,
   Metadata,
   MetadataOf,
-  ResultOf,
   TypeOf,
 } from "../Codec.js"
-import { invalidPattern, InvalidPattern } from "../DecodeError.js"
+
+import { invalidPattern } from "../errors/index.js"
 import { failure } from "../Result.js"
 
 interface PatternMetadata extends Metadata {
@@ -18,7 +17,6 @@ interface PatternMetadata extends Metadata {
 export type PatternCodec<C extends Codec<any, string>> = Codec<
   InputOf<C>,
   TypeOf<C>,
-  ErrorOf<C> | InvalidPattern,
   MetadataOf<C> & PatternMetadata
 >
 
@@ -28,11 +26,11 @@ export const pattern = <C extends Codec<any, string>>(
 ): PatternCodec<C> =>
   createCodec(
     (val) => {
-      const result = codec.decode(val) as ResultOf<C>
+      const result = codec.decode(val)
       return result.ok
         ? pattern.test(result.value)
           ? result
-          : failure(invalidPattern(pattern))
+          : failure(invalidPattern({ regexp: pattern }))
         : result
     },
     codec.encode,

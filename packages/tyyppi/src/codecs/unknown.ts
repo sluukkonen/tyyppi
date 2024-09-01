@@ -5,7 +5,7 @@ interface UnknownMetadata extends SimpleMetadata {
   readonly tag: "unknown"
 }
 
-export type UnknownCodec = SimpleCodec<unknown, never, UnknownMetadata>
+export type UnknownCodec = SimpleCodec<unknown, UnknownMetadata>
 
 export const unknown: UnknownCodec = createSimpleCodec(success, {
   tag: "unknown",

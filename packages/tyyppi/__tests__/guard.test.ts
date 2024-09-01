@@ -1,4 +1,4 @@
-import { array, guard, number, unknown } from "../src/index.js"
+import { array, errors, guard, number, unknown } from "../src/index.js"
 import { expectParseFailure, expectParseSuccess } from "./helpers.js"
 
 test("should parse successfully if the predicate returns true", () => {
@@ -12,11 +12,11 @@ test("should parse successfully if the predicate returns true", () => {
 
 test("should fail to parse if the predicate returns false", () => {
   expectParseFailure(
-    guard(unknown, Array.isArray, () => ({
-      code: "hmm",
-      message: "hmm?",
-      path: [],
-    })),
+    guard(unknown, Array.isArray, () =>
+      errors.custom({
+        message: "hmm?",
+      }),
+    ),
     1,
   )
 })

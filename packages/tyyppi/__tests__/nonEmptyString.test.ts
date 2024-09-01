@@ -12,4 +12,5 @@ test("doesn't parse empty strings", () => {
 
 test("does not parse non-strings", () => {
   expectParseFailure(nonEmptyString, 1)
+  expectParseFailure(nonEmptyString, [])
 })

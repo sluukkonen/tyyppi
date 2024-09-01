@@ -3,8 +3,9 @@
 exports[`should fail to parse if the predicate returns false 1`] = `
 [
   {
-    "code": "hmm",
+    "code": "custom",
     "message": "hmm?",
+    "params": {},
     "path": [],
   },
 ]

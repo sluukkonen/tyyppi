@@ -12,6 +12,18 @@ exports[`does not parse non-strings 1`] = `
 ]
 `;
 
+exports[`does not parse non-strings 2`] = `
+[
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "message": "Expected a string, received an array",
+    "path": [],
+    "received": "array",
+  },
+]
+`;
+
 exports[`doesn't parse empty strings 1`] = `
 [
   {

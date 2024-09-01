@@ -1,8 +1,8 @@
-import { DecodeError } from "./DecodeError.js"
+import { DecodeError } from "./errors/decodeError.js"
 
-export interface Failure<E extends DecodeError> {
+export interface Failure {
   readonly ok: false
-  readonly errors: E[]
+  readonly errors: DecodeError[]
 }
 
 export interface Success<T> {
@@ -10,20 +10,17 @@ export interface Success<T> {
   readonly value: T
 }
 
-export type Result<T, E extends DecodeError> = Success<T> | Failure<E>
-export type AnyResult = Result<any, DecodeError>
-
-export type SuccessOf<R> = R extends Success<infer T> ? T : never
-export type FailureOf<R> = R extends Failure<infer E> ? E : never
+export type Result<T> = Success<T> | Failure
+export type AnyResult = Result<any>
 
 export const success = <T>(value: T): Success<T> => ({ ok: true, value })
 
-export const failure = <E extends DecodeError>(error: E): Failure<E> => ({
+export const failure = (error: DecodeError): Failure => ({
   ok: false,
   errors: [error],
 })
 
-export const failures = <E extends DecodeError>(errors: E[]): Failure<E> => ({
+export const failures = (errors: DecodeError[]): Failure => ({
   ok: false,
   errors,
 })

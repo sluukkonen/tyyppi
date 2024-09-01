@@ -12,6 +12,7 @@ test("delegates to the underlying codec if length is missing or is not an intege
   expectParseFailure(nonEmptyNumberArray, null)
   expectParseFailure(nonEmptyNumberArray, { length: "0" })
   expectParseFailure(nonEmptyNumberArray, { length: NaN })
+  expectParseFailure(nonEmptyNumberArray, "")
 })
 
 test("fails to parse if the length is below the minimum length", () => {

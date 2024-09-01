@@ -1,38 +1,36 @@
 import {
   Codec,
   createCodec,
-  ErrorOf,
   InputOf,
   Metadata,
   MetadataOf,
-  ResultOf,
   TypeOf,
 } from "../Codec.js"
-import { tooLong, TooLong } from "../DecodeError.js"
+import { tooLong } from "../errors/index.js"
 import { failure } from "../Result.js"
 import { HasLength } from "../types.js"
-import { hasLength } from "../utils.js"
 
 interface MaxLengthMetadata extends Metadata {
   readonly maxLength: number
 }
 
-export type MaxLengthCodec<C extends Codec<HasLength, any>> = Codec<
+export type MaxLengthCodec<C extends Codec<any, HasLength>> = Codec<
   InputOf<C>,
   TypeOf<C>,
-  ErrorOf<C> | TooLong,
   MetadataOf<C> & MaxLengthMetadata
 >
 
-export const maxLength = <C extends Codec<HasLength, any>>(
+export const maxLength = <C extends Codec<any, HasLength>>(
   codec: C,
   maxLength: number,
 ): MaxLengthCodec<C> =>
   createCodec(
-    (val) =>
-      hasLength(val) && val.length > maxLength
-        ? failure(tooLong(val, maxLength))
-        : (codec.decode(val) as ResultOf<C>),
-    codec.encode as (value: TypeOf<C>) => InputOf<C>,
+    (val) => {
+      const result = codec.decode(val)
+      return result.ok && result.value.length > maxLength
+        ? failure(tooLong({ val, length: result.value.length, maxLength }))
+        : result
+    },
+    codec.encode,
     { ...codec.meta, maxLength },
   )

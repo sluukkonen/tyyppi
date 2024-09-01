@@ -36,6 +36,18 @@ exports[`delegates to the underlying codec if length is missing or is not an int
 ]
 `;
 
+exports[`delegates to the underlying codec if length is missing or is not an integer 4`] = `
+[
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "message": "Expected an array, received a string",
+    "path": [],
+    "received": "string",
+  },
+]
+`;
+
 exports[`fails to parse if the length is below the minimum length 1`] = `
 [
   {

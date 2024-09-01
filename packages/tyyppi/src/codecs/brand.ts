@@ -1,27 +1,19 @@
-import {
-  AnyCodec,
-  Codec,
-  ErrorOf,
-  InputOf,
-  MetadataOf,
-  TypeOf,
-} from "../Codec.js"
-import { identity } from "../utils.js"
+import { AnyCodec, Codec, InputOf, MetadataOf, TypeOf } from "../Codec.js"
 
 declare const BRAND: unique symbol
 
 interface Brand<B> {
-  [BRAND]: B
+  readonly [BRAND]: B
 }
 
 export type BrandedCodec<C extends AnyCodec, B> = Codec<
   InputOf<C>,
   TypeOf<C> & Brand<B>,
-  ErrorOf<C>,
   MetadataOf<C>
 >
 
-export const brand: <C extends AnyCodec, B extends string>(
+export const brand = <C extends AnyCodec, B extends string>(
   codec: C,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   brand: B,
-) => BrandedCodec<C, B> = identity as any
+): BrandedCodec<C, B> => codec

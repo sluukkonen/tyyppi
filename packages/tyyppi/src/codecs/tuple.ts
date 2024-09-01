@@ -2,20 +2,15 @@ import {
   AnyCodec,
   Codec,
   createCodec,
-  ErrorOf,
   InputOf,
   IsSimple,
   Metadata,
   TypeOf,
 } from "../Codec.js"
-import {
-  invalidArray,
-  InvalidArray,
-  tooLong,
-  TooLong,
-  tooShort,
-  TooShort,
-} from "../DecodeError.js"
+import { DecodeError } from "../errors/index.js"
+import { tooLong } from "../errors/tooLong.js"
+import { tooShort } from "../errors/tooShort.js"
+import { invalidArray } from "../errors/utils.js"
 import { failure, failures, success } from "../Result.js"
 import { identity, isArray, isEveryCodecSimple, pushErrors } from "../utils.js"
 
@@ -42,7 +37,6 @@ interface TupleMetadata<C extends readonly AnyCodec[] | []> extends Metadata {
 export type TupleCodec<C extends readonly AnyCodec[] | []> = Codec<
   InputsOf<C>,
   TypesOf<C>,
-  ErrorOf<C[number]> | InvalidArray | TooShort | TooLong,
   TupleMetadata<C>
 >
 
@@ -56,14 +50,14 @@ export const tuple = <C extends readonly AnyCodec[] | []>(
       if (!isArray(val)) {
         return failure(invalidArray(val))
       } else if (val.length < length) {
-        return failure(tooShort(val, length))
+        return failure(tooShort({ val, length: val.length, minLength: length }))
       } else if (val.length > length) {
-        return failure(tooLong(val, length))
+        return failure(tooLong({ val, length: val.length, maxLength: length }))
       }
 
       let ok = true
-      const errors: ErrorOf<C[number]>[] = []
-      const array: any[] = simple ? val : []
+      const errors: DecodeError[] = []
+      const array = simple ? val : []
 
       for (let i = 0; i < length; i++) {
         const value = val[i]
@@ -81,7 +75,8 @@ export const tuple = <C extends readonly AnyCodec[] | []>(
     },
     simple
       ? identity
-      : (array) => array.map((value, i) => items[i].encode(value)) as any,
+      : (array) =>
+          array.map((value, i) => items[i].encode(value)) as InputsOf<C>,
     {
       tag: "tuple",
       simple,

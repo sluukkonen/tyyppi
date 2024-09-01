@@ -1,5 +1,5 @@
 import { SimpleCodec, SimpleMetadata } from "../Codec.js"
-import { InvalidString, InvalidUuid, invalidUuid } from "../DecodeError.js"
+import { invalidFormat } from "../errors/index.js"
 import { refinement } from "./refinement.js"
 import { string } from "./string.js"
 
@@ -11,15 +11,11 @@ const uuidRegexp =
 interface UuidMetadata extends SimpleMetadata {
   readonly tag: "uuid"
 }
-export type UuidCodec = SimpleCodec<
-  string,
-  InvalidString | InvalidUuid,
-  UuidMetadata
->
+export type UuidCodec = SimpleCodec<string, UuidMetadata>
 
 export const uuid: UuidCodec = refinement(
   string,
   (s) => uuidRegexp.test(s),
-  invalidUuid,
+  () => invalidFormat({ format: "uuid" }),
   { tag: "uuid" },
 )

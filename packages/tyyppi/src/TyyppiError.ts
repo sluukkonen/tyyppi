@@ -1,9 +1,9 @@
-import { DecodeError } from "./DecodeError.js"
+import { DecodeError } from "./errors/decodeError.js"
 
-export class TyyppiError<E extends DecodeError> extends Error {
+export class TyyppiError extends Error {
   constructor(
     readonly message: string,
-    readonly errors: readonly E[],
+    readonly errors: readonly DecodeError[],
   ) {
     super(message)
   }
