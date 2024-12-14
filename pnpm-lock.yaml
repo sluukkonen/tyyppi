@@ -51,8 +51,8 @@ importers:
         specifier: 2.16.9
         version: 2.16.9
       io-ts:
-        specifier: 2.2.21
-        version: 2.2.21(fp-ts@2.16.9)
+        specifier: 2.2.22
+        version: 2.2.22(fp-ts@2.16.9)
       typescript:
         specifier: 5.7.2
         version: 5.7.2
@@ -967,8 +967,8 @@ packages:
     resolution: {integrity: sha512-JmXMZ6wuvDmLiHEml9ykzqO6lwFbof0GG4IkcGaENdCRDDmMVnny7s5HsIgHCbaq0w2MyPhDqkhTUgS2LU2PHA==}
     engines: {node: '>=0.8.19'}
 
-  io-ts@2.2.21:
-    resolution: {integrity: sha512-zz2Z69v9ZIC3mMLYWIeoUcwWD6f+O7yP92FMVVaXEOSZH1jnVBmET/urd/uoarD1WGBY4rCj8TAyMPzsGNzMFQ==}
+  io-ts@2.2.22:
+    resolution: {integrity: sha512-FHCCztTkHoV9mdBsHpocLpdTAfh956ZQcIkWQxxS0U5HT53vtrcuYdQneEJKH6xILaLNzXVl2Cvwtoy8XNN0AA==}
     peerDependencies:
       fp-ts: ^2.5.0
 
@@ -2274,7 +2274,7 @@ snapshots:
 
   imurmurhash@0.1.4: {}
 
-  io-ts@2.2.21(fp-ts@2.16.9):
+  io-ts@2.2.22(fp-ts@2.16.9):
     dependencies:
       fp-ts: 2.16.9
 
