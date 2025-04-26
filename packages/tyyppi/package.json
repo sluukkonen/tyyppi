@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@vitest/coverage-v8": "2.1.9",
-    "esbuild": "0.25.2",
+    "esbuild": "0.25.3",
     "prettier": "3.5.3",
     "typescript": "5.8.3",
     "vitest": "2.1.9"
