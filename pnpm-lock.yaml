@@ -60,8 +60,8 @@ importers:
         specifier: workspace:*
         version: link:../tyyppi
       zod:
-        specifier: 3.25.42
-        version: 3.25.42
+        specifier: 3.25.43
+        version: 3.25.43
 
 packages:
 
@@ -1466,8 +1466,8 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
-  zod@3.25.42:
-    resolution: {integrity: sha512-PcALTLskaucbeHc41tU/xfjfhcz8z0GdhhDcSgrCTmSazUuqnYqiXO63M0QUBVwpBlsLsNVn5qHSC5Dw3KZvaQ==}
+  zod@3.25.43:
+    resolution: {integrity: sha512-KrQFEkfox9WLfYCOksqEWjf97QdgSC1YJSqxJxnWz0l+BW8mN2PQ+yjshL8RC7RC5p5YOlUCLyTDNaf++QbPtA==}
 
 snapshots:
 
@@ -2759,4 +2759,4 @@ snapshots:
 
   yocto-queue@0.1.0: {}
 
-  zod@3.25.42: {}
+  zod@3.25.43: {}
