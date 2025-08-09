@@ -14,7 +14,7 @@
     "fp-ts": "2.16.10",
     "io-ts": "2.2.22",
     "tyyppi": "workspace:*",
-    "typescript": "5.8.3",
+    "typescript": "5.9.2",
     "zod": "3.25.76"
   }
 }
