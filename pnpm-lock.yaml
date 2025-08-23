@@ -48,11 +48,11 @@ importers:
         specifier: 3.7.1
         version: 3.7.1
       fp-ts:
-        specifier: 2.16.10
-        version: 2.16.10
+        specifier: 2.16.11
+        version: 2.16.11
       io-ts:
         specifier: 2.2.22
-        version: 2.2.22(fp-ts@2.16.10)
+        version: 2.2.22(fp-ts@2.16.11)
       typescript:
         specifier: 5.9.2
         version: 5.9.2
@@ -933,8 +933,8 @@ packages:
     resolution: {integrity: sha512-Ld2g8rrAyMYFXBhEqMz8ZAHBi4J4uS1i/CxGMDnjyFWddMXLVcDp051DZfu+t7+ab7Wv6SMqpWmyFIj5UbfFvg==}
     engines: {node: '>=14'}
 
-  fp-ts@2.16.10:
-    resolution: {integrity: sha512-vuROzbNVfCmUkZSUbnWSltR1sbheyQbTzug7LB/46fEa1c0EucLeBaCEUE0gF3ZGUGBt9lVUiziGOhhj6K1ORA==}
+  fp-ts@2.16.11:
+    resolution: {integrity: sha512-LaI+KaX2NFkfn1ZGHoKCmcfv7yrZsC3b8NtWsTVQeHkq4F27vI5igUuO53sxqDEa2gNQMHFPmpojDw/1zmUK7w==}
 
   fs-extra@10.1.0:
     resolution: {integrity: sha512-oRXApq54ETRj4eMiFzGnHWGy+zo5raudjuxN0b8H7s/RU2oW0Wvsx9O0ACRN/kRq9E8Vu/ReskGB5o3ji+FzHQ==}
@@ -2274,7 +2274,7 @@ snapshots:
       cross-spawn: 7.0.6
       signal-exit: 4.1.0
 
-  fp-ts@2.16.10: {}
+  fp-ts@2.16.11: {}
 
   fs-extra@10.1.0:
     dependencies:
@@ -2323,9 +2323,9 @@ snapshots:
 
   imurmurhash@0.1.4: {}
 
-  io-ts@2.2.22(fp-ts@2.16.10):
+  io-ts@2.2.22(fp-ts@2.16.11):
     dependencies:
-      fp-ts: 2.16.10
+      fp-ts: 2.16.11
 
   is-extglob@2.1.1: {}
 
