@@ -19,7 +19,7 @@
     "@types/node": "22.19.7",
     "eslint": "9.17.0",
     "turbo": "2.8.1",
-    "typescript-eslint": "8.53.1"
+    "typescript-eslint": "8.54.0"
   },
   "packageManager": "pnpm@9.15.9"
 }
