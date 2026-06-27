@@ -18,7 +18,7 @@
     "@eslint/js": "9.17.0",
     "@types/node": "24.13.2",
     "eslint": "9.17.0",
-    "turbo": "2.9.18",
+    "turbo": "2.10.0",
     "typescript-eslint": "8.61.1"
   },
   "packageManager": "pnpm@9.15.9"
